@@ -1,4 +1,4 @@
-void run()
+void runDIS()
 {
 gROOT->ProcessLine(".L DIS.C");
 gROOT->ProcessLine("DIS aa");

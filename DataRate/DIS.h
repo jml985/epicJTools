@@ -5692,12 +5692,20 @@ public :
 DIS::DIS(TTree *tree) : fChain(0) 
 {
 // if parameter tree is not specified (or zero), connect the file
-// used to generate this class and read the Tree.
+// used to generate this class and read the T
    if (tree == 0) {
-      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("/gpfs/mnt/gpfs02/eic/zhangzq/EPIC/NewReco/analysis_DIS/all.tree.edm4eic.root");
-      if (!f || !f->IsOpen()) {
-         f = new TFile("/gpfs/mnt/gpfs02/eic/zhangzq/EPIC/NewReco/analysis_DIS/all.tree.edm4eic.root");
-      }
+       const char *fn = "/home/jml/eic/jml/pythia_ep_noradcor_18x275_q2_0.000000001_1.0_run9.ab.0001.eicrecon.tree.edm4eic.root";
+       //const char *fn = "s3https://dtn01.sdcc.bnl.gov:9000/eictest/EPIC/EVGEN/BACKGROUNDS/BEAMGAS/proton/pythia8.306-1.0/pythia_ep_noradcor_18x275_q2_0.000000001_1.0_run9.ab.0001.eicrecon.tree.edm4eic.root";
+       /*
+       TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject(fn);
+       //TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("/gpfs/mnt/gpfs02/eic/zhangzq/EPIC/NewReco/analysis_DIS/all.tree.edm4eic.root");
+       if (!f || !f->IsOpen()) {
+       */
+       //TFile *f = new TFile(fn);
+       TFile *f = TFile::Open(fn, "AUTH=eicS3read:eicS3read");
+       
+	   //f = new TFile("/gpfs/mnt/gpfs02/eic/zhangzq/EPIC/NewReco/analysis_DIS/all.tree.edm4eic.root");
+	   //}
       f->GetObject("events",tree);
 
    }
