@@ -1,9 +1,9 @@
-#define DIS_cxx
-#include "DIS.h"
+#define protonBeam_cxx
+#include "protonBeam.h"
 #include <TH2.h>
 #include <TStyle.h>
 #include <TCanvas.h>
 #include "functions.h"
 
-void DIS::Loop()
+void protonBeam::Loop()
 #include "AnalysisShell.C"
