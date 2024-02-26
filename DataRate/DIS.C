@@ -42,7 +42,8 @@ void DIS::Loop()
     if (fChain == 0) return;
 
     Long64_t nentries_file = fChain->GetEntriesFast();
-    Long64_t nentries = 1000;
+    // Long64_t nentries = 1;
+    Long64_t nentries = 10000;
     //Long64_t nentries = 200000;
     if(nentries > nentries_file) nentries = nentries_file;
 
@@ -99,9 +100,41 @@ void DIS::Loop()
 	for(int i = 0;i<HcalEndcapPInsertRecHits_;i++){
 	    fun.addHitCell(jentry, fun.DET_HcalEndcapPInsert, HcalEndcapPInsertRecHits_cellID[i], HcalEndcapPInsertRecHits_position_x[i], HcalEndcapPInsertRecHits_position_y[i], HcalEndcapPInsertRecHits_position_z[i]);
 	}
-	for(int i = 0;i<LFHCALRecHits_;i++){
+
+	// Hit one and only one lfhcal cell per event!
+	if(1) {
+	  for(int i = 0;i<LFHCALRecHits_;i++) {
 	    fun.addHitCell(jentry, fun.DET_LFHCAL, LFHCALRecHits_cellID[i], LFHCALRecHits_position_x[i], LFHCALRecHits_position_y[i], LFHCALRecHits_position_z[i]);
+	  }
 	}
+	else {
+	  std::unordered_map<ULong_t, vector<Float_t>> lfhcal_cells_hit;
+	  for(int i = 0;i<LFHCALRecHits_;i++){
+	    //const auto &[sys,moduleIDx,moduleIDy,moduletype,passive,towerx,towery,rlayerz,layerz] = tup9(cellToLocal(cell, {8,6,6,1,1,2,1,4,4}));
+	    ULong_t cell = LFHCALRecHits_cellID[i];
+	    cell = cell & fun.maskBits(8+6+6+1+1+2+1+4);   // mask out rlayerz & layerz
+	    std::vector<Float_t>  hit = {LFHCALRecHits_position_x[i], LFHCALRecHits_position_y[i], LFHCALRecHits_position_z[i]};
+	    // get one and only 1 hit from all layers hit with same tower hit!
+	    if(lfhcal_cells_hit.find(cell) == lfhcal_cells_hit.end()) {
+	      lfhcal_cells_hit[cell] = hit;
+	      //printf("LFHCAL cell %8lx added   %lld\n", cell, jentry);
+	    }
+	    else {
+	      if(lfhcal_cells_hit[cell][2] > hit[2])  {
+		lfhcal_cells_hit[cell] = hit;
+		//printf("LFHCAL cell %8lx updated %lld\n", cell, jentry);
+	      }
+	      else {
+		//printf("LFHCAL cell %8lx skipped %lld\n", cell, jentry);
+	      }
+	    }
+	  }
+	  for(const auto& [cell, hit] : lfhcal_cells_hit) {
+	    fun.addHitCell(jentry, fun.DET_LFHCAL, cell, hit[0], hit[1], hit[2]);
+	  }
+	}
+
+
 	for(int i = 0;i<MPGDBarrelRecHits_;i++){
 	    fun.addHitCell(jentry, fun.DET_MPGDBarrel, MPGDBarrelRecHits_cellID[i], MPGDBarrelRecHits_position_x[i], MPGDBarrelRecHits_position_y[i], MPGDBarrelRecHits_position_z[i]);
 	}
@@ -119,6 +152,9 @@ void DIS::Loop()
 	}
 	for(int i = 0;i<SiEndcapTrackerRecHits_;i++){
 	    fun.addHitCell(jentry, fun.DET_SiEndcapTracker, SiEndcapTrackerRecHits_cellID[i], SiEndcapTrackerRecHits_position_x[i], SiEndcapTrackerRecHits_position_y[i], SiEndcapTrackerRecHits_position_z[i]);
+	}
+	for(int i = 0;i<TOFBarrelRecHit_;i++) {
+	  fun.addHitCell(jentry, fun.DET_TOFBarrel, TOFBarrelRecHit_cellID[i], TOFBarrelRecHit_position_x[i], TOFBarrelRecHit_position_y[i], TOFBarrelRecHit_position_z[i]);
 	}
 	for(int i = 0;i<TOFEndcapRecHits_;i++){
 	    fun.addHitCell(jentry, fun.DET_TOFEndcap, TOFEndcapRecHits_cellID[i], TOFEndcapRecHits_position_x[i], TOFEndcapRecHits_position_y[i], TOFEndcapRecHits_position_z[i]);
@@ -143,12 +179,12 @@ void DIS::Loop()
 	// ULong_t cell;
 	//UInt_t count;
 	auto [cnt, num_hit_cells] = fun.getHits(i);
-	auto [mincell, maxcell] = fun.getMinMaxCellId(i);
 
-	printf("        (detector)  %40s:  rate=%10.1f   distinct channels=%lu  hits/channel=%8.2f    [0x%16lx-0x%16lx]\n", fun.detnames[i].c_str(), rate_ratio * (Float_t)cnt, num_hit_cells,   ((Float_t)cnt)/((Float_t)num_hit_cells), mincell, maxcell);
+	printf("        (detector)  %40s:  rate=%10.1f   distinct channels=%lu  hits/channel=%8.2f\n", fun.detnames[i].c_str(), rate_ratio * (Float_t)cnt, num_hit_cells,   ((Float_t)cnt)/((Float_t)num_hit_cells));
     }
 
 
     fun.writeHistos(rate_ratio);
  
+    fun.printLimits();
 }
