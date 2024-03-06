@@ -1,12 +1,13 @@
 //void XXX::Loop()
 {
     functions fun;
+    fun.setup();
 
     if (fChain == 0) return;
 
     Long64_t nentries_file = fChain->GetEntriesFast();
-    // Long64_t nentries = 1;
-    Long64_t nentries = 10000;
+    Long64_t nentries = 10;
+    //Long64_t nentries = 15000;
     //Long64_t nentries = 200000;
     if(nentries > nentries_file) nentries = nentries_file;
 
@@ -129,6 +130,7 @@
 
     double rate_ratio = 8.3e4/actual_events;
     
+    /*
     // Print out rates and cell information 
     for(int i=0;i<fun.DET_cnt;i++) {
 	// ULong_t cell;
@@ -146,9 +148,15 @@
 	printf("        (detector)  %40s:  rate=%10.1f   distinct channels=%lu  hits/channel=%8.2f\n", fun.detnames[i].c_str(), rate_ratio * (Float_t)cnt, num_hit_cells,   ((Float_t)cnt)/((Float_t)num_hit_cells));
     }
 
+    */
+
+    fun.writeData();
     fun.buildAsicHistos();
     fun.buildRdoHistos();
     fun.writeHistos(rate_ratio);
  
+    fun.printNElectronicTypes();
     fun.printLimits();
 }
+
+

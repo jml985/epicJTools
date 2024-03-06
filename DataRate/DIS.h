@@ -5694,7 +5694,7 @@ DIS::DIS(TTree *tree) : fChain(0)
   // if parameter tree is not specified (or zero), connect the file
   // used to generate this class and read the T
   if (tree == 0) {
-    const char *fn = "DIS.root";
+    const char *fn = "DIS_Input.root";
     //const char *fn = "/home/jml/eic/jml/pythia_ep_noradcor_18x275_q2_0.000000001_1.0_run9.ab.0001.eicrecon.tree.edm4eic.root";
     //const char *fn = "s3https://dtn01.sdcc.bnl.gov:9000/eictest/EPIC/EVGEN/BACKGROUNDS/BEAMGAS/proton/pythia8.306-1.0/pythia_ep_noradcor_18x275_q2_0.000000001_1.0_run9.ab.0001.eicrecon.tree.edm4eic.root";
     /*

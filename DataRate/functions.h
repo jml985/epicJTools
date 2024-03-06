@@ -4,18 +4,32 @@
 #include <TROOT.h>
 #include <TChain.h>
 #include <TFile.h>
+#include <TH1F.h>
+#include <TH2D.h>
+#include <TCanvas.h>
+#include <TStyle.h>
+
+
+#include <DD4hep/Detector.h>
+#include <DD4hep/IDDescriptor.h>
+#include <DD4hep/DetElement.h>
+//#include <DD4hep/DetectorInterna.h>
+
+using namespace dd4hep;
+
+
 
 struct  JmlHit {
-  ULong_t CellId;
-  Float_t x;
-  Float_t y;
-  Float_t z;
+    ULong_t CellId;
+    Float_t x;
+    Float_t y;
+    Float_t z;
 };
   
 class functions {
-public:
+ public:
     TCanvas *jmlcanvas;
-    TFile *store;
+    //TFile *store;
     
     TH1D *hits_number_th;
 
@@ -31,7 +45,12 @@ public:
 
     std::vector<std::string> detnames;
     std::vector<Int_t> detids;
-    std::vector<std::unordered_map<ULong_t, Int_t>> det_hitcells;    // cellId
+
+    std::vector<Long_t> nominalChannels;
+    std::vector<Int_t> nominalRDO;
+    std::vector<Int_t> nominalFEB;
+    std::vector<Int_t> nominalASIC;
+  
     std::vector<std::map<ULong_t, Int_t>> asic_hits;    // ASIC:18, FEB:15, RDO:11, DAM:8
                                                         // 262k,    32k,    2048    256
     std::vector<std::map<ULong_t, Int_t>> rdo_hits;
@@ -89,14 +108,89 @@ public:
 
     Int_t DET_cnt;
 
-public:
-    functions() {
+ public:
 
-      //printf("getPhi %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f\n", getPhi(1,0), getPhi(1,1), getPhi(0,1), getPhi(-1,1), getPhi(-1,0), getPhi(-1,-1), getPhi(0,-1), getPhi(1,-1));
+    functions() {}
+
+    void setup() {
+	//printf("getPhi %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f\n", getPhi(1,0), getPhi(1,1), getPhi(0,1), getPhi(-1,1), getPhi(-1,0), getPhi(-1,-1), getPhi(0,-1), getPhi(1,-1));
+	
+	
+	// Surfaces...
+	//
+	// SiBarrelTracker   sys=59
+	// SiBarrelTracker   sys=60
+	// SiBarrelVertex    sys=31  layer=1
+	// SiBarrelVertex    sys=31  layer=2
+	// SiBarrelVertex    sys=31  layer=3
+	// SiEndcapTracker   sys=68 
+	// SiEndcapTracker   sys=69 
+	// SiEndcapTracker   sys=70  layer=1 
+	// SiEndcapTracker   sys=70  layer=2
+	// SiEndcapTracker   sys=70  layer=3
+	// SiEndcapTracker   sys=77 
+	// SiEndcapTracker   sys=78 
+	// SiEndcapTracker   sys=79  layer=1 
+	// SiEndcapTracker   sys=79  layer=2
+	// SiEndcapTracker   sys=79  layer=3
+	// BackwardMPGDEndcap  sys=72   layer=1
+	// BackwardMPGDEndcap  sys=72   layer=2
+	// ForwardMPGDEndcap   sys=82   layer=1
+	// ForwardMPGDEndcap   sys=82   layer=2
+	// MPGDBarrel          sys=61   
+	// OuterMPGDBarrel     sys=64 
+	// LFHCAL              sys=116  rlayer=0     { for ASIC perspective group... }
+	// LFHCAL              sys=116  rlayer=1
+	// LFHCAL              sys=116  rlayer=2
+	// LFHCAL              sys=116  rlayer=3
+	// LFHCAL              sys=116  rlayer=4
+	// LFHCAL              sys=116  rlayer=5
+      	// LFHCAL              sys=116  rlayer=6
+	// HCcalEndcapPInsert  sys=115  int(layer/5)=0
+	// HCcalEndcapPInsert  sys=115  int(layer/5)=1
+	// HCcalEndcapPInsert  sys=115  int(layer/5)=2
+	// HCcalEndcapPInsert  sys=115  int(layer/5)=3
+	// HCcalEndcapPInsert  sys=115  int(layer/5)=4
+	// HCcalEndcapPInsert  sys=115  int(layer/5)=5
+	// HCcalEndcapPInsert  sys=115  int(layer/5)=6
+	// HCcalEndcapPInsert  sys=115  int(layer/5)=7
+	// HCcalEndcapPInsert  sys=115  int(layer/5)=8
+	// HCcalEndcapPInsert  sys=115  int(layer/5)=9
+	// HCcalEndcapPInsert  sys=115  int(layer/5)=10
+	// HCcalEndcapPInsert  sys=115  int(layer/5)=11
+	// HCcalEndcapPInsert  sys=115  int(layer/5)=12
+	// EcalEndcapP         sys=102
+	// EcalEndcapPInsert   sys=106
+	// HcalEndcapN         sys=113
+	// EcalEndcapN         sys=103
+	// HCalBarrel          sys=111
+	// EcalBarrelImaging   sys=101  rpos0
+	// EcalBarrelImaging   sys=101  rpos1
+	// EcalBarrelImaging   sys=101  rpos2
+	// EcalBarrelImaging   sys=101  rpos3
+	// EcalBarrelSiFi      sys=105  zpos0       
+	// EcalBarrelSiFi      sys=105  zpos1             phi
+	// TOFBarrel           sys=92                     phi
+	// TOFEndcap           sys=122  idxy=odd          xy
+	// TOFEndcap           sys=122  idxy=even         xy
+	// dRICH
+	// pfRICH
+	// DIRC
+        // B0ECal
+	// B0Tracker
+	// RP
+	// OffM
+	// ZDCHcal
+	// ZDCEcal
+	// LowQ2Tracker
+	// LowQ2Cal
+	// LumiPairSpecCal
+	// LumiPairSpecTrack
+	// EcalLumiSpec
 
     	DET_cnt = 0;
 	// Si Tracking
-	detnames.push_back("SiBarrelTracker");  DET_SiBarrelTracker = DET_cnt; detids.push_back(DET_cnt++);
+	detnames.push_back("SiBarrelTracker");  DET_SiBarrelTracker = DET_cnt; detids.push_back(DET_cnt++);         
 	detnames.push_back("SiBarrelVertex");  DET_SiBarrelVertex = DET_cnt; detids.push_back(DET_cnt++);
 	detnames.push_back("SiEndcapTracker");  DET_SiEndcapTracker = DET_cnt; detids.push_back(DET_cnt++);
 	// MPGD
@@ -104,7 +198,6 @@ public:
 	detnames.push_back("ForwardMPGDEndcap");  DET_ForwardMPGDEndcap = DET_cnt; detids.push_back(DET_cnt++);
 	detnames.push_back("MPGDBarrel");    DET_MPGDBarrel = DET_cnt; detids.push_back(DET_cnt++);
 	detnames.push_back("OuterMPGDBarrel");  DET_OuterMPGDBarrel = DET_cnt; detids.push_back(DET_cnt++);
-	//detnames.push_back("MPGDDIRC");  DET_MPGDDIRC = DET_cnt; detids.push_back(DET_cnt++);
 	// Forward CAL
 	detnames.push_back("LFHCAL");  DET_LFHCAL = DET_cnt; detids.push_back(DET_cnt++);
 	detnames.push_back("HcalEndcapPInsert");   DET_HcalEndcapPInsert = DET_cnt; detids.push_back(DET_cnt++);
@@ -135,16 +228,13 @@ public:
 	detnames.push_back("LowQ2Cal");  DET_LowQ2Cal = DET_cnt; detids.push_back(DET_cnt++);
 	detnames.push_back("LumiPairSpecCal");  DET_LumiPairSpecCal = DET_cnt; detids.push_back(DET_cnt++);
 	detnames.push_back("LumiPairSpecTrack");  DET_LumiPairSpecTrack = DET_cnt; detids.push_back(DET_cnt++);
-	detnames.push_back("LumiDirectPhoton");  DET_LumiDirectPhoton = DET_cnt; detids.push_back(DET_cnt++);
-
-	// Don't know?
-	detnames.push_back("EcalLumiSpec");  DET_EcalLumiSpec = DET_cnt; detids.push_back(DET_cnt++);
+	detnames.push_back("EcalLumiSpec");  DET_EcalLumiSpec = DET_cnt; detids.push_back(DET_cnt++);     // Direct Photon
 
 
 	// Set Ranges for debug plots
 	for(int i=0;i<detids.size();i++) {
-	  std::vector<Float_t> range = { 100, -3000, 3000, 100, -3000, 3000 };
-	  dbgR.push_back(range);
+	    std::vector<Float_t> range = { 100, -3000, 3000, 100, -3000, 3000 };
+	    dbgR.push_back(range);
 	}
 	dbgR[DET_SiBarrelTracker] = { 100, -150, 150, 100, 0, 2*3.14159 };    // Z,phi
 	dbgR[DET_SiBarrelVertex] = { 100, -150, 150, 100, 0, 2*3.14159 };     // Z,phi
@@ -160,6 +250,7 @@ public:
 	dbgR[DET_EcalEndcapP] = { 161, -80.5, 80.5, 161 , -80.5, 80.5 };    // xx, yy
 	dbgR[DET_EcalEndcapPInsert] =  { 31, -15.5, 15.5, 31 , -15.5, 15.5 };    // xx, yy
 	dbgR[DET_HcalEndcapN] =  { 161, -80.5, 80.5, 161 , -80.5, 80.5 };    // xx, yy
+	dbgR[DET_EcalBarrelScFi] = { 600, -1500,1500, 600, -1500, 1500 };     // X,Y
 	dbgR[DET_EcalEndcapN] =  { 150, -650, 650, 150 , -650, 650 };    // X,Y
 	dbgR[DET_TOFBarrel] = { 200, -1200,1800, 200, 0,3.14159*2 };   // Z,Phi
 	dbgR[DET_TOFEndcap] = { 200, -640, 640, 200, -640, 640 };   // X,Y
@@ -169,13 +260,23 @@ public:
 	// Setup hit storage for each detector
 	for(int i=0;i<detids.size();i++) {
 	    std::unordered_map<ULong_t, Int_t> x;
-	    det_hitcells.push_back(x);
 	    std::map<ULong_t, Int_t> y;
 	    asic_hits.push_back(y);
 	    std::map<ULong_t, Int_t> yy;
 	    rdo_hits.push_back(y);
 	    std::map<ULong_t, Int_t> yyy;
 	    channel_hits.push_back(y);
+
+	  
+	    nominalChannels.push_back(0);
+	    nominalASIC.push_back(0);
+	    nominalFEB.push_back(0);
+	    nominalRDO.push_back(0);
+
+	}
+
+	for(int i=0;i<detnames.size();i++) {
+	    detectorSetup(i);
 	}
 
 	// Define Histograms
@@ -187,7 +288,7 @@ public:
 
     void defineHistograms() {
 	for(int i=0;i<detnames.size();i++) {
-	  TH2D *debug =  new TH2D((detnames[i] + "_debug").c_str(), (detnames[i] + "_debug").c_str(), dbgR[i][0], dbgR[i][1], dbgR[i][2], dbgR[i][3],dbgR[i][4], dbgR[i][5]);
+	    TH2D *debug =  new TH2D((detnames[i] + "_debug").c_str(), (detnames[i] + "_debug").c_str(), dbgR[i][0], dbgR[i][1], dbgR[i][2], dbgR[i][3],dbgR[i][4], dbgR[i][5]);
 
 	    TH2D *RZ = new TH2D((detnames[i] +"_RZ").c_str(), (detnames[i]+ "_RZ").c_str(), 1000,-6000,6000,1000,0,3000);
 	    TH2D *XY = new TH2D((detnames[i] + "_XY").c_str(), (detnames[i] + "_XY").c_str(), 1000,-3000,3000,1000,-3000,3000);	
@@ -205,7 +306,7 @@ public:
 	gStyle->SetOptStat(0);
 	gStyle->SetOptDate(0);
 	   
-	store = new TFile("results.root","recreate");
+	//store = new TFile("ARESULTS.root","recreate");
 	hits_number_th = new TH1D("hits_threshold","hits_threshold",detnames.size()+1,0,detnames.size()+1);
 
 	RZ_alldet = new TH2D("RZ_alldet","RZ_alldet",1000,-6000,6000,1000,0,3000);
@@ -223,437 +324,783 @@ public:
 
     void buildLimits(Float_t x, Float_t y, Float_t z)
     {      
-      Float_t r = getR(x,y);
-      Float_t phi = getPhi(x,y);
+	Float_t r = getR(x,y);
+	Float_t phi = getPhi(x,y);
 
-      if(tmp_min_x == 0) { tmp_min_x = x; }
-      if(tmp_max_x == 0) { tmp_max_x = x; }
-      if(tmp_min_y == 0) { tmp_min_y = y; }
-      if(tmp_max_y == 0) { tmp_max_y = y; }
-      if(tmp_min_z == 0) { tmp_min_z = z; }
-      if(tmp_max_z == 0) { tmp_max_z = z; }
-      if(tmp_min_r == 0) { tmp_min_r = r; }
-      if(tmp_max_r == 0) { tmp_max_r = r; }
-      if(tmp_min_phi == 0) { tmp_min_phi = phi; }
-      if(tmp_max_phi == 0) { tmp_max_phi = phi; }
+	if(tmp_min_x == 0) { tmp_min_x = x; }
+	if(tmp_max_x == 0) { tmp_max_x = x; }
+	if(tmp_min_y == 0) { tmp_min_y = y; }
+	if(tmp_max_y == 0) { tmp_max_y = y; }
+	if(tmp_min_z == 0) { tmp_min_z = z; }
+	if(tmp_max_z == 0) { tmp_max_z = z; }
+	if(tmp_min_r == 0) { tmp_min_r = r; }
+	if(tmp_max_r == 0) { tmp_max_r = r; }
+	if(tmp_min_phi == 0) { tmp_min_phi = phi; }
+	if(tmp_max_phi == 0) { tmp_max_phi = phi; }
 
 
-      if(tmp_min_x > x) { tmp_min_x = x; }
-      if(tmp_max_x < x) { tmp_max_x = x; }
-      if(tmp_min_y > y) { tmp_min_y = y; }
-      if(tmp_max_y < y) { tmp_max_y = y; }
-      if(tmp_min_z > z) { tmp_min_z = z; }
-      if(tmp_max_z < z) { tmp_max_z = z; }
-      if(tmp_min_r > r) { tmp_min_r = r; }
-      if(tmp_max_r < r) { tmp_max_r = r; }
-      if(tmp_min_phi > phi) { tmp_min_phi = phi; }
-      if(tmp_max_phi < phi) { tmp_max_phi = phi; }
+	if(tmp_min_x > x) { tmp_min_x = x; }
+	if(tmp_max_x < x) { tmp_max_x = x; }
+	if(tmp_min_y > y) { tmp_min_y = y; }
+	if(tmp_max_y < y) { tmp_max_y = y; }
+	if(tmp_min_z > z) { tmp_min_z = z; }
+	if(tmp_max_z < z) { tmp_max_z = z; }
+	if(tmp_min_r > r) { tmp_min_r = r; }
+	if(tmp_max_r < r) { tmp_max_r = r; }
+	if(tmp_min_phi > phi) { tmp_min_phi = phi; }
+	if(tmp_max_phi < phi) { tmp_max_phi = phi; }
     }
 
     void printLimits() {
-      printf("Limits:  x=[%.2f-%.2f] y=[%.2f-%.2f] z=[%.2f-%.2f] r=[%.2f-%.2f] phi=[%.2f-%.2f]\n", 
-	     tmp_min_x, tmp_max_x, tmp_min_y, tmp_max_y, tmp_min_z, tmp_max_z, tmp_min_r, tmp_max_r, tmp_min_phi, tmp_max_phi);
+	printf("Limits:  x=[%.2f-%.2f] y=[%.2f-%.2f] z=[%.2f-%.2f] r=[%.2f-%.2f] phi=[%.2f-%.2f]\n", 
+	       tmp_min_x, tmp_max_x, tmp_min_y, tmp_max_y, tmp_min_z, tmp_max_z, tmp_min_r, tmp_max_r, tmp_min_phi, tmp_max_phi);
     }
 
     // Analysis...
+    void detectorSetup(Int_t detector) {
+	if(detector==DET_SiBarrelTracker) {  
+	    //  unit currently 44 staves for inner layer,   69 staves for outer layer
+	    // 892111 mm^2   .02mmx.02mm channel 
+	    // 1578 reticules  
+	    // 50 RDO
+	    nominalChannels[detector] = (Long_t)(892111.0/(.02*.02));
+	    nominalASIC[detector] = 1578 + 2294;
+	    nominalFEB[detector] = 1578 + 2294;
+	    nominalRDO[detector] = 50 + 72;
+	}
+	else if(detector==DET_SiBarrelVertex) {   // unit currently 128 something x 3 layers
+	    // A=61041 mm^2
+	    // 108 ASIC
+	    // 4 RDO
+	    nominalChannels[detector] = (Long_t)(61041.0/(.02*.02));
+	    nominalASIC[detector] = (108 + 144 + 359);
+	    nominalFEB[detector] = (108 + 144 + 359);
+	    nominalRDO[detector] = (4 + 5 + 12);
+
+	}	
+	else if(detector==DET_SiEndcapTracker) {
+	    // sys=68:              A=176565,   ASIC=313,   RDO=10
+	    // sys=69               A=536488,   ASIC=949,   RDO=30
+	    // sys=70, layer=2:     A=552238,   ASIC=977,   RDO=31
+	    // sys=70  layer=3:     A=551513,   ASIC=976,   RDO=31
+	    // sys=70, layer=4:     A=549892,   ASIC=972,   RDO=31
+	    // sys=77               A=176565,   ASIC=313,   RDO=10
+	    // sys=78               A=536488,   ASIC=949,   RDO=30
+	    // sys=79, layer=2      A=552002,   ASIC=977,   RDO=31
+	    // sys=79, layer=3      A=547716,   ASIC=969,   RDO=31
+	    // sys=79, layer=4      A=541150,   ASIC=957,   RDO=31
+	    nominalChannels[detector] = (Long_t)((176565.0/(.02*.02))+
+						 (536488.0/(.02*.02))+
+						 (552238.0/(.02*.02))+
+						 (551513.0/(.02*.02))+
+						 (549892.0/(.02*.02))+
+						 (176565.0/(.02*.02))+
+						 (536488.0/(.02*.02))+
+						 (552002.0/(.02*.02))+
+						 (547716.0/(.02*.02))+
+						 (541150.0/(.02*.02)));
+	    nominalASIC[detector] = (313+949+977+976+972+
+				     313+949+977+969+957);
+	    nominalFEB[detector] = nominalASIC[detector];
+	    nominalRDO[detector] = (10+30+31+31+31+
+				    10+30+31+31+31);
+	}
+	else if(detector==DET_BackwardMPGDEndcap) {
+	    // 16k channels
+	    // 2 layers (1-2)
+	    // 8k ch = 128 asic = 32 feb = 8 rdo / layer
+	    nominalChannels[detector] = 8000*2;
+	    nominalASIC[detector] = 128*2;
+	    nominalFEB[detector] = 32*2;
+	    nominalRDO[detector] = 8*2;
+	}
+	else if(detector==DET_ForwardMPGDEndcap) {
+	    // 16k channels
+	    // 2 layers (1-2)
+	    // 8k ch = 128 asic = 32 feb = 8 rdo / layer
+	    nominalChannels[detector] = 8000*2;
+	    nominalASIC[detector] = 128*2;
+	    nominalFEB[detector] = 32*2;
+	    nominalRDO[detector] = 8*2;
+	}
+      	else if(detector==DET_MPGDBarrel) {
+	    // 30k channels = 512 asic = 32 RDO
+	    nominalChannels[detector] = 30000;
+	    nominalASIC[detector] = 512;
+	    nominalFEB[detector] = 128;
+	    nominalRDO[detector] = 32;
+	}
+	else if(detector==DET_OuterMPGDBarrel) {
+	    // 140k channels
+	    // 2188 asic
+	    // 1094 asic = 69 RDO / side
+	    nominalChannels[detector] = 140000;
+	    nominalASIC[detector] = 2188;
+	    nominalFEB[detector] = 547;
+	    nominalRDO[detector] = 137;
+	}
+	else if(detector==DET_LFHCAL) {
+	    // Total asics = 1000
+	    // 
+	    // Assume moduleIDx,moduleIDy, rlayerz 53*53 -> 1150  defines asic  (54 channels)
+	    //
+	    // channel = moduleIDx, moduleIDy, towerx, towery, rlayerz
+	    //asic = moduleIdx + 53*moduleIdy;           // 4x2x7 = 56 ch/asic
+	    //rdo = (int)moduleIdx/2+ 53*((int)moduleIdy/2);   // poor mans divide by 4!
+	    nominalChannels[detector] = 63280;
+	    nominalASIC[detector] = 1130;           // assume 7 layers x 8 towers
+	    nominalFEB[detector] = 1130;
+	    nominalRDO[detector] = 74;              // 16 FEB/RDO?
+	}
+	else if(detector==DET_HcalEndcapPInsert) {
+	    // 8k nominal channels
+	    // ~562 hexagonal layers by xx,yy
+	    // readout layer = 65/5 = 13 layers
+	    // channel = xx,yy,readout layer
+	    nominalChannels[detector] = 8000;
+	    nominalASIC[detector] = 154;           // assume 13 layers x 4 towers
+	    nominalFEB[detector] = 154;
+	    nominalRDO[detector] = 10;             // 16 FEB/RDO?
+	}
+	else if(detector==DET_EcalEndcapP) {
+	    // 19k channels
+	    // r = 199 - 1965
+	    // 24 ch/feb   16 ch/RDO
+	    // ASIC = 790   RDO = 50
+	    nominalChannels[detector] = 16000;
+	    nominalASIC[detector] = 790;          
+	    nominalFEB[detector] = 790;
+	    nominalRDO[detector] = 50;           
+	}
+	else if(detector==DET_EcalEndcapPInsert) {
+	    // 536 channels
+	    nominalChannels[detector] = 536;
+	    nominalASIC[detector] = 23;              
+	    nominalFEB[detector] = 23;
+	    nominalRDO[detector] = 2;               
+	}
+	else if(detector==DET_HcalEndcapN) {
+	    // 2334 x,y positions
+	    // 10 layers
+	    //    Go for now with "2334 channels"
+	    //    2 RDO
+	    //    64 ASIC  (only 37 channels / asic)
+	    nominalChannels[detector] = 3256;          // Completely unknown structure
+	    nominalASIC[detector] = 64;              
+	    nominalFEB[detector] = 64;
+	    nominalRDO[detector] = 2;               
+	}
+	else if(detector==DET_EcalEndcapN) {
+	    // 2998 channels distributed in ring
+	    // 24 channels/feb = 125 FEB
+	    // 8 RDO
+	    nominalChannels[detector] = 2998;
+	    nominalASIC[detector] = 125;              // 24 ch/feb
+	    nominalFEB[detector] = 125;
+	    nominalRDO[detector] = 8;                 // 16 FEB/RDO?
+	}
+	else if(detector==DET_HcalBarrel) {
+	    // sector=0-31, tower=0-47, tile=0-4
+	    // 1 asic/tile, 5 asic/sector
+	    // 30 asic/rdo -> 6 sectors/rdo
+	    nominalChannels[detector] = 7680;
+	    nominalASIC[detector] = 160;            // 48 ch/feb
+	    nominalFEB[detector] = 160;
+	    nominalRDO[detector] = 10;              // 16 FEB/RDO
+	}
+	else if(detector==DET_EcalBarrelImaging) {
+
+	    // Layer 1: if(getR(x,y) <900) {
+	    //	asic = distributeEven(z, 14537, -2579, 1804);
+	    //	rdo = distributeEven(z, 52, -2579, 1804);
+	    // Layer 2: if((getR(x,y) >900) && (getR(x,y) < 930)) {
+	    //  asic = distributeEven(z, 15827, -2579, 1804) + bAsic;
+	    //  rdo = distributeEven(z, 57, -2579, 1804) + bRdo;
+	    // Layer 3: if((getR(x,y) >930) && (getR(x,y) < 970)) {
+	    //  asic = distributeEven(z, 16429, -2579, 1804) + bAsic;
+	    //  rdo = distributeEven(z, 59, -2579, 1804) + bRdo;
+	    // Layer3: if(getR(x,y) > 970) {
+	    //  asic = distributeEven(z, 17719, -2579, 1804) + bAsic;
+	    //	rdo = distributeEven(z, 63, -2579, 1804) + bRdo;
+	    nominalChannels[detector] = (14537 + 15827 + 16429 + 17719) * 5320;
+	    nominalASIC[detector] = (14537 + 15827 + 16429 + 17719);      
+	    nominalFEB[detector] = (14537 + 15827 + 16429 + 17719); 
+	    nominalRDO[detector] = (52+57+59+63);
+	}
+	else if(detector==DET_EcalBarrelScFi) {
+	    // 48 sectors
+	    // 12 rowsx
+	    // 60 towers/sector (5 towers/row-sector)
+	    // 60 channels/sector,  1 asic/sector
+	    // NASIC=48 / side,  NRDO=2/side
+	    nominalChannels[detector] = 2880 * 2;
+	    nominalASIC[detector] = 48 * 2;            
+	    nominalFEB[detector] = 48 * 2;
+	    nominalRDO[detector] = 3 * 2;              
+	}
+
+	else if(detector==DET_TOFBarrel) {
+	    // asic = 2,359,296/128 -> 18,432 ASIC/64 -> 288 RDO
+	    nominalChannels[detector] = 2359296;
+	    nominalASIC[detector] = 18432;              
+	    nominalFEB[detector] = 2304;
+	    nominalRDO[detector] = 288;               
+	}  
+
+	else if(detector==DET_TOFEndcap) {
+	    // pixel=3719168 -> 3632 asic -> 212 RDO
+	    //                  1816 asic -> 106 RDO / layer
+	    nominalChannels[detector] = 3719168;
+	    nominalASIC[detector] = 3632;              // 1024 ch/asic
+	    nominalFEB[detector] = 3632;
+	    nominalRDO[detector] = 212;                  
+	}  		
+      	else {
+	    return;
+	}
+  
+    }
 
     void addHitCell(int event, Int_t detector, ULong_t cell, Float_t x, Float_t y, Float_t z) {
-      ULong_t asic=0xffffffffff;
-      ULong_t rdo =0xffffffffff;
-      ULong_t channel = 0xffffffffff;
+	ULong_t asic=0xffffffffff;
+	ULong_t rdo =0xffffffffff;
+	ULong_t channel = 0xffffffffff;
 
-      ULong_t bAsic = 0;
-      //printf("yup %d\n",detector);
+	ULong_t bAsic = 0;
+	ULong_t bRdo = 0;
 
-      if(detector==DET_SiBarrelTracker) {  //  unit currently 44 staves for inner layer,   69 staves for outer layer
-	const auto &[sys, layer, module, sensor] = tup4(cellToLocal(cell, {8,4,12,2}));
+	if(detector==DET_SiBarrelTracker) {  //  unit currently 44 staves for inner layer,   69 staves for outer layer
+	    const auto &[sys, layer, module, sensor] = tup4(cellToLocal(cell, {8,4,12,2}));
+	    // 892111 mm^2
+	    // 1578 reticules
+	    // 50 RDO
+	    if(sys == 59) {
+		asic = distributeEven(z, 1578, -261, 261);
+		rdo = distributeEven(z, 50, -261, 261);
+		
+	    }
+	    // 1296848 mm^2
+	    // 2294 reticules
+	    // 72 RDO
+	    if(sys == 60) {
+		asic = distributeEven(z, 2294, -420, 420) + 1578;
+		rdo = distributeEven(z, 72, -420, 420) + 50;
+		
+		fillDebugHist(detector, z, getPhi(x,y), asic);
+	    }
+	    
+	    //printf("Sys %ld %d %d %d %d %f %f\n",asic, sys,layer,module,sensor,getPhi(x,y),z);
+	    //cell = cell & maskBits(26);
+	}
 	
-	//printf("a\n");
-	if(sys == 59) {
-	  asic = distributeEven(z, 36, -261, 261) + ((module-1)*36);
+	else if(detector==DET_SiBarrelVertex) {   // unit currently 128 something x 3 layers
+	    const auto &[sys, layer, module, sensor] = tup4(cellToLocal(cell, {8,4,12,2}));
+	    
+	    // A=61041 mm^2
+	    // 108 ASIC
+	    // 4 RDO
+	    if(layer == 1) {
+		asic = distributeEven(z,108,-135,135);
+		rdo = distributeEven(z,4,-135,135);
+	    }
+	    bAsic = 108;
+	    bRdo = 4;
+	    // A=81389 mm^2
+	    // 144 ASIC
+	    // 5 RDO
+	    if(layer == 2) {
+		asic = distributeEven(z,144,-135,135)  + bAsic;
+		rdo = distributeEven(z,5,-135,135)  + bRdo;
+	    }
+	    bAsic += 144;
+	    bRdo += 5;
+	    
+	    // A=203472 mm^2
+	    // 360 ASIC
+	    // 12 RDO
+	    if(layer == 4) {
+		asic = distributeEven(z,359,-135,135)  + bAsic;
+		rdo = distributeEven(z,12,-135,135)  + bRdo;
+	    }
+	    
+	    if(layer == 4) {
+		fillDebugHist(detector, z, getPhi(x,y), asic);
+	    }
+	    
+	    cell = cell & maskBits(26); 
 	}
-	bAsic += 44*36;
-	if(sys == 60) {
-	  asic = distributeEven(z, 58, -420, 420) + bAsic + ((module-1)*58);
-	  fillDebugHist(detector, z, getPhi(x,y), asic);
+	
+	else if(detector==DET_SiEndcapTracker) {
+	    const auto &[sys, layer, module, sensor] = tup4(cellToLocal(cell, {8,4,12,2}));	
+	    
+	    cell = cell & maskBits(26);
+	    
+	    // A=176565,   ASIC=313,   RDO=10
+	    if(sys == 68) {
+		asic = distributeCircle(getR(x,y), 313, 37, 240);
+		rdo = distributeCircle(getR(x,y), 10, 37, 240);
+	    }
+	    bAsic = 313;
+	    bRdo = 10;
+	    
+	    // A=536488,   ASIC=949,   RDO=30
+	    if(sys == 69) {
+		asic = distributeCircle(getR(x,y), 949, 37,415) + bAsic;
+		rdo = distributeCircle(getR(x,y), 30, 37,415) + bRdo;
+	    }
+	    bAsic += 313;
+	    bRdo += 30;
+	    
+	    // A=552238,   ASIC=977,   RDO=31
+	    if((sys == 70) && (layer==2)) {
+		asic = distributeCircle(getR(x,y), 977, 37,415) + bAsic;
+		rdo = distributeCircle(getR(x,y), 31, 37,415) + bRdo;
+	    }
+	    bAsic += 977;
+	    bRdo += 31;
+	    
+	    // A=551513,   ASIC=976,   RDO=31
+	    if((sys == 70) && (layer==3)) {
+		asic = distributeCircle(getR(x,y), 976, 40,421) + bAsic;
+		rdo = distributeCircle(getR(x,y), 31, 40, 421) + bRdo;
+	    }
+	    bAsic += 976;
+	    bRdo += 31;
+	    
+	    // A=549892,   ASIC=972,   RDO=31
+	    if((sys == 70) && (layer==4)) {
+		asic = distributeCircle(getR(x,y), 972, 46,421) + bAsic;
+		rdo = distributeCircle(getR(x,y), 31, 46,421) + bRdo;
+	    }
+	    bAsic += 972;
+	    bRdo += 31;
+	    
+	    // A=176565,   ASIC=313,   RDO=10
+	    if(sys == 77) {
+		asic = distributeCircle(getR(x,y), 313 ,37,240)   + bAsic;
+		rdo = distributeCircle(getR(x,y), 10 ,37,240)   + bRdo;
+	    }
+	    bAsic += 313;
+	    bRdo += 10;
+	    
+	    // A=536488,   ASIC=949,   RDO=30
+	    if(sys == 78) {
+		asic = distributeCircle(getR(x,y), 949, 37,415) + bAsic;
+		rdo = distributeCircle(getR(x,y), 30, 37,415) + bRdo;
+	    }
+	    bAsic += 949;
+	    bRdo += 30;
+	    
+	    // A=552002,   ASIC=977,   RDO=31
+	    if((sys == 79) && (layer==2)) {
+		asic = distributeCircle(getR(x,y), 977, 38,421) + bAsic;
+		rdo = distributeCircle(getR(x,y), 31, 38,421) + bRdo;
+	    }
+	    bAsic += 977;
+	    bRdo += 31;
+	    
+	    // A=547716,   ASIC=969,   RDO=31
+	    if((sys == 79) && (layer==3)) {
+		asic = distributeCircle(getR(x,y), 969, 53,421) + bAsic;
+		rdo = distributeCircle(getR(x,y), 31, 53,421) + bRdo;
+	    }
+	    bAsic += 969;
+	    bRdo += 31;
+	    
+	    // A=541150,   ASIC=957,   RDO=31
+	    if((sys == 79) && (layer==4)) {
+		asic = distributeCircle(getR(x,y), 957, 70,421) + bAsic;
+		rdo = distributeCircle(getR(x,y), 31, 70,421) + bRdo;
+	    }
+	    
+	    if((sys == 79)  && (layer==4)) {
+		fillDebugHist(detector, x,y, asic-bAsic);
+	    }
+	    
+	    //printf("SiEndcapTracker: %ld %d %d %d %d\n", asic, sys, module, layer, sensor);
 	}
+	
+	else if(detector==DET_BackwardMPGDEndcap) {
+	    const auto &[sys, layer, module, sensor] = tup4(cellToLocal(cell, {8,2,6,12}));
+	    Short_t xx = (cell >>32) & 0xffff;
+	    Short_t yy = (cell >>48) & 0xffff;
+	    //printf("Backward MPGDEndcap %d %d %d %d %d %d\n", sys,layer,module,sensor, xx, yy);
+	
+	    if(layer == 2) {
+		fillDebugHist(detector, x, y, module);
+	    }
 
-	//printf("Sys %ld %d %d %d %d %f %f\n",asic, sys,layer,module,sensor,getPhi(x,y),z);
-	cell = cell & maskBits(26);
-      }
+	    // 16k channels
+	    // 2 layers (1-2)
+	    // 8k ch = 128 asic = 32 feb = 8 rdo / layer
+	    if(layer == 1) {
+		asic = distributeCircle(getR(x,y), 128, 47, 500);
+		rdo = distributeCircle(getR(x,y), 8, 47, 500);
+	    }
+	    if(layer == 2) {
+		asic = distributeCircle(getR(x,y), 128, 47, 500) + 128;
+		rdo = distributeCircle(getR(x,y), 8, 47, 500) + 8;
+	    }
+	
+	    cell = cell & maskBits(8+2+6+12);
+	}
       
-      else if(detector==DET_SiBarrelVertex) {   // unit currently 128 something x 3 layers
-	const auto &[sys, layer, module, sensor] = tup4(cellToLocal(cell, {8,4,12,2}));
-	
-	//printf("mod %d\n",module);
-	if(layer == 1) asic = distributeEven(z,1,-135,135) + 1*(module-1);
-	bAsic = 1*128;
-	if(layer == 2) asic = distributeEven(z,1,-135,135)  + bAsic + 1 * (module-1);
-	bAsic += 1*128;
-	if(layer == 4) asic = distributeEven(z,3,-135,135)  + bAsic + 3 * (module-1);
+	else if(detector==DET_ForwardMPGDEndcap) {
+	    const auto &[sys, layer, module, sensor] = tup4(cellToLocal(cell, {8,2,6,12}));
+	    Short_t xx = (cell >>32) & 0xffff;
+	    Short_t yy = (cell >>48) & 0xffff;
 
-	if(layer == 4) {
-	  fillDebugHist(detector, z, getPhi(x,y), asic);
-	}
-	
-	cell = cell & maskBits(26); 
-      }
-      
-      else if(detector==DET_SiEndcapTracker) {
-	const auto &[sys, layer, module, sensor] = tup4(cellToLocal(cell, {8,4,12,2}));	
-	//printf("Sys %d %d %d %d\n", sys, module, layer, sensor);
-
-	//printf("hi\n");
-	cell = cell & maskBits(26);
-	
-	if(sys == 68) 
-	  asic = distributeCircle(getR(x,y), 9,37,240) + 9*(module-1);
-	bAsic = 9*36;
-	if(sys == 69) 
-	  asic = distributeCircle(getR(x,y), 26, 37,415) + bAsic + 26*(module-1);
-	bAsic += 26*36;
-	if((sys == 70) && (layer==2)) 
-	  asic = distributeCircle(getR(x,y), 27, 37,415) + bAsic + 27*(module-1);
-	bAsic += 27*36;
-	if((sys == 70) && (layer==3))
-	  asic = distributeCircle(getR(x,y), 27, 40,421) + bAsic + 27*(module-1);
-	bAsic += 27*36;
-	if((sys == 70) && (layer==4))
-	  asic = distributeCircle(getR(x,y), 27, 46,421) + bAsic + 27*(module-1);
-	bAsic += 27*36;
-	
-	if(sys == 77) 
-	  asic = distributeCircle(getR(x,y), 9,37,240)   + bAsic + 9*(module-1);
-	bAsic += 9*36;
-	if(sys == 78) 
-	  asic = distributeCircle(getR(x,y), 26, 37,415) + bAsic + 26*(module-1);
-	bAsic += 26*36;
-	if((sys == 79) && (layer==2)) 
-	  asic = distributeCircle(getR(x,y), 27, 38,421) + bAsic + 27*(module-1);
-	bAsic += 27*36;
-	if((sys == 79) && (layer==3))
-	  asic = distributeCircle(getR(x,y), 27, 53,421) + bAsic + 27*(module-1);
-	bAsic += 27*36;
-	if((sys == 79) && (layer==4))
-	  asic = distributeCircle(getR(x,y), 27, 70,421) + bAsic + 27*(module-1);
-	//bAsic += 27*36;
-
-	if((sys == 79)  && (layer==4)) {
-	    fillDebugHist(detector, x,y, asic-bAsic);
-	}
-
-	//printf("SiEndcapTracker: %ld %d %d %d %d\n", asic, sys, module, layer, sensor);
-      }
-      
-      else if(detector==DET_BackwardMPGDEndcap) {
-	const auto &[sys, layer, module, sensor] = tup4(cellToLocal(cell, {8,2,6,12}));
-	//printf("Sys %d %d %d %d\n", sys,layer,module,sensor);
-	
-	if(layer == 2) {
-	  fillDebugHist(detector, x, y, module);
-	}
-
-	// 16k channels
-	// 2 layers (1-2)
-	// 8k ch = 128 asic = 32 feb = 8 rdo / layer
-	if(layer == 1) {
-	  asic = distributeCircle(getR(x,y), 128, 47, 500);
-	  rdo = distributeCircle(getR(x,y), 8, 47, 500);
-	}
-	if(layer == 2) {
-	  asic = distributeCircle(getR(x,y), 128, 47, 500) + 128;
-	  rdo = distributeCircle(getR(x,y), 8, 47, 500) + 8;
-	}
-	
-	cell = cell & maskBits(8+2+6+12);
-      }
-      
-      else if(detector==DET_ForwardMPGDEndcap) {
-	const auto &[sys, layer, module, sensor] = tup4(cellToLocal(cell, {8,2,6,12}));
-	//printf("Sys %d %d %d %d\n", sys,layer,module,sensor);
-	  
-	if(layer == 1) {
-	  fillDebugHist(detector, x, y, module);
-	}
-
-	// 16k channels
-	// 2 layers (1-2)
-	// 8k ch = 128 asic = 32 feb = 8 rdo / layer
-	if(layer == 1) {
-	  asic = distributeCircle(getR(x,y), 128, 70, 500);
-	  rdo = distributeCircle(getR(x,y), 8, 70, 500);
-	}
-	if(layer == 2) {
-	  asic = distributeCircle(getR(x,y), 128, 70, 500) + 128;
-	  rdo = distributeCircle(getR(x,y), 8, 70, 500) + 8;
-	}
-	
-	
-	cell = cell & maskBits(8+2+6+12);
-      }
-      
-      else if(detector==DET_MPGDBarrel) {
-	const auto &[sys, layer, module, sensor] = tup4(cellToLocal(cell, {8,4,12,2}));
-	//printf("Sys %d %d %d %d\n", sys,layer,module,sensor);
-	
-	fillDebugHist(detector, z, getPhi(x,y), module);
-
-	// 30k channels = 512 asic = 32 RDO
-	asic = distributeEven(z, 512, -1050, 1350);
-	rdo = distributeEven(z, 32, -1050, 1350);
+	    // 16k channels
+	    // 2 layers (1-2)
+	    // 8k ch = 128 asic = 32 feb = 8 rdo / layer
+	    if(layer == 1) {
+		asic = distributeCircle(getR(x,y), 128, 70, 500);
+		rdo = distributeCircle(getR(x,y), 8, 70, 500);
        
-	cell = cell & maskBits(8+4+12+2);
-      }
-      
-      else if(detector==DET_OuterMPGDBarrel) {
-	const auto &[sys, layer, module, sensor] = tup4(cellToLocal(cell, {8,4,12,2}));
-	//printf("Sys %d %d %d %d\n", sys,layer,module,sensor);
-	if((module %2) == 0) {
-	  fillDebugHist(detector, z, getPhi(x,y), module);
+		fillDebugHist(detector, x, y, rdo);
+	    }
+	    if(layer == 2) {
+		asic = distributeCircle(getR(x,y), 128, 70, 500) + 128;
+		rdo = distributeCircle(getR(x,y), 8, 70, 500) + 8;
+	    }
+       	
+	    cell = cell & maskBits(8+2+6+12);
+	    //channel = cell;
 	}
+      
+	else if(detector==DET_MPGDBarrel) {
+	    const auto &[sys, layer, module, sensor] = tup4(cellToLocal(cell, {8,4,12,2}));
+	    fillDebugHist(detector, z, getPhi(x,y), module);
+
+	    // 30k channels = 512 asic = 32 RDO
+	    asic = distributeEven(z, 512, -1050, 1350);
+	    rdo = distributeEven(z, 32, -1050, 1350);
+       
+	    cell = cell & maskBits(8+4+12+2);
+	    //channel = cell;
+	}
+      
+	else if(detector==DET_OuterMPGDBarrel) {
+	    const auto &[sys, layer, module, sensor] = tup4(cellToLocal(cell, {8,4,12,2}));
+
+	    if((module %2) == 0) {
+		fillDebugHist(detector, z, getPhi(x,y), module);
+	    }
+	    else {
+		fillDebugHist(detector, z, getPhi(x,y), module + 30);  
+	    }
+
+	    // 140k channels
+	    // 2188 asic
+	    // 1094 asic = 69 RDO / side
+	    // 
+	    // both modules same length, but overlap
+	    if((module % 2) == 0) {
+		asic = distributeEven(z, 1094, -1624, 60);
+		rdo = distributeEven(z, 69, -1624, 60);
+	    }
+	    else {
+		asic = distributeEven(z, 1094, 40, 1724) + 1094;
+		rdo = distributeEven(z, 69, 40, 1724) + 69;
+	    }
+
+	    cell = cell & maskBits(8+4+12+2);
+	    //channel = cell;
+	}
+      
+	else if(detector==DET_LFHCAL) {
+	    const auto &[sys,moduleIDx,moduleIDy,moduletype,passive,towerx,towery,rlayerz,layerz] = tup9(cellToLocal(cell, {8,6,6,1,1,2,1,4,4}));
+
+	    Short_t xx = (cell >>32) & 0xffff;
+	    Short_t yy = (cell >>48) & 0xffff;
+
+	    //printf("DET_LFHCAL- %d %d %f %f %d %d %d %d %d %d %d %d %d\n", xx, yy, x,y, getR(x,y), getPhi(x,y), sys, moduleIDx, moduleIDy, moduletype, passive, towerx, towery,rlayerz,layerz);
+	
+	    //UInt_t ID = moduletype+1;
+	    //fillDebugHist(detector, x, y, ID);
+	    addDebugHist(detector,x,y);
+	    cell = cell & maskBits(8+6+6+1+1+2+1+4);
+
+	    // Total asics = 1000
+	    // 
+	    asic = moduleIDx + 1000*moduleIDy;            // 8 towers x 7 layers
+	    rdo = (int)(moduleIDx/8) + (int)(moduleIDy/4) * 1000;   //16 asic/RDO
+
+	    // Assume moduleIDx,moduleIDy, rlayerz 53*53 -> 1150  defines asic  (54 channels)
+	    //
+	    // channel = moduleIDx, moduleIDy, towerx, towery, rlayerz
+	    channel = cell;
+	    //asic = moduleIdx + 53*moduleIdy;           // 4x2x7 = 56 ch/asic
+	    //rdo = (int)moduleIdx/2+ 53*((int)moduleIdy/2);   // poor mans divide by 4!
+	}
+
+	else if(detector==DET_HcalEndcapPInsert) {
+	    const auto &[sys,layer,slice] = tup3(cellToLocal(cell, {8,8,8}));
+	    Short_t xx = (cell >>32) & 0xffff;
+	    Short_t yy = (cell >>48) & 0xffff;
+	    //printf("DET_HcalEndcapPInsert- %d %d %f %f %d %d %d\n", xx, yy, x, y, getR(x,y), getPhi(x,y), sys, layer, slice);
+
+	    addDebugHist(detector,xx, yy);
+
+	    cell = cell & 0xffffffff00000000;   // only take integerized xx,yy
+	    cell += (int)((layer-1)/5);
+
+	    //asic = distributeGrid(xx,yy,3,2,100,100);  // 2x2x13 layers = 52 ch/asic
+	    //rdo = distributeGrid(xx,yy,6,4,100,100);   // 16 asics/rdo
+
+	    asic = distributeRect(x,y,154/7,-500,250,-350,350,130, 1);  //130
+	    asic += 1000000 * (int)((layer-1)/10);    // 7 layers
+	    rdo = distributeRect(x,y,10,-500,250,-350, 350,130, 1);
+
+	    // 8k nominal channels
+	    // ~562 hexagonal layers by xx,yy
+	    // readout layer = 65/5 = 13 layers
+	    // channel = xx,yy,readout layer
+
+	    channel = cell;
+	}
+
+	else if(detector==DET_EcalEndcapP) {
+	    const auto &[sys, barrel, module, layer, slice, fiber_x, fiber_y] = tup7(cellToLocal(cell, {8,3,4,8,5,1,1}));
+	    Short_t xx = (cell >>32) & 0xffff;
+	    Short_t yy = (cell >>48) & 0xffff;
+	    //printf("DET_EcalEndcapP- %d %d %d %d %d %d %d %d %d\n", xx,yy, sys, barrel, module, layer, slice, fiber_x, fiber_y);
+	    
+	    // 19k channels
+	    // r = 199 - 1965
+	    // 24 ch/feb   16 ch/RDO
+	    // ASIC = 790   RDO = 50
+	    asic = distributeCircle(getR(x,y), 790, 199, 1965);
+	    rdo = distributeCircle(getR(x,y), 50, 199, 1965);
+
+	    addDebugHist(detector, xx, yy);
+	    //buildLimits(x,y,z);
+	    //channel = xx,yy
+	
+	    channel = cell;
+	}
+
+	else if(detector==DET_EcalEndcapPInsert) {
+	    const auto &[sys, barrel, module, layer, slice] = tup5(cellToLocal(cell, {8,3,4,8,5}));
+	    Short_t xx = (cell >>32) & 0xffff;
+	    Short_t yy = (cell >>48) & 0xffff;
+	    addDebugHist(detector, xx, yy);
+	    //printf("DET_EcalEndcapPInsert- %d %d %d %d %d %d %d\n", xx,yy, sys, barrel, module, layer, slice);
+	    //asic = (Int_t)
+	    asic = distributeRect(x,y,24,-400,200, -300,300, 125);
+	    rdo = (y>0) ? 0 : 1;
+	    channel = cell;
+	}
+
+	else if(detector==DET_HcalEndcapN) {
+	    const auto &[sys, barrel, module, layer, slice] = tup5(cellToLocal(cell, {8,3,4,8,5}));
+	
+	    Short_t xx = (cell >>32) & 0xffff;
+	    Short_t yy = (cell >>48) & 0xffff;
+	    //printf("DET_HcalEndcapN- %f %f %f %d %d %d %d %d %d %d\n", x,y,z,xx,yy,sys, barrel, module, layer, slice);
+
+	    fillDebugHist(detector, xx, yy, xx);
+	    cell = cell & 0xffffffff00000000;
+
+	    // 2334 x,y positions
+	    // 10 layers
+	    //    Go for now with "2334 channels"
+	    //    2 RDO
+	    //    64 ASIC  (only 37 channels / asic)
+
+	    asic=distributeCircle(getR(x,y), 64, 100, 2551);
+	    rdo = distributeCircle(getR(x,y), 2, 100, 2551);
+	    // buildLimits(x,y,z);
+
+	    // channel = xx,yy     -> 2334 channels
+	    //         layers/grouping to make 3256?
+	    channel = cell;
+	}
+      
+	else if(detector==DET_EcalEndcapN) {
+	    const auto &[sys, sector, module] = tup3(cellToLocal(cell, {8,4,20}));
+	
+	    Short_t xx = (cell >>32) & 0xffff;
+	    Short_t yy = (cell >>48) & 0xffff;	
+	    //printf("DET_EcalEndcapN- %d %d %d %d %d\n", xx,yy,sys,sector,module);
+	    
+	    // 2998 channels distributed in ring
+	    // 24 channels/feb = 125 FEB
+	    // 8 RDO
+	    asic = distributeCircle(getR(x,y), 125, 72, 643);
+	    rdo = distributeCircle(getR(x,y), 8, 72,643);
+
+	    fillDebugHist(detector, x,y, module);
+	
+	    cell = cell & maskBits(8+4+20);
+	    // channel = sys,sector,module
+	    channel = cell;
+	}
+
+	else if(detector==DET_HcalBarrel) {
+	    const auto &[sys, sector, tower, tile] = tup4(cellToLocal(cell, {8,5,6,3}));
+	
+	    Short_t xx = (cell >>32) & 0xffff;
+	    Short_t yy = (cell >>48) & 0xffff;
+	    //printf("DET_HcalBarrel- %d %d %d %d %d %d\n", xx,yy,sys, sector, tower,tile
+
+	    // sector=0-32, tower=0-47, tile=0-4
+	    // 1 asic/tile, 5 asic/sector
+	    // 30 asic/rdo -> 6 sectors/rdo
+	    // 
+	    asic = sector*5 + tile;
+	    rdo = (int)(sector/4);
+
+
+	    fillDebugHist(detector, x,y, tower);
+	
+	    cell = cell & maskBits(8+5+6+3);
+	    // channel = sys,sector,module
+	    channel = cell;
+	}
+
+	else if(detector==DET_EcalBarrelImaging) {
+	    const auto &[sys,sector,layer,slice,grid,fiber,u_zz] = tup7(cellToLocal(cell, {8,6,6,4,10,16,14}));
+	    Short_t zz = u_zz & ~0x2000;
+	    if(u_zz & 0x2000) {    // sign bit!
+		zz = -zz;
+	    }
+
+	    if(getR(x,y) <900) {
+		asic = distributeRect(z, getPhi(x,y), 14537, -2579, 1804,0,2*3.14159,0,697);
+		rdo = distributeRect(z, getPhi(x,y),  52,    -2579, 1804,0,2*3.14159,0,697);
+	    }
+	    bAsic = 14537;
+	    bRdo = 52;
+	    if((getR(x,y) >900) && (getR(x,y) < 930)) {
+		asic = distributeRect(z,getPhi(x,y), 15827, -2579, 1804,0,2*3.14159,0,697) + bAsic;
+		rdo = distributeRect(z, getPhi(x,y), 57, -2579, 1804,0,2*3.14159,0,697) + bRdo;
+	    }
+	    bAsic += 15827;
+	    bRdo += 57;
+	    if((getR(x,y) >930) && (getR(x,y) < 970)) {
+		asic = distributeRect(z, getPhi(x,y), 16429, -2579, 1804,0,2*3.14159,0,697) + bAsic;
+		rdo = distributeRect(z, getPhi(x,y),  59, -2579, 1804,0,2*3.14159,0,697) + bRdo;
+	    }
+	    bAsic += 16429;
+	    bRdo += 59;
+	    if(getR(x,y) > 970) {
+		asic = distributeRect(z, getPhi(x,y), 17719, -2579, 1804,0,2*3.14159,0,697) + bAsic;
+		rdo = distributeRect(z, getPhi(x,y), 63, -2579, 1804,0,2*3.14159,0,697) + bRdo;
+	    }
+
+	    //printf("Astropix %d %d %f %f %d %d %d %d %d %f\n", sys,sector,layer,slice,grid,fiber,zz, z);
+	    //buildLimits(x,y,z);
+	}
+	
+	else if(detector==DET_EcalBarrelScFi) {
+	    //const auto &[sys,sector,row,tower] = tup4(cellToLocal(cell, {8,8,8,8}));
+	    const auto &[sys,sector,row,zzz,tower] = tup5(cellToLocal(cell, {8,6,6,4,8}));
+	    Short_t xx = (cell >>32) & 0xffff;
+	    Short_t yy = (cell >>48) & 0xffff;
+	    //printf("DET_EcalBarrelScFi- %d %d %f %f %f %f %d %d %d %d\n", xx,yy, x, y, getR(x,y), getPhi(x,y), sys, sector,row,tower);
+	    {
+		fillDebugHist(detector, x, y,row);
+	    }
+
+	    // 60 channels/sector,  1 asic/sector
+	    // NASIC=48 / side,  NRDO=2/side
+	    asic = sector-1;
+	    rdo = (int)((sector-1)/24);
+	    if(z > 0) {
+		asic += 48;
+		rdo += 2;
+	    }
+
+	    cell = cell & maskBits(8+8+8+8);
+	    ULong_t ncell = cell + 0x10000000000;    // always hit both sides!
+	    //det_[detector][ncell]++;         // add second hit!
+
+	    channel = cell;
+	    int nchannel = ncell;
+	    int nasic = asic + 10000;
+	    int nrdo = rdo + 10000;
+	    asic_hits[detector][nasic]++;
+	    rdo_hits[detector][nrdo]++;
+	    channel_hits[detector][nchannel]++;
+       
+
+
+	}
+
+	else if(detector==DET_TOFBarrel) {
+	    const auto &[sys,layer,module,sensor] = tup4(cellToLocal(cell, {8,4,12,2}));
+	    Short_t xx = (cell >>32) & 0xffff;
+	    Short_t yy = (cell >>48) & 0xffff;
+	    //	printf("Sys %d %d %d %d %d %d\n", sys, layer,module,sensor,xx,yy);
+
+	    cell = cell & maskBits(8+4+12+2);
+
+	    fillDebugHist(detector, z, getPhi(x,y), module);
+
+	    // asic = 2,359,296/128 -> 18,432 ASIC/64 -> 288 RDO
+	    asic = distributeRect(z, getPhi(x,y), 18432, -1120, 1737, 0, 2*3.14159,0,454);
+	    rdo = distributeRect(z, getPhi(x,y),  288,   -1120, 1737, 0, 2*3.14159,0,454);
+	
+	    // channel = sys,layer,module,sensor   {add z/100}
+	}  
+
+	else if(detector==DET_TOFEndcap) {
+	    const auto &[sys,layer,module,idx,idy] = tup5(cellToLocal(cell, {8,4,8,7,5}));
+	    Short_t xx = (cell >>32) & 0xffff;
+	    Short_t yy = (cell >>48) & 0xffff;
+	    //printf("Sys %d %d %d %d %d %d %d %f\n", sys, layer,module,idx,idy,xx,yy,z);
+
+	    cell = cell & maskBits(8+4+8+7+5);
+
+	    fillDebugHist(detector, x,y, idy);
+	    // pixel=3719168 -> 3632 asic -> 212 RDO
+	    //                  1816 asic -> 106 RDO / layer
+
+	    if((idy%2) == 0) {
+		asic = distributeCircle(getR(x,y), 1816, 96, 493);
+		rdo = distributeCircle(getR(x,y), 106, 96, 493);
+	    }
+	    else {
+		asic = distributeCircle(getR(x,y), 1816, 96, 493) + 1816;	
+		rdo = distributeCircle(getR(x,y), 106, 96, 493) + 106;
+	    }
+	}  		
+      
 	else {
-	  fillDebugHist(detector, z, getPhi(x,y), module + 30);  
-	  // buildLimits(x,y,z);
+	    return;
 	}
-
-	// 140k channels
-	// 2188 asic
-	// 1094 asic = 69 RDO / side
-	// 
-	// both modules same length, but overlap
-	if((module % 2) == 0) {
-	  asic = distributeEven(z, 1094, -1624, 60);
-	  rdo = distributeEven(z, 69, -1624, 60);
-	}
-	else {
-	  asic = distributeEven(z, 1094, 40, 1724) + 1094;
-	  rdo = distributeEven(z, 69, 40, 1724) + 69;
-	}
-
-	cell = cell & maskBits(8+4+12+2);
-      }
-      
-      else if(detector==DET_LFHCAL) {
-	const auto &[sys,moduleIDx,moduleIDy,moduletype,passive,towerx,towery,rlayerz,layerz] = tup9(cellToLocal(cell, {8,6,6,1,1,2,1,4,4}));
-
-	//printf("LFHCAL- %d %d %d %d %d %d %d %d %d\n", sys, moduleIDx, moduleIDy, moduletype, passive, towerx, towery,rlayerz,layerz);
-	
-	//UInt_t ID = moduletype+1;
-	//fillDebugHist(detector, x, y, ID);
-	addDebugHist(detector,x,y);
-	cell = cell & maskBits(8+6+6+1+1+2+1+4);
-
-	// Assume moduleIDx,moduleIDy, rlayerz 53*53 -> 1150  defines asic  (54 channels)
-	//
-	// channel = moduleIDx, moduleIDy, towerx, towery, rlayerz
-	channel = cell;
-	//asic = moduleIdx + 53*moduleIdy;           // 4x2x7 = 56 ch/asic
-	//rdo = (int)moduleIdx/2+ 53*((int)moduleIdy/2);   // poor mans divide by 4!
-      }
-
-      else if(detector==DET_HcalEndcapPInsert) {
-	const auto &[sys,layer,slice] = tup3(cellToLocal(cell, {8,8,8}));
-	Short_t xx = (cell >>32) & 0xffff;
-	Short_t yy = (cell >>48) & 0xffff;
-	addDebugHist(detector,xx, yy);
-
-	cell = cell & 0xffffffff00000000;   // only take integerized xx,yy
-	cell += (int)((layer-1)/5);
-
-	// ~526 hexagonal layers by xx,yy
-	// readout layer = 65/5 = 13 layers
-	// channel = xx,yy,readout layer
-
-	channel = cell;
-      }
-
-      else if(detector==DET_EcalEndcapP) {
-	const auto &[sys, barrel, module, layer, slice, fiber_x, fiber_y] = tup7(cellToLocal(cell, {8,3,4,8,5,1,1}));
-	Short_t xx = (cell >>32) & 0xffff;
-	Short_t yy = (cell >>48) & 0xffff;
-	//printf("Sys %d %d %d %d %d %d %d %d %d\n", sys, barrel, module, layer, slice, fiber_x, fiber_y, xx, yy);
-	addDebugHist(detector, xx, yy);
-
-	//channel = xx,yy
-	
-	channel = cell;
-      }
-
-      else if(detector==DET_EcalEndcapPInsert) {
-	const auto &[sys, barrel, module, layer, slice] = tup5(cellToLocal(cell, {8,3,4,8,5}));
-	Short_t xx = (cell >>32) & 0xffff;
-	Short_t yy = (cell >>48) & 0xffff;
-	addDebugHist(detector, xx, yy);
-	//printf("Sys %d %d %d %d %d %d %d\n", sys, barrel, module, layer, slice, xx, yy);
-
-	//channel = xx,yy
-	channel = cell;
-      }
-
-      else if(detector==DET_HcalEndcapN) {
-	const auto &[sys, barrel, module, layer, slice] = tup5(cellToLocal(cell, {8,3,4,8,5}));
-	
-	Short_t xx = (cell >>32) & 0xffff;
-	Short_t yy = (cell >>48) & 0xffff;
-	addDebugHist(detector, xx, yy);
-	//printf("Sys %d %d %d %d %d %d %d\n", sys, barrel, module, layer, slice, xx, yy);
-
-	cell = cell & 0xffffffff00000000;
-
-	// channel = xx,yy     -> 2334 channels
-	//         layers/grouping to make 3256?
-	channel = cell;
-      }
-      
-      else if(detector==DET_EcalEndcapN) {
-	const auto &[sys, sector, module] = tup3(cellToLocal(cell, {8,4,20}));
-	
-	Short_t xx = (cell >>32) & 0xffff;
-	Short_t yy = (cell >>48) & 0xffff;
-	fillDebugHist(detector, x,y, module);
-	
-	cell = cell & maskBits(8+4+20);
-	// channel = sys,sector,module
-	channel = cell;
-      }
-
-      else if(detector==DET_HcalBarrel) {
-	const auto &[sys, sector, tower, tile] = tup4(cellToLocal(cell, {8,5,6,3}));
-	
-	Short_t xx = (cell >>32) & 0xffff;
-	Short_t yy = (cell >>48) & 0xffff;
-	fillDebugHist(detector, x,y, tower);
-
-	//printf("Sys %d %d %d %d %d %d\n", sys,sector,tower,tile,xx,yy);
-	
-	cell = cell & maskBits(8+5+6+3);
-	// channel = sys,sector,module
-	channel = cell;
-      }
-
-      else if(detector==DET_EcalBarrelImaging) {
-	const auto &[sys,sector,layer,slice,grid,fiber,u_zz] = tup7(cellToLocal(cell, {8,6,6,4,10,16,14}));
-	Short_t zz = u_zz & ~0x2000;
-	if(u_zz & 0x2000) {    // sign bit!
-	  zz = -zz;
-	}
-
-	int bRdo = 0;
-
-	if(getR(x,y) <900) {
-	  asic = distributeEven(z, 14537, -2579, 1804);
-	  rdo = distributeEven(z, 52, -2579, 1804);
-	}
-	bAsic = 14537;
-	bRdo = 52;
-	if((getR(x,y) >900) && (getR(x,y) < 930)) {
-	  asic = distributeEven(z, 15827, -2579, 1804) + bAsic;
-	  rdo = distributeEven(z, 57, -2579, 1804) + bRdo;
-	}
-	bAsic += 15827;
-	bRdo += 57;
-	if((getR(x,y) >930) && (getR(x,y) < 970)) {
-	  asic = distributeEven(z, 16429, -2579, 1804) + bAsic;
-	  rdo = distributeEven(z, 59, -2579, 1804) + bRdo;
-	}
-	bAsic += 16429;
-	bRdo += 59;
-	if(getR(x,y) > 970) {
-	  asic = distributeEven(z, 17719, -2579, 1804) + bAsic;
-	  rdo = distributeEven(z, 63, -2579, 1804) + bRdo;
-	}
-
-	//printf("Sys %d %d %d %d %d %d %d %f\n", sys,sector,layer,slice,grid,fiber,zz, z);
-	//buildLimits(x,y,z);
-      }
-	
-      else if(detector==DET_EcalBarrelScFi) {
-	const auto &[sys,sector,row,tower] = tup4(cellToLocal(cell, {8,8,8,8}));
-	Short_t xx = (cell >>32) & 0xffff;
-	Short_t yy = (cell >>48) & 0xffff;
-	//printf("Sys %d %d %d %d %d %d\n", sys, sector,row,tower,xx,yy);
-
-	cell = cell & maskBits(8+8+8+8);
-	ULong_t ncell = cell + 0x10000000000;    // always hit both sides!
-	det_hitcells[detector][ncell]++;         // add second hit!
-
-	channel = cell;
-	//buildLimits(x,y,z);
-      }
-
-      else if(detector==DET_TOFBarrel) {
-	const auto &[sys,layer,module,sensor] = tup4(cellToLocal(cell, {8,4,12,2}));
-	Short_t xx = (cell >>32) & 0xffff;
-	Short_t yy = (cell >>48) & 0xffff;
-	//	printf("Sys %d %d %d %d %d %d\n", sys, layer,module,sensor,xx,yy);
-
-	cell = cell & maskBits(8+4+12+2);
-
-	fillDebugHist(detector, z, getPhi(x,y), module);
-
-	// asic = 2,359,296/128 -> 18,432 ASIC/64 -> 288 RDO
-	asic = distributeEven(z,18432, -1120, 1737);
-	rdo = distributeEven(z, 288, -1120, 1737);
-	
-	// channel = sys,layer,module,sensor   {add z/100}
-      }  
-
-      else if(detector==DET_TOFEndcap) {
-	const auto &[sys,layer,module,idx,idy] = tup5(cellToLocal(cell, {8,4,8,7,5}));
-	Short_t xx = (cell >>32) & 0xffff;
-	Short_t yy = (cell >>48) & 0xffff;
-	//printf("Sys %d %d %d %d %d %d %d %f\n", sys, layer,module,idx,idy,xx,yy,z);
-
-	cell = cell & maskBits(8+4+8+7+5);
-
-	fillDebugHist(detector, x,y, idy);
-	// pixel=3719168 -> 3632 asic -> 212 RDO
-	//                  1816 asic -> 106 RDO / layer
-
-	if((idy%2) == 0) {
-	  asic = distributeCircle(getR(x,y), 1816, 96, 493);
-	  rdo = distributeCircle(getR(x,y), 106, 96, 493);
-	}
-	else {
-	  asic = distributeCircle(getR(x,y), 1816, 96, 493) + 1816;	
-	  rdo = distributeCircle(getR(x,y), 106, 96, 493) + 106;
-	}
-      }  		
-      
-      else {
-	return;
-      }
   
       
-      XY_alldet->Fill(x,y);
-      RZ_alldet->Fill(z, sqrt(x*x+y*y));
-      ZPhi_hist[detector]->Fill(z, getPhi(x,y));
+	XY_alldet->Fill(x,y);
+	RZ_alldet->Fill(z, sqrt(x*x+y*y));
+	ZPhi_hist[detector]->Fill(z, getPhi(x,y));
       
       
-      XY_hist[detector]->Fill(x,y);
-      RZ_hist[detector]->Fill(z, sqrt(x*x+y*y));
+	XY_hist[detector]->Fill(x,y);
+	RZ_hist[detector]->Fill(z, sqrt(x*x+y*y));
       
 
-      if(asic != 0xffffffffff) {
-	//printf("daq 0x%lx\n",asic);
-	asic_hits[detector][asic]++;
-      }
+	if(asic != 0xffffffffff) {
+	    //printf("daq 0x%lx\n",asic);
+	    asic_hits[detector][asic]++;
+	}
 
-      if(rdo != 0xffffffffff) {
-	rdo_hits[detector][rdo]++;
-      }
+	if(rdo != 0xffffffffff) {
+	    rdo_hits[detector][rdo]++;
+	}
       
-      if(channel != 0xffffffffff) {
-	channel_hits[detector][rdo]++;
-      }
+	if(channel != 0xffffffffff) {
+	    channel_hits[detector][channel]++;
+	}
 
-      //printf("det\n");
-      det_hitcells[detector][cell]++;
-      // printf("added\n");
+	//printf("det\n");
+	//det_hitcells[detector][cell]++;
+	// printf("added\n");
     }
    
     Float_t getR(Float_t x, Float_t y) {
-      return sqrt(x*x+y*y);
+	return sqrt(x*x+y*y);
     }
 
     Float_t getPhi(Float_t x, Float_t y) {
@@ -663,6 +1110,7 @@ public:
 	return phi;
     }
 
+    /*
     std::pair<ULong_t, Int_t> getMaxCell(Int_t detector) {
 	UInt_t max_count = 0;
 	ULong_t max_cell = 0;
@@ -686,49 +1134,50 @@ public:
 	}
 	return std::make_pair(cnt, hit_cells);
     }
+    */
     
     UInt_t maskBits(UInt_t bits) {
-      UInt_t x = 0;
-      for(int i=0;i<bits;i++) {
-	x = (x<<1) | 1;
-      }
-      return x;
+	UInt_t x = 0;
+	for(int i=0;i<bits;i++) {
+	    x = (x<<1) | 1;
+	}
+	return x;
     }
    
     std::tuple<UInt_t, UInt_t, UInt_t> tup3(const std::vector<Int_t> &v) {
 	return std::make_tuple(v[0], v[1], v[2]);
     }
     std::tuple<UInt_t, UInt_t, UInt_t, UInt_t> tup4(const std::vector<Int_t> &v) {
-      return std::make_tuple(v[0], v[1], v[2], v[3]);
+	return std::make_tuple(v[0], v[1], v[2], v[3]);
     }
     std::tuple<UInt_t, UInt_t, UInt_t, UInt_t, UInt_t> tup5(const std::vector<Int_t> &v) {
-      return std::make_tuple(v[0], v[1], v[2], v[3], v[4]);
+	return std::make_tuple(v[0], v[1], v[2], v[3], v[4]);
     }
     std::tuple<UInt_t, UInt_t, UInt_t, UInt_t, UInt_t, UInt_t, UInt_t> tup7(const std::vector<Int_t> &v) {
-      return std::make_tuple(v[0], v[1], v[2], v[3], v[4], v[5], v[6]);
+	return std::make_tuple(v[0], v[1], v[2], v[3], v[4], v[5], v[6]);
     }
     std::tuple<UInt_t, UInt_t, UInt_t, UInt_t, UInt_t, UInt_t, UInt_t, UInt_t, UInt_t> tup9(const std::vector<Int_t> &v) {
-      return std::make_tuple(v[0], v[1], v[2], v[3], v[4], v[5], v[6], v[7], v[8]);
+	return std::make_tuple(v[0], v[1], v[2], v[3], v[4], v[5], v[6], v[7], v[8]);
     }
 
 
     const std::vector<Int_t> rVec(const std::vector<Int_t> &bits) {
-      std::vector<Int_t> local = bits;
-      return local;
+	std::vector<Int_t> local = bits;
+	return local;
     }
 
     const std::vector<Int_t> cellToLocal(ULong_t cell, const std::vector<Int_t> &bits) {
-      std::vector<Int_t> local;
-      for(int i=0;i<bits.size();i++) {
-	UInt_t mask=0;
-	for(int j=0;j<bits[i];j++) {
-	  mask |= 1<<j;
+	std::vector<Int_t> local;
+	for(int i=0;i<bits.size();i++) {
+	    UInt_t mask=0;
+	    for(int j=0;j<bits[i];j++) {
+		mask |= 1<<j;
+	    }
+	    Int_t loc = cell & mask;
+	    local.push_back(loc);
+	    cell = cell >> bits[i];
 	}
-	Int_t loc = cell & mask;
-	local.push_back(loc);
-	cell = cell >> bits[i];
-      }
-      return local;
+	return local;
     }
 
     // system, module, layer, sensor
@@ -746,7 +1195,8 @@ public:
 	    
 	return std::make_tuple(local[0], local[1], local[2], local[3]);
     }
-    
+
+    /*    
     // Get minimum/maximum cell id for detector
     std::pair<ULong_t, ULong_t> getMinMaxCellId(Int_t detector) {
 	ULong_t minCell=0;
@@ -758,24 +1208,70 @@ public:
 	}
 	return std::make_pair(minCell, maxCell);
     }
+    */
 
     void addDebugHist(Int_t det, Float_t axis1, Float_t axis2) {
-      debug_hist[det]->Fill(axis1, axis2);
+	debug_hist[det]->Fill(axis1, axis2);
     }
 
     void fillDebugHist(Int_t det, Float_t axis1, Float_t axis2, Int_t weight) {
-      UInt_t binx = debug_hist[det]->GetXaxis()->FindBin(axis1);
-      UInt_t biny = debug_hist[det]->GetYaxis()->FindBin(axis2);
-      UInt_t bin = debug_hist[det]->GetBin(binx,biny);
-      debug_hist[det]->SetBinContent(bin, weight);
+	UInt_t binx = debug_hist[det]->GetXaxis()->FindBin(axis1);
+	UInt_t biny = debug_hist[det]->GetYaxis()->FindBin(axis2);
+	UInt_t bin = debug_hist[det]->GetBin(binx,biny);
+	debug_hist[det]->SetBinContent(bin, weight);
     }
 
+    void writeData(char *fn) {
+	TFile f1(fn, "RECREATE");
+	
+	f1.WriteObjectAny(&detnames, "detnames");
+	f1.WriteObject(&asic_hits, "asic_hits");
+	f1.WriteObject(&rdo_hits, "rdo_hits");
+	f1.WriteObject(&channel_hits, "channel_hits");
 
-    void writeHistos(Float_t rate_ratio) {
-	int ndets = det_hitcells.size();
+	f1.Close();
+
+	
+	//std::vector<std::string> detnames;
+	//std::vector<Int_t> detids;
+
+	//std::vector<Long_t> nominalChannels;
+	//std::vector<Int_t> nominalRDO;
+	//std::vector<Int_t> nominalFEB;
+	//std::vector<Int_t> nominalASIC;
+  
+	//std::vector<std::map<ULong_t, Int_t>> asic_hits;    // ASIC:18, FEB:15, RDO:11, DAM:8
+                                                        // 262k,    32k,    2048    256
+	//std::vector<std::map<ULong_t, Int_t>> rdo_hits;
+	//std::vector<std::map<ULong_t, Int_t>> channel_hits;
+    }
+
+    void readData(char *fn) {
+	TFile f1(fn);
+
+	std::vector<std::string> *tstr;
+	std::vector<std::map<ULong_t, Int_t>> *tmp;
+	f1.GetObject("detnames", tstr);
+	detnames = *tstr;
+	f1.GetObject("asic_hits", tmp);
+	asic_hits = *tmp;
+	f1.GetObject("rdo_hits", tmp);
+	rdo_hits = *tmp;
+	f1.GetObject("channel_hits", tmp);
+	channel_hits = *tmp;
+	f1.Close();
+    }
+    
+    
+
+    void writeHistos(char *fn, Float_t rate_ratio) {
+
+	TFile *store = new TFile(fn,"recreate");
+	
+	int ndets = detnames.size();
 	for(int i=0;i<ndets;i++) {
 	    int hits=0;
-	    for(const auto & [cell, count] : det_hitcells[i]) hits += count;
+	    //for(const auto & [cell, count] : det_hitcells[i]) hits += count;
 	    hits_number_th->SetBinContent(i+1, hits * rate_ratio);
 	    hits_number_th->GetXaxis()->SetBinLabel(i+1, detnames[i].c_str());
 	}
@@ -790,78 +1286,140 @@ public:
 	hits_number_th->Write();
 
 	for(int i=0;i<ndets;i++) {
-	  asicHistos[i]->Write();
-	  rdoHistos[i]->Write();
-	  debug_hist[i]->Write();	    
-	  XY_hist[i]->Write();
-	  RZ_hist[i]->Write();
-	  ZPhi_hist[i]->Write();
+	    asicHistos[i]->Write();
+	    rdoHistos[i]->Write();
+	    debug_hist[i]->Write();	    
+	    XY_hist[i]->Write();
+	    RZ_hist[i]->Write();
+	    ZPhi_hist[i]->Write();
 	}
 
 	XY_alldet->Write();
 	RZ_alldet->Write();
+
+	store->Close();
+	delete store;
     }
 
+    Int_t distributeRect(Float_t x, Float_t y, Int_t n, Float_t min_x, Float_t max_x, Float_t min_y, Float_t max_y, Float_t R_hole=0, Float_t xratio=1) {
+	Float_t area_square = (max_x-min_x)*(max_y-min_y);
+	Float_t area_hole = 3.14 * R_hole * R_hole;
+	Float_t n_eff = (Float_t)n * area_square / (area_square - area_hole); 
+	Float_t a_ch = area_square / n_eff;
+	Float_t delta_x = sqrt(a_ch);
+	Float_t delta_y = delta_x / sqrt(xratio);
+	delta_x = delta_x * sqrt(xratio);
+	
+	Float_t pos_x = x-min_x;
+	Int_t x_idx = (Int_t)(pos_x/delta_x);
+	Float_t pos_y = y-min_y;
+	Int_t y_idx = (Int_t)(pos_y/delta_y);
+	if(x_idx < 0) x_idx = 0;
+	if(y_idx < 0) y_idx = 0;
+	if(x > max_x) x_idx = (Int_t)((max_x - min_x)/delta_x);
+	if(y > max_y) y_idx = (Int_t)((max_y - min_y)/delta_y);
+	
+	return x_idx + y_idx * 1000;
+    }
+
+    Int_t distributeGrid(Int_t x, Int_t y, Int_t dx, Int_t dy, Int_t sx, Int_t sy) {
+	x /= dx;
+	y /= dy;
+	return x + y * ((sx-1)/dx + 1);
+    }
+    
     Int_t distributeEven(Float_t x, Int_t n, Float_t min, Float_t max) {
-      Float_t delta = (max-min)/((Float_t)n);
-      Float_t pos = x - min;
-      Int_t idx = (Int_t)(pos/delta);
-      if(idx<0) idx = 0;
-      if(idx>=n) idx = n-1;
-      return idx;
+	Float_t delta = (max-min)/((Float_t)n);
+	Float_t pos = x - min;
+	Int_t idx = (Int_t)(pos/delta);
+	if(idx<0) idx = 0;
+	if(idx>=n) idx = n-1;
+	return idx;
     }
 
     Int_t distributeCircle(Float_t x, Int_t n, Float_t rmin, Float_t rmax) {
-      Float_t Tarea = 3.14159*(rmax*rmax - rmin*rmin);   
-      Float_t delta_area = Tarea/n;
-      Float_t Xarea = 3.14159*(x*x - rmin*rmin);
-      Int_t idx = (Int_t)(Xarea/delta_area);
-      if(idx < 0) idx = 0;
-      if(idx >= n) idx = n-1;
-      return idx;
+	Float_t Tarea = 3.14159*(rmax*rmax - rmin*rmin);   
+	Float_t delta_area = Tarea/n;
+	Float_t Xarea = 3.14159*(x*x - rmin*rmin);
+	Int_t idx = (Int_t)(Xarea/delta_area);
+	if(idx < 0) idx = 0;
+	if(idx >= n) idx = n-1;
+	return idx;
     }
 
 
     void buildRdoHistos() {   
-      int ndets = rdo_hits.size();
-      for(int i=0;i<ndets;i++) {
-	int max = 1;
-	if(rdo_hits[i].size() != 0) {
-	  max = rdo_hits[i].rbegin()->first;
-	}
+	int ndets = rdo_hits.size();
+	for(int i=0;i<ndets;i++) {
+	    int max = 1;
+	    if(rdo_hits[i].size() != 0) {
+		max = rdo_hits[i].rbegin()->first;
+	    }
 
-	TH1F *rdoHisto = new TH1F((detnames[i] + "_rdo").c_str(),(detnames[i] + "_rdo").c_str(), max+1, -0.5, max+.5);
+	    TH1F *rdoHisto = new TH1F((detnames[i] + "_rdo").c_str(),(detnames[i] + "_rdo").c_str(), max+1, -0.5, max+.5);
 	
-	for(const auto& [rdo, count] : rdo_hits[i]) {
-	  UInt_t binx = rdoHisto->GetXaxis()->FindBin(rdo);
-	  UInt_t bin = rdoHisto->GetBin(binx);
-	  rdoHisto->SetBinContent(bin, count);
-	}
+	    for(const auto& [rdo, count] : rdo_hits[i]) {
+		UInt_t binx = rdoHisto->GetXaxis()->FindBin(rdo);
+		UInt_t bin = rdoHisto->GetBin(binx);
+		rdoHisto->SetBinContent(bin, count);
+	    }
 
-	rdoHistos.push_back(rdoHisto);
-      }	
+	    rdoHistos.push_back(rdoHisto);
+	}	
     }
 
     void buildAsicHistos() {
-      int ndets = asic_hits.size();
-      for(int i=0;i<ndets;i++) {
-	int max = 1;
-	if(asic_hits[i].size() != 0) {
-	  max = asic_hits[i].rbegin()->first;
-	}
+	int ndets = asic_hits.size();
+	for(int i=0;i<ndets;i++) {
+	    int max = 1;
+	    if(asic_hits[i].size() != 0) {
+		max = asic_hits[i].rbegin()->first;
+	    }
 
-	TH1F *asicHisto = new TH1F((detnames[i] + "_asic").c_str(),(detnames[i] + "_asic").c_str(), max+1, -0.5, max+.5);
+	    TH1F *asicHisto = new TH1F((detnames[i] + "_asic").c_str(),(detnames[i] + "_asic").c_str(), max+1, -0.5, max+.5);
 	
-	for(const auto& [asic, count] : asic_hits[i]) {
-	  UInt_t binx = asicHisto->GetXaxis()->FindBin(asic);
-	  UInt_t bin = asicHisto->GetBin(binx);
-	  asicHisto->SetBinContent(bin, count);
+	    for(const auto& [asic, count] : asic_hits[i]) {
+		UInt_t binx = asicHisto->GetXaxis()->FindBin(asic);
+		UInt_t bin = asicHisto->GetBin(binx);
+		asicHisto->SetBinContent(bin, count);
+	    }
+
+	    asicHistos.push_back(asicHisto);
+	}	
+    }
+
+    void printNElectronicTypes() {
+	int ndets = detnames.size();
+
+	for(int i=0;i<ndets;i++) {
+	    ULong_t tot_ch_hits = 0;
+	    ULong_t tot_asic_hits = 0;
+	    ULong_t tot_rdo_hits=0;
+	    for(auto [key, x] : channel_hits[i]) { tot_ch_hits += x; }
+	    for(auto [key, x] : asic_hits[i]) { tot_asic_hits += x; }
+	    for(auto [key, x] : rdo_hits[i]) { tot_rdo_hits += x; }
+
+	    printf("%20s: CH/ASIC/RDO [%12ld/%-12ld %12ld/%-12d %12ld/%-12d]   hits [%12ld %12ld %12ld]\n", detnames[i].c_str(), channel_hits[i].size(), nominalChannels[i], asic_hits[i].size(), nominalASIC[i],  rdo_hits[i].size(), nominalRDO[i], tot_ch_hits, tot_asic_hits, tot_rdo_hits);
 	}
 
-	asicHistos.push_back(asicHisto);
-      }	
+
+	int nch=0;
+	int nasic=0;
+	int nrdo=0;
+	for(int i=0;i<ndets;i++) {
+	    nch += channel_hits[i].size();
+	    nasic += asic_hits[i].size();
+	    nrdo += rdo_hits[i].size();
+	}
+	
+	printf("%20s:              [%12d %12s %12d %12s %12d %12s]\n", "total", nch," ", nasic," ", nrdo, " ");
     }
+
+    
+    
 };
     
+
+
 
 #endif
