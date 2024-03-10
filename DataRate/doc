@@ -1,0 +1,91 @@
+Setup S3, from within eic-shell:
+
+      mc config host add S3 https://dtn01.sdcc.bnl.gov:9000 eicS3read eicS3read
+
+Access S3
+
+       mc ls S3
+       mc cp --insecure S3/blah .
+
+       TFile* file = TFile::Open("s3https://dtn01.sdcc.bnl.gov:9000/eictest/ATHENA/<path>.root","AUTH=<login>:<password>");
+
+
+
+
+Files:
+
+Proton Beam Gas:        (Have 100GeV, 275GeV)  -- Zhengqiao Zhang
+			S3/eictest/EPIC/EVGEN/BACKGROUNDS/BEAMGAS/proton/pythia8.306-1.0/                            #  craterlake
+			100 Files:   pythia8.306-1.0_ProtonBeamGas_275GeV_run092.hepmc3.tree.root
+
+			Hit list is in
+			/gpfs/mnt/gpfs02/eic/zhangzq/EPIC/NewReco/analysis_ProtonGas/all_protonGas.eicrecon.tree.edm4eic.root
+			Code is
+			same directory events.C, events.h 
+
+Electron Beam Gas:				-- Jakub Ceska
+   Input HEPMC		/gpfs02/eic/ceska/eic/simulation/beam_gas_ep_10GeV_foam_emin10keV_10Mevt_rotx.hepmc		# brycecanyon
+   code  		/gpfs02/eic/ceska/eic/simulation/code
+   output 2M evts	/gpfs02/eic/ceska/eic/simulation/results/23.12.0.edm4hep.root
+			mirrored at S3/eictest/EPIC/EVGEN/BACKGROUNDS/BEAMGAS/electron
+
+
+Sync Radiation:
+
+Radiation:
+
+DIS:                    (Have 10x100, 18x275, 5x41)     -- Brian Page
+   Simulated Data:	S3/eictest/EPIC/RECO/23.12.0/epic_craterlake/SIDIS/pythia6-eic/1.0.0/18x275/q2_0to1/
+	  		64k files:   pythia_ep_noradcor_18x275_q2_0.000000001_1.0_run9.ab.[].eicrecon.tree.edm4eic.root	 # craterlake
+
+			Hit list is in
+			/gpfs/mnt/gpfs02/eic/zhangzq/EPIC/NewReco/analysis_DIS/all.tree.edm4eic.root
+			Code is
+			same directory events.C, events.h
+
+   HepMC3 Events:	S3/eictest/EPIC/EVGEN/SIDIS/pythia6-eic/1.0.0/18x275/q2_0to1/ 
+       			50 files:    pythia_ep_noradcor_18x275_q2_0.000000001_1.0_run[].ab.hepmc3.tree.root
+
+
+
+# Root to generate C++ code from a root file tree
+#
+  TFile *inFile = TFile::Open(fn);
+  inFile->ls();
+ 
+  TTree *dataTree;   
+  inFile->GetObject("object_from_file", dataTree);
+  dataTree->MakeClass("MyClassNameForObject");
+
+
+# Generate dictionary to allow for saving nested std:vector<<>> etc..
+
+1.   make linkDef.h -> 
+
+     #pragma link C++ class std::map<unsigned long, int>+;
+     #pragma link C++ class std::vector<std::map<unsigned long, int>>+;
+
+2.   Build functionDict.cc
+
+     > rootcint -f functionsDict.cc functions.h linkDef.h
+
+3.   add to root session:
+
+     .L functionsDict.cc
+
+4.   Now use 
+
+     std::map<blah blah> *pObj;
+     f.WriteObjectAny("name_from_file", "std::map<blah blah>", pObj)
+     f.WriteObject("name_from_file", pObj);
+     f.ReadObject("name_from_file", pObj);
+
+
+
+
+
+File sizes:
+
+DIS -> 59G          1,504,405 evts
+Proton -> 94G       
+Electron -> 13G     1,992,000 evts

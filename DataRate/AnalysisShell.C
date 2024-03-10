@@ -1,13 +1,13 @@
 //void XXX::Loop()
 {
     functions fun;
-    fun.setup();
+    fun.setup_storage();
 
     if (fChain == 0) return;
 
     Long64_t nentries_file = fChain->GetEntriesFast();
-    Long64_t nentries = 10;
-    //Long64_t nentries = 15000;
+    //Long64_t nentries = 10;
+    Long64_t nentries = n_events_to_process;
     //Long64_t nentries = 200000;
     if(nentries > nentries_file) nentries = nentries_file;
 
@@ -18,6 +18,10 @@
     cout<<"total events = "<<nentries<<endl;
     for (Long64_t jentry=0; jentry<nentries;jentry++) {
 	if(jentry > nentries) break;
+
+	if((jentry % 50000) == 0) {
+	    printf("%lld events processed\n", jentry);
+	}
 
 	Long64_t ientry = LoadTree(jentry);
 	if (ientry < 0) break;
@@ -122,13 +126,14 @@
 	}
 	for(int i = 0;i<TOFEndcapRecHits_;i++){
 	    fun.addHitCell(jentry, fun.DET_TOFEndcap, TOFEndcapRecHits_cellID[i], TOFEndcapRecHits_position_x[i], TOFEndcapRecHits_position_y[i], TOFEndcapRecHits_position_z[i]);
-	}
-	for(int i = 0;i<ZDCEcalRecHits_;i++){
+	}/*
+       	for(int i = 0;i<ZDCEcalRecHits_;i++){
 	    fun.addHitCell(jentry, fun.DET_ZDCEcal, ZDCEcalRecHits_cellID[i], ZDCEcalRecHits_position_x[i], ZDCEcalRecHits_position_y[i], ZDCEcalRecHits_position_z[i]);
 	}
+	 */
     }
 
-    double rate_ratio = 8.3e4/actual_events;
+    double rate_ratio = base_event_rate/actual_events;
     
     /*
     // Print out rates and cell information 
@@ -150,10 +155,10 @@
 
     */
 
-    fun.writeData();
+    fun.writeData(filenameOutput);
     fun.buildAsicHistos();
     fun.buildRdoHistos();
-    fun.writeHistos(rate_ratio);
+    fun.writeHistos(filenameHistograms, rate_ratio);
  
     fun.printNElectronicTypes();
     fun.printLimits();

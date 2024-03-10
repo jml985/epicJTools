@@ -1,5 +1,5 @@
-#ifndef functions_h
-#define functions_h
+#ifndef DetectorDefintions_h
+#define DetectorDefintions_h
 
 #include <TROOT.h>
 #include <TChain.h>
@@ -16,8 +16,6 @@
 //#include <DD4hep/DetectorInterna.h>
 
 using namespace dd4hep;
-
-
 
 struct  JmlHit {
     ULong_t CellId;
@@ -110,9 +108,7 @@ class functions {
 
  public:
 
-    functions() {}
-
-    void setup() {
+    functions() {
 	//printf("getPhi %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f\n", getPhi(1,0), getPhi(1,1), getPhi(0,1), getPhi(-1,1), getPhi(-1,0), getPhi(-1,-1), getPhi(0,-1), getPhi(1,-1));
 	
 	
@@ -231,6 +227,17 @@ class functions {
 	detnames.push_back("EcalLumiSpec");  DET_EcalLumiSpec = DET_cnt; detids.push_back(DET_cnt++);     // Direct Photon
 
 
+	for(int i=0;i<detnames.size();i++) {  
+	    nominalChannels.push_back(0);
+	    nominalASIC.push_back(0);
+	    nominalFEB.push_back(0);
+	    nominalRDO.push_back(0);
+
+	    detectorSetup(i);
+	}
+    }
+
+    void setup_storage() {
 	// Set Ranges for debug plots
 	for(int i=0;i<detids.size();i++) {
 	    std::vector<Float_t> range = { 100, -3000, 3000, 100, -3000, 3000 };
@@ -256,7 +263,6 @@ class functions {
 	dbgR[DET_TOFEndcap] = { 200, -640, 640, 200, -640, 640 };   // X,Y
 
 
-
 	// Setup hit storage for each detector
 	for(int i=0;i<detids.size();i++) {
 	    std::unordered_map<ULong_t, Int_t> x;
@@ -267,17 +273,10 @@ class functions {
 	    std::map<ULong_t, Int_t> yyy;
 	    channel_hits.push_back(y);
 
-	  
-	    nominalChannels.push_back(0);
-	    nominalASIC.push_back(0);
-	    nominalFEB.push_back(0);
-	    nominalRDO.push_back(0);
+	
 
 	}
 
-	for(int i=0;i<detnames.size();i++) {
-	    detectorSetup(i);
-	}
 
 	// Define Histograms
 	defineHistograms();
@@ -357,6 +356,129 @@ class functions {
     }
 
     // Analysis...
+    // step 1 = out of rdo
+    // step 2 = to tape
+    Float_t asicBits(Int_t detector,Int_t stage) {
+     
+	// ITS-3
+	if((detector == DET_SiBarrelVertex) ||
+	   (detector == DET_SiBarrelTracker) ||
+	   (detector == DET_SiEndcapTracker)) {
+	    return 2*64;    // 64 bits / pixel + same hit likely in adjoining readouts
+	}
+	
+	else if ((detector == DET_BackwardMPGDEndcap) ||
+		 (detector == DET_ForwardMPGDEndcap) ||
+		 (detector == DET_MPGDBarrel) ||
+		 (detector == DET_OuterMPGDBarrel)) {
+	    if(stage == 1)
+		return 5*64;    // 64 bits / hit        Charge sharing estimated at 3-5 pixels
+	    else 
+		return 64;      // assume cluster finding reduction
+	}
+
+	else if((detector == DET_LFHCAL) ||
+		(detector == DET_HcalEndcapPInsert) ||
+		(detector == DET_EcalEndcapP) ||
+		(detector == DET_EcalEndcapPInsert) ||
+		(detector == DET_HcalEndcapN) ||
+		(detector == DET_EcalEndcapN) ||
+		(detector == DET_HcalBarrel) ||
+		(detector == DET_EcalBarrelScFi)) {
+	    if(stage == 1) 
+		return 18*64*6;  // assume 1/4 asic segmentation AND need for 4 samples 
+	    else
+		return 64;       // can reduce to single channel hit
+	}
+	
+	else if(detector == DET_EcalBarrelImaging) {
+	    return 64;
+	}
+
+	else if(detector == DET_TOFBarrel) {
+	    return 64;           // FCFD?
+	}
+
+	else if (detector == DET_TOFEndcap) {
+	    if(stage == 1) 
+		return 9*64;     // 3x3 segmentation
+	    else
+		return 64;       // can reduce to single channel hit
+	}
+	else {
+	    return 64;
+	}
+    }
+
+    // stage = 0 -> per channel
+    // stage = 1 -> per asic
+    // stage = 2 -> per rdo
+    // stage = 3 -> per rdo after software triggering
+
+    Float_t detectorNoise(Int_t detector, int stage) {
+	Float_t noise_per_channel=0;
+
+	
+	    // ITS-3
+	if((detector == DET_SiBarrelVertex) ||
+	   (detector == DET_SiBarrelTracker) ||
+	   (detector == DET_SiEndcapTracker)) {
+	    noise_per_channel = 1e-3;                
+	}
+	
+	else if((detector == DET_BackwardMPGDEndcap) ||
+		(detector == DET_ForwardMPGDEndcap) ||
+		(detector == DET_MPGDBarrel) ||
+		(detector == DET_OuterMPGDBarrel)) {
+	    noise_per_channel = 30;                  //guess
+	    if(stage >= 3) noise_per_channel = 0;                 // assume cluster finding eliminates noise!
+	}
+	
+	else if((detector == DET_LFHCAL) ||
+		(detector == DET_HcalEndcapPInsert) ||
+		(detector == DET_EcalEndcapP) ||
+		(detector == DET_EcalEndcapPInsert) ||
+		(detector == DET_HcalEndcapN) ||
+		(detector == DET_EcalEndcapN) ||
+		(detector == DET_HcalBarrel) ||
+		(detector == DET_EcalBarrelScFi)) {
+	    noise_per_channel = 1000;
+	}
+	
+	else if(detector == DET_EcalBarrelImaging) {
+	    return 0;                 // no quote?
+	}
+	 
+	else if(detector == DET_TOFBarrel) {
+	    noise_per_channel = 30;
+	}
+
+	else if	(detector == DET_TOFEndcap) {
+	    noise_per_channel = 30;     
+	    if(stage >= 3) noise_per_channel = 0;                // cluster finding eliminates noise
+	}   
+
+	else if(detector == DET_dRICH) {
+	    noise_per_channel = 320000.0/5;         // timing window
+	    if(stage >= 3) {
+		noise_per_channel /= 200;           // should be fraction of events hitting dRICH, including backgrounds
+	    }
+	}
+	else {
+	    //noise_per_channel = 2.7e-3 * 100e6 / 2;             // 3 sigma   135kHz
+	    //noise_per_channel = 6.3e-5 * 100e6 / 2;             // 4 sigma   3.1kHz
+	    noise_per_channel = 5.7e-7 * 100e6 / 2;               // 5 sigma   30hz
+	    //noise_per_channel = 2.0e-9 * 100e6 / 2;             // 6 sigma   .1hz
+	}
+
+	// for simple detectors/no software trigger or clustering
+	// if noise reductions exist, do full calculations in case statements
+	if(stage == 0) return noise_per_channel;
+	if(stage == 1) return noise_per_channel * nominalChannels[detector]/nominalASIC[detector];
+	return noise_per_channel * nominalChannels[detector]/nominalRDO[detector];
+    }
+
+
     void detectorSetup(Int_t detector) {
 	if(detector==DET_SiBarrelTracker) {  
 	    //  unit currently 44 staves for inner layer,   69 staves for outer layer
@@ -1111,29 +1233,29 @@ class functions {
     }
 
     /*
-    std::pair<ULong_t, Int_t> getMaxCell(Int_t detector) {
-	UInt_t max_count = 0;
-	ULong_t max_cell = 0;
-	for(const auto& [cell, count] : det_hitcells[detector]) {
-	    if(count > max_count) {
-		max_count = count;
-		max_cell = cell;
-	    }
-	}
+      std::pair<ULong_t, Int_t> getMaxCell(Int_t detector) {
+      UInt_t max_count = 0;
+      ULong_t max_cell = 0;
+      for(const auto& [cell, count] : det_hitcells[detector]) {
+      if(count > max_count) {
+      max_count = count;
+      max_cell = cell;
+      }
+      }
 
-	return std::make_pair(max_cell, max_count);
-    }
+      return std::make_pair(max_cell, max_count);
+      }
 
-    // Total hits, tot # distinct cells hit
-    std::pair<ULong_t, ULong_t> getHits(Int_t detector) {
-	ULong_t cnt=0;
-	ULong_t hit_cells=0;
-	for(const auto& [cell, count] : det_hitcells[detector]) {
-	    cnt += count;
-	    hit_cells++;
-	}
-	return std::make_pair(cnt, hit_cells);
-    }
+      // Total hits, tot # distinct cells hit
+      std::pair<ULong_t, ULong_t> getHits(Int_t detector) {
+      ULong_t cnt=0;
+      ULong_t hit_cells=0;
+      for(const auto& [cell, count] : det_hitcells[detector]) {
+      cnt += count;
+      hit_cells++;
+      }
+      return std::make_pair(cnt, hit_cells);
+      }
     */
     
     UInt_t maskBits(UInt_t bits) {
@@ -1199,14 +1321,14 @@ class functions {
     /*    
     // Get minimum/maximum cell id for detector
     std::pair<ULong_t, ULong_t> getMinMaxCellId(Int_t detector) {
-	ULong_t minCell=0;
-	ULong_t maxCell=0;
-	for(const auto& [cell, count] : det_hitcells[detector]) {
-	    if(minCell == 0) minCell = cell;
-	    if(cell < minCell) minCell = cell;
-	    if(cell > maxCell) maxCell = cell;
-	}
-	return std::make_pair(minCell, maxCell);
+    ULong_t minCell=0;
+    ULong_t maxCell=0;
+    for(const auto& [cell, count] : det_hitcells[detector]) {
+    if(minCell == 0) minCell = cell;
+    if(cell < minCell) minCell = cell;
+    if(cell > maxCell) maxCell = cell;
+    }
+    return std::make_pair(minCell, maxCell);
     }
     */
 
@@ -1221,10 +1343,10 @@ class functions {
 	debug_hist[det]->SetBinContent(bin, weight);
     }
 
-    void writeData(char *fn) {
+    void writeData(const char *fn) {
 	TFile f1(fn, "RECREATE");
 	
-	f1.WriteObjectAny(&detnames, "detnames");
+	f1.WriteObject(&detnames, "detnames");
 	f1.WriteObject(&asic_hits, "asic_hits");
 	f1.WriteObject(&rdo_hits, "rdo_hits");
 	f1.WriteObject(&channel_hits, "channel_hits");
@@ -1241,12 +1363,12 @@ class functions {
 	//std::vector<Int_t> nominalASIC;
   
 	//std::vector<std::map<ULong_t, Int_t>> asic_hits;    // ASIC:18, FEB:15, RDO:11, DAM:8
-                                                        // 262k,    32k,    2048    256
+	// 262k,    32k,    2048    256
 	//std::vector<std::map<ULong_t, Int_t>> rdo_hits;
 	//std::vector<std::map<ULong_t, Int_t>> channel_hits;
     }
 
-    void readData(char *fn) {
+    void readData(const char *fn) {
 	TFile f1(fn);
 
 	std::vector<std::string> *tstr;
@@ -1264,14 +1386,14 @@ class functions {
     
     
 
-    void writeHistos(char *fn, Float_t rate_ratio) {
+    void writeHistos(const char *fn, Float_t rate_ratio) {
 
 	TFile *store = new TFile(fn,"recreate");
 	
 	int ndets = detnames.size();
 	for(int i=0;i<ndets;i++) {
 	    int hits=0;
-	    //for(const auto & [cell, count] : det_hitcells[i]) hits += count;
+	    for(const auto & [cell, count] : asic_hits[i]) hits += count;
 	    hits_number_th->SetBinContent(i+1, hits * rate_ratio);
 	    hits_number_th->GetXaxis()->SetBinLabel(i+1, detnames[i].c_str());
 	}

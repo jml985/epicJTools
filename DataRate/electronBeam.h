@@ -1,12 +1,12 @@
 //////////////////////////////////////////////////////////
 // This class has been automatically generated on
-// Tue Mar  5 21:19:05 2024 by ROOT version 6.30/02
+// Tue Mar  5 20:54:44 2024 by ROOT version 6.30/02
 // from TTree events/events data tree
-// found on file: protonBeamGas_Input.root
+// found on file: electronBeam_Input.root
 //////////////////////////////////////////////////////////
 
-#ifndef protonBeam_h
-#define protonBeam_h
+#ifndef electronBeam_h
+#define electronBeam_h
 
 #include <TROOT.h>
 #include <TChain.h>
@@ -20,13 +20,15 @@
 #include "vector"
 #include "edm4hep/RawCalorimeterHitData.h"
 #include "edm4eic/CalorimeterHitData.h"
+#include "edm4hep/SimTrackerHitData.h"
+#include "edm4eic/RawTrackerHitData.h"
 #include "edm4eic/TrackerHitData.h"
 #include "edm4eic/TrackSegmentData.h"
 #include "edm4eic/TrackParametersData.h"
+#include "edm4eic/TrackData.h"
 #include "edm4eic/TrajectoryData.h"
 #include "edm4eic/Measurement2DData.h"
 #include "edm4eic/VertexData.h"
-#include "edm4eic/RawTrackerHitData.h"
 #include "edm4eic/CherenkovParticleIDData.h"
 #include "edm4eic/MCRecoTrackerHitAssociationData.h"
 #include "edm4hep/EventHeaderData.h"
@@ -37,167 +39,199 @@
 #include "edm4hep/ParticleIDData.h"
 #include "podio/GenericParameters.h"
 
-class protonBeam {
+class electronBeam {
 public :
    TTree          *fChain;   //!pointer to the analyzed TTree or TChain
    Int_t           fCurrent; //!current Tree number in a TChain
 
 // Fixed size dimensions of array or collections stored in the TTree if any.
-   static constexpr Int_t kMaxB0ECalClusterAssociations = 7;
-   static constexpr Int_t kMax_B0ECalClusterAssociations_rec = 7;
-   static constexpr Int_t kMax_B0ECalClusterAssociations_sim = 7;
-   static constexpr Int_t kMaxB0ECalClusters = 7;
+   static constexpr Int_t kMaxB0ECalClusterAssociations = 2;
+   static constexpr Int_t kMax_B0ECalClusterAssociations_rec = 2;
+   static constexpr Int_t kMax_B0ECalClusterAssociations_sim = 2;
+   static constexpr Int_t kMaxB0ECalClusters = 2;
    static constexpr Int_t kMax_B0ECalClusters_clusters = 1;
-   static constexpr Int_t kMax_B0ECalClusters_hits = 1;
+   static constexpr Int_t kMax_B0ECalClusters_hits = 21;
    static constexpr Int_t kMax_B0ECalClusters_particleIDs = 1;
-   static constexpr Int_t kMaxB0ECalRawHits = 131;
-   static constexpr Int_t kMaxB0ECalRecHits = 131;
-   static constexpr Int_t kMaxB0TrackerRecHits = 1349;
-   static constexpr Int_t kMaxBackwardMPGDEndcapRecHits = 628;
-   static constexpr Int_t kMaxCalorimeterTrackProjections = 36;
-   static constexpr Int_t kMax_CalorimeterTrackProjections_track = 36;
-   static constexpr Int_t kMax_CalorimeterTrackProjections_points = 141;
-   static constexpr Int_t kMaxCentralCKFSeededTrackParameters = 1005;
-   static constexpr Int_t kMax_CentralCKFSeededTrackParameters_trajectory = 1005;
-   static constexpr Int_t kMaxCentralCKFSeededTrajectories = 1005;
-   static constexpr Int_t kMax_CentralCKFSeededTrajectories_trackParameters = 1005;
-   static constexpr Int_t kMax_CentralCKFSeededTrajectories_measurementHits = 1237;
-   static constexpr Int_t kMax_CentralCKFSeededTrajectories_outlierHits = 265;
-   static constexpr Int_t kMaxCentralCKFTrackParameters = 36;
-   static constexpr Int_t kMax_CentralCKFTrackParameters_trajectory = 36;
-   static constexpr Int_t kMaxCentralCKFTrajectories = 36;
-   static constexpr Int_t kMax_CentralCKFTrajectories_trackParameters = 36;
-   static constexpr Int_t kMax_CentralCKFTrajectories_measurementHits = 105;
-   static constexpr Int_t kMax_CentralCKFTrajectories_outlierHits = 43;
-   static constexpr Int_t kMaxCentralTrackerMeasurements = 6114;
-   static constexpr Int_t kMax_CentralTrackerMeasurements_hits = 6114;
-   static constexpr Int_t kMaxCentralTrackingRecHits_objIdx = 6114;
-   static constexpr Int_t kMaxCentralTrackSeedingResults = 1005;
-   static constexpr Int_t kMax_CentralTrackSeedingResults_trajectory = 1005;
-   static constexpr Int_t kMaxCentralTrackSegments = 36;
-   static constexpr Int_t kMax_CentralTrackSegments_track = 36;
-   static constexpr Int_t kMax_CentralTrackSegments_points = 185;
-   static constexpr Int_t kMaxCentralTrackVertices = 5;
-   static constexpr Int_t kMax_CentralTrackVertices_associatedParticle = 5;
+   static constexpr Int_t kMaxB0ECalRawHits = 63;
+   static constexpr Int_t kMaxB0ECalRecHits = 56;
+   static constexpr Int_t kMaxB0TrackerHits = 26;
+   static constexpr Int_t kMax_B0TrackerHits_MCParticle = 26;
+   static constexpr Int_t kMaxB0TrackerRawHits = 25;
+   static constexpr Int_t kMaxB0TrackerRecHits = 25;
+   static constexpr Int_t kMaxBackwardMPGDEndcapHits = 94;
+   static constexpr Int_t kMax_BackwardMPGDEndcapHits_MCParticle = 94;
+   static constexpr Int_t kMaxBackwardMPGDEndcapRawHits = 75;
+   static constexpr Int_t kMaxBackwardMPGDEndcapRecHits = 75;
+   static constexpr Int_t kMaxCalorimeterTrackProjections = 1;
+   static constexpr Int_t kMax_CalorimeterTrackProjections_track = 1;
+   static constexpr Int_t kMax_CalorimeterTrackProjections_points = 1;
+   static constexpr Int_t kMaxCentralCKFSeededTrackParameters = 9;
+   static constexpr Int_t kMaxCentralCKFSeededTracks = 9;
+   static constexpr Int_t kMax_CentralCKFSeededTracks_measurements = 14;
+   static constexpr Int_t kMax_CentralCKFSeededTracks_tracks = 1;
+   static constexpr Int_t kMax_CentralCKFSeededTracks_trajectory = 9;
+   static constexpr Int_t kMaxCentralCKFSeededTrajectories = 9;
+   static constexpr Int_t kMax_CentralCKFSeededTrajectories_trackParameters = 9;
+   static constexpr Int_t kMax_CentralCKFSeededTrajectories_measurements_deprecated = 14;
+   static constexpr Int_t kMax_CentralCKFSeededTrajectories_outliers_deprecated = 12;
+   static constexpr Int_t kMax_CentralCKFSeededTrajectories_seed = 9;
+   static constexpr Int_t kMaxCentralCKFTrackParameters = 1;
+   static constexpr Int_t kMaxCentralCKFTracks = 1;
+   static constexpr Int_t kMax_CentralCKFTracks_measurements = 1;
+   static constexpr Int_t kMax_CentralCKFTracks_tracks = 1;
+   static constexpr Int_t kMax_CentralCKFTracks_trajectory = 1;
+   static constexpr Int_t kMaxCentralCKFTrajectories = 1;
+   static constexpr Int_t kMax_CentralCKFTrajectories_trackParameters = 1;
+   static constexpr Int_t kMax_CentralCKFTrajectories_measurements_deprecated = 1;
+   static constexpr Int_t kMax_CentralCKFTrajectories_outliers_deprecated = 1;
+   static constexpr Int_t kMax_CentralCKFTrajectories_seed = 1;
+   static constexpr Int_t kMaxCentralTrackerMeasurements = 732;
+   static constexpr Int_t kMax_CentralTrackerMeasurements_hits = 732;
+   static constexpr Int_t kMaxCentralTrackingRecHits_objIdx = 732;
+   static constexpr Int_t kMaxCentralTrackSeedingResults = 9;
+   static constexpr Int_t kMaxCentralTrackSegments = 1;
+   static constexpr Int_t kMax_CentralTrackSegments_track = 1;
+   static constexpr Int_t kMax_CentralTrackSegments_points = 1;
+   static constexpr Int_t kMaxCentralTrackVertices = 1;
+   static constexpr Int_t kMax_CentralTrackVertices_associatedParticles = 1;
    static constexpr Int_t kMaxDIRCRawHits = 1;
-   static constexpr Int_t kMaxDRICHAerogelIrtCherenkovParticleID = 30;
-   static constexpr Int_t kMax_DRICHAerogelIrtCherenkovParticleID_rawHitAssociations = 38624;
-   static constexpr Int_t kMax_DRICHAerogelIrtCherenkovParticleID_chargedParticle = 30;
-   static constexpr Int_t kMax_DRICHAerogelIrtCherenkovParticleID_hypotheses = 120;
-   static constexpr Int_t kMax_DRICHAerogelIrtCherenkovParticleID_thetaPhiPhotons = 3229;
-   static constexpr Int_t kMaxDRICHAerogelTracks = 30;
-   static constexpr Int_t kMax_DRICHAerogelTracks_track = 30;
-   static constexpr Int_t kMax_DRICHAerogelTracks_points = 150;
-   static constexpr Int_t kMaxDRICHGasIrtCherenkovParticleID = 30;
-   static constexpr Int_t kMax_DRICHGasIrtCherenkovParticleID_rawHitAssociations = 38624;
-   static constexpr Int_t kMax_DRICHGasIrtCherenkovParticleID_chargedParticle = 30;
-   static constexpr Int_t kMax_DRICHGasIrtCherenkovParticleID_hypotheses = 120;
-   static constexpr Int_t kMax_DRICHGasIrtCherenkovParticleID_thetaPhiPhotons = 23725;
-   static constexpr Int_t kMaxDRICHGasTracks = 30;
-   static constexpr Int_t kMax_DRICHGasTracks_track = 30;
-   static constexpr Int_t kMax_DRICHGasTracks_points = 262;
-   static constexpr Int_t kMaxDRICHRawHits = 2665;
-   static constexpr Int_t kMaxDRICHRawHitsAssociations = 2665;
-   static constexpr Int_t kMax_DRICHRawHitsAssociations_simHits = 2754;
-   static constexpr Int_t kMax_DRICHRawHitsAssociations_rawHit = 2665;
-   static constexpr Int_t kMaxEcalBarrelClusterAssociations = 6;
-   static constexpr Int_t kMax_EcalBarrelClusterAssociations_rec = 6;
-   static constexpr Int_t kMax_EcalBarrelClusterAssociations_sim = 6;
-   static constexpr Int_t kMaxEcalBarrelClusters = 5;
-   static constexpr Int_t kMax_EcalBarrelClusters_clusters = 10;
+   static constexpr Int_t kMaxDRICHAerogelIrtCherenkovParticleID = 1;
+   static constexpr Int_t kMax_DRICHAerogelIrtCherenkovParticleID_rawHitAssociations = 1;
+   static constexpr Int_t kMax_DRICHAerogelIrtCherenkovParticleID_chargedParticle = 1;
+   static constexpr Int_t kMax_DRICHAerogelIrtCherenkovParticleID_hypotheses = 1;
+   static constexpr Int_t kMax_DRICHAerogelIrtCherenkovParticleID_thetaPhiPhotons = 1;
+   static constexpr Int_t kMaxDRICHAerogelTracks = 1;
+   static constexpr Int_t kMax_DRICHAerogelTracks_track = 1;
+   static constexpr Int_t kMax_DRICHAerogelTracks_points = 1;
+   static constexpr Int_t kMaxDRICHGasIrtCherenkovParticleID = 1;
+   static constexpr Int_t kMax_DRICHGasIrtCherenkovParticleID_rawHitAssociations = 1;
+   static constexpr Int_t kMax_DRICHGasIrtCherenkovParticleID_chargedParticle = 1;
+   static constexpr Int_t kMax_DRICHGasIrtCherenkovParticleID_hypotheses = 1;
+   static constexpr Int_t kMax_DRICHGasIrtCherenkovParticleID_thetaPhiPhotons = 1;
+   static constexpr Int_t kMaxDRICHGasTracks = 1;
+   static constexpr Int_t kMax_DRICHGasTracks_track = 1;
+   static constexpr Int_t kMax_DRICHGasTracks_points = 1;
+   static constexpr Int_t kMaxDRICHRawHits = 54;
+   static constexpr Int_t kMaxDRICHRawHitsAssociations = 54;
+   static constexpr Int_t kMax_DRICHRawHitsAssociations_simHits = 54;
+   static constexpr Int_t kMax_DRICHRawHitsAssociations_rawHit = 54;
+   static constexpr Int_t kMaxEcalBarrelClusterAssociations = 1;
+   static constexpr Int_t kMax_EcalBarrelClusterAssociations_rec = 1;
+   static constexpr Int_t kMax_EcalBarrelClusterAssociations_sim = 1;
+   static constexpr Int_t kMaxEcalBarrelClusters = 1;
+   static constexpr Int_t kMax_EcalBarrelClusters_clusters = 2;
    static constexpr Int_t kMax_EcalBarrelClusters_hits = 1;
    static constexpr Int_t kMax_EcalBarrelClusters_particleIDs = 1;
-   static constexpr Int_t kMaxEcalBarrelImagingClusterAssociations = 7;
-   static constexpr Int_t kMax_EcalBarrelImagingClusterAssociations_rec = 7;
-   static constexpr Int_t kMax_EcalBarrelImagingClusterAssociations_sim = 7;
-   static constexpr Int_t kMaxEcalBarrelImagingClusters = 7;
-   static constexpr Int_t kMax_EcalBarrelImagingClusters_clusters = 10;
-   static constexpr Int_t kMax_EcalBarrelImagingClusters_hits = 258;
+   static constexpr Int_t kMaxEcalBarrelImagingClusterAssociations = 2;
+   static constexpr Int_t kMax_EcalBarrelImagingClusterAssociations_rec = 2;
+   static constexpr Int_t kMax_EcalBarrelImagingClusterAssociations_sim = 2;
+   static constexpr Int_t kMaxEcalBarrelImagingClusters = 2;
+   static constexpr Int_t kMax_EcalBarrelImagingClusters_clusters = 3;
+   static constexpr Int_t kMax_EcalBarrelImagingClusters_hits = 39;
    static constexpr Int_t kMax_EcalBarrelImagingClusters_particleIDs = 1;
-   static constexpr Int_t kMaxEcalBarrelImagingRawHits = 870;
-   static constexpr Int_t kMaxEcalBarrelImagingRecHits = 801;
-   static constexpr Int_t kMaxEcalBarrelScFiClusterAssociations = 64;
-   static constexpr Int_t kMax_EcalBarrelScFiClusterAssociations_rec = 64;
-   static constexpr Int_t kMax_EcalBarrelScFiClusterAssociations_sim = 64;
-   static constexpr Int_t kMaxEcalBarrelScFiClusters = 64;
+   static constexpr Int_t kMaxEcalBarrelImagingRawHits = 220;
+   static constexpr Int_t kMaxEcalBarrelImagingRecHits = 212;
+   static constexpr Int_t kMaxEcalBarrelScFiClusterAssociations = 8;
+   static constexpr Int_t kMax_EcalBarrelScFiClusterAssociations_rec = 8;
+   static constexpr Int_t kMax_EcalBarrelScFiClusterAssociations_sim = 8;
+   static constexpr Int_t kMaxEcalBarrelScFiClusters = 8;
    static constexpr Int_t kMax_EcalBarrelScFiClusters_clusters = 1;
-   static constexpr Int_t kMax_EcalBarrelScFiClusters_hits = 1;
+   static constexpr Int_t kMax_EcalBarrelScFiClusters_hits = 29;
    static constexpr Int_t kMax_EcalBarrelScFiClusters_particleIDs = 1;
-   static constexpr Int_t kMaxEcalBarrelScFiRawHits = 2570;
-   static constexpr Int_t kMaxEcalBarrelScFiRecHits = 1034;
-   static constexpr Int_t kMaxEcalBarrelTruthClusterAssociations = 19;
-   static constexpr Int_t kMax_EcalBarrelTruthClusterAssociations_rec = 19;
-   static constexpr Int_t kMax_EcalBarrelTruthClusterAssociations_sim = 19;
-   static constexpr Int_t kMaxEcalBarrelTruthClusters = 19;
-   static constexpr Int_t kMax_EcalBarrelTruthClusters_clusters = 22;
-   static constexpr Int_t kMax_EcalBarrelTruthClusters_hits = 163;
+   static constexpr Int_t kMaxEcalBarrelScFiRawHits = 392;
+   static constexpr Int_t kMaxEcalBarrelScFiRecHits = 115;
+   static constexpr Int_t kMaxEcalBarrelTruthClusterAssociations = 5;
+   static constexpr Int_t kMax_EcalBarrelTruthClusterAssociations_rec = 5;
+   static constexpr Int_t kMax_EcalBarrelTruthClusterAssociations_sim = 5;
+   static constexpr Int_t kMaxEcalBarrelTruthClusters = 5;
+   static constexpr Int_t kMax_EcalBarrelTruthClusters_clusters = 7;
+   static constexpr Int_t kMax_EcalBarrelTruthClusters_hits = 44;
    static constexpr Int_t kMax_EcalBarrelTruthClusters_particleIDs = 1;
-   static constexpr Int_t kMaxEcalEndcapNClusterAssociations = 116;
-   static constexpr Int_t kMax_EcalEndcapNClusterAssociations_rec = 116;
-   static constexpr Int_t kMax_EcalEndcapNClusterAssociations_sim = 116;
-   static constexpr Int_t kMaxEcalEndcapNClusters = 116;
+   static constexpr Int_t kMaxEcalEndcapNClusterAssociations = 30;
+   static constexpr Int_t kMax_EcalEndcapNClusterAssociations_rec = 30;
+   static constexpr Int_t kMax_EcalEndcapNClusterAssociations_sim = 30;
+   static constexpr Int_t kMaxEcalEndcapNClusters = 30;
    static constexpr Int_t kMax_EcalEndcapNClusters_clusters = 1;
-   static constexpr Int_t kMax_EcalEndcapNClusters_hits = 1;
+   static constexpr Int_t kMax_EcalEndcapNClusters_hits = 281;
    static constexpr Int_t kMax_EcalEndcapNClusters_particleIDs = 1;
-   static constexpr Int_t kMaxEcalEndcapNRawHits = 2656;
-   static constexpr Int_t kMaxEcalEndcapNRecHits = 841;
-   static constexpr Int_t kMaxEcalEndcapNTruthClusterAssociations = 49;
-   static constexpr Int_t kMax_EcalEndcapNTruthClusterAssociations_rec = 49;
-   static constexpr Int_t kMax_EcalEndcapNTruthClusterAssociations_sim = 49;
-   static constexpr Int_t kMaxEcalEndcapNTruthClusters = 49;
+   static constexpr Int_t kMaxEcalEndcapNRawHits = 589;
+   static constexpr Int_t kMaxEcalEndcapNRecHits = 171;
+   static constexpr Int_t kMaxEcalEndcapNTruthClusterAssociations = 67;
+   static constexpr Int_t kMax_EcalEndcapNTruthClusterAssociations_rec = 67;
+   static constexpr Int_t kMax_EcalEndcapNTruthClusterAssociations_sim = 67;
+   static constexpr Int_t kMaxEcalEndcapNTruthClusters = 67;
    static constexpr Int_t kMax_EcalEndcapNTruthClusters_clusters = 1;
-   static constexpr Int_t kMax_EcalEndcapNTruthClusters_hits = 1;
+   static constexpr Int_t kMax_EcalEndcapNTruthClusters_hits = 171;
    static constexpr Int_t kMax_EcalEndcapNTruthClusters_particleIDs = 1;
-   static constexpr Int_t kMaxEcalEndcapPClusterAssociations = 984;
-   static constexpr Int_t kMax_EcalEndcapPClusterAssociations_rec = 984;
-   static constexpr Int_t kMax_EcalEndcapPClusterAssociations_sim = 984;
-   static constexpr Int_t kMaxEcalEndcapPClusters = 984;
+   static constexpr Int_t kMaxEcalEndcapPClusterAssociations = 52;
+   static constexpr Int_t kMax_EcalEndcapPClusterAssociations_rec = 52;
+   static constexpr Int_t kMax_EcalEndcapPClusterAssociations_sim = 52;
+   static constexpr Int_t kMaxEcalEndcapPClusters = 52;
    static constexpr Int_t kMax_EcalEndcapPClusters_clusters = 1;
-   static constexpr Int_t kMax_EcalEndcapPClusters_hits = 1;
+   static constexpr Int_t kMax_EcalEndcapPClusters_hits = 59;
    static constexpr Int_t kMax_EcalEndcapPClusters_particleIDs = 1;
-   static constexpr Int_t kMaxEcalEndcapPInsertClusterAssociations = 45;
-   static constexpr Int_t kMax_EcalEndcapPInsertClusterAssociations_rec = 45;
-   static constexpr Int_t kMax_EcalEndcapPInsertClusterAssociations_sim = 45;
-   static constexpr Int_t kMaxEcalEndcapPInsertClusters = 45;
+   static constexpr Int_t kMaxEcalEndcapPInsertClusterAssociations = 22;
+   static constexpr Int_t kMax_EcalEndcapPInsertClusterAssociations_rec = 22;
+   static constexpr Int_t kMax_EcalEndcapPInsertClusterAssociations_sim = 22;
+   static constexpr Int_t kMaxEcalEndcapPInsertClusters = 22;
    static constexpr Int_t kMax_EcalEndcapPInsertClusters_clusters = 1;
-   static constexpr Int_t kMax_EcalEndcapPInsertClusters_hits = 1;
+   static constexpr Int_t kMax_EcalEndcapPInsertClusters_hits = 46;
    static constexpr Int_t kMax_EcalEndcapPInsertClusters_particleIDs = 1;
-   static constexpr Int_t kMaxEcalEndcapPInsertRawHits = 533;
-   static constexpr Int_t kMaxEcalEndcapPInsertRecHits = 407;
-   static constexpr Int_t kMaxEcalEndcapPInsertTruthClusterAssociations = 34;
-   static constexpr Int_t kMax_EcalEndcapPInsertTruthClusterAssociations_rec = 34;
-   static constexpr Int_t kMax_EcalEndcapPInsertTruthClusterAssociations_sim = 34;
-   static constexpr Int_t kMaxEcalEndcapPInsertTruthClusters = 34;
+   static constexpr Int_t kMaxEcalEndcapPInsertRawHits = 94;
+   static constexpr Int_t kMaxEcalEndcapPInsertRecHits = 46;
+   static constexpr Int_t kMaxEcalEndcapPInsertTruthClusterAssociations = 15;
+   static constexpr Int_t kMax_EcalEndcapPInsertTruthClusterAssociations_rec = 15;
+   static constexpr Int_t kMax_EcalEndcapPInsertTruthClusterAssociations_sim = 15;
+   static constexpr Int_t kMaxEcalEndcapPInsertTruthClusters = 15;
    static constexpr Int_t kMax_EcalEndcapPInsertTruthClusters_clusters = 1;
-   static constexpr Int_t kMax_EcalEndcapPInsertTruthClusters_hits = 1;
+   static constexpr Int_t kMax_EcalEndcapPInsertTruthClusters_hits = 46;
    static constexpr Int_t kMax_EcalEndcapPInsertTruthClusters_particleIDs = 1;
-   static constexpr Int_t kMaxEcalEndcapPRawHits = 4325;
-   static constexpr Int_t kMaxEcalEndcapPRecHits = 1659;
-   static constexpr Int_t kMaxEcalEndcapPTruthClusterAssociations = 88;
-   static constexpr Int_t kMax_EcalEndcapPTruthClusterAssociations_rec = 88;
-   static constexpr Int_t kMax_EcalEndcapPTruthClusterAssociations_sim = 88;
-   static constexpr Int_t kMaxEcalEndcapPTruthClusters = 88;
+   static constexpr Int_t kMaxEcalEndcapPRawHits = 149;
+   static constexpr Int_t kMaxEcalEndcapPRecHits = 54;
+   static constexpr Int_t kMaxEcalEndcapPTruthClusterAssociations = 42;
+   static constexpr Int_t kMax_EcalEndcapPTruthClusterAssociations_rec = 42;
+   static constexpr Int_t kMax_EcalEndcapPTruthClusterAssociations_sim = 42;
+   static constexpr Int_t kMaxEcalEndcapPTruthClusters = 42;
    static constexpr Int_t kMax_EcalEndcapPTruthClusters_clusters = 1;
-   static constexpr Int_t kMax_EcalEndcapPTruthClusters_hits = 1;
+   static constexpr Int_t kMax_EcalEndcapPTruthClusters_hits = 54;
    static constexpr Int_t kMax_EcalEndcapPTruthClusters_particleIDs = 1;
-   static constexpr Int_t kMaxEcalLumiSpecClusterAssociations = 1;
-   static constexpr Int_t kMax_EcalLumiSpecClusterAssociations_rec = 1;
-   static constexpr Int_t kMax_EcalLumiSpecClusterAssociations_sim = 1;
-   static constexpr Int_t kMaxEcalLumiSpecClusters = 1;
+   static constexpr Int_t kMaxEcalFarForwardZDCClusterAssociations = 1;
+   static constexpr Int_t kMax_EcalFarForwardZDCClusterAssociations_rec = 1;
+   static constexpr Int_t kMax_EcalFarForwardZDCClusterAssociations_sim = 1;
+   static constexpr Int_t kMaxEcalFarForwardZDCClusters = 1;
+   static constexpr Int_t kMax_EcalFarForwardZDCClusters_clusters = 1;
+   static constexpr Int_t kMax_EcalFarForwardZDCClusters_hits = 1;
+   static constexpr Int_t kMax_EcalFarForwardZDCClusters_particleIDs = 1;
+   static constexpr Int_t kMaxEcalFarForwardZDCRawHits = 1;
+   static constexpr Int_t kMaxEcalFarForwardZDCRecHits = 1;
+   static constexpr Int_t kMaxEcalFarForwardZDCTruthClusterAssociations = 1;
+   static constexpr Int_t kMax_EcalFarForwardZDCTruthClusterAssociations_rec = 1;
+   static constexpr Int_t kMax_EcalFarForwardZDCTruthClusterAssociations_sim = 1;
+   static constexpr Int_t kMaxEcalFarForwardZDCTruthClusters = 1;
+   static constexpr Int_t kMax_EcalFarForwardZDCTruthClusters_clusters = 1;
+   static constexpr Int_t kMax_EcalFarForwardZDCTruthClusters_hits = 1;
+   static constexpr Int_t kMax_EcalFarForwardZDCTruthClusters_particleIDs = 1;
+   static constexpr Int_t kMaxEcalLumiSpecClusterAssociations = 6;
+   static constexpr Int_t kMax_EcalLumiSpecClusterAssociations_rec = 6;
+   static constexpr Int_t kMax_EcalLumiSpecClusterAssociations_sim = 6;
+   static constexpr Int_t kMaxEcalLumiSpecClusters = 6;
    static constexpr Int_t kMax_EcalLumiSpecClusters_clusters = 1;
-   static constexpr Int_t kMax_EcalLumiSpecClusters_hits = 1;
+   static constexpr Int_t kMax_EcalLumiSpecClusters_hits = 142;
    static constexpr Int_t kMax_EcalLumiSpecClusters_particleIDs = 1;
-   static constexpr Int_t kMaxEcalLumiSpecRawHits = 24;
-   static constexpr Int_t kMaxEcalLumiSpecRecHits = 3;
-   static constexpr Int_t kMaxEcalLumiSpecTruthClusterAssociations = 1;
-   static constexpr Int_t kMax_EcalLumiSpecTruthClusterAssociations_rec = 1;
-   static constexpr Int_t kMax_EcalLumiSpecTruthClusterAssociations_sim = 1;
-   static constexpr Int_t kMaxEcalLumiSpecTruthClusters = 1;
+   static constexpr Int_t kMaxEcalLumiSpecRawHits = 100;
+   static constexpr Int_t kMaxEcalLumiSpecRecHits = 66;
+   static constexpr Int_t kMaxEcalLumiSpecTruthClusterAssociations = 5;
+   static constexpr Int_t kMax_EcalLumiSpecTruthClusterAssociations_rec = 5;
+   static constexpr Int_t kMax_EcalLumiSpecTruthClusterAssociations_sim = 5;
+   static constexpr Int_t kMaxEcalLumiSpecTruthClusters = 5;
    static constexpr Int_t kMax_EcalLumiSpecTruthClusters_clusters = 1;
-   static constexpr Int_t kMax_EcalLumiSpecTruthClusters_hits = 1;
+   static constexpr Int_t kMax_EcalLumiSpecTruthClusters_hits = 66;
    static constexpr Int_t kMax_EcalLumiSpecTruthClusters_particleIDs = 1;
    static constexpr Int_t kMaxEventHeader = 1;
-   static constexpr Int_t kMaxForwardMPGDEndcapRecHits = 596;
+   static constexpr Int_t kMaxForwardMPGDEndcapHits = 85;
+   static constexpr Int_t kMax_ForwardMPGDEndcapHits_MCParticle = 85;
+   static constexpr Int_t kMaxForwardMPGDEndcapRawHits = 67;
+   static constexpr Int_t kMaxForwardMPGDEndcapRecHits = 67;
    static constexpr Int_t kMaxForwardOffMRecParticles = 1;
    static constexpr Int_t kMax_ForwardOffMRecParticles_clusters = 1;
    static constexpr Int_t kMax_ForwardOffMRecParticles_tracks = 1;
@@ -212,70 +246,94 @@ public :
    static constexpr Int_t kMax_ForwardRomanPotRecParticles_particleIDs = 1;
    static constexpr Int_t kMax_ForwardRomanPotRecParticles_startVertex = 1;
    static constexpr Int_t kMax_ForwardRomanPotRecParticles_particleIDUsed = 1;
-   static constexpr Int_t kMaxGeneratedChargedJets = 30;
+   static constexpr Int_t kMaxGeneratedChargedJets = 1;
    static constexpr Int_t kMax_GeneratedChargedJets_clusters = 1;
    static constexpr Int_t kMax_GeneratedChargedJets_tracks = 1;
    static constexpr Int_t kMax_GeneratedChargedJets_particles = 1;
    static constexpr Int_t kMax_GeneratedChargedJets_particleIDs = 1;
-   static constexpr Int_t kMax_GeneratedChargedJets_startVertex = 30;
-   static constexpr Int_t kMax_GeneratedChargedJets_particleIDUsed = 30;
-   static constexpr Int_t kMaxGeneratedJets = 40;
+   static constexpr Int_t kMax_GeneratedChargedJets_startVertex = 1;
+   static constexpr Int_t kMax_GeneratedChargedJets_particleIDUsed = 1;
+   static constexpr Int_t kMaxGeneratedJets = 1;
    static constexpr Int_t kMax_GeneratedJets_clusters = 1;
    static constexpr Int_t kMax_GeneratedJets_tracks = 1;
    static constexpr Int_t kMax_GeneratedJets_particles = 1;
    static constexpr Int_t kMax_GeneratedJets_particleIDs = 1;
-   static constexpr Int_t kMax_GeneratedJets_startVertex = 40;
-   static constexpr Int_t kMax_GeneratedJets_particleIDUsed = 40;
-   static constexpr Int_t kMaxGeneratedParticles = 70;
+   static constexpr Int_t kMax_GeneratedJets_startVertex = 1;
+   static constexpr Int_t kMax_GeneratedJets_particleIDUsed = 1;
+   static constexpr Int_t kMaxGeneratedParticles = 2;
    static constexpr Int_t kMax_GeneratedParticles_clusters = 1;
    static constexpr Int_t kMax_GeneratedParticles_tracks = 1;
    static constexpr Int_t kMax_GeneratedParticles_particles = 1;
    static constexpr Int_t kMax_GeneratedParticles_particleIDs = 1;
-   static constexpr Int_t kMax_GeneratedParticles_startVertex = 70;
-   static constexpr Int_t kMax_GeneratedParticles_particleIDUsed = 70;
-   static constexpr Int_t kMaxHcalBarrelClusterAssociations = 37;
-   static constexpr Int_t kMax_HcalBarrelClusterAssociations_rec = 37;
-   static constexpr Int_t kMax_HcalBarrelClusterAssociations_sim = 37;
-   static constexpr Int_t kMaxHcalBarrelClusters = 37;
+   static constexpr Int_t kMax_GeneratedParticles_startVertex = 2;
+   static constexpr Int_t kMax_GeneratedParticles_particleIDUsed = 2;
+   static constexpr Int_t kMaxHcalBarrelClusterAssociations = 3;
+   static constexpr Int_t kMax_HcalBarrelClusterAssociations_rec = 3;
+   static constexpr Int_t kMax_HcalBarrelClusterAssociations_sim = 3;
+   static constexpr Int_t kMaxHcalBarrelClusters = 3;
    static constexpr Int_t kMax_HcalBarrelClusters_clusters = 1;
-   static constexpr Int_t kMax_HcalBarrelClusters_hits = 1;
+   static constexpr Int_t kMax_HcalBarrelClusters_hits = 4;
    static constexpr Int_t kMax_HcalBarrelClusters_particleIDs = 1;
-   static constexpr Int_t kMaxHcalBarrelRawHits = 466;
-   static constexpr Int_t kMaxHcalBarrelRecHits = 64;
-   static constexpr Int_t kMaxHcalBarrelTruthClusterAssociations = 14;
-   static constexpr Int_t kMax_HcalBarrelTruthClusterAssociations_rec = 14;
-   static constexpr Int_t kMax_HcalBarrelTruthClusterAssociations_sim = 14;
-   static constexpr Int_t kMaxHcalBarrelTruthClusters = 14;
+   static constexpr Int_t kMaxHcalBarrelRawHits = 34;
+   static constexpr Int_t kMaxHcalBarrelRecHits = 6;
+   static constexpr Int_t kMaxHcalBarrelTruthClusterAssociations = 5;
+   static constexpr Int_t kMax_HcalBarrelTruthClusterAssociations_rec = 5;
+   static constexpr Int_t kMax_HcalBarrelTruthClusterAssociations_sim = 5;
+   static constexpr Int_t kMaxHcalBarrelTruthClusters = 5;
    static constexpr Int_t kMax_HcalBarrelTruthClusters_clusters = 1;
-   static constexpr Int_t kMax_HcalBarrelTruthClusters_hits = 1;
+   static constexpr Int_t kMax_HcalBarrelTruthClusters_hits = 6;
    static constexpr Int_t kMax_HcalBarrelTruthClusters_particleIDs = 1;
-   static constexpr Int_t kMaxHcalEndcapNClusterAssociations = 31;
-   static constexpr Int_t kMax_HcalEndcapNClusterAssociations_rec = 31;
-   static constexpr Int_t kMax_HcalEndcapNClusterAssociations_sim = 31;
-   static constexpr Int_t kMaxHcalEndcapNClusters = 31;
+   static constexpr Int_t kMaxHcalEndcapNClusterAssociations = 3;
+   static constexpr Int_t kMax_HcalEndcapNClusterAssociations_rec = 3;
+   static constexpr Int_t kMax_HcalEndcapNClusterAssociations_sim = 3;
+   static constexpr Int_t kMaxHcalEndcapNClusters = 3;
    static constexpr Int_t kMax_HcalEndcapNClusters_clusters = 1;
-   static constexpr Int_t kMax_HcalEndcapNClusters_hits = 1;
+   static constexpr Int_t kMax_HcalEndcapNClusters_hits = 25;
    static constexpr Int_t kMax_HcalEndcapNClusters_particleIDs = 1;
-   static constexpr Int_t kMaxHcalEndcapNMergedHits = 474;
-   static constexpr Int_t kMaxHcalEndcapNRawHits = 1022;
-   static constexpr Int_t kMaxHcalEndcapNRecHits = 979;
-   static constexpr Int_t kMaxHcalEndcapNTruthClusterAssociations = 33;
-   static constexpr Int_t kMax_HcalEndcapNTruthClusterAssociations_rec = 33;
-   static constexpr Int_t kMax_HcalEndcapNTruthClusterAssociations_sim = 33;
-   static constexpr Int_t kMaxHcalEndcapNTruthClusters = 33;
+   static constexpr Int_t kMaxHcalEndcapNMergedHits = 19;
+   static constexpr Int_t kMaxHcalEndcapNRawHits = 45;
+   static constexpr Int_t kMaxHcalEndcapNRecHits = 26;
+   static constexpr Int_t kMaxHcalEndcapNTruthClusterAssociations = 14;
+   static constexpr Int_t kMax_HcalEndcapNTruthClusterAssociations_rec = 14;
+   static constexpr Int_t kMax_HcalEndcapNTruthClusterAssociations_sim = 14;
+   static constexpr Int_t kMaxHcalEndcapNTruthClusters = 14;
    static constexpr Int_t kMax_HcalEndcapNTruthClusters_clusters = 1;
-   static constexpr Int_t kMax_HcalEndcapNTruthClusters_hits = 1;
+   static constexpr Int_t kMax_HcalEndcapNTruthClusters_hits = 19;
    static constexpr Int_t kMax_HcalEndcapNTruthClusters_particleIDs = 1;
-   static constexpr Int_t kMaxHcalEndcapPInsertClusterAssociations = 3;
-   static constexpr Int_t kMax_HcalEndcapPInsertClusterAssociations_rec = 3;
-   static constexpr Int_t kMax_HcalEndcapPInsertClusterAssociations_sim = 3;
-   static constexpr Int_t kMaxHcalEndcapPInsertClusters = 3;
+   static constexpr Int_t kMaxHcalEndcapPInsertClusterAssociations = 2;
+   static constexpr Int_t kMax_HcalEndcapPInsertClusterAssociations_rec = 2;
+   static constexpr Int_t kMax_HcalEndcapPInsertClusterAssociations_sim = 2;
+   static constexpr Int_t kMaxHcalEndcapPInsertClusters = 2;
    static constexpr Int_t kMax_HcalEndcapPInsertClusters_clusters = 1;
-   static constexpr Int_t kMax_HcalEndcapPInsertClusters_hits = 1;
+   static constexpr Int_t kMax_HcalEndcapPInsertClusters_hits = 40;
    static constexpr Int_t kMax_HcalEndcapPInsertClusters_particleIDs = 1;
-   static constexpr Int_t kMaxHcalEndcapPInsertMergedHits = 277;
-   static constexpr Int_t kMaxHcalEndcapPInsertRawHits = 5609;
-   static constexpr Int_t kMaxHcalEndcapPInsertRecHits = 1302;
+   static constexpr Int_t kMaxHcalEndcapPInsertMergedHits = 38;
+   static constexpr Int_t kMaxHcalEndcapPInsertRawHits = 120;
+   static constexpr Int_t kMaxHcalEndcapPInsertRecHits = 71;
+   static constexpr Int_t kMaxHcalFarForwardZDCClusterAssociations = 1;
+   static constexpr Int_t kMax_HcalFarForwardZDCClusterAssociations_rec = 1;
+   static constexpr Int_t kMax_HcalFarForwardZDCClusterAssociations_sim = 1;
+   static constexpr Int_t kMaxHcalFarForwardZDCClusterAssociationsBaseline = 1;
+   static constexpr Int_t kMax_HcalFarForwardZDCClusterAssociationsBaseline_rec = 1;
+   static constexpr Int_t kMax_HcalFarForwardZDCClusterAssociationsBaseline_sim = 1;
+   static constexpr Int_t kMaxHcalFarForwardZDCClusters = 1;
+   static constexpr Int_t kMax_HcalFarForwardZDCClusters_clusters = 1;
+   static constexpr Int_t kMax_HcalFarForwardZDCClusters_hits = 1;
+   static constexpr Int_t kMax_HcalFarForwardZDCClusters_particleIDs = 1;
+   static constexpr Int_t kMaxHcalFarForwardZDCClustersBaseline = 1;
+   static constexpr Int_t kMax_HcalFarForwardZDCClustersBaseline_clusters = 1;
+   static constexpr Int_t kMax_HcalFarForwardZDCClustersBaseline_hits = 1;
+   static constexpr Int_t kMax_HcalFarForwardZDCClustersBaseline_particleIDs = 1;
+   static constexpr Int_t kMaxHcalFarForwardZDCRawHits = 1;
+   static constexpr Int_t kMaxHcalFarForwardZDCRecHits = 1;
+   static constexpr Int_t kMaxHcalFarForwardZDCSubcellHits = 1;
+   static constexpr Int_t kMaxHcalFarForwardZDCTruthClusterAssociations = 1;
+   static constexpr Int_t kMax_HcalFarForwardZDCTruthClusterAssociations_rec = 1;
+   static constexpr Int_t kMax_HcalFarForwardZDCTruthClusterAssociations_sim = 1;
+   static constexpr Int_t kMaxHcalFarForwardZDCTruthClusters = 1;
+   static constexpr Int_t kMax_HcalFarForwardZDCTruthClusters_clusters = 1;
+   static constexpr Int_t kMax_HcalFarForwardZDCTruthClusters_hits = 1;
+   static constexpr Int_t kMax_HcalFarForwardZDCTruthClusters_particleIDs = 1;
    static constexpr Int_t kMaxInclusiveKinematicsDA = 1;
    static constexpr Int_t kMax_InclusiveKinematicsDA_scat = 1;
    static constexpr Int_t kMaxInclusiveKinematicsElectron = 1;
@@ -288,98 +346,104 @@ public :
    static constexpr Int_t kMax_InclusiveKinematicsSigma_scat = 1;
    static constexpr Int_t kMaxInclusiveKinematicsTruth = 1;
    static constexpr Int_t kMax_InclusiveKinematicsTruth_scat = 1;
-   static constexpr Int_t kMaxLFHCALClusterAssociations = 56;
-   static constexpr Int_t kMax_LFHCALClusterAssociations_rec = 56;
-   static constexpr Int_t kMax_LFHCALClusterAssociations_sim = 56;
-   static constexpr Int_t kMaxLFHCALClusters = 56;
+   static constexpr Int_t kMaxLFHCALClusterAssociations = 2;
+   static constexpr Int_t kMax_LFHCALClusterAssociations_rec = 2;
+   static constexpr Int_t kMax_LFHCALClusterAssociations_sim = 2;
+   static constexpr Int_t kMaxLFHCALClusters = 2;
    static constexpr Int_t kMax_LFHCALClusters_clusters = 1;
-   static constexpr Int_t kMax_LFHCALClusters_hits = 1;
+   static constexpr Int_t kMax_LFHCALClusters_hits = 8;
    static constexpr Int_t kMax_LFHCALClusters_particleIDs = 1;
-   static constexpr Int_t kMaxLFHCALRawHits = 1935;
-   static constexpr Int_t kMaxLFHCALRecHits = 572;
-   static constexpr Int_t kMaxMCParticles = 334;
-   static constexpr Int_t kMax_MCParticles_parents = 519;
-   static constexpr Int_t kMax_MCParticles_daughters = 519;
-   static constexpr Int_t kMaxMPGDBarrelRecHits = 261;
+   static constexpr Int_t kMaxLFHCALRawHits = 28;
+   static constexpr Int_t kMaxLFHCALRecHits = 15;
+   static constexpr Int_t kMaxMCParticles = 1194;
+   static constexpr Int_t kMax_MCParticles_parents = 1193;
+   static constexpr Int_t kMax_MCParticles_daughters = 1193;
+   static constexpr Int_t kMaxMPGDBarrelHits = 115;
+   static constexpr Int_t kMax_MPGDBarrelHits_MCParticle = 115;
+   static constexpr Int_t kMaxMPGDBarrelRawHits = 87;
+   static constexpr Int_t kMaxMPGDBarrelRecHits = 87;
+   static constexpr Int_t kMaxMPGDDIRCRawHits = 1;
    static constexpr Int_t kMaxMPGDDIRCRecHits = 1;
-   static constexpr Int_t kMaxOuterMPGDBarrelRecHits = 359;
-   static constexpr Int_t kMaxReconstructedChargedJets = 29;
+   static constexpr Int_t kMaxOuterMPGDBarrelHits = 368;
+   static constexpr Int_t kMax_OuterMPGDBarrelHits_MCParticle = 368;
+   static constexpr Int_t kMaxOuterMPGDBarrelRawHits = 282;
+   static constexpr Int_t kMaxOuterMPGDBarrelRecHits = 282;
+   static constexpr Int_t kMaxReconstructedChargedJets = 1;
    static constexpr Int_t kMax_ReconstructedChargedJets_clusters = 1;
    static constexpr Int_t kMax_ReconstructedChargedJets_tracks = 1;
    static constexpr Int_t kMax_ReconstructedChargedJets_particles = 1;
    static constexpr Int_t kMax_ReconstructedChargedJets_particleIDs = 1;
-   static constexpr Int_t kMax_ReconstructedChargedJets_startVertex = 29;
-   static constexpr Int_t kMax_ReconstructedChargedJets_particleIDUsed = 29;
-   static constexpr Int_t kMaxReconstructedChargedParticleAssociations = 23;
-   static constexpr Int_t kMax_ReconstructedChargedParticleAssociations_rec = 23;
-   static constexpr Int_t kMax_ReconstructedChargedParticleAssociations_sim = 23;
-   static constexpr Int_t kMaxReconstructedChargedParticleIDs = 76;
-   static constexpr Int_t kMaxReconstructedChargedParticles = 36;
+   static constexpr Int_t kMax_ReconstructedChargedJets_startVertex = 1;
+   static constexpr Int_t kMax_ReconstructedChargedJets_particleIDUsed = 1;
+   static constexpr Int_t kMaxReconstructedChargedParticleAssociations = 1;
+   static constexpr Int_t kMax_ReconstructedChargedParticleAssociations_rec = 1;
+   static constexpr Int_t kMax_ReconstructedChargedParticleAssociations_sim = 1;
+   static constexpr Int_t kMaxReconstructedChargedParticleIDs = 1;
+   static constexpr Int_t kMaxReconstructedChargedParticles = 1;
    static constexpr Int_t kMax_ReconstructedChargedParticles_clusters = 1;
    static constexpr Int_t kMax_ReconstructedChargedParticles_tracks = 1;
    static constexpr Int_t kMax_ReconstructedChargedParticles_particles = 1;
-   static constexpr Int_t kMax_ReconstructedChargedParticles_particleIDs = 76;
-   static constexpr Int_t kMax_ReconstructedChargedParticles_startVertex = 36;
-   static constexpr Int_t kMax_ReconstructedChargedParticles_particleIDUsed = 36;
-   static constexpr Int_t kMaxReconstructedElectrons = 5;
+   static constexpr Int_t kMax_ReconstructedChargedParticles_particleIDs = 1;
+   static constexpr Int_t kMax_ReconstructedChargedParticles_startVertex = 1;
+   static constexpr Int_t kMax_ReconstructedChargedParticles_particleIDUsed = 1;
+   static constexpr Int_t kMaxReconstructedElectrons = 1;
    static constexpr Int_t kMax_ReconstructedElectrons_clusters = 1;
    static constexpr Int_t kMax_ReconstructedElectrons_tracks = 1;
    static constexpr Int_t kMax_ReconstructedElectrons_particles = 1;
-   static constexpr Int_t kMax_ReconstructedElectrons_particleIDs = 8;
-   static constexpr Int_t kMax_ReconstructedElectrons_startVertex = 5;
-   static constexpr Int_t kMax_ReconstructedElectrons_particleIDUsed = 5;
-   static constexpr Int_t kMaxReconstructedJets = 35;
+   static constexpr Int_t kMax_ReconstructedElectrons_particleIDs = 1;
+   static constexpr Int_t kMax_ReconstructedElectrons_startVertex = 1;
+   static constexpr Int_t kMax_ReconstructedElectrons_particleIDUsed = 1;
+   static constexpr Int_t kMaxReconstructedJets = 1;
    static constexpr Int_t kMax_ReconstructedJets_clusters = 1;
    static constexpr Int_t kMax_ReconstructedJets_tracks = 1;
-   static constexpr Int_t kMax_ReconstructedJets_particles = 1;
+   static constexpr Int_t kMax_ReconstructedJets_particles = 2;
    static constexpr Int_t kMax_ReconstructedJets_particleIDs = 1;
-   static constexpr Int_t kMax_ReconstructedJets_startVertex = 35;
-   static constexpr Int_t kMax_ReconstructedJets_particleIDUsed = 35;
-   static constexpr Int_t kMaxReconstructedParticleAssociations = 113;
-   static constexpr Int_t kMax_ReconstructedParticleAssociations_rec = 113;
-   static constexpr Int_t kMax_ReconstructedParticleAssociations_sim = 113;
-   static constexpr Int_t kMaxReconstructedParticles = 113;
-   static constexpr Int_t kMax_ReconstructedParticles_clusters = 113;
+   static constexpr Int_t kMax_ReconstructedJets_startVertex = 1;
+   static constexpr Int_t kMax_ReconstructedJets_particleIDUsed = 1;
+   static constexpr Int_t kMaxReconstructedParticleAssociations = 58;
+   static constexpr Int_t kMax_ReconstructedParticleAssociations_rec = 58;
+   static constexpr Int_t kMax_ReconstructedParticleAssociations_sim = 58;
+   static constexpr Int_t kMaxReconstructedParticles = 58;
+   static constexpr Int_t kMax_ReconstructedParticles_clusters = 58;
    static constexpr Int_t kMax_ReconstructedParticles_tracks = 1;
    static constexpr Int_t kMax_ReconstructedParticles_particles = 1;
-   static constexpr Int_t kMax_ReconstructedParticles_particleIDs = 76;
-   static constexpr Int_t kMax_ReconstructedParticles_startVertex = 113;
-   static constexpr Int_t kMax_ReconstructedParticles_particleIDUsed = 113;
-   static constexpr Int_t kMaxReconstructedSeededChargedParticleAssociations = 20;
-   static constexpr Int_t kMax_ReconstructedSeededChargedParticleAssociations_rec = 20;
-   static constexpr Int_t kMax_ReconstructedSeededChargedParticleAssociations_sim = 20;
-   static constexpr Int_t kMaxReconstructedSeededChargedParticles = 1005;
+   static constexpr Int_t kMax_ReconstructedParticles_particleIDs = 1;
+   static constexpr Int_t kMax_ReconstructedParticles_startVertex = 58;
+   static constexpr Int_t kMax_ReconstructedParticles_particleIDUsed = 58;
+   static constexpr Int_t kMaxReconstructedSeededChargedParticleAssociations = 3;
+   static constexpr Int_t kMax_ReconstructedSeededChargedParticleAssociations_rec = 3;
+   static constexpr Int_t kMax_ReconstructedSeededChargedParticleAssociations_sim = 3;
+   static constexpr Int_t kMaxReconstructedSeededChargedParticles = 9;
    static constexpr Int_t kMax_ReconstructedSeededChargedParticles_clusters = 1;
-   static constexpr Int_t kMax_ReconstructedSeededChargedParticles_tracks = 1;
+   static constexpr Int_t kMax_ReconstructedSeededChargedParticles_tracks = 9;
    static constexpr Int_t kMax_ReconstructedSeededChargedParticles_particles = 1;
-   static constexpr Int_t kMax_ReconstructedSeededChargedParticles_particleIDs = 136;
-   static constexpr Int_t kMax_ReconstructedSeededChargedParticles_startVertex = 1005;
-   static constexpr Int_t kMax_ReconstructedSeededChargedParticles_particleIDUsed = 1005;
-   static constexpr Int_t kMaxSiBarrelTrackerRecHits = 221;
-   static constexpr Int_t kMaxSiBarrelVertexRecHits = 1894;
-   static constexpr Int_t kMaxSiEndcapTrackerRecHits = 3213;
-   static constexpr Int_t kMaxTaggerTrackerRawHits = 5;
-   static constexpr Int_t kMaxTOFBarrelRecHit = 271;
-   static constexpr Int_t kMaxTOFEndcapRecHits = 185;
-   static constexpr Int_t kMaxZDCEcalClusterAssociations = 59;
-   static constexpr Int_t kMax_ZDCEcalClusterAssociations_rec = 59;
-   static constexpr Int_t kMax_ZDCEcalClusterAssociations_sim = 59;
-   static constexpr Int_t kMaxZDCEcalClusters = 59;
-   static constexpr Int_t kMax_ZDCEcalClusters_clusters = 1;
-   static constexpr Int_t kMax_ZDCEcalClusters_hits = 1;
-   static constexpr Int_t kMax_ZDCEcalClusters_particleIDs = 1;
-   static constexpr Int_t kMaxZDCEcalRawHits = 252;
-   static constexpr Int_t kMaxZDCEcalRecHits = 252;
-   static constexpr Int_t kMaxZDCEcalTruthClusterAssociations = 13;
-   static constexpr Int_t kMax_ZDCEcalTruthClusterAssociations_rec = 13;
-   static constexpr Int_t kMax_ZDCEcalTruthClusterAssociations_sim = 13;
-   static constexpr Int_t kMaxZDCEcalTruthClusters = 13;
-   static constexpr Int_t kMax_ZDCEcalTruthClusters_clusters = 1;
-   static constexpr Int_t kMax_ZDCEcalTruthClusters_hits = 1;
-   static constexpr Int_t kMax_ZDCEcalTruthClusters_particleIDs = 1;
+   static constexpr Int_t kMax_ReconstructedSeededChargedParticles_particleIDs = 1;
+   static constexpr Int_t kMax_ReconstructedSeededChargedParticles_startVertex = 9;
+   static constexpr Int_t kMax_ReconstructedSeededChargedParticles_particleIDUsed = 9;
+   static constexpr Int_t kMaxSiBarrelHits = 106;
+   static constexpr Int_t kMax_SiBarrelHits_MCParticle = 106;
+   static constexpr Int_t kMaxSiBarrelRawHits = 105;
+   static constexpr Int_t kMaxSiBarrelTrackerRecHits = 105;
+   static constexpr Int_t kMaxSiBarrelVertexRawHits = 381;
+   static constexpr Int_t kMaxSiBarrelVertexRecHits = 381;
+   static constexpr Int_t kMaxSiEndcapTrackerRawHits = 338;
+   static constexpr Int_t kMaxSiEndcapTrackerRecHits = 338;
+   static constexpr Int_t kMaxTaggerTrackerRawHits = 193;
+   static constexpr Int_t kMaxTOFBarrelHits = 87;
+   static constexpr Int_t kMax_TOFBarrelHits_MCParticle = 87;
+   static constexpr Int_t kMaxTOFBarrelRawHit = 82;
+   static constexpr Int_t kMaxTOFBarrelRecHit = 82;
+   static constexpr Int_t kMaxTOFEndcapHits = 32;
+   static constexpr Int_t kMax_TOFEndcapHits_MCParticle = 32;
+   static constexpr Int_t kMaxTOFEndcapRawHits = 29;
+   static constexpr Int_t kMaxTOFEndcapRecHits = 29;
+   static constexpr Int_t kMaxTrackerEndcapHits = 340;
+   static constexpr Int_t kMax_TrackerEndcapHits_MCParticle = 340;
+   static constexpr Int_t kMaxVertexBarrelHits = 381;
+   static constexpr Int_t kMax_VertexBarrelHits_MCParticle = 381;
    static constexpr Int_t kMax_intMap = 1;
    static constexpr Int_t kMax_floatMap = 1;
-   static constexpr Int_t kMax_stringMap = 267;
+   static constexpr Int_t kMax_stringMap = 1;
    static constexpr Int_t kMax_doubleMap = 1;
 
    // Declaration of leaf types
@@ -459,6 +523,25 @@ public :
    Float_t         B0ECalRecHits_local_x[kMaxB0ECalRecHits];   //[B0ECalRecHits_]
    Float_t         B0ECalRecHits_local_y[kMaxB0ECalRecHits];   //[B0ECalRecHits_]
    Float_t         B0ECalRecHits_local_z[kMaxB0ECalRecHits];   //[B0ECalRecHits_]
+   Int_t           B0TrackerHits_;
+   ULong_t         B0TrackerHits_cellID[kMaxB0TrackerHits];   //[B0TrackerHits_]
+   Float_t         B0TrackerHits_EDep[kMaxB0TrackerHits];   //[B0TrackerHits_]
+   Float_t         B0TrackerHits_time[kMaxB0TrackerHits];   //[B0TrackerHits_]
+   Float_t         B0TrackerHits_pathLength[kMaxB0TrackerHits];   //[B0TrackerHits_]
+   Int_t           B0TrackerHits_quality[kMaxB0TrackerHits];   //[B0TrackerHits_]
+   Double_t        B0TrackerHits_position_x[kMaxB0TrackerHits];   //[B0TrackerHits_]
+   Double_t        B0TrackerHits_position_y[kMaxB0TrackerHits];   //[B0TrackerHits_]
+   Double_t        B0TrackerHits_position_z[kMaxB0TrackerHits];   //[B0TrackerHits_]
+   Float_t         B0TrackerHits_momentum_x[kMaxB0TrackerHits];   //[B0TrackerHits_]
+   Float_t         B0TrackerHits_momentum_y[kMaxB0TrackerHits];   //[B0TrackerHits_]
+   Float_t         B0TrackerHits_momentum_z[kMaxB0TrackerHits];   //[B0TrackerHits_]
+   Int_t           _B0TrackerHits_MCParticle_;
+   Int_t           _B0TrackerHits_MCParticle_index[kMax_B0TrackerHits_MCParticle];   //[_B0TrackerHits_MCParticle_]
+   UInt_t          _B0TrackerHits_MCParticle_collectionID[kMax_B0TrackerHits_MCParticle];   //[_B0TrackerHits_MCParticle_]
+   Int_t           B0TrackerRawHits_;
+   ULong_t         B0TrackerRawHits_cellID[kMaxB0TrackerRawHits];   //[B0TrackerRawHits_]
+   Int_t           B0TrackerRawHits_charge[kMaxB0TrackerRawHits];   //[B0TrackerRawHits_]
+   Int_t           B0TrackerRawHits_timeStamp[kMaxB0TrackerRawHits];   //[B0TrackerRawHits_]
    Int_t           B0TrackerRecHits_;
    ULong_t         B0TrackerRecHits_cellID[kMaxB0TrackerRecHits];   //[B0TrackerRecHits_]
    Float_t         B0TrackerRecHits_position_x[kMaxB0TrackerRecHits];   //[B0TrackerRecHits_]
@@ -471,6 +554,25 @@ public :
    Float_t         B0TrackerRecHits_timeError[kMaxB0TrackerRecHits];   //[B0TrackerRecHits_]
    Float_t         B0TrackerRecHits_edep[kMaxB0TrackerRecHits];   //[B0TrackerRecHits_]
    Float_t         B0TrackerRecHits_edepError[kMaxB0TrackerRecHits];   //[B0TrackerRecHits_]
+   Int_t           BackwardMPGDEndcapHits_;
+   ULong_t         BackwardMPGDEndcapHits_cellID[kMaxBackwardMPGDEndcapHits];   //[BackwardMPGDEndcapHits_]
+   Float_t         BackwardMPGDEndcapHits_EDep[kMaxBackwardMPGDEndcapHits];   //[BackwardMPGDEndcapHits_]
+   Float_t         BackwardMPGDEndcapHits_time[kMaxBackwardMPGDEndcapHits];   //[BackwardMPGDEndcapHits_]
+   Float_t         BackwardMPGDEndcapHits_pathLength[kMaxBackwardMPGDEndcapHits];   //[BackwardMPGDEndcapHits_]
+   Int_t           BackwardMPGDEndcapHits_quality[kMaxBackwardMPGDEndcapHits];   //[BackwardMPGDEndcapHits_]
+   Double_t        BackwardMPGDEndcapHits_position_x[kMaxBackwardMPGDEndcapHits];   //[BackwardMPGDEndcapHits_]
+   Double_t        BackwardMPGDEndcapHits_position_y[kMaxBackwardMPGDEndcapHits];   //[BackwardMPGDEndcapHits_]
+   Double_t        BackwardMPGDEndcapHits_position_z[kMaxBackwardMPGDEndcapHits];   //[BackwardMPGDEndcapHits_]
+   Float_t         BackwardMPGDEndcapHits_momentum_x[kMaxBackwardMPGDEndcapHits];   //[BackwardMPGDEndcapHits_]
+   Float_t         BackwardMPGDEndcapHits_momentum_y[kMaxBackwardMPGDEndcapHits];   //[BackwardMPGDEndcapHits_]
+   Float_t         BackwardMPGDEndcapHits_momentum_z[kMaxBackwardMPGDEndcapHits];   //[BackwardMPGDEndcapHits_]
+   Int_t           _BackwardMPGDEndcapHits_MCParticle_;
+   Int_t           _BackwardMPGDEndcapHits_MCParticle_index[kMax_BackwardMPGDEndcapHits_MCParticle];   //[_BackwardMPGDEndcapHits_MCParticle_]
+   UInt_t          _BackwardMPGDEndcapHits_MCParticle_collectionID[kMax_BackwardMPGDEndcapHits_MCParticle];   //[_BackwardMPGDEndcapHits_MCParticle_]
+   Int_t           BackwardMPGDEndcapRawHits_;
+   ULong_t         BackwardMPGDEndcapRawHits_cellID[kMaxBackwardMPGDEndcapRawHits];   //[BackwardMPGDEndcapRawHits_]
+   Int_t           BackwardMPGDEndcapRawHits_charge[kMaxBackwardMPGDEndcapRawHits];   //[BackwardMPGDEndcapRawHits_]
+   Int_t           BackwardMPGDEndcapRawHits_timeStamp[kMaxBackwardMPGDEndcapRawHits];   //[BackwardMPGDEndcapRawHits_]
    Int_t           BackwardMPGDEndcapRecHits_;
    ULong_t         BackwardMPGDEndcapRecHits_cellID[kMaxBackwardMPGDEndcapRecHits];   //[BackwardMPGDEndcapRecHits_]
    Float_t         BackwardMPGDEndcapRecHits_position_x[kMaxBackwardMPGDEndcapRecHits];   //[BackwardMPGDEndcapRecHits_]
@@ -523,34 +625,49 @@ public :
    Float_t         _CalorimeterTrackProjections_points_pathlengthError[kMax_CalorimeterTrackProjections_points];   //[_CalorimeterTrackProjections_points_]
    Int_t           CentralCKFSeededTrackParameters_;
    Int_t           CentralCKFSeededTrackParameters_type[kMaxCentralCKFSeededTrackParameters];   //[CentralCKFSeededTrackParameters_]
+   ULong_t         CentralCKFSeededTrackParameters_surface[kMaxCentralCKFSeededTrackParameters];   //[CentralCKFSeededTrackParameters_]
    Float_t         CentralCKFSeededTrackParameters_loc_a[kMaxCentralCKFSeededTrackParameters];   //[CentralCKFSeededTrackParameters_]
    Float_t         CentralCKFSeededTrackParameters_loc_b[kMaxCentralCKFSeededTrackParameters];   //[CentralCKFSeededTrackParameters_]
-   Float_t         CentralCKFSeededTrackParameters_locError_xx[kMaxCentralCKFSeededTrackParameters];   //[CentralCKFSeededTrackParameters_]
-   Float_t         CentralCKFSeededTrackParameters_locError_yy[kMaxCentralCKFSeededTrackParameters];   //[CentralCKFSeededTrackParameters_]
-   Float_t         CentralCKFSeededTrackParameters_locError_xy[kMaxCentralCKFSeededTrackParameters];   //[CentralCKFSeededTrackParameters_]
    Float_t         CentralCKFSeededTrackParameters_theta[kMaxCentralCKFSeededTrackParameters];   //[CentralCKFSeededTrackParameters_]
    Float_t         CentralCKFSeededTrackParameters_phi[kMaxCentralCKFSeededTrackParameters];   //[CentralCKFSeededTrackParameters_]
    Float_t         CentralCKFSeededTrackParameters_qOverP[kMaxCentralCKFSeededTrackParameters];   //[CentralCKFSeededTrackParameters_]
-   Float_t         CentralCKFSeededTrackParameters_momentumError_xx[kMaxCentralCKFSeededTrackParameters];   //[CentralCKFSeededTrackParameters_]
-   Float_t         CentralCKFSeededTrackParameters_momentumError_yy[kMaxCentralCKFSeededTrackParameters];   //[CentralCKFSeededTrackParameters_]
-   Float_t         CentralCKFSeededTrackParameters_momentumError_zz[kMaxCentralCKFSeededTrackParameters];   //[CentralCKFSeededTrackParameters_]
-   Float_t         CentralCKFSeededTrackParameters_momentumError_xy[kMaxCentralCKFSeededTrackParameters];   //[CentralCKFSeededTrackParameters_]
-   Float_t         CentralCKFSeededTrackParameters_momentumError_xz[kMaxCentralCKFSeededTrackParameters];   //[CentralCKFSeededTrackParameters_]
-   Float_t         CentralCKFSeededTrackParameters_momentumError_yz[kMaxCentralCKFSeededTrackParameters];   //[CentralCKFSeededTrackParameters_]
    Float_t         CentralCKFSeededTrackParameters_time[kMaxCentralCKFSeededTrackParameters];   //[CentralCKFSeededTrackParameters_]
-   Float_t         CentralCKFSeededTrackParameters_timeError[kMaxCentralCKFSeededTrackParameters];   //[CentralCKFSeededTrackParameters_]
-   Float_t         CentralCKFSeededTrackParameters_charge[kMaxCentralCKFSeededTrackParameters];   //[CentralCKFSeededTrackParameters_]
-   Int_t           _CentralCKFSeededTrackParameters_trajectory_;
-   Int_t           _CentralCKFSeededTrackParameters_trajectory_index[kMax_CentralCKFSeededTrackParameters_trajectory];   //[_CentralCKFSeededTrackParameters_trajectory_]
-   UInt_t          _CentralCKFSeededTrackParameters_trajectory_collectionID[kMax_CentralCKFSeededTrackParameters_trajectory];   //[_CentralCKFSeededTrackParameters_trajectory_]
+   Int_t           CentralCKFSeededTrackParameters_pdg[kMaxCentralCKFSeededTrackParameters];   //[CentralCKFSeededTrackParameters_]
+   Float_t         CentralCKFSeededTrackParameters_covariance_covariance[kMaxCentralCKFSeededTrackParameters][21];   //[CentralCKFSeededTrackParameters_]
+   Int_t           CentralCKFSeededTracks_;
+   Int_t           CentralCKFSeededTracks_type[kMaxCentralCKFSeededTracks];   //[CentralCKFSeededTracks_]
+   Float_t         CentralCKFSeededTracks_position_x[kMaxCentralCKFSeededTracks];   //[CentralCKFSeededTracks_]
+   Float_t         CentralCKFSeededTracks_position_y[kMaxCentralCKFSeededTracks];   //[CentralCKFSeededTracks_]
+   Float_t         CentralCKFSeededTracks_position_z[kMaxCentralCKFSeededTracks];   //[CentralCKFSeededTracks_]
+   Float_t         CentralCKFSeededTracks_momentum_x[kMaxCentralCKFSeededTracks];   //[CentralCKFSeededTracks_]
+   Float_t         CentralCKFSeededTracks_momentum_y[kMaxCentralCKFSeededTracks];   //[CentralCKFSeededTracks_]
+   Float_t         CentralCKFSeededTracks_momentum_z[kMaxCentralCKFSeededTracks];   //[CentralCKFSeededTracks_]
+   Float_t         CentralCKFSeededTracks_positionMomentumCovariance_covariance[kMaxCentralCKFSeededTracks][21];   //[CentralCKFSeededTracks_]
+   Float_t         CentralCKFSeededTracks_time[kMaxCentralCKFSeededTracks];   //[CentralCKFSeededTracks_]
+   Float_t         CentralCKFSeededTracks_timeError[kMaxCentralCKFSeededTracks];   //[CentralCKFSeededTracks_]
+   Float_t         CentralCKFSeededTracks_charge[kMaxCentralCKFSeededTracks];   //[CentralCKFSeededTracks_]
+   Float_t         CentralCKFSeededTracks_chi2[kMaxCentralCKFSeededTracks];   //[CentralCKFSeededTracks_]
+   UInt_t          CentralCKFSeededTracks_ndf[kMaxCentralCKFSeededTracks];   //[CentralCKFSeededTracks_]
+   Int_t           CentralCKFSeededTracks_pdg[kMaxCentralCKFSeededTracks];   //[CentralCKFSeededTracks_]
+   UInt_t          CentralCKFSeededTracks_measurements_begin[kMaxCentralCKFSeededTracks];   //[CentralCKFSeededTracks_]
+   UInt_t          CentralCKFSeededTracks_measurements_end[kMaxCentralCKFSeededTracks];   //[CentralCKFSeededTracks_]
+   UInt_t          CentralCKFSeededTracks_tracks_begin[kMaxCentralCKFSeededTracks];   //[CentralCKFSeededTracks_]
+   UInt_t          CentralCKFSeededTracks_tracks_end[kMaxCentralCKFSeededTracks];   //[CentralCKFSeededTracks_]
+   Int_t           _CentralCKFSeededTracks_measurements_;
+   Int_t           _CentralCKFSeededTracks_measurements_index[kMax_CentralCKFSeededTracks_measurements];   //[_CentralCKFSeededTracks_measurements_]
+   UInt_t          _CentralCKFSeededTracks_measurements_collectionID[kMax_CentralCKFSeededTracks_measurements];   //[_CentralCKFSeededTracks_measurements_]
+   Int_t           _CentralCKFSeededTracks_tracks_;
+   Int_t           _CentralCKFSeededTracks_tracks_index[kMax_CentralCKFSeededTracks_tracks];   //[_CentralCKFSeededTracks_tracks_]
+   UInt_t          _CentralCKFSeededTracks_tracks_collectionID[kMax_CentralCKFSeededTracks_tracks];   //[_CentralCKFSeededTracks_tracks_]
+   Int_t           _CentralCKFSeededTracks_trajectory_;
+   Int_t           _CentralCKFSeededTracks_trajectory_index[kMax_CentralCKFSeededTracks_trajectory];   //[_CentralCKFSeededTracks_trajectory_]
+   UInt_t          _CentralCKFSeededTracks_trajectory_collectionID[kMax_CentralCKFSeededTracks_trajectory];   //[_CentralCKFSeededTracks_trajectory_]
    Int_t           CentralCKFSeededTrajectories_;
    UInt_t          CentralCKFSeededTrajectories_type[kMaxCentralCKFSeededTrajectories];   //[CentralCKFSeededTrajectories_]
    UInt_t          CentralCKFSeededTrajectories_nStates[kMaxCentralCKFSeededTrajectories];   //[CentralCKFSeededTrajectories_]
    UInt_t          CentralCKFSeededTrajectories_nMeasurements[kMaxCentralCKFSeededTrajectories];   //[CentralCKFSeededTrajectories_]
    UInt_t          CentralCKFSeededTrajectories_nOutliers[kMaxCentralCKFSeededTrajectories];   //[CentralCKFSeededTrajectories_]
    UInt_t          CentralCKFSeededTrajectories_nHoles[kMaxCentralCKFSeededTrajectories];   //[CentralCKFSeededTrajectories_]
-   Float_t         CentralCKFSeededTrajectories_chi2[kMaxCentralCKFSeededTrajectories];   //[CentralCKFSeededTrajectories_]
-   UInt_t          CentralCKFSeededTrajectories_ndf[kMaxCentralCKFSeededTrajectories];   //[CentralCKFSeededTrajectories_]
    UInt_t          CentralCKFSeededTrajectories_nSharedHits[kMaxCentralCKFSeededTrajectories];   //[CentralCKFSeededTrajectories_]
    UInt_t          CentralCKFSeededTrajectories_measurementChi2_begin[kMaxCentralCKFSeededTrajectories];   //[CentralCKFSeededTrajectories_]
    UInt_t          CentralCKFSeededTrajectories_measurementChi2_end[kMaxCentralCKFSeededTrajectories];   //[CentralCKFSeededTrajectories_]
@@ -558,51 +675,69 @@ public :
    UInt_t          CentralCKFSeededTrajectories_outlierChi2_end[kMaxCentralCKFSeededTrajectories];   //[CentralCKFSeededTrajectories_]
    UInt_t          CentralCKFSeededTrajectories_trackParameters_begin[kMaxCentralCKFSeededTrajectories];   //[CentralCKFSeededTrajectories_]
    UInt_t          CentralCKFSeededTrajectories_trackParameters_end[kMaxCentralCKFSeededTrajectories];   //[CentralCKFSeededTrajectories_]
-   UInt_t          CentralCKFSeededTrajectories_measurementHits_begin[kMaxCentralCKFSeededTrajectories];   //[CentralCKFSeededTrajectories_]
-   UInt_t          CentralCKFSeededTrajectories_measurementHits_end[kMaxCentralCKFSeededTrajectories];   //[CentralCKFSeededTrajectories_]
-   UInt_t          CentralCKFSeededTrajectories_outlierHits_begin[kMaxCentralCKFSeededTrajectories];   //[CentralCKFSeededTrajectories_]
-   UInt_t          CentralCKFSeededTrajectories_outlierHits_end[kMaxCentralCKFSeededTrajectories];   //[CentralCKFSeededTrajectories_]
+   UInt_t          CentralCKFSeededTrajectories_measurements_deprecated_begin[kMaxCentralCKFSeededTrajectories];   //[CentralCKFSeededTrajectories_]
+   UInt_t          CentralCKFSeededTrajectories_measurements_deprecated_end[kMaxCentralCKFSeededTrajectories];   //[CentralCKFSeededTrajectories_]
+   UInt_t          CentralCKFSeededTrajectories_outliers_deprecated_begin[kMaxCentralCKFSeededTrajectories];   //[CentralCKFSeededTrajectories_]
+   UInt_t          CentralCKFSeededTrajectories_outliers_deprecated_end[kMaxCentralCKFSeededTrajectories];   //[CentralCKFSeededTrajectories_]
    Int_t           _CentralCKFSeededTrajectories_trackParameters_;
    Int_t           _CentralCKFSeededTrajectories_trackParameters_index[kMax_CentralCKFSeededTrajectories_trackParameters];   //[_CentralCKFSeededTrajectories_trackParameters_]
    UInt_t          _CentralCKFSeededTrajectories_trackParameters_collectionID[kMax_CentralCKFSeededTrajectories_trackParameters];   //[_CentralCKFSeededTrajectories_trackParameters_]
-   Int_t           _CentralCKFSeededTrajectories_measurementHits_;
-   Int_t           _CentralCKFSeededTrajectories_measurementHits_index[kMax_CentralCKFSeededTrajectories_measurementHits];   //[_CentralCKFSeededTrajectories_measurementHits_]
-   UInt_t          _CentralCKFSeededTrajectories_measurementHits_collectionID[kMax_CentralCKFSeededTrajectories_measurementHits];   //[_CentralCKFSeededTrajectories_measurementHits_]
-   Int_t           _CentralCKFSeededTrajectories_outlierHits_;
-   Int_t           _CentralCKFSeededTrajectories_outlierHits_index[kMax_CentralCKFSeededTrajectories_outlierHits];   //[_CentralCKFSeededTrajectories_outlierHits_]
-   UInt_t          _CentralCKFSeededTrajectories_outlierHits_collectionID[kMax_CentralCKFSeededTrajectories_outlierHits];   //[_CentralCKFSeededTrajectories_outlierHits_]
+   Int_t           _CentralCKFSeededTrajectories_measurements_deprecated_;
+   Int_t           _CentralCKFSeededTrajectories_measurements_deprecated_index[kMax_CentralCKFSeededTrajectories_measurements_deprecated];   //[_CentralCKFSeededTrajectories_measurements_deprecated_]
+   UInt_t          _CentralCKFSeededTrajectories_measurements_deprecated_collectionID[kMax_CentralCKFSeededTrajectories_measurements_deprecated];   //[_CentralCKFSeededTrajectories_measurements_deprecated_]
+   Int_t           _CentralCKFSeededTrajectories_outliers_deprecated_;
+   Int_t           _CentralCKFSeededTrajectories_outliers_deprecated_index[kMax_CentralCKFSeededTrajectories_outliers_deprecated];   //[_CentralCKFSeededTrajectories_outliers_deprecated_]
+   UInt_t          _CentralCKFSeededTrajectories_outliers_deprecated_collectionID[kMax_CentralCKFSeededTrajectories_outliers_deprecated];   //[_CentralCKFSeededTrajectories_outliers_deprecated_]
+   Int_t           _CentralCKFSeededTrajectories_seed_;
+   Int_t           _CentralCKFSeededTrajectories_seed_index[kMax_CentralCKFSeededTrajectories_seed];   //[_CentralCKFSeededTrajectories_seed_]
+   UInt_t          _CentralCKFSeededTrajectories_seed_collectionID[kMax_CentralCKFSeededTrajectories_seed];   //[_CentralCKFSeededTrajectories_seed_]
    vector<float>   *_CentralCKFSeededTrajectories_measurementChi2;
    vector<float>   *_CentralCKFSeededTrajectories_outlierChi2;
    Int_t           CentralCKFTrackParameters_;
    Int_t           CentralCKFTrackParameters_type[kMaxCentralCKFTrackParameters];   //[CentralCKFTrackParameters_]
+   ULong_t         CentralCKFTrackParameters_surface[kMaxCentralCKFTrackParameters];   //[CentralCKFTrackParameters_]
    Float_t         CentralCKFTrackParameters_loc_a[kMaxCentralCKFTrackParameters];   //[CentralCKFTrackParameters_]
    Float_t         CentralCKFTrackParameters_loc_b[kMaxCentralCKFTrackParameters];   //[CentralCKFTrackParameters_]
-   Float_t         CentralCKFTrackParameters_locError_xx[kMaxCentralCKFTrackParameters];   //[CentralCKFTrackParameters_]
-   Float_t         CentralCKFTrackParameters_locError_yy[kMaxCentralCKFTrackParameters];   //[CentralCKFTrackParameters_]
-   Float_t         CentralCKFTrackParameters_locError_xy[kMaxCentralCKFTrackParameters];   //[CentralCKFTrackParameters_]
    Float_t         CentralCKFTrackParameters_theta[kMaxCentralCKFTrackParameters];   //[CentralCKFTrackParameters_]
    Float_t         CentralCKFTrackParameters_phi[kMaxCentralCKFTrackParameters];   //[CentralCKFTrackParameters_]
    Float_t         CentralCKFTrackParameters_qOverP[kMaxCentralCKFTrackParameters];   //[CentralCKFTrackParameters_]
-   Float_t         CentralCKFTrackParameters_momentumError_xx[kMaxCentralCKFTrackParameters];   //[CentralCKFTrackParameters_]
-   Float_t         CentralCKFTrackParameters_momentumError_yy[kMaxCentralCKFTrackParameters];   //[CentralCKFTrackParameters_]
-   Float_t         CentralCKFTrackParameters_momentumError_zz[kMaxCentralCKFTrackParameters];   //[CentralCKFTrackParameters_]
-   Float_t         CentralCKFTrackParameters_momentumError_xy[kMaxCentralCKFTrackParameters];   //[CentralCKFTrackParameters_]
-   Float_t         CentralCKFTrackParameters_momentumError_xz[kMaxCentralCKFTrackParameters];   //[CentralCKFTrackParameters_]
-   Float_t         CentralCKFTrackParameters_momentumError_yz[kMaxCentralCKFTrackParameters];   //[CentralCKFTrackParameters_]
    Float_t         CentralCKFTrackParameters_time[kMaxCentralCKFTrackParameters];   //[CentralCKFTrackParameters_]
-   Float_t         CentralCKFTrackParameters_timeError[kMaxCentralCKFTrackParameters];   //[CentralCKFTrackParameters_]
-   Float_t         CentralCKFTrackParameters_charge[kMaxCentralCKFTrackParameters];   //[CentralCKFTrackParameters_]
-   Int_t           _CentralCKFTrackParameters_trajectory_;
-   Int_t           _CentralCKFTrackParameters_trajectory_index[kMax_CentralCKFTrackParameters_trajectory];   //[_CentralCKFTrackParameters_trajectory_]
-   UInt_t          _CentralCKFTrackParameters_trajectory_collectionID[kMax_CentralCKFTrackParameters_trajectory];   //[_CentralCKFTrackParameters_trajectory_]
+   Int_t           CentralCKFTrackParameters_pdg[kMaxCentralCKFTrackParameters];   //[CentralCKFTrackParameters_]
+   Float_t         CentralCKFTrackParameters_covariance_covariance[kMaxCentralCKFTrackParameters][21];   //[CentralCKFTrackParameters_]
+   Int_t           CentralCKFTracks_;
+   Int_t           CentralCKFTracks_type[kMaxCentralCKFTracks];   //[CentralCKFTracks_]
+   Float_t         CentralCKFTracks_position_x[kMaxCentralCKFTracks];   //[CentralCKFTracks_]
+   Float_t         CentralCKFTracks_position_y[kMaxCentralCKFTracks];   //[CentralCKFTracks_]
+   Float_t         CentralCKFTracks_position_z[kMaxCentralCKFTracks];   //[CentralCKFTracks_]
+   Float_t         CentralCKFTracks_momentum_x[kMaxCentralCKFTracks];   //[CentralCKFTracks_]
+   Float_t         CentralCKFTracks_momentum_y[kMaxCentralCKFTracks];   //[CentralCKFTracks_]
+   Float_t         CentralCKFTracks_momentum_z[kMaxCentralCKFTracks];   //[CentralCKFTracks_]
+   Float_t         CentralCKFTracks_positionMomentumCovariance_covariance[kMaxCentralCKFTracks][21];   //[CentralCKFTracks_]
+   Float_t         CentralCKFTracks_time[kMaxCentralCKFTracks];   //[CentralCKFTracks_]
+   Float_t         CentralCKFTracks_timeError[kMaxCentralCKFTracks];   //[CentralCKFTracks_]
+   Float_t         CentralCKFTracks_charge[kMaxCentralCKFTracks];   //[CentralCKFTracks_]
+   Float_t         CentralCKFTracks_chi2[kMaxCentralCKFTracks];   //[CentralCKFTracks_]
+   UInt_t          CentralCKFTracks_ndf[kMaxCentralCKFTracks];   //[CentralCKFTracks_]
+   Int_t           CentralCKFTracks_pdg[kMaxCentralCKFTracks];   //[CentralCKFTracks_]
+   UInt_t          CentralCKFTracks_measurements_begin[kMaxCentralCKFTracks];   //[CentralCKFTracks_]
+   UInt_t          CentralCKFTracks_measurements_end[kMaxCentralCKFTracks];   //[CentralCKFTracks_]
+   UInt_t          CentralCKFTracks_tracks_begin[kMaxCentralCKFTracks];   //[CentralCKFTracks_]
+   UInt_t          CentralCKFTracks_tracks_end[kMaxCentralCKFTracks];   //[CentralCKFTracks_]
+   Int_t           _CentralCKFTracks_measurements_;
+   Int_t           _CentralCKFTracks_measurements_index[kMax_CentralCKFTracks_measurements];   //[_CentralCKFTracks_measurements_]
+   UInt_t          _CentralCKFTracks_measurements_collectionID[kMax_CentralCKFTracks_measurements];   //[_CentralCKFTracks_measurements_]
+   Int_t           _CentralCKFTracks_tracks_;
+   Int_t           _CentralCKFTracks_tracks_index[kMax_CentralCKFTracks_tracks];   //[_CentralCKFTracks_tracks_]
+   UInt_t          _CentralCKFTracks_tracks_collectionID[kMax_CentralCKFTracks_tracks];   //[_CentralCKFTracks_tracks_]
+   Int_t           _CentralCKFTracks_trajectory_;
+   Int_t           _CentralCKFTracks_trajectory_index[kMax_CentralCKFTracks_trajectory];   //[_CentralCKFTracks_trajectory_]
+   UInt_t          _CentralCKFTracks_trajectory_collectionID[kMax_CentralCKFTracks_trajectory];   //[_CentralCKFTracks_trajectory_]
    Int_t           CentralCKFTrajectories_;
    UInt_t          CentralCKFTrajectories_type[kMaxCentralCKFTrajectories];   //[CentralCKFTrajectories_]
    UInt_t          CentralCKFTrajectories_nStates[kMaxCentralCKFTrajectories];   //[CentralCKFTrajectories_]
    UInt_t          CentralCKFTrajectories_nMeasurements[kMaxCentralCKFTrajectories];   //[CentralCKFTrajectories_]
    UInt_t          CentralCKFTrajectories_nOutliers[kMaxCentralCKFTrajectories];   //[CentralCKFTrajectories_]
    UInt_t          CentralCKFTrajectories_nHoles[kMaxCentralCKFTrajectories];   //[CentralCKFTrajectories_]
-   Float_t         CentralCKFTrajectories_chi2[kMaxCentralCKFTrajectories];   //[CentralCKFTrajectories_]
-   UInt_t          CentralCKFTrajectories_ndf[kMaxCentralCKFTrajectories];   //[CentralCKFTrajectories_]
    UInt_t          CentralCKFTrajectories_nSharedHits[kMaxCentralCKFTrajectories];   //[CentralCKFTrajectories_]
    UInt_t          CentralCKFTrajectories_measurementChi2_begin[kMaxCentralCKFTrajectories];   //[CentralCKFTrajectories_]
    UInt_t          CentralCKFTrajectories_measurementChi2_end[kMaxCentralCKFTrajectories];   //[CentralCKFTrajectories_]
@@ -610,19 +745,22 @@ public :
    UInt_t          CentralCKFTrajectories_outlierChi2_end[kMaxCentralCKFTrajectories];   //[CentralCKFTrajectories_]
    UInt_t          CentralCKFTrajectories_trackParameters_begin[kMaxCentralCKFTrajectories];   //[CentralCKFTrajectories_]
    UInt_t          CentralCKFTrajectories_trackParameters_end[kMaxCentralCKFTrajectories];   //[CentralCKFTrajectories_]
-   UInt_t          CentralCKFTrajectories_measurementHits_begin[kMaxCentralCKFTrajectories];   //[CentralCKFTrajectories_]
-   UInt_t          CentralCKFTrajectories_measurementHits_end[kMaxCentralCKFTrajectories];   //[CentralCKFTrajectories_]
-   UInt_t          CentralCKFTrajectories_outlierHits_begin[kMaxCentralCKFTrajectories];   //[CentralCKFTrajectories_]
-   UInt_t          CentralCKFTrajectories_outlierHits_end[kMaxCentralCKFTrajectories];   //[CentralCKFTrajectories_]
+   UInt_t          CentralCKFTrajectories_measurements_deprecated_begin[kMaxCentralCKFTrajectories];   //[CentralCKFTrajectories_]
+   UInt_t          CentralCKFTrajectories_measurements_deprecated_end[kMaxCentralCKFTrajectories];   //[CentralCKFTrajectories_]
+   UInt_t          CentralCKFTrajectories_outliers_deprecated_begin[kMaxCentralCKFTrajectories];   //[CentralCKFTrajectories_]
+   UInt_t          CentralCKFTrajectories_outliers_deprecated_end[kMaxCentralCKFTrajectories];   //[CentralCKFTrajectories_]
    Int_t           _CentralCKFTrajectories_trackParameters_;
    Int_t           _CentralCKFTrajectories_trackParameters_index[kMax_CentralCKFTrajectories_trackParameters];   //[_CentralCKFTrajectories_trackParameters_]
    UInt_t          _CentralCKFTrajectories_trackParameters_collectionID[kMax_CentralCKFTrajectories_trackParameters];   //[_CentralCKFTrajectories_trackParameters_]
-   Int_t           _CentralCKFTrajectories_measurementHits_;
-   Int_t           _CentralCKFTrajectories_measurementHits_index[kMax_CentralCKFTrajectories_measurementHits];   //[_CentralCKFTrajectories_measurementHits_]
-   UInt_t          _CentralCKFTrajectories_measurementHits_collectionID[kMax_CentralCKFTrajectories_measurementHits];   //[_CentralCKFTrajectories_measurementHits_]
-   Int_t           _CentralCKFTrajectories_outlierHits_;
-   Int_t           _CentralCKFTrajectories_outlierHits_index[kMax_CentralCKFTrajectories_outlierHits];   //[_CentralCKFTrajectories_outlierHits_]
-   UInt_t          _CentralCKFTrajectories_outlierHits_collectionID[kMax_CentralCKFTrajectories_outlierHits];   //[_CentralCKFTrajectories_outlierHits_]
+   Int_t           _CentralCKFTrajectories_measurements_deprecated_;
+   Int_t           _CentralCKFTrajectories_measurements_deprecated_index[kMax_CentralCKFTrajectories_measurements_deprecated];   //[_CentralCKFTrajectories_measurements_deprecated_]
+   UInt_t          _CentralCKFTrajectories_measurements_deprecated_collectionID[kMax_CentralCKFTrajectories_measurements_deprecated];   //[_CentralCKFTrajectories_measurements_deprecated_]
+   Int_t           _CentralCKFTrajectories_outliers_deprecated_;
+   Int_t           _CentralCKFTrajectories_outliers_deprecated_index[kMax_CentralCKFTrajectories_outliers_deprecated];   //[_CentralCKFTrajectories_outliers_deprecated_]
+   UInt_t          _CentralCKFTrajectories_outliers_deprecated_collectionID[kMax_CentralCKFTrajectories_outliers_deprecated];   //[_CentralCKFTrajectories_outliers_deprecated_]
+   Int_t           _CentralCKFTrajectories_seed_;
+   Int_t           _CentralCKFTrajectories_seed_index[kMax_CentralCKFTrajectories_seed];   //[_CentralCKFTrajectories_seed_]
+   UInt_t          _CentralCKFTrajectories_seed_collectionID[kMax_CentralCKFTrajectories_seed];   //[_CentralCKFTrajectories_seed_]
    vector<float>   *_CentralCKFTrajectories_measurementChi2;
    vector<float>   *_CentralCKFTrajectories_outlierChi2;
    Int_t           CentralTrackerMeasurements_;
@@ -649,26 +787,15 @@ public :
    UInt_t          CentralTrackingRecHits_objIdx_collectionID[kMaxCentralTrackingRecHits_objIdx];   //[CentralTrackingRecHits_objIdx_]
    Int_t           CentralTrackSeedingResults_;
    Int_t           CentralTrackSeedingResults_type[kMaxCentralTrackSeedingResults];   //[CentralTrackSeedingResults_]
+   ULong_t         CentralTrackSeedingResults_surface[kMaxCentralTrackSeedingResults];   //[CentralTrackSeedingResults_]
    Float_t         CentralTrackSeedingResults_loc_a[kMaxCentralTrackSeedingResults];   //[CentralTrackSeedingResults_]
    Float_t         CentralTrackSeedingResults_loc_b[kMaxCentralTrackSeedingResults];   //[CentralTrackSeedingResults_]
-   Float_t         CentralTrackSeedingResults_locError_xx[kMaxCentralTrackSeedingResults];   //[CentralTrackSeedingResults_]
-   Float_t         CentralTrackSeedingResults_locError_yy[kMaxCentralTrackSeedingResults];   //[CentralTrackSeedingResults_]
-   Float_t         CentralTrackSeedingResults_locError_xy[kMaxCentralTrackSeedingResults];   //[CentralTrackSeedingResults_]
    Float_t         CentralTrackSeedingResults_theta[kMaxCentralTrackSeedingResults];   //[CentralTrackSeedingResults_]
    Float_t         CentralTrackSeedingResults_phi[kMaxCentralTrackSeedingResults];   //[CentralTrackSeedingResults_]
    Float_t         CentralTrackSeedingResults_qOverP[kMaxCentralTrackSeedingResults];   //[CentralTrackSeedingResults_]
-   Float_t         CentralTrackSeedingResults_momentumError_xx[kMaxCentralTrackSeedingResults];   //[CentralTrackSeedingResults_]
-   Float_t         CentralTrackSeedingResults_momentumError_yy[kMaxCentralTrackSeedingResults];   //[CentralTrackSeedingResults_]
-   Float_t         CentralTrackSeedingResults_momentumError_zz[kMaxCentralTrackSeedingResults];   //[CentralTrackSeedingResults_]
-   Float_t         CentralTrackSeedingResults_momentumError_xy[kMaxCentralTrackSeedingResults];   //[CentralTrackSeedingResults_]
-   Float_t         CentralTrackSeedingResults_momentumError_xz[kMaxCentralTrackSeedingResults];   //[CentralTrackSeedingResults_]
-   Float_t         CentralTrackSeedingResults_momentumError_yz[kMaxCentralTrackSeedingResults];   //[CentralTrackSeedingResults_]
    Float_t         CentralTrackSeedingResults_time[kMaxCentralTrackSeedingResults];   //[CentralTrackSeedingResults_]
-   Float_t         CentralTrackSeedingResults_timeError[kMaxCentralTrackSeedingResults];   //[CentralTrackSeedingResults_]
-   Float_t         CentralTrackSeedingResults_charge[kMaxCentralTrackSeedingResults];   //[CentralTrackSeedingResults_]
-   Int_t           _CentralTrackSeedingResults_trajectory_;
-   Int_t           _CentralTrackSeedingResults_trajectory_index[kMax_CentralTrackSeedingResults_trajectory];   //[_CentralTrackSeedingResults_trajectory_]
-   UInt_t          _CentralTrackSeedingResults_trajectory_collectionID[kMax_CentralTrackSeedingResults_trajectory];   //[_CentralTrackSeedingResults_trajectory_]
+   Int_t           CentralTrackSeedingResults_pdg[kMaxCentralTrackSeedingResults];   //[CentralTrackSeedingResults_]
+   Float_t         CentralTrackSeedingResults_covariance_covariance[kMaxCentralTrackSeedingResults][21];   //[CentralTrackSeedingResults_]
    Int_t           CentralTrackSegments_;
    Float_t         CentralTrackSegments_length[kMaxCentralTrackSegments];   //[CentralTrackSegments_]
    Float_t         CentralTrackSegments_lengthError[kMaxCentralTrackSegments];   //[CentralTrackSegments_]
@@ -708,26 +835,28 @@ public :
    Float_t         _CentralTrackSegments_points_pathlength[kMax_CentralTrackSegments_points];   //[_CentralTrackSegments_points_]
    Float_t         _CentralTrackSegments_points_pathlengthError[kMax_CentralTrackSegments_points];   //[_CentralTrackSegments_points_]
    Int_t           CentralTrackVertices_;
-   Int_t           CentralTrackVertices_primary[kMaxCentralTrackVertices];   //[CentralTrackVertices_]
+   Int_t           CentralTrackVertices_type[kMaxCentralTrackVertices];   //[CentralTrackVertices_]
    Float_t         CentralTrackVertices_chi2[kMaxCentralTrackVertices];   //[CentralTrackVertices_]
-   Float_t         CentralTrackVertices_probability[kMaxCentralTrackVertices];   //[CentralTrackVertices_]
+   Int_t           CentralTrackVertices_ndf[kMaxCentralTrackVertices];   //[CentralTrackVertices_]
    Float_t         CentralTrackVertices_position_x[kMaxCentralTrackVertices];   //[CentralTrackVertices_]
    Float_t         CentralTrackVertices_position_y[kMaxCentralTrackVertices];   //[CentralTrackVertices_]
    Float_t         CentralTrackVertices_position_z[kMaxCentralTrackVertices];   //[CentralTrackVertices_]
+   Float_t         CentralTrackVertices_position_t[kMaxCentralTrackVertices];   //[CentralTrackVertices_]
    Float_t         CentralTrackVertices_positionError_xx[kMaxCentralTrackVertices];   //[CentralTrackVertices_]
    Float_t         CentralTrackVertices_positionError_yy[kMaxCentralTrackVertices];   //[CentralTrackVertices_]
    Float_t         CentralTrackVertices_positionError_zz[kMaxCentralTrackVertices];   //[CentralTrackVertices_]
+   Float_t         CentralTrackVertices_positionError_tt[kMaxCentralTrackVertices];   //[CentralTrackVertices_]
    Float_t         CentralTrackVertices_positionError_xy[kMaxCentralTrackVertices];   //[CentralTrackVertices_]
    Float_t         CentralTrackVertices_positionError_xz[kMaxCentralTrackVertices];   //[CentralTrackVertices_]
+   Float_t         CentralTrackVertices_positionError_xt[kMaxCentralTrackVertices];   //[CentralTrackVertices_]
    Float_t         CentralTrackVertices_positionError_yz[kMaxCentralTrackVertices];   //[CentralTrackVertices_]
-   Int_t           CentralTrackVertices_algorithmType[kMaxCentralTrackVertices];   //[CentralTrackVertices_]
-   Float_t         CentralTrackVertices_time[kMaxCentralTrackVertices];   //[CentralTrackVertices_]
-   UInt_t          CentralTrackVertices_parameters_begin[kMaxCentralTrackVertices];   //[CentralTrackVertices_]
-   UInt_t          CentralTrackVertices_parameters_end[kMaxCentralTrackVertices];   //[CentralTrackVertices_]
-   Int_t           _CentralTrackVertices_associatedParticle_;
-   Int_t           _CentralTrackVertices_associatedParticle_index[kMax_CentralTrackVertices_associatedParticle];   //[_CentralTrackVertices_associatedParticle_]
-   UInt_t          _CentralTrackVertices_associatedParticle_collectionID[kMax_CentralTrackVertices_associatedParticle];   //[_CentralTrackVertices_associatedParticle_]
-   vector<float>   *_CentralTrackVertices_parameters;
+   Float_t         CentralTrackVertices_positionError_yt[kMaxCentralTrackVertices];   //[CentralTrackVertices_]
+   Float_t         CentralTrackVertices_positionError_zt[kMaxCentralTrackVertices];   //[CentralTrackVertices_]
+   UInt_t          CentralTrackVertices_associatedParticles_begin[kMaxCentralTrackVertices];   //[CentralTrackVertices_]
+   UInt_t          CentralTrackVertices_associatedParticles_end[kMaxCentralTrackVertices];   //[CentralTrackVertices_]
+   Int_t           _CentralTrackVertices_associatedParticles_;
+   Int_t           _CentralTrackVertices_associatedParticles_index[kMax_CentralTrackVertices_associatedParticles];   //[_CentralTrackVertices_associatedParticles_]
+   UInt_t          _CentralTrackVertices_associatedParticles_collectionID[kMax_CentralTrackVertices_associatedParticles];   //[_CentralTrackVertices_associatedParticles_]
    Int_t           DIRCRawHits_;
    ULong_t         DIRCRawHits_cellID[kMaxDIRCRawHits];   //[DIRCRawHits_]
    Int_t           DIRCRawHits_charge[kMaxDIRCRawHits];   //[DIRCRawHits_]
@@ -1523,6 +1652,137 @@ public :
    vector<float>   *_EcalEndcapPTruthClusters_shapeParameters;
    vector<float>   *_EcalEndcapPTruthClusters_hitContributions;
    vector<float>   *_EcalEndcapPTruthClusters_subdetectorEnergies;
+   Int_t           EcalFarForwardZDCClusterAssociations_;
+   UInt_t          EcalFarForwardZDCClusterAssociations_simID[kMaxEcalFarForwardZDCClusterAssociations];   //[EcalFarForwardZDCClusterAssociations_]
+   UInt_t          EcalFarForwardZDCClusterAssociations_recID[kMaxEcalFarForwardZDCClusterAssociations];   //[EcalFarForwardZDCClusterAssociations_]
+   Float_t         EcalFarForwardZDCClusterAssociations_weight[kMaxEcalFarForwardZDCClusterAssociations];   //[EcalFarForwardZDCClusterAssociations_]
+   Int_t           _EcalFarForwardZDCClusterAssociations_rec_;
+   Int_t           _EcalFarForwardZDCClusterAssociations_rec_index[kMax_EcalFarForwardZDCClusterAssociations_rec];   //[_EcalFarForwardZDCClusterAssociations_rec_]
+   UInt_t          _EcalFarForwardZDCClusterAssociations_rec_collectionID[kMax_EcalFarForwardZDCClusterAssociations_rec];   //[_EcalFarForwardZDCClusterAssociations_rec_]
+   Int_t           _EcalFarForwardZDCClusterAssociations_sim_;
+   Int_t           _EcalFarForwardZDCClusterAssociations_sim_index[kMax_EcalFarForwardZDCClusterAssociations_sim];   //[_EcalFarForwardZDCClusterAssociations_sim_]
+   UInt_t          _EcalFarForwardZDCClusterAssociations_sim_collectionID[kMax_EcalFarForwardZDCClusterAssociations_sim];   //[_EcalFarForwardZDCClusterAssociations_sim_]
+   Int_t           EcalFarForwardZDCClusters_;
+   Int_t           EcalFarForwardZDCClusters_type[kMaxEcalFarForwardZDCClusters];   //[EcalFarForwardZDCClusters_]
+   Float_t         EcalFarForwardZDCClusters_energy[kMaxEcalFarForwardZDCClusters];   //[EcalFarForwardZDCClusters_]
+   Float_t         EcalFarForwardZDCClusters_energyError[kMaxEcalFarForwardZDCClusters];   //[EcalFarForwardZDCClusters_]
+   Float_t         EcalFarForwardZDCClusters_time[kMaxEcalFarForwardZDCClusters];   //[EcalFarForwardZDCClusters_]
+   Float_t         EcalFarForwardZDCClusters_timeError[kMaxEcalFarForwardZDCClusters];   //[EcalFarForwardZDCClusters_]
+   UInt_t          EcalFarForwardZDCClusters_nhits[kMaxEcalFarForwardZDCClusters];   //[EcalFarForwardZDCClusters_]
+   Float_t         EcalFarForwardZDCClusters_position_x[kMaxEcalFarForwardZDCClusters];   //[EcalFarForwardZDCClusters_]
+   Float_t         EcalFarForwardZDCClusters_position_y[kMaxEcalFarForwardZDCClusters];   //[EcalFarForwardZDCClusters_]
+   Float_t         EcalFarForwardZDCClusters_position_z[kMaxEcalFarForwardZDCClusters];   //[EcalFarForwardZDCClusters_]
+   Float_t         EcalFarForwardZDCClusters_positionError_xx[kMaxEcalFarForwardZDCClusters];   //[EcalFarForwardZDCClusters_]
+   Float_t         EcalFarForwardZDCClusters_positionError_yy[kMaxEcalFarForwardZDCClusters];   //[EcalFarForwardZDCClusters_]
+   Float_t         EcalFarForwardZDCClusters_positionError_zz[kMaxEcalFarForwardZDCClusters];   //[EcalFarForwardZDCClusters_]
+   Float_t         EcalFarForwardZDCClusters_positionError_xy[kMaxEcalFarForwardZDCClusters];   //[EcalFarForwardZDCClusters_]
+   Float_t         EcalFarForwardZDCClusters_positionError_xz[kMaxEcalFarForwardZDCClusters];   //[EcalFarForwardZDCClusters_]
+   Float_t         EcalFarForwardZDCClusters_positionError_yz[kMaxEcalFarForwardZDCClusters];   //[EcalFarForwardZDCClusters_]
+   Float_t         EcalFarForwardZDCClusters_intrinsicTheta[kMaxEcalFarForwardZDCClusters];   //[EcalFarForwardZDCClusters_]
+   Float_t         EcalFarForwardZDCClusters_intrinsicPhi[kMaxEcalFarForwardZDCClusters];   //[EcalFarForwardZDCClusters_]
+   Float_t         EcalFarForwardZDCClusters_intrinsicDirectionError_xx[kMaxEcalFarForwardZDCClusters];   //[EcalFarForwardZDCClusters_]
+   Float_t         EcalFarForwardZDCClusters_intrinsicDirectionError_yy[kMaxEcalFarForwardZDCClusters];   //[EcalFarForwardZDCClusters_]
+   Float_t         EcalFarForwardZDCClusters_intrinsicDirectionError_xy[kMaxEcalFarForwardZDCClusters];   //[EcalFarForwardZDCClusters_]
+   UInt_t          EcalFarForwardZDCClusters_shapeParameters_begin[kMaxEcalFarForwardZDCClusters];   //[EcalFarForwardZDCClusters_]
+   UInt_t          EcalFarForwardZDCClusters_shapeParameters_end[kMaxEcalFarForwardZDCClusters];   //[EcalFarForwardZDCClusters_]
+   UInt_t          EcalFarForwardZDCClusters_hitContributions_begin[kMaxEcalFarForwardZDCClusters];   //[EcalFarForwardZDCClusters_]
+   UInt_t          EcalFarForwardZDCClusters_hitContributions_end[kMaxEcalFarForwardZDCClusters];   //[EcalFarForwardZDCClusters_]
+   UInt_t          EcalFarForwardZDCClusters_subdetectorEnergies_begin[kMaxEcalFarForwardZDCClusters];   //[EcalFarForwardZDCClusters_]
+   UInt_t          EcalFarForwardZDCClusters_subdetectorEnergies_end[kMaxEcalFarForwardZDCClusters];   //[EcalFarForwardZDCClusters_]
+   UInt_t          EcalFarForwardZDCClusters_clusters_begin[kMaxEcalFarForwardZDCClusters];   //[EcalFarForwardZDCClusters_]
+   UInt_t          EcalFarForwardZDCClusters_clusters_end[kMaxEcalFarForwardZDCClusters];   //[EcalFarForwardZDCClusters_]
+   UInt_t          EcalFarForwardZDCClusters_hits_begin[kMaxEcalFarForwardZDCClusters];   //[EcalFarForwardZDCClusters_]
+   UInt_t          EcalFarForwardZDCClusters_hits_end[kMaxEcalFarForwardZDCClusters];   //[EcalFarForwardZDCClusters_]
+   UInt_t          EcalFarForwardZDCClusters_particleIDs_begin[kMaxEcalFarForwardZDCClusters];   //[EcalFarForwardZDCClusters_]
+   UInt_t          EcalFarForwardZDCClusters_particleIDs_end[kMaxEcalFarForwardZDCClusters];   //[EcalFarForwardZDCClusters_]
+   Int_t           _EcalFarForwardZDCClusters_clusters_;
+   Int_t           _EcalFarForwardZDCClusters_clusters_index[kMax_EcalFarForwardZDCClusters_clusters];   //[_EcalFarForwardZDCClusters_clusters_]
+   UInt_t          _EcalFarForwardZDCClusters_clusters_collectionID[kMax_EcalFarForwardZDCClusters_clusters];   //[_EcalFarForwardZDCClusters_clusters_]
+   Int_t           _EcalFarForwardZDCClusters_hits_;
+   Int_t           _EcalFarForwardZDCClusters_hits_index[kMax_EcalFarForwardZDCClusters_hits];   //[_EcalFarForwardZDCClusters_hits_]
+   UInt_t          _EcalFarForwardZDCClusters_hits_collectionID[kMax_EcalFarForwardZDCClusters_hits];   //[_EcalFarForwardZDCClusters_hits_]
+   Int_t           _EcalFarForwardZDCClusters_particleIDs_;
+   Int_t           _EcalFarForwardZDCClusters_particleIDs_index[kMax_EcalFarForwardZDCClusters_particleIDs];   //[_EcalFarForwardZDCClusters_particleIDs_]
+   UInt_t          _EcalFarForwardZDCClusters_particleIDs_collectionID[kMax_EcalFarForwardZDCClusters_particleIDs];   //[_EcalFarForwardZDCClusters_particleIDs_]
+   vector<float>   *_EcalFarForwardZDCClusters_shapeParameters;
+   vector<float>   *_EcalFarForwardZDCClusters_hitContributions;
+   vector<float>   *_EcalFarForwardZDCClusters_subdetectorEnergies;
+   Int_t           EcalFarForwardZDCRawHits_;
+   ULong_t         EcalFarForwardZDCRawHits_cellID[kMaxEcalFarForwardZDCRawHits];   //[EcalFarForwardZDCRawHits_]
+   Int_t           EcalFarForwardZDCRawHits_amplitude[kMaxEcalFarForwardZDCRawHits];   //[EcalFarForwardZDCRawHits_]
+   Int_t           EcalFarForwardZDCRawHits_timeStamp[kMaxEcalFarForwardZDCRawHits];   //[EcalFarForwardZDCRawHits_]
+   Int_t           EcalFarForwardZDCRecHits_;
+   ULong_t         EcalFarForwardZDCRecHits_cellID[kMaxEcalFarForwardZDCRecHits];   //[EcalFarForwardZDCRecHits_]
+   Float_t         EcalFarForwardZDCRecHits_energy[kMaxEcalFarForwardZDCRecHits];   //[EcalFarForwardZDCRecHits_]
+   Float_t         EcalFarForwardZDCRecHits_energyError[kMaxEcalFarForwardZDCRecHits];   //[EcalFarForwardZDCRecHits_]
+   Float_t         EcalFarForwardZDCRecHits_time[kMaxEcalFarForwardZDCRecHits];   //[EcalFarForwardZDCRecHits_]
+   Float_t         EcalFarForwardZDCRecHits_timeError[kMaxEcalFarForwardZDCRecHits];   //[EcalFarForwardZDCRecHits_]
+   Float_t         EcalFarForwardZDCRecHits_position_x[kMaxEcalFarForwardZDCRecHits];   //[EcalFarForwardZDCRecHits_]
+   Float_t         EcalFarForwardZDCRecHits_position_y[kMaxEcalFarForwardZDCRecHits];   //[EcalFarForwardZDCRecHits_]
+   Float_t         EcalFarForwardZDCRecHits_position_z[kMaxEcalFarForwardZDCRecHits];   //[EcalFarForwardZDCRecHits_]
+   Float_t         EcalFarForwardZDCRecHits_dimension_x[kMaxEcalFarForwardZDCRecHits];   //[EcalFarForwardZDCRecHits_]
+   Float_t         EcalFarForwardZDCRecHits_dimension_y[kMaxEcalFarForwardZDCRecHits];   //[EcalFarForwardZDCRecHits_]
+   Float_t         EcalFarForwardZDCRecHits_dimension_z[kMaxEcalFarForwardZDCRecHits];   //[EcalFarForwardZDCRecHits_]
+   Int_t           EcalFarForwardZDCRecHits_sector[kMaxEcalFarForwardZDCRecHits];   //[EcalFarForwardZDCRecHits_]
+   Int_t           EcalFarForwardZDCRecHits_layer[kMaxEcalFarForwardZDCRecHits];   //[EcalFarForwardZDCRecHits_]
+   Float_t         EcalFarForwardZDCRecHits_local_x[kMaxEcalFarForwardZDCRecHits];   //[EcalFarForwardZDCRecHits_]
+   Float_t         EcalFarForwardZDCRecHits_local_y[kMaxEcalFarForwardZDCRecHits];   //[EcalFarForwardZDCRecHits_]
+   Float_t         EcalFarForwardZDCRecHits_local_z[kMaxEcalFarForwardZDCRecHits];   //[EcalFarForwardZDCRecHits_]
+   Int_t           EcalFarForwardZDCTruthClusterAssociations_;
+   UInt_t          EcalFarForwardZDCTruthClusterAssociations_simID[kMaxEcalFarForwardZDCTruthClusterAssociations];   //[EcalFarForwardZDCTruthClusterAssociations_]
+   UInt_t          EcalFarForwardZDCTruthClusterAssociations_recID[kMaxEcalFarForwardZDCTruthClusterAssociations];   //[EcalFarForwardZDCTruthClusterAssociations_]
+   Float_t         EcalFarForwardZDCTruthClusterAssociations_weight[kMaxEcalFarForwardZDCTruthClusterAssociations];   //[EcalFarForwardZDCTruthClusterAssociations_]
+   Int_t           _EcalFarForwardZDCTruthClusterAssociations_rec_;
+   Int_t           _EcalFarForwardZDCTruthClusterAssociations_rec_index[kMax_EcalFarForwardZDCTruthClusterAssociations_rec];   //[_EcalFarForwardZDCTruthClusterAssociations_rec_]
+   UInt_t          _EcalFarForwardZDCTruthClusterAssociations_rec_collectionID[kMax_EcalFarForwardZDCTruthClusterAssociations_rec];   //[_EcalFarForwardZDCTruthClusterAssociations_rec_]
+   Int_t           _EcalFarForwardZDCTruthClusterAssociations_sim_;
+   Int_t           _EcalFarForwardZDCTruthClusterAssociations_sim_index[kMax_EcalFarForwardZDCTruthClusterAssociations_sim];   //[_EcalFarForwardZDCTruthClusterAssociations_sim_]
+   UInt_t          _EcalFarForwardZDCTruthClusterAssociations_sim_collectionID[kMax_EcalFarForwardZDCTruthClusterAssociations_sim];   //[_EcalFarForwardZDCTruthClusterAssociations_sim_]
+   Int_t           EcalFarForwardZDCTruthClusters_;
+   Int_t           EcalFarForwardZDCTruthClusters_type[kMaxEcalFarForwardZDCTruthClusters];   //[EcalFarForwardZDCTruthClusters_]
+   Float_t         EcalFarForwardZDCTruthClusters_energy[kMaxEcalFarForwardZDCTruthClusters];   //[EcalFarForwardZDCTruthClusters_]
+   Float_t         EcalFarForwardZDCTruthClusters_energyError[kMaxEcalFarForwardZDCTruthClusters];   //[EcalFarForwardZDCTruthClusters_]
+   Float_t         EcalFarForwardZDCTruthClusters_time[kMaxEcalFarForwardZDCTruthClusters];   //[EcalFarForwardZDCTruthClusters_]
+   Float_t         EcalFarForwardZDCTruthClusters_timeError[kMaxEcalFarForwardZDCTruthClusters];   //[EcalFarForwardZDCTruthClusters_]
+   UInt_t          EcalFarForwardZDCTruthClusters_nhits[kMaxEcalFarForwardZDCTruthClusters];   //[EcalFarForwardZDCTruthClusters_]
+   Float_t         EcalFarForwardZDCTruthClusters_position_x[kMaxEcalFarForwardZDCTruthClusters];   //[EcalFarForwardZDCTruthClusters_]
+   Float_t         EcalFarForwardZDCTruthClusters_position_y[kMaxEcalFarForwardZDCTruthClusters];   //[EcalFarForwardZDCTruthClusters_]
+   Float_t         EcalFarForwardZDCTruthClusters_position_z[kMaxEcalFarForwardZDCTruthClusters];   //[EcalFarForwardZDCTruthClusters_]
+   Float_t         EcalFarForwardZDCTruthClusters_positionError_xx[kMaxEcalFarForwardZDCTruthClusters];   //[EcalFarForwardZDCTruthClusters_]
+   Float_t         EcalFarForwardZDCTruthClusters_positionError_yy[kMaxEcalFarForwardZDCTruthClusters];   //[EcalFarForwardZDCTruthClusters_]
+   Float_t         EcalFarForwardZDCTruthClusters_positionError_zz[kMaxEcalFarForwardZDCTruthClusters];   //[EcalFarForwardZDCTruthClusters_]
+   Float_t         EcalFarForwardZDCTruthClusters_positionError_xy[kMaxEcalFarForwardZDCTruthClusters];   //[EcalFarForwardZDCTruthClusters_]
+   Float_t         EcalFarForwardZDCTruthClusters_positionError_xz[kMaxEcalFarForwardZDCTruthClusters];   //[EcalFarForwardZDCTruthClusters_]
+   Float_t         EcalFarForwardZDCTruthClusters_positionError_yz[kMaxEcalFarForwardZDCTruthClusters];   //[EcalFarForwardZDCTruthClusters_]
+   Float_t         EcalFarForwardZDCTruthClusters_intrinsicTheta[kMaxEcalFarForwardZDCTruthClusters];   //[EcalFarForwardZDCTruthClusters_]
+   Float_t         EcalFarForwardZDCTruthClusters_intrinsicPhi[kMaxEcalFarForwardZDCTruthClusters];   //[EcalFarForwardZDCTruthClusters_]
+   Float_t         EcalFarForwardZDCTruthClusters_intrinsicDirectionError_xx[kMaxEcalFarForwardZDCTruthClusters];   //[EcalFarForwardZDCTruthClusters_]
+   Float_t         EcalFarForwardZDCTruthClusters_intrinsicDirectionError_yy[kMaxEcalFarForwardZDCTruthClusters];   //[EcalFarForwardZDCTruthClusters_]
+   Float_t         EcalFarForwardZDCTruthClusters_intrinsicDirectionError_xy[kMaxEcalFarForwardZDCTruthClusters];   //[EcalFarForwardZDCTruthClusters_]
+   UInt_t          EcalFarForwardZDCTruthClusters_shapeParameters_begin[kMaxEcalFarForwardZDCTruthClusters];   //[EcalFarForwardZDCTruthClusters_]
+   UInt_t          EcalFarForwardZDCTruthClusters_shapeParameters_end[kMaxEcalFarForwardZDCTruthClusters];   //[EcalFarForwardZDCTruthClusters_]
+   UInt_t          EcalFarForwardZDCTruthClusters_hitContributions_begin[kMaxEcalFarForwardZDCTruthClusters];   //[EcalFarForwardZDCTruthClusters_]
+   UInt_t          EcalFarForwardZDCTruthClusters_hitContributions_end[kMaxEcalFarForwardZDCTruthClusters];   //[EcalFarForwardZDCTruthClusters_]
+   UInt_t          EcalFarForwardZDCTruthClusters_subdetectorEnergies_begin[kMaxEcalFarForwardZDCTruthClusters];   //[EcalFarForwardZDCTruthClusters_]
+   UInt_t          EcalFarForwardZDCTruthClusters_subdetectorEnergies_end[kMaxEcalFarForwardZDCTruthClusters];   //[EcalFarForwardZDCTruthClusters_]
+   UInt_t          EcalFarForwardZDCTruthClusters_clusters_begin[kMaxEcalFarForwardZDCTruthClusters];   //[EcalFarForwardZDCTruthClusters_]
+   UInt_t          EcalFarForwardZDCTruthClusters_clusters_end[kMaxEcalFarForwardZDCTruthClusters];   //[EcalFarForwardZDCTruthClusters_]
+   UInt_t          EcalFarForwardZDCTruthClusters_hits_begin[kMaxEcalFarForwardZDCTruthClusters];   //[EcalFarForwardZDCTruthClusters_]
+   UInt_t          EcalFarForwardZDCTruthClusters_hits_end[kMaxEcalFarForwardZDCTruthClusters];   //[EcalFarForwardZDCTruthClusters_]
+   UInt_t          EcalFarForwardZDCTruthClusters_particleIDs_begin[kMaxEcalFarForwardZDCTruthClusters];   //[EcalFarForwardZDCTruthClusters_]
+   UInt_t          EcalFarForwardZDCTruthClusters_particleIDs_end[kMaxEcalFarForwardZDCTruthClusters];   //[EcalFarForwardZDCTruthClusters_]
+   Int_t           _EcalFarForwardZDCTruthClusters_clusters_;
+   Int_t           _EcalFarForwardZDCTruthClusters_clusters_index[kMax_EcalFarForwardZDCTruthClusters_clusters];   //[_EcalFarForwardZDCTruthClusters_clusters_]
+   UInt_t          _EcalFarForwardZDCTruthClusters_clusters_collectionID[kMax_EcalFarForwardZDCTruthClusters_clusters];   //[_EcalFarForwardZDCTruthClusters_clusters_]
+   Int_t           _EcalFarForwardZDCTruthClusters_hits_;
+   Int_t           _EcalFarForwardZDCTruthClusters_hits_index[kMax_EcalFarForwardZDCTruthClusters_hits];   //[_EcalFarForwardZDCTruthClusters_hits_]
+   UInt_t          _EcalFarForwardZDCTruthClusters_hits_collectionID[kMax_EcalFarForwardZDCTruthClusters_hits];   //[_EcalFarForwardZDCTruthClusters_hits_]
+   Int_t           _EcalFarForwardZDCTruthClusters_particleIDs_;
+   Int_t           _EcalFarForwardZDCTruthClusters_particleIDs_index[kMax_EcalFarForwardZDCTruthClusters_particleIDs];   //[_EcalFarForwardZDCTruthClusters_particleIDs_]
+   UInt_t          _EcalFarForwardZDCTruthClusters_particleIDs_collectionID[kMax_EcalFarForwardZDCTruthClusters_particleIDs];   //[_EcalFarForwardZDCTruthClusters_particleIDs_]
+   vector<float>   *_EcalFarForwardZDCTruthClusters_shapeParameters;
+   vector<float>   *_EcalFarForwardZDCTruthClusters_hitContributions;
+   vector<float>   *_EcalFarForwardZDCTruthClusters_subdetectorEnergies;
    Int_t           EcalLumiSpecClusterAssociations_;
    UInt_t          EcalLumiSpecClusterAssociations_simID[kMaxEcalLumiSpecClusterAssociations];   //[EcalLumiSpecClusterAssociations_]
    UInt_t          EcalLumiSpecClusterAssociations_recID[kMaxEcalLumiSpecClusterAssociations];   //[EcalLumiSpecClusterAssociations_]
@@ -1659,6 +1919,25 @@ public :
    Int_t           EventHeader_runNumber[kMaxEventHeader];   //[EventHeader_]
    ULong_t         EventHeader_timeStamp[kMaxEventHeader];   //[EventHeader_]
    Float_t         EventHeader_weight[kMaxEventHeader];   //[EventHeader_]
+   Int_t           ForwardMPGDEndcapHits_;
+   ULong_t         ForwardMPGDEndcapHits_cellID[kMaxForwardMPGDEndcapHits];   //[ForwardMPGDEndcapHits_]
+   Float_t         ForwardMPGDEndcapHits_EDep[kMaxForwardMPGDEndcapHits];   //[ForwardMPGDEndcapHits_]
+   Float_t         ForwardMPGDEndcapHits_time[kMaxForwardMPGDEndcapHits];   //[ForwardMPGDEndcapHits_]
+   Float_t         ForwardMPGDEndcapHits_pathLength[kMaxForwardMPGDEndcapHits];   //[ForwardMPGDEndcapHits_]
+   Int_t           ForwardMPGDEndcapHits_quality[kMaxForwardMPGDEndcapHits];   //[ForwardMPGDEndcapHits_]
+   Double_t        ForwardMPGDEndcapHits_position_x[kMaxForwardMPGDEndcapHits];   //[ForwardMPGDEndcapHits_]
+   Double_t        ForwardMPGDEndcapHits_position_y[kMaxForwardMPGDEndcapHits];   //[ForwardMPGDEndcapHits_]
+   Double_t        ForwardMPGDEndcapHits_position_z[kMaxForwardMPGDEndcapHits];   //[ForwardMPGDEndcapHits_]
+   Float_t         ForwardMPGDEndcapHits_momentum_x[kMaxForwardMPGDEndcapHits];   //[ForwardMPGDEndcapHits_]
+   Float_t         ForwardMPGDEndcapHits_momentum_y[kMaxForwardMPGDEndcapHits];   //[ForwardMPGDEndcapHits_]
+   Float_t         ForwardMPGDEndcapHits_momentum_z[kMaxForwardMPGDEndcapHits];   //[ForwardMPGDEndcapHits_]
+   Int_t           _ForwardMPGDEndcapHits_MCParticle_;
+   Int_t           _ForwardMPGDEndcapHits_MCParticle_index[kMax_ForwardMPGDEndcapHits_MCParticle];   //[_ForwardMPGDEndcapHits_MCParticle_]
+   UInt_t          _ForwardMPGDEndcapHits_MCParticle_collectionID[kMax_ForwardMPGDEndcapHits_MCParticle];   //[_ForwardMPGDEndcapHits_MCParticle_]
+   Int_t           ForwardMPGDEndcapRawHits_;
+   ULong_t         ForwardMPGDEndcapRawHits_cellID[kMaxForwardMPGDEndcapRawHits];   //[ForwardMPGDEndcapRawHits_]
+   Int_t           ForwardMPGDEndcapRawHits_charge[kMaxForwardMPGDEndcapRawHits];   //[ForwardMPGDEndcapRawHits_]
+   Int_t           ForwardMPGDEndcapRawHits_timeStamp[kMaxForwardMPGDEndcapRawHits];   //[ForwardMPGDEndcapRawHits_]
    Int_t           ForwardMPGDEndcapRecHits_;
    ULong_t         ForwardMPGDEndcapRecHits_cellID[kMaxForwardMPGDEndcapRecHits];   //[ForwardMPGDEndcapRecHits_]
    Float_t         ForwardMPGDEndcapRecHits_position_x[kMaxForwardMPGDEndcapRecHits];   //[ForwardMPGDEndcapRecHits_]
@@ -2288,6 +2567,209 @@ public :
    Float_t         HcalEndcapPInsertRecHits_local_x[kMaxHcalEndcapPInsertRecHits];   //[HcalEndcapPInsertRecHits_]
    Float_t         HcalEndcapPInsertRecHits_local_y[kMaxHcalEndcapPInsertRecHits];   //[HcalEndcapPInsertRecHits_]
    Float_t         HcalEndcapPInsertRecHits_local_z[kMaxHcalEndcapPInsertRecHits];   //[HcalEndcapPInsertRecHits_]
+   Int_t           HcalFarForwardZDCClusterAssociations_;
+   UInt_t          HcalFarForwardZDCClusterAssociations_simID[kMaxHcalFarForwardZDCClusterAssociations];   //[HcalFarForwardZDCClusterAssociations_]
+   UInt_t          HcalFarForwardZDCClusterAssociations_recID[kMaxHcalFarForwardZDCClusterAssociations];   //[HcalFarForwardZDCClusterAssociations_]
+   Float_t         HcalFarForwardZDCClusterAssociations_weight[kMaxHcalFarForwardZDCClusterAssociations];   //[HcalFarForwardZDCClusterAssociations_]
+   Int_t           _HcalFarForwardZDCClusterAssociations_rec_;
+   Int_t           _HcalFarForwardZDCClusterAssociations_rec_index[kMax_HcalFarForwardZDCClusterAssociations_rec];   //[_HcalFarForwardZDCClusterAssociations_rec_]
+   UInt_t          _HcalFarForwardZDCClusterAssociations_rec_collectionID[kMax_HcalFarForwardZDCClusterAssociations_rec];   //[_HcalFarForwardZDCClusterAssociations_rec_]
+   Int_t           _HcalFarForwardZDCClusterAssociations_sim_;
+   Int_t           _HcalFarForwardZDCClusterAssociations_sim_index[kMax_HcalFarForwardZDCClusterAssociations_sim];   //[_HcalFarForwardZDCClusterAssociations_sim_]
+   UInt_t          _HcalFarForwardZDCClusterAssociations_sim_collectionID[kMax_HcalFarForwardZDCClusterAssociations_sim];   //[_HcalFarForwardZDCClusterAssociations_sim_]
+   Int_t           HcalFarForwardZDCClusterAssociationsBaseline_;
+   UInt_t          HcalFarForwardZDCClusterAssociationsBaseline_simID[kMaxHcalFarForwardZDCClusterAssociationsBaseline];   //[HcalFarForwardZDCClusterAssociationsBaseline_]
+   UInt_t          HcalFarForwardZDCClusterAssociationsBaseline_recID[kMaxHcalFarForwardZDCClusterAssociationsBaseline];   //[HcalFarForwardZDCClusterAssociationsBaseline_]
+   Float_t         HcalFarForwardZDCClusterAssociationsBaseline_weight[kMaxHcalFarForwardZDCClusterAssociationsBaseline];   //[HcalFarForwardZDCClusterAssociationsBaseline_]
+   Int_t           _HcalFarForwardZDCClusterAssociationsBaseline_rec_;
+   Int_t           _HcalFarForwardZDCClusterAssociationsBaseline_rec_index[kMax_HcalFarForwardZDCClusterAssociationsBaseline_rec];   //[_HcalFarForwardZDCClusterAssociationsBaseline_rec_]
+   UInt_t          _HcalFarForwardZDCClusterAssociationsBaseline_rec_collectionID[kMax_HcalFarForwardZDCClusterAssociationsBaseline_rec];   //[_HcalFarForwardZDCClusterAssociationsBaseline_rec_]
+   Int_t           _HcalFarForwardZDCClusterAssociationsBaseline_sim_;
+   Int_t           _HcalFarForwardZDCClusterAssociationsBaseline_sim_index[kMax_HcalFarForwardZDCClusterAssociationsBaseline_sim];   //[_HcalFarForwardZDCClusterAssociationsBaseline_sim_]
+   UInt_t          _HcalFarForwardZDCClusterAssociationsBaseline_sim_collectionID[kMax_HcalFarForwardZDCClusterAssociationsBaseline_sim];   //[_HcalFarForwardZDCClusterAssociationsBaseline_sim_]
+   Int_t           HcalFarForwardZDCClusters_;
+   Int_t           HcalFarForwardZDCClusters_type[kMaxHcalFarForwardZDCClusters];   //[HcalFarForwardZDCClusters_]
+   Float_t         HcalFarForwardZDCClusters_energy[kMaxHcalFarForwardZDCClusters];   //[HcalFarForwardZDCClusters_]
+   Float_t         HcalFarForwardZDCClusters_energyError[kMaxHcalFarForwardZDCClusters];   //[HcalFarForwardZDCClusters_]
+   Float_t         HcalFarForwardZDCClusters_time[kMaxHcalFarForwardZDCClusters];   //[HcalFarForwardZDCClusters_]
+   Float_t         HcalFarForwardZDCClusters_timeError[kMaxHcalFarForwardZDCClusters];   //[HcalFarForwardZDCClusters_]
+   UInt_t          HcalFarForwardZDCClusters_nhits[kMaxHcalFarForwardZDCClusters];   //[HcalFarForwardZDCClusters_]
+   Float_t         HcalFarForwardZDCClusters_position_x[kMaxHcalFarForwardZDCClusters];   //[HcalFarForwardZDCClusters_]
+   Float_t         HcalFarForwardZDCClusters_position_y[kMaxHcalFarForwardZDCClusters];   //[HcalFarForwardZDCClusters_]
+   Float_t         HcalFarForwardZDCClusters_position_z[kMaxHcalFarForwardZDCClusters];   //[HcalFarForwardZDCClusters_]
+   Float_t         HcalFarForwardZDCClusters_positionError_xx[kMaxHcalFarForwardZDCClusters];   //[HcalFarForwardZDCClusters_]
+   Float_t         HcalFarForwardZDCClusters_positionError_yy[kMaxHcalFarForwardZDCClusters];   //[HcalFarForwardZDCClusters_]
+   Float_t         HcalFarForwardZDCClusters_positionError_zz[kMaxHcalFarForwardZDCClusters];   //[HcalFarForwardZDCClusters_]
+   Float_t         HcalFarForwardZDCClusters_positionError_xy[kMaxHcalFarForwardZDCClusters];   //[HcalFarForwardZDCClusters_]
+   Float_t         HcalFarForwardZDCClusters_positionError_xz[kMaxHcalFarForwardZDCClusters];   //[HcalFarForwardZDCClusters_]
+   Float_t         HcalFarForwardZDCClusters_positionError_yz[kMaxHcalFarForwardZDCClusters];   //[HcalFarForwardZDCClusters_]
+   Float_t         HcalFarForwardZDCClusters_intrinsicTheta[kMaxHcalFarForwardZDCClusters];   //[HcalFarForwardZDCClusters_]
+   Float_t         HcalFarForwardZDCClusters_intrinsicPhi[kMaxHcalFarForwardZDCClusters];   //[HcalFarForwardZDCClusters_]
+   Float_t         HcalFarForwardZDCClusters_intrinsicDirectionError_xx[kMaxHcalFarForwardZDCClusters];   //[HcalFarForwardZDCClusters_]
+   Float_t         HcalFarForwardZDCClusters_intrinsicDirectionError_yy[kMaxHcalFarForwardZDCClusters];   //[HcalFarForwardZDCClusters_]
+   Float_t         HcalFarForwardZDCClusters_intrinsicDirectionError_xy[kMaxHcalFarForwardZDCClusters];   //[HcalFarForwardZDCClusters_]
+   UInt_t          HcalFarForwardZDCClusters_shapeParameters_begin[kMaxHcalFarForwardZDCClusters];   //[HcalFarForwardZDCClusters_]
+   UInt_t          HcalFarForwardZDCClusters_shapeParameters_end[kMaxHcalFarForwardZDCClusters];   //[HcalFarForwardZDCClusters_]
+   UInt_t          HcalFarForwardZDCClusters_hitContributions_begin[kMaxHcalFarForwardZDCClusters];   //[HcalFarForwardZDCClusters_]
+   UInt_t          HcalFarForwardZDCClusters_hitContributions_end[kMaxHcalFarForwardZDCClusters];   //[HcalFarForwardZDCClusters_]
+   UInt_t          HcalFarForwardZDCClusters_subdetectorEnergies_begin[kMaxHcalFarForwardZDCClusters];   //[HcalFarForwardZDCClusters_]
+   UInt_t          HcalFarForwardZDCClusters_subdetectorEnergies_end[kMaxHcalFarForwardZDCClusters];   //[HcalFarForwardZDCClusters_]
+   UInt_t          HcalFarForwardZDCClusters_clusters_begin[kMaxHcalFarForwardZDCClusters];   //[HcalFarForwardZDCClusters_]
+   UInt_t          HcalFarForwardZDCClusters_clusters_end[kMaxHcalFarForwardZDCClusters];   //[HcalFarForwardZDCClusters_]
+   UInt_t          HcalFarForwardZDCClusters_hits_begin[kMaxHcalFarForwardZDCClusters];   //[HcalFarForwardZDCClusters_]
+   UInt_t          HcalFarForwardZDCClusters_hits_end[kMaxHcalFarForwardZDCClusters];   //[HcalFarForwardZDCClusters_]
+   UInt_t          HcalFarForwardZDCClusters_particleIDs_begin[kMaxHcalFarForwardZDCClusters];   //[HcalFarForwardZDCClusters_]
+   UInt_t          HcalFarForwardZDCClusters_particleIDs_end[kMaxHcalFarForwardZDCClusters];   //[HcalFarForwardZDCClusters_]
+   Int_t           _HcalFarForwardZDCClusters_clusters_;
+   Int_t           _HcalFarForwardZDCClusters_clusters_index[kMax_HcalFarForwardZDCClusters_clusters];   //[_HcalFarForwardZDCClusters_clusters_]
+   UInt_t          _HcalFarForwardZDCClusters_clusters_collectionID[kMax_HcalFarForwardZDCClusters_clusters];   //[_HcalFarForwardZDCClusters_clusters_]
+   Int_t           _HcalFarForwardZDCClusters_hits_;
+   Int_t           _HcalFarForwardZDCClusters_hits_index[kMax_HcalFarForwardZDCClusters_hits];   //[_HcalFarForwardZDCClusters_hits_]
+   UInt_t          _HcalFarForwardZDCClusters_hits_collectionID[kMax_HcalFarForwardZDCClusters_hits];   //[_HcalFarForwardZDCClusters_hits_]
+   Int_t           _HcalFarForwardZDCClusters_particleIDs_;
+   Int_t           _HcalFarForwardZDCClusters_particleIDs_index[kMax_HcalFarForwardZDCClusters_particleIDs];   //[_HcalFarForwardZDCClusters_particleIDs_]
+   UInt_t          _HcalFarForwardZDCClusters_particleIDs_collectionID[kMax_HcalFarForwardZDCClusters_particleIDs];   //[_HcalFarForwardZDCClusters_particleIDs_]
+   vector<float>   *_HcalFarForwardZDCClusters_shapeParameters;
+   vector<float>   *_HcalFarForwardZDCClusters_hitContributions;
+   vector<float>   *_HcalFarForwardZDCClusters_subdetectorEnergies;
+   Int_t           HcalFarForwardZDCClustersBaseline_;
+   Int_t           HcalFarForwardZDCClustersBaseline_type[kMaxHcalFarForwardZDCClustersBaseline];   //[HcalFarForwardZDCClustersBaseline_]
+   Float_t         HcalFarForwardZDCClustersBaseline_energy[kMaxHcalFarForwardZDCClustersBaseline];   //[HcalFarForwardZDCClustersBaseline_]
+   Float_t         HcalFarForwardZDCClustersBaseline_energyError[kMaxHcalFarForwardZDCClustersBaseline];   //[HcalFarForwardZDCClustersBaseline_]
+   Float_t         HcalFarForwardZDCClustersBaseline_time[kMaxHcalFarForwardZDCClustersBaseline];   //[HcalFarForwardZDCClustersBaseline_]
+   Float_t         HcalFarForwardZDCClustersBaseline_timeError[kMaxHcalFarForwardZDCClustersBaseline];   //[HcalFarForwardZDCClustersBaseline_]
+   UInt_t          HcalFarForwardZDCClustersBaseline_nhits[kMaxHcalFarForwardZDCClustersBaseline];   //[HcalFarForwardZDCClustersBaseline_]
+   Float_t         HcalFarForwardZDCClustersBaseline_position_x[kMaxHcalFarForwardZDCClustersBaseline];   //[HcalFarForwardZDCClustersBaseline_]
+   Float_t         HcalFarForwardZDCClustersBaseline_position_y[kMaxHcalFarForwardZDCClustersBaseline];   //[HcalFarForwardZDCClustersBaseline_]
+   Float_t         HcalFarForwardZDCClustersBaseline_position_z[kMaxHcalFarForwardZDCClustersBaseline];   //[HcalFarForwardZDCClustersBaseline_]
+   Float_t         HcalFarForwardZDCClustersBaseline_positionError_xx[kMaxHcalFarForwardZDCClustersBaseline];   //[HcalFarForwardZDCClustersBaseline_]
+   Float_t         HcalFarForwardZDCClustersBaseline_positionError_yy[kMaxHcalFarForwardZDCClustersBaseline];   //[HcalFarForwardZDCClustersBaseline_]
+   Float_t         HcalFarForwardZDCClustersBaseline_positionError_zz[kMaxHcalFarForwardZDCClustersBaseline];   //[HcalFarForwardZDCClustersBaseline_]
+   Float_t         HcalFarForwardZDCClustersBaseline_positionError_xy[kMaxHcalFarForwardZDCClustersBaseline];   //[HcalFarForwardZDCClustersBaseline_]
+   Float_t         HcalFarForwardZDCClustersBaseline_positionError_xz[kMaxHcalFarForwardZDCClustersBaseline];   //[HcalFarForwardZDCClustersBaseline_]
+   Float_t         HcalFarForwardZDCClustersBaseline_positionError_yz[kMaxHcalFarForwardZDCClustersBaseline];   //[HcalFarForwardZDCClustersBaseline_]
+   Float_t         HcalFarForwardZDCClustersBaseline_intrinsicTheta[kMaxHcalFarForwardZDCClustersBaseline];   //[HcalFarForwardZDCClustersBaseline_]
+   Float_t         HcalFarForwardZDCClustersBaseline_intrinsicPhi[kMaxHcalFarForwardZDCClustersBaseline];   //[HcalFarForwardZDCClustersBaseline_]
+   Float_t         HcalFarForwardZDCClustersBaseline_intrinsicDirectionError_xx[kMaxHcalFarForwardZDCClustersBaseline];   //[HcalFarForwardZDCClustersBaseline_]
+   Float_t         HcalFarForwardZDCClustersBaseline_intrinsicDirectionError_yy[kMaxHcalFarForwardZDCClustersBaseline];   //[HcalFarForwardZDCClustersBaseline_]
+   Float_t         HcalFarForwardZDCClustersBaseline_intrinsicDirectionError_xy[kMaxHcalFarForwardZDCClustersBaseline];   //[HcalFarForwardZDCClustersBaseline_]
+   UInt_t          HcalFarForwardZDCClustersBaseline_shapeParameters_begin[kMaxHcalFarForwardZDCClustersBaseline];   //[HcalFarForwardZDCClustersBaseline_]
+   UInt_t          HcalFarForwardZDCClustersBaseline_shapeParameters_end[kMaxHcalFarForwardZDCClustersBaseline];   //[HcalFarForwardZDCClustersBaseline_]
+   UInt_t          HcalFarForwardZDCClustersBaseline_hitContributions_begin[kMaxHcalFarForwardZDCClustersBaseline];   //[HcalFarForwardZDCClustersBaseline_]
+   UInt_t          HcalFarForwardZDCClustersBaseline_hitContributions_end[kMaxHcalFarForwardZDCClustersBaseline];   //[HcalFarForwardZDCClustersBaseline_]
+   UInt_t          HcalFarForwardZDCClustersBaseline_subdetectorEnergies_begin[kMaxHcalFarForwardZDCClustersBaseline];   //[HcalFarForwardZDCClustersBaseline_]
+   UInt_t          HcalFarForwardZDCClustersBaseline_subdetectorEnergies_end[kMaxHcalFarForwardZDCClustersBaseline];   //[HcalFarForwardZDCClustersBaseline_]
+   UInt_t          HcalFarForwardZDCClustersBaseline_clusters_begin[kMaxHcalFarForwardZDCClustersBaseline];   //[HcalFarForwardZDCClustersBaseline_]
+   UInt_t          HcalFarForwardZDCClustersBaseline_clusters_end[kMaxHcalFarForwardZDCClustersBaseline];   //[HcalFarForwardZDCClustersBaseline_]
+   UInt_t          HcalFarForwardZDCClustersBaseline_hits_begin[kMaxHcalFarForwardZDCClustersBaseline];   //[HcalFarForwardZDCClustersBaseline_]
+   UInt_t          HcalFarForwardZDCClustersBaseline_hits_end[kMaxHcalFarForwardZDCClustersBaseline];   //[HcalFarForwardZDCClustersBaseline_]
+   UInt_t          HcalFarForwardZDCClustersBaseline_particleIDs_begin[kMaxHcalFarForwardZDCClustersBaseline];   //[HcalFarForwardZDCClustersBaseline_]
+   UInt_t          HcalFarForwardZDCClustersBaseline_particleIDs_end[kMaxHcalFarForwardZDCClustersBaseline];   //[HcalFarForwardZDCClustersBaseline_]
+   Int_t           _HcalFarForwardZDCClustersBaseline_clusters_;
+   Int_t           _HcalFarForwardZDCClustersBaseline_clusters_index[kMax_HcalFarForwardZDCClustersBaseline_clusters];   //[_HcalFarForwardZDCClustersBaseline_clusters_]
+   UInt_t          _HcalFarForwardZDCClustersBaseline_clusters_collectionID[kMax_HcalFarForwardZDCClustersBaseline_clusters];   //[_HcalFarForwardZDCClustersBaseline_clusters_]
+   Int_t           _HcalFarForwardZDCClustersBaseline_hits_;
+   Int_t           _HcalFarForwardZDCClustersBaseline_hits_index[kMax_HcalFarForwardZDCClustersBaseline_hits];   //[_HcalFarForwardZDCClustersBaseline_hits_]
+   UInt_t          _HcalFarForwardZDCClustersBaseline_hits_collectionID[kMax_HcalFarForwardZDCClustersBaseline_hits];   //[_HcalFarForwardZDCClustersBaseline_hits_]
+   Int_t           _HcalFarForwardZDCClustersBaseline_particleIDs_;
+   Int_t           _HcalFarForwardZDCClustersBaseline_particleIDs_index[kMax_HcalFarForwardZDCClustersBaseline_particleIDs];   //[_HcalFarForwardZDCClustersBaseline_particleIDs_]
+   UInt_t          _HcalFarForwardZDCClustersBaseline_particleIDs_collectionID[kMax_HcalFarForwardZDCClustersBaseline_particleIDs];   //[_HcalFarForwardZDCClustersBaseline_particleIDs_]
+   vector<float>   *_HcalFarForwardZDCClustersBaseline_shapeParameters;
+   vector<float>   *_HcalFarForwardZDCClustersBaseline_hitContributions;
+   vector<float>   *_HcalFarForwardZDCClustersBaseline_subdetectorEnergies;
+   Int_t           HcalFarForwardZDCRawHits_;
+   ULong_t         HcalFarForwardZDCRawHits_cellID[kMaxHcalFarForwardZDCRawHits];   //[HcalFarForwardZDCRawHits_]
+   Int_t           HcalFarForwardZDCRawHits_amplitude[kMaxHcalFarForwardZDCRawHits];   //[HcalFarForwardZDCRawHits_]
+   Int_t           HcalFarForwardZDCRawHits_timeStamp[kMaxHcalFarForwardZDCRawHits];   //[HcalFarForwardZDCRawHits_]
+   Int_t           HcalFarForwardZDCRecHits_;
+   ULong_t         HcalFarForwardZDCRecHits_cellID[kMaxHcalFarForwardZDCRecHits];   //[HcalFarForwardZDCRecHits_]
+   Float_t         HcalFarForwardZDCRecHits_energy[kMaxHcalFarForwardZDCRecHits];   //[HcalFarForwardZDCRecHits_]
+   Float_t         HcalFarForwardZDCRecHits_energyError[kMaxHcalFarForwardZDCRecHits];   //[HcalFarForwardZDCRecHits_]
+   Float_t         HcalFarForwardZDCRecHits_time[kMaxHcalFarForwardZDCRecHits];   //[HcalFarForwardZDCRecHits_]
+   Float_t         HcalFarForwardZDCRecHits_timeError[kMaxHcalFarForwardZDCRecHits];   //[HcalFarForwardZDCRecHits_]
+   Float_t         HcalFarForwardZDCRecHits_position_x[kMaxHcalFarForwardZDCRecHits];   //[HcalFarForwardZDCRecHits_]
+   Float_t         HcalFarForwardZDCRecHits_position_y[kMaxHcalFarForwardZDCRecHits];   //[HcalFarForwardZDCRecHits_]
+   Float_t         HcalFarForwardZDCRecHits_position_z[kMaxHcalFarForwardZDCRecHits];   //[HcalFarForwardZDCRecHits_]
+   Float_t         HcalFarForwardZDCRecHits_dimension_x[kMaxHcalFarForwardZDCRecHits];   //[HcalFarForwardZDCRecHits_]
+   Float_t         HcalFarForwardZDCRecHits_dimension_y[kMaxHcalFarForwardZDCRecHits];   //[HcalFarForwardZDCRecHits_]
+   Float_t         HcalFarForwardZDCRecHits_dimension_z[kMaxHcalFarForwardZDCRecHits];   //[HcalFarForwardZDCRecHits_]
+   Int_t           HcalFarForwardZDCRecHits_sector[kMaxHcalFarForwardZDCRecHits];   //[HcalFarForwardZDCRecHits_]
+   Int_t           HcalFarForwardZDCRecHits_layer[kMaxHcalFarForwardZDCRecHits];   //[HcalFarForwardZDCRecHits_]
+   Float_t         HcalFarForwardZDCRecHits_local_x[kMaxHcalFarForwardZDCRecHits];   //[HcalFarForwardZDCRecHits_]
+   Float_t         HcalFarForwardZDCRecHits_local_y[kMaxHcalFarForwardZDCRecHits];   //[HcalFarForwardZDCRecHits_]
+   Float_t         HcalFarForwardZDCRecHits_local_z[kMaxHcalFarForwardZDCRecHits];   //[HcalFarForwardZDCRecHits_]
+   Int_t           HcalFarForwardZDCSubcellHits_;
+   ULong_t         HcalFarForwardZDCSubcellHits_cellID[kMaxHcalFarForwardZDCSubcellHits];   //[HcalFarForwardZDCSubcellHits_]
+   Float_t         HcalFarForwardZDCSubcellHits_energy[kMaxHcalFarForwardZDCSubcellHits];   //[HcalFarForwardZDCSubcellHits_]
+   Float_t         HcalFarForwardZDCSubcellHits_energyError[kMaxHcalFarForwardZDCSubcellHits];   //[HcalFarForwardZDCSubcellHits_]
+   Float_t         HcalFarForwardZDCSubcellHits_time[kMaxHcalFarForwardZDCSubcellHits];   //[HcalFarForwardZDCSubcellHits_]
+   Float_t         HcalFarForwardZDCSubcellHits_timeError[kMaxHcalFarForwardZDCSubcellHits];   //[HcalFarForwardZDCSubcellHits_]
+   Float_t         HcalFarForwardZDCSubcellHits_position_x[kMaxHcalFarForwardZDCSubcellHits];   //[HcalFarForwardZDCSubcellHits_]
+   Float_t         HcalFarForwardZDCSubcellHits_position_y[kMaxHcalFarForwardZDCSubcellHits];   //[HcalFarForwardZDCSubcellHits_]
+   Float_t         HcalFarForwardZDCSubcellHits_position_z[kMaxHcalFarForwardZDCSubcellHits];   //[HcalFarForwardZDCSubcellHits_]
+   Float_t         HcalFarForwardZDCSubcellHits_dimension_x[kMaxHcalFarForwardZDCSubcellHits];   //[HcalFarForwardZDCSubcellHits_]
+   Float_t         HcalFarForwardZDCSubcellHits_dimension_y[kMaxHcalFarForwardZDCSubcellHits];   //[HcalFarForwardZDCSubcellHits_]
+   Float_t         HcalFarForwardZDCSubcellHits_dimension_z[kMaxHcalFarForwardZDCSubcellHits];   //[HcalFarForwardZDCSubcellHits_]
+   Int_t           HcalFarForwardZDCSubcellHits_sector[kMaxHcalFarForwardZDCSubcellHits];   //[HcalFarForwardZDCSubcellHits_]
+   Int_t           HcalFarForwardZDCSubcellHits_layer[kMaxHcalFarForwardZDCSubcellHits];   //[HcalFarForwardZDCSubcellHits_]
+   Float_t         HcalFarForwardZDCSubcellHits_local_x[kMaxHcalFarForwardZDCSubcellHits];   //[HcalFarForwardZDCSubcellHits_]
+   Float_t         HcalFarForwardZDCSubcellHits_local_y[kMaxHcalFarForwardZDCSubcellHits];   //[HcalFarForwardZDCSubcellHits_]
+   Float_t         HcalFarForwardZDCSubcellHits_local_z[kMaxHcalFarForwardZDCSubcellHits];   //[HcalFarForwardZDCSubcellHits_]
+   Int_t           HcalFarForwardZDCTruthClusterAssociations_;
+   UInt_t          HcalFarForwardZDCTruthClusterAssociations_simID[kMaxHcalFarForwardZDCTruthClusterAssociations];   //[HcalFarForwardZDCTruthClusterAssociations_]
+   UInt_t          HcalFarForwardZDCTruthClusterAssociations_recID[kMaxHcalFarForwardZDCTruthClusterAssociations];   //[HcalFarForwardZDCTruthClusterAssociations_]
+   Float_t         HcalFarForwardZDCTruthClusterAssociations_weight[kMaxHcalFarForwardZDCTruthClusterAssociations];   //[HcalFarForwardZDCTruthClusterAssociations_]
+   Int_t           _HcalFarForwardZDCTruthClusterAssociations_rec_;
+   Int_t           _HcalFarForwardZDCTruthClusterAssociations_rec_index[kMax_HcalFarForwardZDCTruthClusterAssociations_rec];   //[_HcalFarForwardZDCTruthClusterAssociations_rec_]
+   UInt_t          _HcalFarForwardZDCTruthClusterAssociations_rec_collectionID[kMax_HcalFarForwardZDCTruthClusterAssociations_rec];   //[_HcalFarForwardZDCTruthClusterAssociations_rec_]
+   Int_t           _HcalFarForwardZDCTruthClusterAssociations_sim_;
+   Int_t           _HcalFarForwardZDCTruthClusterAssociations_sim_index[kMax_HcalFarForwardZDCTruthClusterAssociations_sim];   //[_HcalFarForwardZDCTruthClusterAssociations_sim_]
+   UInt_t          _HcalFarForwardZDCTruthClusterAssociations_sim_collectionID[kMax_HcalFarForwardZDCTruthClusterAssociations_sim];   //[_HcalFarForwardZDCTruthClusterAssociations_sim_]
+   Int_t           HcalFarForwardZDCTruthClusters_;
+   Int_t           HcalFarForwardZDCTruthClusters_type[kMaxHcalFarForwardZDCTruthClusters];   //[HcalFarForwardZDCTruthClusters_]
+   Float_t         HcalFarForwardZDCTruthClusters_energy[kMaxHcalFarForwardZDCTruthClusters];   //[HcalFarForwardZDCTruthClusters_]
+   Float_t         HcalFarForwardZDCTruthClusters_energyError[kMaxHcalFarForwardZDCTruthClusters];   //[HcalFarForwardZDCTruthClusters_]
+   Float_t         HcalFarForwardZDCTruthClusters_time[kMaxHcalFarForwardZDCTruthClusters];   //[HcalFarForwardZDCTruthClusters_]
+   Float_t         HcalFarForwardZDCTruthClusters_timeError[kMaxHcalFarForwardZDCTruthClusters];   //[HcalFarForwardZDCTruthClusters_]
+   UInt_t          HcalFarForwardZDCTruthClusters_nhits[kMaxHcalFarForwardZDCTruthClusters];   //[HcalFarForwardZDCTruthClusters_]
+   Float_t         HcalFarForwardZDCTruthClusters_position_x[kMaxHcalFarForwardZDCTruthClusters];   //[HcalFarForwardZDCTruthClusters_]
+   Float_t         HcalFarForwardZDCTruthClusters_position_y[kMaxHcalFarForwardZDCTruthClusters];   //[HcalFarForwardZDCTruthClusters_]
+   Float_t         HcalFarForwardZDCTruthClusters_position_z[kMaxHcalFarForwardZDCTruthClusters];   //[HcalFarForwardZDCTruthClusters_]
+   Float_t         HcalFarForwardZDCTruthClusters_positionError_xx[kMaxHcalFarForwardZDCTruthClusters];   //[HcalFarForwardZDCTruthClusters_]
+   Float_t         HcalFarForwardZDCTruthClusters_positionError_yy[kMaxHcalFarForwardZDCTruthClusters];   //[HcalFarForwardZDCTruthClusters_]
+   Float_t         HcalFarForwardZDCTruthClusters_positionError_zz[kMaxHcalFarForwardZDCTruthClusters];   //[HcalFarForwardZDCTruthClusters_]
+   Float_t         HcalFarForwardZDCTruthClusters_positionError_xy[kMaxHcalFarForwardZDCTruthClusters];   //[HcalFarForwardZDCTruthClusters_]
+   Float_t         HcalFarForwardZDCTruthClusters_positionError_xz[kMaxHcalFarForwardZDCTruthClusters];   //[HcalFarForwardZDCTruthClusters_]
+   Float_t         HcalFarForwardZDCTruthClusters_positionError_yz[kMaxHcalFarForwardZDCTruthClusters];   //[HcalFarForwardZDCTruthClusters_]
+   Float_t         HcalFarForwardZDCTruthClusters_intrinsicTheta[kMaxHcalFarForwardZDCTruthClusters];   //[HcalFarForwardZDCTruthClusters_]
+   Float_t         HcalFarForwardZDCTruthClusters_intrinsicPhi[kMaxHcalFarForwardZDCTruthClusters];   //[HcalFarForwardZDCTruthClusters_]
+   Float_t         HcalFarForwardZDCTruthClusters_intrinsicDirectionError_xx[kMaxHcalFarForwardZDCTruthClusters];   //[HcalFarForwardZDCTruthClusters_]
+   Float_t         HcalFarForwardZDCTruthClusters_intrinsicDirectionError_yy[kMaxHcalFarForwardZDCTruthClusters];   //[HcalFarForwardZDCTruthClusters_]
+   Float_t         HcalFarForwardZDCTruthClusters_intrinsicDirectionError_xy[kMaxHcalFarForwardZDCTruthClusters];   //[HcalFarForwardZDCTruthClusters_]
+   UInt_t          HcalFarForwardZDCTruthClusters_shapeParameters_begin[kMaxHcalFarForwardZDCTruthClusters];   //[HcalFarForwardZDCTruthClusters_]
+   UInt_t          HcalFarForwardZDCTruthClusters_shapeParameters_end[kMaxHcalFarForwardZDCTruthClusters];   //[HcalFarForwardZDCTruthClusters_]
+   UInt_t          HcalFarForwardZDCTruthClusters_hitContributions_begin[kMaxHcalFarForwardZDCTruthClusters];   //[HcalFarForwardZDCTruthClusters_]
+   UInt_t          HcalFarForwardZDCTruthClusters_hitContributions_end[kMaxHcalFarForwardZDCTruthClusters];   //[HcalFarForwardZDCTruthClusters_]
+   UInt_t          HcalFarForwardZDCTruthClusters_subdetectorEnergies_begin[kMaxHcalFarForwardZDCTruthClusters];   //[HcalFarForwardZDCTruthClusters_]
+   UInt_t          HcalFarForwardZDCTruthClusters_subdetectorEnergies_end[kMaxHcalFarForwardZDCTruthClusters];   //[HcalFarForwardZDCTruthClusters_]
+   UInt_t          HcalFarForwardZDCTruthClusters_clusters_begin[kMaxHcalFarForwardZDCTruthClusters];   //[HcalFarForwardZDCTruthClusters_]
+   UInt_t          HcalFarForwardZDCTruthClusters_clusters_end[kMaxHcalFarForwardZDCTruthClusters];   //[HcalFarForwardZDCTruthClusters_]
+   UInt_t          HcalFarForwardZDCTruthClusters_hits_begin[kMaxHcalFarForwardZDCTruthClusters];   //[HcalFarForwardZDCTruthClusters_]
+   UInt_t          HcalFarForwardZDCTruthClusters_hits_end[kMaxHcalFarForwardZDCTruthClusters];   //[HcalFarForwardZDCTruthClusters_]
+   UInt_t          HcalFarForwardZDCTruthClusters_particleIDs_begin[kMaxHcalFarForwardZDCTruthClusters];   //[HcalFarForwardZDCTruthClusters_]
+   UInt_t          HcalFarForwardZDCTruthClusters_particleIDs_end[kMaxHcalFarForwardZDCTruthClusters];   //[HcalFarForwardZDCTruthClusters_]
+   Int_t           _HcalFarForwardZDCTruthClusters_clusters_;
+   Int_t           _HcalFarForwardZDCTruthClusters_clusters_index[kMax_HcalFarForwardZDCTruthClusters_clusters];   //[_HcalFarForwardZDCTruthClusters_clusters_]
+   UInt_t          _HcalFarForwardZDCTruthClusters_clusters_collectionID[kMax_HcalFarForwardZDCTruthClusters_clusters];   //[_HcalFarForwardZDCTruthClusters_clusters_]
+   Int_t           _HcalFarForwardZDCTruthClusters_hits_;
+   Int_t           _HcalFarForwardZDCTruthClusters_hits_index[kMax_HcalFarForwardZDCTruthClusters_hits];   //[_HcalFarForwardZDCTruthClusters_hits_]
+   UInt_t          _HcalFarForwardZDCTruthClusters_hits_collectionID[kMax_HcalFarForwardZDCTruthClusters_hits];   //[_HcalFarForwardZDCTruthClusters_hits_]
+   Int_t           _HcalFarForwardZDCTruthClusters_particleIDs_;
+   Int_t           _HcalFarForwardZDCTruthClusters_particleIDs_index[kMax_HcalFarForwardZDCTruthClusters_particleIDs];   //[_HcalFarForwardZDCTruthClusters_particleIDs_]
+   UInt_t          _HcalFarForwardZDCTruthClusters_particleIDs_collectionID[kMax_HcalFarForwardZDCTruthClusters_particleIDs];   //[_HcalFarForwardZDCTruthClusters_particleIDs_]
+   vector<float>   *_HcalFarForwardZDCTruthClusters_shapeParameters;
+   vector<float>   *_HcalFarForwardZDCTruthClusters_hitContributions;
+   vector<float>   *_HcalFarForwardZDCTruthClusters_subdetectorEnergies;
    Int_t           InclusiveKinematicsDA_;
    Float_t         InclusiveKinematicsDA_x[kMaxInclusiveKinematicsDA];   //[InclusiveKinematicsDA_]
    Float_t         InclusiveKinematicsDA_Q2[kMaxInclusiveKinematicsDA];   //[InclusiveKinematicsDA_]
@@ -2452,6 +2934,25 @@ public :
    Int_t           _MCParticles_daughters_;
    Int_t           _MCParticles_daughters_index[kMax_MCParticles_daughters];   //[_MCParticles_daughters_]
    UInt_t          _MCParticles_daughters_collectionID[kMax_MCParticles_daughters];   //[_MCParticles_daughters_]
+   Int_t           MPGDBarrelHits_;
+   ULong_t         MPGDBarrelHits_cellID[kMaxMPGDBarrelHits];   //[MPGDBarrelHits_]
+   Float_t         MPGDBarrelHits_EDep[kMaxMPGDBarrelHits];   //[MPGDBarrelHits_]
+   Float_t         MPGDBarrelHits_time[kMaxMPGDBarrelHits];   //[MPGDBarrelHits_]
+   Float_t         MPGDBarrelHits_pathLength[kMaxMPGDBarrelHits];   //[MPGDBarrelHits_]
+   Int_t           MPGDBarrelHits_quality[kMaxMPGDBarrelHits];   //[MPGDBarrelHits_]
+   Double_t        MPGDBarrelHits_position_x[kMaxMPGDBarrelHits];   //[MPGDBarrelHits_]
+   Double_t        MPGDBarrelHits_position_y[kMaxMPGDBarrelHits];   //[MPGDBarrelHits_]
+   Double_t        MPGDBarrelHits_position_z[kMaxMPGDBarrelHits];   //[MPGDBarrelHits_]
+   Float_t         MPGDBarrelHits_momentum_x[kMaxMPGDBarrelHits];   //[MPGDBarrelHits_]
+   Float_t         MPGDBarrelHits_momentum_y[kMaxMPGDBarrelHits];   //[MPGDBarrelHits_]
+   Float_t         MPGDBarrelHits_momentum_z[kMaxMPGDBarrelHits];   //[MPGDBarrelHits_]
+   Int_t           _MPGDBarrelHits_MCParticle_;
+   Int_t           _MPGDBarrelHits_MCParticle_index[kMax_MPGDBarrelHits_MCParticle];   //[_MPGDBarrelHits_MCParticle_]
+   UInt_t          _MPGDBarrelHits_MCParticle_collectionID[kMax_MPGDBarrelHits_MCParticle];   //[_MPGDBarrelHits_MCParticle_]
+   Int_t           MPGDBarrelRawHits_;
+   ULong_t         MPGDBarrelRawHits_cellID[kMaxMPGDBarrelRawHits];   //[MPGDBarrelRawHits_]
+   Int_t           MPGDBarrelRawHits_charge[kMaxMPGDBarrelRawHits];   //[MPGDBarrelRawHits_]
+   Int_t           MPGDBarrelRawHits_timeStamp[kMaxMPGDBarrelRawHits];   //[MPGDBarrelRawHits_]
    Int_t           MPGDBarrelRecHits_;
    ULong_t         MPGDBarrelRecHits_cellID[kMaxMPGDBarrelRecHits];   //[MPGDBarrelRecHits_]
    Float_t         MPGDBarrelRecHits_position_x[kMaxMPGDBarrelRecHits];   //[MPGDBarrelRecHits_]
@@ -2464,6 +2965,10 @@ public :
    Float_t         MPGDBarrelRecHits_timeError[kMaxMPGDBarrelRecHits];   //[MPGDBarrelRecHits_]
    Float_t         MPGDBarrelRecHits_edep[kMaxMPGDBarrelRecHits];   //[MPGDBarrelRecHits_]
    Float_t         MPGDBarrelRecHits_edepError[kMaxMPGDBarrelRecHits];   //[MPGDBarrelRecHits_]
+   Int_t           MPGDDIRCRawHits_;
+   ULong_t         MPGDDIRCRawHits_cellID[kMaxMPGDDIRCRawHits];   //[MPGDDIRCRawHits_]
+   Int_t           MPGDDIRCRawHits_charge[kMaxMPGDDIRCRawHits];   //[MPGDDIRCRawHits_]
+   Int_t           MPGDDIRCRawHits_timeStamp[kMaxMPGDDIRCRawHits];   //[MPGDDIRCRawHits_]
    Int_t           MPGDDIRCRecHits_;
    ULong_t         MPGDDIRCRecHits_cellID[kMaxMPGDDIRCRecHits];   //[MPGDDIRCRecHits_]
    Float_t         MPGDDIRCRecHits_position_x[kMaxMPGDDIRCRecHits];   //[MPGDDIRCRecHits_]
@@ -2476,6 +2981,25 @@ public :
    Float_t         MPGDDIRCRecHits_timeError[kMaxMPGDDIRCRecHits];   //[MPGDDIRCRecHits_]
    Float_t         MPGDDIRCRecHits_edep[kMaxMPGDDIRCRecHits];   //[MPGDDIRCRecHits_]
    Float_t         MPGDDIRCRecHits_edepError[kMaxMPGDDIRCRecHits];   //[MPGDDIRCRecHits_]
+   Int_t           OuterMPGDBarrelHits_;
+   ULong_t         OuterMPGDBarrelHits_cellID[kMaxOuterMPGDBarrelHits];   //[OuterMPGDBarrelHits_]
+   Float_t         OuterMPGDBarrelHits_EDep[kMaxOuterMPGDBarrelHits];   //[OuterMPGDBarrelHits_]
+   Float_t         OuterMPGDBarrelHits_time[kMaxOuterMPGDBarrelHits];   //[OuterMPGDBarrelHits_]
+   Float_t         OuterMPGDBarrelHits_pathLength[kMaxOuterMPGDBarrelHits];   //[OuterMPGDBarrelHits_]
+   Int_t           OuterMPGDBarrelHits_quality[kMaxOuterMPGDBarrelHits];   //[OuterMPGDBarrelHits_]
+   Double_t        OuterMPGDBarrelHits_position_x[kMaxOuterMPGDBarrelHits];   //[OuterMPGDBarrelHits_]
+   Double_t        OuterMPGDBarrelHits_position_y[kMaxOuterMPGDBarrelHits];   //[OuterMPGDBarrelHits_]
+   Double_t        OuterMPGDBarrelHits_position_z[kMaxOuterMPGDBarrelHits];   //[OuterMPGDBarrelHits_]
+   Float_t         OuterMPGDBarrelHits_momentum_x[kMaxOuterMPGDBarrelHits];   //[OuterMPGDBarrelHits_]
+   Float_t         OuterMPGDBarrelHits_momentum_y[kMaxOuterMPGDBarrelHits];   //[OuterMPGDBarrelHits_]
+   Float_t         OuterMPGDBarrelHits_momentum_z[kMaxOuterMPGDBarrelHits];   //[OuterMPGDBarrelHits_]
+   Int_t           _OuterMPGDBarrelHits_MCParticle_;
+   Int_t           _OuterMPGDBarrelHits_MCParticle_index[kMax_OuterMPGDBarrelHits_MCParticle];   //[_OuterMPGDBarrelHits_MCParticle_]
+   UInt_t          _OuterMPGDBarrelHits_MCParticle_collectionID[kMax_OuterMPGDBarrelHits_MCParticle];   //[_OuterMPGDBarrelHits_MCParticle_]
+   Int_t           OuterMPGDBarrelRawHits_;
+   ULong_t         OuterMPGDBarrelRawHits_cellID[kMaxOuterMPGDBarrelRawHits];   //[OuterMPGDBarrelRawHits_]
+   Int_t           OuterMPGDBarrelRawHits_charge[kMaxOuterMPGDBarrelRawHits];   //[OuterMPGDBarrelRawHits_]
+   Int_t           OuterMPGDBarrelRawHits_timeStamp[kMaxOuterMPGDBarrelRawHits];   //[OuterMPGDBarrelRawHits_]
    Int_t           OuterMPGDBarrelRecHits_;
    ULong_t         OuterMPGDBarrelRecHits_cellID[kMaxOuterMPGDBarrelRecHits];   //[OuterMPGDBarrelRecHits_]
    Float_t         OuterMPGDBarrelRecHits_position_x[kMaxOuterMPGDBarrelRecHits];   //[OuterMPGDBarrelRecHits_]
@@ -2820,6 +3344,25 @@ public :
    Int_t           _ReconstructedSeededChargedParticles_particleIDUsed_;
    Int_t           _ReconstructedSeededChargedParticles_particleIDUsed_index[kMax_ReconstructedSeededChargedParticles_particleIDUsed];   //[_ReconstructedSeededChargedParticles_particleIDUsed_]
    UInt_t          _ReconstructedSeededChargedParticles_particleIDUsed_collectionID[kMax_ReconstructedSeededChargedParticles_particleIDUsed];   //[_ReconstructedSeededChargedParticles_particleIDUsed_]
+   Int_t           SiBarrelHits_;
+   ULong_t         SiBarrelHits_cellID[kMaxSiBarrelHits];   //[SiBarrelHits_]
+   Float_t         SiBarrelHits_EDep[kMaxSiBarrelHits];   //[SiBarrelHits_]
+   Float_t         SiBarrelHits_time[kMaxSiBarrelHits];   //[SiBarrelHits_]
+   Float_t         SiBarrelHits_pathLength[kMaxSiBarrelHits];   //[SiBarrelHits_]
+   Int_t           SiBarrelHits_quality[kMaxSiBarrelHits];   //[SiBarrelHits_]
+   Double_t        SiBarrelHits_position_x[kMaxSiBarrelHits];   //[SiBarrelHits_]
+   Double_t        SiBarrelHits_position_y[kMaxSiBarrelHits];   //[SiBarrelHits_]
+   Double_t        SiBarrelHits_position_z[kMaxSiBarrelHits];   //[SiBarrelHits_]
+   Float_t         SiBarrelHits_momentum_x[kMaxSiBarrelHits];   //[SiBarrelHits_]
+   Float_t         SiBarrelHits_momentum_y[kMaxSiBarrelHits];   //[SiBarrelHits_]
+   Float_t         SiBarrelHits_momentum_z[kMaxSiBarrelHits];   //[SiBarrelHits_]
+   Int_t           _SiBarrelHits_MCParticle_;
+   Int_t           _SiBarrelHits_MCParticle_index[kMax_SiBarrelHits_MCParticle];   //[_SiBarrelHits_MCParticle_]
+   UInt_t          _SiBarrelHits_MCParticle_collectionID[kMax_SiBarrelHits_MCParticle];   //[_SiBarrelHits_MCParticle_]
+   Int_t           SiBarrelRawHits_;
+   ULong_t         SiBarrelRawHits_cellID[kMaxSiBarrelRawHits];   //[SiBarrelRawHits_]
+   Int_t           SiBarrelRawHits_charge[kMaxSiBarrelRawHits];   //[SiBarrelRawHits_]
+   Int_t           SiBarrelRawHits_timeStamp[kMaxSiBarrelRawHits];   //[SiBarrelRawHits_]
    Int_t           SiBarrelTrackerRecHits_;
    ULong_t         SiBarrelTrackerRecHits_cellID[kMaxSiBarrelTrackerRecHits];   //[SiBarrelTrackerRecHits_]
    Float_t         SiBarrelTrackerRecHits_position_x[kMaxSiBarrelTrackerRecHits];   //[SiBarrelTrackerRecHits_]
@@ -2832,6 +3375,10 @@ public :
    Float_t         SiBarrelTrackerRecHits_timeError[kMaxSiBarrelTrackerRecHits];   //[SiBarrelTrackerRecHits_]
    Float_t         SiBarrelTrackerRecHits_edep[kMaxSiBarrelTrackerRecHits];   //[SiBarrelTrackerRecHits_]
    Float_t         SiBarrelTrackerRecHits_edepError[kMaxSiBarrelTrackerRecHits];   //[SiBarrelTrackerRecHits_]
+   Int_t           SiBarrelVertexRawHits_;
+   ULong_t         SiBarrelVertexRawHits_cellID[kMaxSiBarrelVertexRawHits];   //[SiBarrelVertexRawHits_]
+   Int_t           SiBarrelVertexRawHits_charge[kMaxSiBarrelVertexRawHits];   //[SiBarrelVertexRawHits_]
+   Int_t           SiBarrelVertexRawHits_timeStamp[kMaxSiBarrelVertexRawHits];   //[SiBarrelVertexRawHits_]
    Int_t           SiBarrelVertexRecHits_;
    ULong_t         SiBarrelVertexRecHits_cellID[kMaxSiBarrelVertexRecHits];   //[SiBarrelVertexRecHits_]
    Float_t         SiBarrelVertexRecHits_position_x[kMaxSiBarrelVertexRecHits];   //[SiBarrelVertexRecHits_]
@@ -2844,6 +3391,10 @@ public :
    Float_t         SiBarrelVertexRecHits_timeError[kMaxSiBarrelVertexRecHits];   //[SiBarrelVertexRecHits_]
    Float_t         SiBarrelVertexRecHits_edep[kMaxSiBarrelVertexRecHits];   //[SiBarrelVertexRecHits_]
    Float_t         SiBarrelVertexRecHits_edepError[kMaxSiBarrelVertexRecHits];   //[SiBarrelVertexRecHits_]
+   Int_t           SiEndcapTrackerRawHits_;
+   ULong_t         SiEndcapTrackerRawHits_cellID[kMaxSiEndcapTrackerRawHits];   //[SiEndcapTrackerRawHits_]
+   Int_t           SiEndcapTrackerRawHits_charge[kMaxSiEndcapTrackerRawHits];   //[SiEndcapTrackerRawHits_]
+   Int_t           SiEndcapTrackerRawHits_timeStamp[kMaxSiEndcapTrackerRawHits];   //[SiEndcapTrackerRawHits_]
    Int_t           SiEndcapTrackerRecHits_;
    ULong_t         SiEndcapTrackerRecHits_cellID[kMaxSiEndcapTrackerRecHits];   //[SiEndcapTrackerRecHits_]
    Float_t         SiEndcapTrackerRecHits_position_x[kMaxSiEndcapTrackerRecHits];   //[SiEndcapTrackerRecHits_]
@@ -2860,6 +3411,25 @@ public :
    ULong_t         TaggerTrackerRawHits_cellID[kMaxTaggerTrackerRawHits];   //[TaggerTrackerRawHits_]
    Int_t           TaggerTrackerRawHits_charge[kMaxTaggerTrackerRawHits];   //[TaggerTrackerRawHits_]
    Int_t           TaggerTrackerRawHits_timeStamp[kMaxTaggerTrackerRawHits];   //[TaggerTrackerRawHits_]
+   Int_t           TOFBarrelHits_;
+   ULong_t         TOFBarrelHits_cellID[kMaxTOFBarrelHits];   //[TOFBarrelHits_]
+   Float_t         TOFBarrelHits_EDep[kMaxTOFBarrelHits];   //[TOFBarrelHits_]
+   Float_t         TOFBarrelHits_time[kMaxTOFBarrelHits];   //[TOFBarrelHits_]
+   Float_t         TOFBarrelHits_pathLength[kMaxTOFBarrelHits];   //[TOFBarrelHits_]
+   Int_t           TOFBarrelHits_quality[kMaxTOFBarrelHits];   //[TOFBarrelHits_]
+   Double_t        TOFBarrelHits_position_x[kMaxTOFBarrelHits];   //[TOFBarrelHits_]
+   Double_t        TOFBarrelHits_position_y[kMaxTOFBarrelHits];   //[TOFBarrelHits_]
+   Double_t        TOFBarrelHits_position_z[kMaxTOFBarrelHits];   //[TOFBarrelHits_]
+   Float_t         TOFBarrelHits_momentum_x[kMaxTOFBarrelHits];   //[TOFBarrelHits_]
+   Float_t         TOFBarrelHits_momentum_y[kMaxTOFBarrelHits];   //[TOFBarrelHits_]
+   Float_t         TOFBarrelHits_momentum_z[kMaxTOFBarrelHits];   //[TOFBarrelHits_]
+   Int_t           _TOFBarrelHits_MCParticle_;
+   Int_t           _TOFBarrelHits_MCParticle_index[kMax_TOFBarrelHits_MCParticle];   //[_TOFBarrelHits_MCParticle_]
+   UInt_t          _TOFBarrelHits_MCParticle_collectionID[kMax_TOFBarrelHits_MCParticle];   //[_TOFBarrelHits_MCParticle_]
+   Int_t           TOFBarrelRawHit_;
+   ULong_t         TOFBarrelRawHit_cellID[kMaxTOFBarrelRawHit];   //[TOFBarrelRawHit_]
+   Int_t           TOFBarrelRawHit_charge[kMaxTOFBarrelRawHit];   //[TOFBarrelRawHit_]
+   Int_t           TOFBarrelRawHit_timeStamp[kMaxTOFBarrelRawHit];   //[TOFBarrelRawHit_]
    Int_t           TOFBarrelRecHit_;
    ULong_t         TOFBarrelRecHit_cellID[kMaxTOFBarrelRecHit];   //[TOFBarrelRecHit_]
    Float_t         TOFBarrelRecHit_position_x[kMaxTOFBarrelRecHit];   //[TOFBarrelRecHit_]
@@ -2872,6 +3442,25 @@ public :
    Float_t         TOFBarrelRecHit_timeError[kMaxTOFBarrelRecHit];   //[TOFBarrelRecHit_]
    Float_t         TOFBarrelRecHit_edep[kMaxTOFBarrelRecHit];   //[TOFBarrelRecHit_]
    Float_t         TOFBarrelRecHit_edepError[kMaxTOFBarrelRecHit];   //[TOFBarrelRecHit_]
+   Int_t           TOFEndcapHits_;
+   ULong_t         TOFEndcapHits_cellID[kMaxTOFEndcapHits];   //[TOFEndcapHits_]
+   Float_t         TOFEndcapHits_EDep[kMaxTOFEndcapHits];   //[TOFEndcapHits_]
+   Float_t         TOFEndcapHits_time[kMaxTOFEndcapHits];   //[TOFEndcapHits_]
+   Float_t         TOFEndcapHits_pathLength[kMaxTOFEndcapHits];   //[TOFEndcapHits_]
+   Int_t           TOFEndcapHits_quality[kMaxTOFEndcapHits];   //[TOFEndcapHits_]
+   Double_t        TOFEndcapHits_position_x[kMaxTOFEndcapHits];   //[TOFEndcapHits_]
+   Double_t        TOFEndcapHits_position_y[kMaxTOFEndcapHits];   //[TOFEndcapHits_]
+   Double_t        TOFEndcapHits_position_z[kMaxTOFEndcapHits];   //[TOFEndcapHits_]
+   Float_t         TOFEndcapHits_momentum_x[kMaxTOFEndcapHits];   //[TOFEndcapHits_]
+   Float_t         TOFEndcapHits_momentum_y[kMaxTOFEndcapHits];   //[TOFEndcapHits_]
+   Float_t         TOFEndcapHits_momentum_z[kMaxTOFEndcapHits];   //[TOFEndcapHits_]
+   Int_t           _TOFEndcapHits_MCParticle_;
+   Int_t           _TOFEndcapHits_MCParticle_index[kMax_TOFEndcapHits_MCParticle];   //[_TOFEndcapHits_MCParticle_]
+   UInt_t          _TOFEndcapHits_MCParticle_collectionID[kMax_TOFEndcapHits_MCParticle];   //[_TOFEndcapHits_MCParticle_]
+   Int_t           TOFEndcapRawHits_;
+   ULong_t         TOFEndcapRawHits_cellID[kMaxTOFEndcapRawHits];   //[TOFEndcapRawHits_]
+   Int_t           TOFEndcapRawHits_charge[kMaxTOFEndcapRawHits];   //[TOFEndcapRawHits_]
+   Int_t           TOFEndcapRawHits_timeStamp[kMaxTOFEndcapRawHits];   //[TOFEndcapRawHits_]
    Int_t           TOFEndcapRecHits_;
    ULong_t         TOFEndcapRecHits_cellID[kMaxTOFEndcapRecHits];   //[TOFEndcapRecHits_]
    Float_t         TOFEndcapRecHits_position_x[kMaxTOFEndcapRecHits];   //[TOFEndcapRecHits_]
@@ -2884,137 +3473,36 @@ public :
    Float_t         TOFEndcapRecHits_timeError[kMaxTOFEndcapRecHits];   //[TOFEndcapRecHits_]
    Float_t         TOFEndcapRecHits_edep[kMaxTOFEndcapRecHits];   //[TOFEndcapRecHits_]
    Float_t         TOFEndcapRecHits_edepError[kMaxTOFEndcapRecHits];   //[TOFEndcapRecHits_]
-   Int_t           ZDCEcalClusterAssociations_;
-   UInt_t          ZDCEcalClusterAssociations_simID[kMaxZDCEcalClusterAssociations];   //[ZDCEcalClusterAssociations_]
-   UInt_t          ZDCEcalClusterAssociations_recID[kMaxZDCEcalClusterAssociations];   //[ZDCEcalClusterAssociations_]
-   Float_t         ZDCEcalClusterAssociations_weight[kMaxZDCEcalClusterAssociations];   //[ZDCEcalClusterAssociations_]
-   Int_t           _ZDCEcalClusterAssociations_rec_;
-   Int_t           _ZDCEcalClusterAssociations_rec_index[kMax_ZDCEcalClusterAssociations_rec];   //[_ZDCEcalClusterAssociations_rec_]
-   UInt_t          _ZDCEcalClusterAssociations_rec_collectionID[kMax_ZDCEcalClusterAssociations_rec];   //[_ZDCEcalClusterAssociations_rec_]
-   Int_t           _ZDCEcalClusterAssociations_sim_;
-   Int_t           _ZDCEcalClusterAssociations_sim_index[kMax_ZDCEcalClusterAssociations_sim];   //[_ZDCEcalClusterAssociations_sim_]
-   UInt_t          _ZDCEcalClusterAssociations_sim_collectionID[kMax_ZDCEcalClusterAssociations_sim];   //[_ZDCEcalClusterAssociations_sim_]
-   Int_t           ZDCEcalClusters_;
-   Int_t           ZDCEcalClusters_type[kMaxZDCEcalClusters];   //[ZDCEcalClusters_]
-   Float_t         ZDCEcalClusters_energy[kMaxZDCEcalClusters];   //[ZDCEcalClusters_]
-   Float_t         ZDCEcalClusters_energyError[kMaxZDCEcalClusters];   //[ZDCEcalClusters_]
-   Float_t         ZDCEcalClusters_time[kMaxZDCEcalClusters];   //[ZDCEcalClusters_]
-   Float_t         ZDCEcalClusters_timeError[kMaxZDCEcalClusters];   //[ZDCEcalClusters_]
-   UInt_t          ZDCEcalClusters_nhits[kMaxZDCEcalClusters];   //[ZDCEcalClusters_]
-   Float_t         ZDCEcalClusters_position_x[kMaxZDCEcalClusters];   //[ZDCEcalClusters_]
-   Float_t         ZDCEcalClusters_position_y[kMaxZDCEcalClusters];   //[ZDCEcalClusters_]
-   Float_t         ZDCEcalClusters_position_z[kMaxZDCEcalClusters];   //[ZDCEcalClusters_]
-   Float_t         ZDCEcalClusters_positionError_xx[kMaxZDCEcalClusters];   //[ZDCEcalClusters_]
-   Float_t         ZDCEcalClusters_positionError_yy[kMaxZDCEcalClusters];   //[ZDCEcalClusters_]
-   Float_t         ZDCEcalClusters_positionError_zz[kMaxZDCEcalClusters];   //[ZDCEcalClusters_]
-   Float_t         ZDCEcalClusters_positionError_xy[kMaxZDCEcalClusters];   //[ZDCEcalClusters_]
-   Float_t         ZDCEcalClusters_positionError_xz[kMaxZDCEcalClusters];   //[ZDCEcalClusters_]
-   Float_t         ZDCEcalClusters_positionError_yz[kMaxZDCEcalClusters];   //[ZDCEcalClusters_]
-   Float_t         ZDCEcalClusters_intrinsicTheta[kMaxZDCEcalClusters];   //[ZDCEcalClusters_]
-   Float_t         ZDCEcalClusters_intrinsicPhi[kMaxZDCEcalClusters];   //[ZDCEcalClusters_]
-   Float_t         ZDCEcalClusters_intrinsicDirectionError_xx[kMaxZDCEcalClusters];   //[ZDCEcalClusters_]
-   Float_t         ZDCEcalClusters_intrinsicDirectionError_yy[kMaxZDCEcalClusters];   //[ZDCEcalClusters_]
-   Float_t         ZDCEcalClusters_intrinsicDirectionError_xy[kMaxZDCEcalClusters];   //[ZDCEcalClusters_]
-   UInt_t          ZDCEcalClusters_shapeParameters_begin[kMaxZDCEcalClusters];   //[ZDCEcalClusters_]
-   UInt_t          ZDCEcalClusters_shapeParameters_end[kMaxZDCEcalClusters];   //[ZDCEcalClusters_]
-   UInt_t          ZDCEcalClusters_hitContributions_begin[kMaxZDCEcalClusters];   //[ZDCEcalClusters_]
-   UInt_t          ZDCEcalClusters_hitContributions_end[kMaxZDCEcalClusters];   //[ZDCEcalClusters_]
-   UInt_t          ZDCEcalClusters_subdetectorEnergies_begin[kMaxZDCEcalClusters];   //[ZDCEcalClusters_]
-   UInt_t          ZDCEcalClusters_subdetectorEnergies_end[kMaxZDCEcalClusters];   //[ZDCEcalClusters_]
-   UInt_t          ZDCEcalClusters_clusters_begin[kMaxZDCEcalClusters];   //[ZDCEcalClusters_]
-   UInt_t          ZDCEcalClusters_clusters_end[kMaxZDCEcalClusters];   //[ZDCEcalClusters_]
-   UInt_t          ZDCEcalClusters_hits_begin[kMaxZDCEcalClusters];   //[ZDCEcalClusters_]
-   UInt_t          ZDCEcalClusters_hits_end[kMaxZDCEcalClusters];   //[ZDCEcalClusters_]
-   UInt_t          ZDCEcalClusters_particleIDs_begin[kMaxZDCEcalClusters];   //[ZDCEcalClusters_]
-   UInt_t          ZDCEcalClusters_particleIDs_end[kMaxZDCEcalClusters];   //[ZDCEcalClusters_]
-   Int_t           _ZDCEcalClusters_clusters_;
-   Int_t           _ZDCEcalClusters_clusters_index[kMax_ZDCEcalClusters_clusters];   //[_ZDCEcalClusters_clusters_]
-   UInt_t          _ZDCEcalClusters_clusters_collectionID[kMax_ZDCEcalClusters_clusters];   //[_ZDCEcalClusters_clusters_]
-   Int_t           _ZDCEcalClusters_hits_;
-   Int_t           _ZDCEcalClusters_hits_index[kMax_ZDCEcalClusters_hits];   //[_ZDCEcalClusters_hits_]
-   UInt_t          _ZDCEcalClusters_hits_collectionID[kMax_ZDCEcalClusters_hits];   //[_ZDCEcalClusters_hits_]
-   Int_t           _ZDCEcalClusters_particleIDs_;
-   Int_t           _ZDCEcalClusters_particleIDs_index[kMax_ZDCEcalClusters_particleIDs];   //[_ZDCEcalClusters_particleIDs_]
-   UInt_t          _ZDCEcalClusters_particleIDs_collectionID[kMax_ZDCEcalClusters_particleIDs];   //[_ZDCEcalClusters_particleIDs_]
-   vector<float>   *_ZDCEcalClusters_shapeParameters;
-   vector<float>   *_ZDCEcalClusters_hitContributions;
-   vector<float>   *_ZDCEcalClusters_subdetectorEnergies;
-   Int_t           ZDCEcalRawHits_;
-   ULong_t         ZDCEcalRawHits_cellID[kMaxZDCEcalRawHits];   //[ZDCEcalRawHits_]
-   Int_t           ZDCEcalRawHits_amplitude[kMaxZDCEcalRawHits];   //[ZDCEcalRawHits_]
-   Int_t           ZDCEcalRawHits_timeStamp[kMaxZDCEcalRawHits];   //[ZDCEcalRawHits_]
-   Int_t           ZDCEcalRecHits_;
-   ULong_t         ZDCEcalRecHits_cellID[kMaxZDCEcalRecHits];   //[ZDCEcalRecHits_]
-   Float_t         ZDCEcalRecHits_energy[kMaxZDCEcalRecHits];   //[ZDCEcalRecHits_]
-   Float_t         ZDCEcalRecHits_energyError[kMaxZDCEcalRecHits];   //[ZDCEcalRecHits_]
-   Float_t         ZDCEcalRecHits_time[kMaxZDCEcalRecHits];   //[ZDCEcalRecHits_]
-   Float_t         ZDCEcalRecHits_timeError[kMaxZDCEcalRecHits];   //[ZDCEcalRecHits_]
-   Float_t         ZDCEcalRecHits_position_x[kMaxZDCEcalRecHits];   //[ZDCEcalRecHits_]
-   Float_t         ZDCEcalRecHits_position_y[kMaxZDCEcalRecHits];   //[ZDCEcalRecHits_]
-   Float_t         ZDCEcalRecHits_position_z[kMaxZDCEcalRecHits];   //[ZDCEcalRecHits_]
-   Float_t         ZDCEcalRecHits_dimension_x[kMaxZDCEcalRecHits];   //[ZDCEcalRecHits_]
-   Float_t         ZDCEcalRecHits_dimension_y[kMaxZDCEcalRecHits];   //[ZDCEcalRecHits_]
-   Float_t         ZDCEcalRecHits_dimension_z[kMaxZDCEcalRecHits];   //[ZDCEcalRecHits_]
-   Int_t           ZDCEcalRecHits_sector[kMaxZDCEcalRecHits];   //[ZDCEcalRecHits_]
-   Int_t           ZDCEcalRecHits_layer[kMaxZDCEcalRecHits];   //[ZDCEcalRecHits_]
-   Float_t         ZDCEcalRecHits_local_x[kMaxZDCEcalRecHits];   //[ZDCEcalRecHits_]
-   Float_t         ZDCEcalRecHits_local_y[kMaxZDCEcalRecHits];   //[ZDCEcalRecHits_]
-   Float_t         ZDCEcalRecHits_local_z[kMaxZDCEcalRecHits];   //[ZDCEcalRecHits_]
-   Int_t           ZDCEcalTruthClusterAssociations_;
-   UInt_t          ZDCEcalTruthClusterAssociations_simID[kMaxZDCEcalTruthClusterAssociations];   //[ZDCEcalTruthClusterAssociations_]
-   UInt_t          ZDCEcalTruthClusterAssociations_recID[kMaxZDCEcalTruthClusterAssociations];   //[ZDCEcalTruthClusterAssociations_]
-   Float_t         ZDCEcalTruthClusterAssociations_weight[kMaxZDCEcalTruthClusterAssociations];   //[ZDCEcalTruthClusterAssociations_]
-   Int_t           _ZDCEcalTruthClusterAssociations_rec_;
-   Int_t           _ZDCEcalTruthClusterAssociations_rec_index[kMax_ZDCEcalTruthClusterAssociations_rec];   //[_ZDCEcalTruthClusterAssociations_rec_]
-   UInt_t          _ZDCEcalTruthClusterAssociations_rec_collectionID[kMax_ZDCEcalTruthClusterAssociations_rec];   //[_ZDCEcalTruthClusterAssociations_rec_]
-   Int_t           _ZDCEcalTruthClusterAssociations_sim_;
-   Int_t           _ZDCEcalTruthClusterAssociations_sim_index[kMax_ZDCEcalTruthClusterAssociations_sim];   //[_ZDCEcalTruthClusterAssociations_sim_]
-   UInt_t          _ZDCEcalTruthClusterAssociations_sim_collectionID[kMax_ZDCEcalTruthClusterAssociations_sim];   //[_ZDCEcalTruthClusterAssociations_sim_]
-   Int_t           ZDCEcalTruthClusters_;
-   Int_t           ZDCEcalTruthClusters_type[kMaxZDCEcalTruthClusters];   //[ZDCEcalTruthClusters_]
-   Float_t         ZDCEcalTruthClusters_energy[kMaxZDCEcalTruthClusters];   //[ZDCEcalTruthClusters_]
-   Float_t         ZDCEcalTruthClusters_energyError[kMaxZDCEcalTruthClusters];   //[ZDCEcalTruthClusters_]
-   Float_t         ZDCEcalTruthClusters_time[kMaxZDCEcalTruthClusters];   //[ZDCEcalTruthClusters_]
-   Float_t         ZDCEcalTruthClusters_timeError[kMaxZDCEcalTruthClusters];   //[ZDCEcalTruthClusters_]
-   UInt_t          ZDCEcalTruthClusters_nhits[kMaxZDCEcalTruthClusters];   //[ZDCEcalTruthClusters_]
-   Float_t         ZDCEcalTruthClusters_position_x[kMaxZDCEcalTruthClusters];   //[ZDCEcalTruthClusters_]
-   Float_t         ZDCEcalTruthClusters_position_y[kMaxZDCEcalTruthClusters];   //[ZDCEcalTruthClusters_]
-   Float_t         ZDCEcalTruthClusters_position_z[kMaxZDCEcalTruthClusters];   //[ZDCEcalTruthClusters_]
-   Float_t         ZDCEcalTruthClusters_positionError_xx[kMaxZDCEcalTruthClusters];   //[ZDCEcalTruthClusters_]
-   Float_t         ZDCEcalTruthClusters_positionError_yy[kMaxZDCEcalTruthClusters];   //[ZDCEcalTruthClusters_]
-   Float_t         ZDCEcalTruthClusters_positionError_zz[kMaxZDCEcalTruthClusters];   //[ZDCEcalTruthClusters_]
-   Float_t         ZDCEcalTruthClusters_positionError_xy[kMaxZDCEcalTruthClusters];   //[ZDCEcalTruthClusters_]
-   Float_t         ZDCEcalTruthClusters_positionError_xz[kMaxZDCEcalTruthClusters];   //[ZDCEcalTruthClusters_]
-   Float_t         ZDCEcalTruthClusters_positionError_yz[kMaxZDCEcalTruthClusters];   //[ZDCEcalTruthClusters_]
-   Float_t         ZDCEcalTruthClusters_intrinsicTheta[kMaxZDCEcalTruthClusters];   //[ZDCEcalTruthClusters_]
-   Float_t         ZDCEcalTruthClusters_intrinsicPhi[kMaxZDCEcalTruthClusters];   //[ZDCEcalTruthClusters_]
-   Float_t         ZDCEcalTruthClusters_intrinsicDirectionError_xx[kMaxZDCEcalTruthClusters];   //[ZDCEcalTruthClusters_]
-   Float_t         ZDCEcalTruthClusters_intrinsicDirectionError_yy[kMaxZDCEcalTruthClusters];   //[ZDCEcalTruthClusters_]
-   Float_t         ZDCEcalTruthClusters_intrinsicDirectionError_xy[kMaxZDCEcalTruthClusters];   //[ZDCEcalTruthClusters_]
-   UInt_t          ZDCEcalTruthClusters_shapeParameters_begin[kMaxZDCEcalTruthClusters];   //[ZDCEcalTruthClusters_]
-   UInt_t          ZDCEcalTruthClusters_shapeParameters_end[kMaxZDCEcalTruthClusters];   //[ZDCEcalTruthClusters_]
-   UInt_t          ZDCEcalTruthClusters_hitContributions_begin[kMaxZDCEcalTruthClusters];   //[ZDCEcalTruthClusters_]
-   UInt_t          ZDCEcalTruthClusters_hitContributions_end[kMaxZDCEcalTruthClusters];   //[ZDCEcalTruthClusters_]
-   UInt_t          ZDCEcalTruthClusters_subdetectorEnergies_begin[kMaxZDCEcalTruthClusters];   //[ZDCEcalTruthClusters_]
-   UInt_t          ZDCEcalTruthClusters_subdetectorEnergies_end[kMaxZDCEcalTruthClusters];   //[ZDCEcalTruthClusters_]
-   UInt_t          ZDCEcalTruthClusters_clusters_begin[kMaxZDCEcalTruthClusters];   //[ZDCEcalTruthClusters_]
-   UInt_t          ZDCEcalTruthClusters_clusters_end[kMaxZDCEcalTruthClusters];   //[ZDCEcalTruthClusters_]
-   UInt_t          ZDCEcalTruthClusters_hits_begin[kMaxZDCEcalTruthClusters];   //[ZDCEcalTruthClusters_]
-   UInt_t          ZDCEcalTruthClusters_hits_end[kMaxZDCEcalTruthClusters];   //[ZDCEcalTruthClusters_]
-   UInt_t          ZDCEcalTruthClusters_particleIDs_begin[kMaxZDCEcalTruthClusters];   //[ZDCEcalTruthClusters_]
-   UInt_t          ZDCEcalTruthClusters_particleIDs_end[kMaxZDCEcalTruthClusters];   //[ZDCEcalTruthClusters_]
-   Int_t           _ZDCEcalTruthClusters_clusters_;
-   Int_t           _ZDCEcalTruthClusters_clusters_index[kMax_ZDCEcalTruthClusters_clusters];   //[_ZDCEcalTruthClusters_clusters_]
-   UInt_t          _ZDCEcalTruthClusters_clusters_collectionID[kMax_ZDCEcalTruthClusters_clusters];   //[_ZDCEcalTruthClusters_clusters_]
-   Int_t           _ZDCEcalTruthClusters_hits_;
-   Int_t           _ZDCEcalTruthClusters_hits_index[kMax_ZDCEcalTruthClusters_hits];   //[_ZDCEcalTruthClusters_hits_]
-   UInt_t          _ZDCEcalTruthClusters_hits_collectionID[kMax_ZDCEcalTruthClusters_hits];   //[_ZDCEcalTruthClusters_hits_]
-   Int_t           _ZDCEcalTruthClusters_particleIDs_;
-   Int_t           _ZDCEcalTruthClusters_particleIDs_index[kMax_ZDCEcalTruthClusters_particleIDs];   //[_ZDCEcalTruthClusters_particleIDs_]
-   UInt_t          _ZDCEcalTruthClusters_particleIDs_collectionID[kMax_ZDCEcalTruthClusters_particleIDs];   //[_ZDCEcalTruthClusters_particleIDs_]
-   vector<float>   *_ZDCEcalTruthClusters_shapeParameters;
-   vector<float>   *_ZDCEcalTruthClusters_hitContributions;
-   vector<float>   *_ZDCEcalTruthClusters_subdetectorEnergies;
+   Int_t           TrackerEndcapHits_;
+   ULong_t         TrackerEndcapHits_cellID[kMaxTrackerEndcapHits];   //[TrackerEndcapHits_]
+   Float_t         TrackerEndcapHits_EDep[kMaxTrackerEndcapHits];   //[TrackerEndcapHits_]
+   Float_t         TrackerEndcapHits_time[kMaxTrackerEndcapHits];   //[TrackerEndcapHits_]
+   Float_t         TrackerEndcapHits_pathLength[kMaxTrackerEndcapHits];   //[TrackerEndcapHits_]
+   Int_t           TrackerEndcapHits_quality[kMaxTrackerEndcapHits];   //[TrackerEndcapHits_]
+   Double_t        TrackerEndcapHits_position_x[kMaxTrackerEndcapHits];   //[TrackerEndcapHits_]
+   Double_t        TrackerEndcapHits_position_y[kMaxTrackerEndcapHits];   //[TrackerEndcapHits_]
+   Double_t        TrackerEndcapHits_position_z[kMaxTrackerEndcapHits];   //[TrackerEndcapHits_]
+   Float_t         TrackerEndcapHits_momentum_x[kMaxTrackerEndcapHits];   //[TrackerEndcapHits_]
+   Float_t         TrackerEndcapHits_momentum_y[kMaxTrackerEndcapHits];   //[TrackerEndcapHits_]
+   Float_t         TrackerEndcapHits_momentum_z[kMaxTrackerEndcapHits];   //[TrackerEndcapHits_]
+   Int_t           _TrackerEndcapHits_MCParticle_;
+   Int_t           _TrackerEndcapHits_MCParticle_index[kMax_TrackerEndcapHits_MCParticle];   //[_TrackerEndcapHits_MCParticle_]
+   UInt_t          _TrackerEndcapHits_MCParticle_collectionID[kMax_TrackerEndcapHits_MCParticle];   //[_TrackerEndcapHits_MCParticle_]
+   Int_t           VertexBarrelHits_;
+   ULong_t         VertexBarrelHits_cellID[kMaxVertexBarrelHits];   //[VertexBarrelHits_]
+   Float_t         VertexBarrelHits_EDep[kMaxVertexBarrelHits];   //[VertexBarrelHits_]
+   Float_t         VertexBarrelHits_time[kMaxVertexBarrelHits];   //[VertexBarrelHits_]
+   Float_t         VertexBarrelHits_pathLength[kMaxVertexBarrelHits];   //[VertexBarrelHits_]
+   Int_t           VertexBarrelHits_quality[kMaxVertexBarrelHits];   //[VertexBarrelHits_]
+   Double_t        VertexBarrelHits_position_x[kMaxVertexBarrelHits];   //[VertexBarrelHits_]
+   Double_t        VertexBarrelHits_position_y[kMaxVertexBarrelHits];   //[VertexBarrelHits_]
+   Double_t        VertexBarrelHits_position_z[kMaxVertexBarrelHits];   //[VertexBarrelHits_]
+   Float_t         VertexBarrelHits_momentum_x[kMaxVertexBarrelHits];   //[VertexBarrelHits_]
+   Float_t         VertexBarrelHits_momentum_y[kMaxVertexBarrelHits];   //[VertexBarrelHits_]
+   Float_t         VertexBarrelHits_momentum_z[kMaxVertexBarrelHits];   //[VertexBarrelHits_]
+   Int_t           _VertexBarrelHits_MCParticle_;
+   Int_t           _VertexBarrelHits_MCParticle_index[kMax_VertexBarrelHits_MCParticle];   //[_VertexBarrelHits_MCParticle_]
+   UInt_t          _VertexBarrelHits_MCParticle_collectionID[kMax_VertexBarrelHits_MCParticle];   //[_VertexBarrelHits_MCParticle_]
  //podio::GenericParameters *PARAMETERS;
    Int_t           _intMap_;
    string          _intMap_first[kMax_intMap];
@@ -3106,6 +3594,25 @@ public :
    TBranch        *b_B0ECalRecHits_local_x;   //!
    TBranch        *b_B0ECalRecHits_local_y;   //!
    TBranch        *b_B0ECalRecHits_local_z;   //!
+   TBranch        *b_B0TrackerHits_;   //!
+   TBranch        *b_B0TrackerHits_cellID;   //!
+   TBranch        *b_B0TrackerHits_EDep;   //!
+   TBranch        *b_B0TrackerHits_time;   //!
+   TBranch        *b_B0TrackerHits_pathLength;   //!
+   TBranch        *b_B0TrackerHits_quality;   //!
+   TBranch        *b_B0TrackerHits_position_x;   //!
+   TBranch        *b_B0TrackerHits_position_y;   //!
+   TBranch        *b_B0TrackerHits_position_z;   //!
+   TBranch        *b_B0TrackerHits_momentum_x;   //!
+   TBranch        *b_B0TrackerHits_momentum_y;   //!
+   TBranch        *b_B0TrackerHits_momentum_z;   //!
+   TBranch        *b__B0TrackerHits_MCParticle_;   //!
+   TBranch        *b__B0TrackerHits_MCParticle_index;   //!
+   TBranch        *b__B0TrackerHits_MCParticle_collectionID;   //!
+   TBranch        *b_B0TrackerRawHits_;   //!
+   TBranch        *b_B0TrackerRawHits_cellID;   //!
+   TBranch        *b_B0TrackerRawHits_charge;   //!
+   TBranch        *b_B0TrackerRawHits_timeStamp;   //!
    TBranch        *b_B0TrackerRecHits_;   //!
    TBranch        *b_B0TrackerRecHits_cellID;   //!
    TBranch        *b_B0TrackerRecHits_position_x;   //!
@@ -3118,6 +3625,25 @@ public :
    TBranch        *b_B0TrackerRecHits_timeError;   //!
    TBranch        *b_B0TrackerRecHits_edep;   //!
    TBranch        *b_B0TrackerRecHits_edepError;   //!
+   TBranch        *b_BackwardMPGDEndcapHits_;   //!
+   TBranch        *b_BackwardMPGDEndcapHits_cellID;   //!
+   TBranch        *b_BackwardMPGDEndcapHits_EDep;   //!
+   TBranch        *b_BackwardMPGDEndcapHits_time;   //!
+   TBranch        *b_BackwardMPGDEndcapHits_pathLength;   //!
+   TBranch        *b_BackwardMPGDEndcapHits_quality;   //!
+   TBranch        *b_BackwardMPGDEndcapHits_position_x;   //!
+   TBranch        *b_BackwardMPGDEndcapHits_position_y;   //!
+   TBranch        *b_BackwardMPGDEndcapHits_position_z;   //!
+   TBranch        *b_BackwardMPGDEndcapHits_momentum_x;   //!
+   TBranch        *b_BackwardMPGDEndcapHits_momentum_y;   //!
+   TBranch        *b_BackwardMPGDEndcapHits_momentum_z;   //!
+   TBranch        *b__BackwardMPGDEndcapHits_MCParticle_;   //!
+   TBranch        *b__BackwardMPGDEndcapHits_MCParticle_index;   //!
+   TBranch        *b__BackwardMPGDEndcapHits_MCParticle_collectionID;   //!
+   TBranch        *b_BackwardMPGDEndcapRawHits_;   //!
+   TBranch        *b_BackwardMPGDEndcapRawHits_cellID;   //!
+   TBranch        *b_BackwardMPGDEndcapRawHits_charge;   //!
+   TBranch        *b_BackwardMPGDEndcapRawHits_timeStamp;   //!
    TBranch        *b_BackwardMPGDEndcapRecHits_;   //!
    TBranch        *b_BackwardMPGDEndcapRecHits_cellID;   //!
    TBranch        *b_BackwardMPGDEndcapRecHits_position_x;   //!
@@ -3170,34 +3696,49 @@ public :
    TBranch        *b__CalorimeterTrackProjections_points_pathlengthError;   //!
    TBranch        *b_CentralCKFSeededTrackParameters_;   //!
    TBranch        *b_CentralCKFSeededTrackParameters_type;   //!
+   TBranch        *b_CentralCKFSeededTrackParameters_surface;   //!
    TBranch        *b_CentralCKFSeededTrackParameters_loc_a;   //!
    TBranch        *b_CentralCKFSeededTrackParameters_loc_b;   //!
-   TBranch        *b_CentralCKFSeededTrackParameters_locError_xx;   //!
-   TBranch        *b_CentralCKFSeededTrackParameters_locError_yy;   //!
-   TBranch        *b_CentralCKFSeededTrackParameters_locError_xy;   //!
    TBranch        *b_CentralCKFSeededTrackParameters_theta;   //!
    TBranch        *b_CentralCKFSeededTrackParameters_phi;   //!
    TBranch        *b_CentralCKFSeededTrackParameters_qOverP;   //!
-   TBranch        *b_CentralCKFSeededTrackParameters_momentumError_xx;   //!
-   TBranch        *b_CentralCKFSeededTrackParameters_momentumError_yy;   //!
-   TBranch        *b_CentralCKFSeededTrackParameters_momentumError_zz;   //!
-   TBranch        *b_CentralCKFSeededTrackParameters_momentumError_xy;   //!
-   TBranch        *b_CentralCKFSeededTrackParameters_momentumError_xz;   //!
-   TBranch        *b_CentralCKFSeededTrackParameters_momentumError_yz;   //!
    TBranch        *b_CentralCKFSeededTrackParameters_time;   //!
-   TBranch        *b_CentralCKFSeededTrackParameters_timeError;   //!
-   TBranch        *b_CentralCKFSeededTrackParameters_charge;   //!
-   TBranch        *b__CentralCKFSeededTrackParameters_trajectory_;   //!
-   TBranch        *b__CentralCKFSeededTrackParameters_trajectory_index;   //!
-   TBranch        *b__CentralCKFSeededTrackParameters_trajectory_collectionID;   //!
+   TBranch        *b_CentralCKFSeededTrackParameters_pdg;   //!
+   TBranch        *b_CentralCKFSeededTrackParameters_covariance_covariance;   //!
+   TBranch        *b_CentralCKFSeededTracks_;   //!
+   TBranch        *b_CentralCKFSeededTracks_type;   //!
+   TBranch        *b_CentralCKFSeededTracks_position_x;   //!
+   TBranch        *b_CentralCKFSeededTracks_position_y;   //!
+   TBranch        *b_CentralCKFSeededTracks_position_z;   //!
+   TBranch        *b_CentralCKFSeededTracks_momentum_x;   //!
+   TBranch        *b_CentralCKFSeededTracks_momentum_y;   //!
+   TBranch        *b_CentralCKFSeededTracks_momentum_z;   //!
+   TBranch        *b_CentralCKFSeededTracks_positionMomentumCovariance_covariance;   //!
+   TBranch        *b_CentralCKFSeededTracks_time;   //!
+   TBranch        *b_CentralCKFSeededTracks_timeError;   //!
+   TBranch        *b_CentralCKFSeededTracks_charge;   //!
+   TBranch        *b_CentralCKFSeededTracks_chi2;   //!
+   TBranch        *b_CentralCKFSeededTracks_ndf;   //!
+   TBranch        *b_CentralCKFSeededTracks_pdg;   //!
+   TBranch        *b_CentralCKFSeededTracks_measurements_begin;   //!
+   TBranch        *b_CentralCKFSeededTracks_measurements_end;   //!
+   TBranch        *b_CentralCKFSeededTracks_tracks_begin;   //!
+   TBranch        *b_CentralCKFSeededTracks_tracks_end;   //!
+   TBranch        *b__CentralCKFSeededTracks_measurements_;   //!
+   TBranch        *b__CentralCKFSeededTracks_measurements_index;   //!
+   TBranch        *b__CentralCKFSeededTracks_measurements_collectionID;   //!
+   TBranch        *b__CentralCKFSeededTracks_tracks_;   //!
+   TBranch        *b__CentralCKFSeededTracks_tracks_index;   //!
+   TBranch        *b__CentralCKFSeededTracks_tracks_collectionID;   //!
+   TBranch        *b__CentralCKFSeededTracks_trajectory_;   //!
+   TBranch        *b__CentralCKFSeededTracks_trajectory_index;   //!
+   TBranch        *b__CentralCKFSeededTracks_trajectory_collectionID;   //!
    TBranch        *b_CentralCKFSeededTrajectories_;   //!
    TBranch        *b_CentralCKFSeededTrajectories_type;   //!
    TBranch        *b_CentralCKFSeededTrajectories_nStates;   //!
    TBranch        *b_CentralCKFSeededTrajectories_nMeasurements;   //!
    TBranch        *b_CentralCKFSeededTrajectories_nOutliers;   //!
    TBranch        *b_CentralCKFSeededTrajectories_nHoles;   //!
-   TBranch        *b_CentralCKFSeededTrajectories_chi2;   //!
-   TBranch        *b_CentralCKFSeededTrajectories_ndf;   //!
    TBranch        *b_CentralCKFSeededTrajectories_nSharedHits;   //!
    TBranch        *b_CentralCKFSeededTrajectories_measurementChi2_begin;   //!
    TBranch        *b_CentralCKFSeededTrajectories_measurementChi2_end;   //!
@@ -3205,51 +3746,69 @@ public :
    TBranch        *b_CentralCKFSeededTrajectories_outlierChi2_end;   //!
    TBranch        *b_CentralCKFSeededTrajectories_trackParameters_begin;   //!
    TBranch        *b_CentralCKFSeededTrajectories_trackParameters_end;   //!
-   TBranch        *b_CentralCKFSeededTrajectories_measurementHits_begin;   //!
-   TBranch        *b_CentralCKFSeededTrajectories_measurementHits_end;   //!
-   TBranch        *b_CentralCKFSeededTrajectories_outlierHits_begin;   //!
-   TBranch        *b_CentralCKFSeededTrajectories_outlierHits_end;   //!
+   TBranch        *b_CentralCKFSeededTrajectories_measurements_deprecated_begin;   //!
+   TBranch        *b_CentralCKFSeededTrajectories_measurements_deprecated_end;   //!
+   TBranch        *b_CentralCKFSeededTrajectories_outliers_deprecated_begin;   //!
+   TBranch        *b_CentralCKFSeededTrajectories_outliers_deprecated_end;   //!
    TBranch        *b__CentralCKFSeededTrajectories_trackParameters_;   //!
    TBranch        *b__CentralCKFSeededTrajectories_trackParameters_index;   //!
    TBranch        *b__CentralCKFSeededTrajectories_trackParameters_collectionID;   //!
-   TBranch        *b__CentralCKFSeededTrajectories_measurementHits_;   //!
-   TBranch        *b__CentralCKFSeededTrajectories_measurementHits_index;   //!
-   TBranch        *b__CentralCKFSeededTrajectories_measurementHits_collectionID;   //!
-   TBranch        *b__CentralCKFSeededTrajectories_outlierHits_;   //!
-   TBranch        *b__CentralCKFSeededTrajectories_outlierHits_index;   //!
-   TBranch        *b__CentralCKFSeededTrajectories_outlierHits_collectionID;   //!
+   TBranch        *b__CentralCKFSeededTrajectories_measurements_deprecated_;   //!
+   TBranch        *b__CentralCKFSeededTrajectories_measurements_deprecated_index;   //!
+   TBranch        *b__CentralCKFSeededTrajectories_measurements_deprecated_collectionID;   //!
+   TBranch        *b__CentralCKFSeededTrajectories_outliers_deprecated_;   //!
+   TBranch        *b__CentralCKFSeededTrajectories_outliers_deprecated_index;   //!
+   TBranch        *b__CentralCKFSeededTrajectories_outliers_deprecated_collectionID;   //!
+   TBranch        *b__CentralCKFSeededTrajectories_seed_;   //!
+   TBranch        *b__CentralCKFSeededTrajectories_seed_index;   //!
+   TBranch        *b__CentralCKFSeededTrajectories_seed_collectionID;   //!
    TBranch        *b__CentralCKFSeededTrajectories_measurementChi2;   //!
    TBranch        *b__CentralCKFSeededTrajectories_outlierChi2;   //!
    TBranch        *b_CentralCKFTrackParameters_;   //!
    TBranch        *b_CentralCKFTrackParameters_type;   //!
+   TBranch        *b_CentralCKFTrackParameters_surface;   //!
    TBranch        *b_CentralCKFTrackParameters_loc_a;   //!
    TBranch        *b_CentralCKFTrackParameters_loc_b;   //!
-   TBranch        *b_CentralCKFTrackParameters_locError_xx;   //!
-   TBranch        *b_CentralCKFTrackParameters_locError_yy;   //!
-   TBranch        *b_CentralCKFTrackParameters_locError_xy;   //!
    TBranch        *b_CentralCKFTrackParameters_theta;   //!
    TBranch        *b_CentralCKFTrackParameters_phi;   //!
    TBranch        *b_CentralCKFTrackParameters_qOverP;   //!
-   TBranch        *b_CentralCKFTrackParameters_momentumError_xx;   //!
-   TBranch        *b_CentralCKFTrackParameters_momentumError_yy;   //!
-   TBranch        *b_CentralCKFTrackParameters_momentumError_zz;   //!
-   TBranch        *b_CentralCKFTrackParameters_momentumError_xy;   //!
-   TBranch        *b_CentralCKFTrackParameters_momentumError_xz;   //!
-   TBranch        *b_CentralCKFTrackParameters_momentumError_yz;   //!
    TBranch        *b_CentralCKFTrackParameters_time;   //!
-   TBranch        *b_CentralCKFTrackParameters_timeError;   //!
-   TBranch        *b_CentralCKFTrackParameters_charge;   //!
-   TBranch        *b__CentralCKFTrackParameters_trajectory_;   //!
-   TBranch        *b__CentralCKFTrackParameters_trajectory_index;   //!
-   TBranch        *b__CentralCKFTrackParameters_trajectory_collectionID;   //!
+   TBranch        *b_CentralCKFTrackParameters_pdg;   //!
+   TBranch        *b_CentralCKFTrackParameters_covariance_covariance;   //!
+   TBranch        *b_CentralCKFTracks_;   //!
+   TBranch        *b_CentralCKFTracks_type;   //!
+   TBranch        *b_CentralCKFTracks_position_x;   //!
+   TBranch        *b_CentralCKFTracks_position_y;   //!
+   TBranch        *b_CentralCKFTracks_position_z;   //!
+   TBranch        *b_CentralCKFTracks_momentum_x;   //!
+   TBranch        *b_CentralCKFTracks_momentum_y;   //!
+   TBranch        *b_CentralCKFTracks_momentum_z;   //!
+   TBranch        *b_CentralCKFTracks_positionMomentumCovariance_covariance;   //!
+   TBranch        *b_CentralCKFTracks_time;   //!
+   TBranch        *b_CentralCKFTracks_timeError;   //!
+   TBranch        *b_CentralCKFTracks_charge;   //!
+   TBranch        *b_CentralCKFTracks_chi2;   //!
+   TBranch        *b_CentralCKFTracks_ndf;   //!
+   TBranch        *b_CentralCKFTracks_pdg;   //!
+   TBranch        *b_CentralCKFTracks_measurements_begin;   //!
+   TBranch        *b_CentralCKFTracks_measurements_end;   //!
+   TBranch        *b_CentralCKFTracks_tracks_begin;   //!
+   TBranch        *b_CentralCKFTracks_tracks_end;   //!
+   TBranch        *b__CentralCKFTracks_measurements_;   //!
+   TBranch        *b__CentralCKFTracks_measurements_index;   //!
+   TBranch        *b__CentralCKFTracks_measurements_collectionID;   //!
+   TBranch        *b__CentralCKFTracks_tracks_;   //!
+   TBranch        *b__CentralCKFTracks_tracks_index;   //!
+   TBranch        *b__CentralCKFTracks_tracks_collectionID;   //!
+   TBranch        *b__CentralCKFTracks_trajectory_;   //!
+   TBranch        *b__CentralCKFTracks_trajectory_index;   //!
+   TBranch        *b__CentralCKFTracks_trajectory_collectionID;   //!
    TBranch        *b_CentralCKFTrajectories_;   //!
    TBranch        *b_CentralCKFTrajectories_type;   //!
    TBranch        *b_CentralCKFTrajectories_nStates;   //!
    TBranch        *b_CentralCKFTrajectories_nMeasurements;   //!
    TBranch        *b_CentralCKFTrajectories_nOutliers;   //!
    TBranch        *b_CentralCKFTrajectories_nHoles;   //!
-   TBranch        *b_CentralCKFTrajectories_chi2;   //!
-   TBranch        *b_CentralCKFTrajectories_ndf;   //!
    TBranch        *b_CentralCKFTrajectories_nSharedHits;   //!
    TBranch        *b_CentralCKFTrajectories_measurementChi2_begin;   //!
    TBranch        *b_CentralCKFTrajectories_measurementChi2_end;   //!
@@ -3257,19 +3816,22 @@ public :
    TBranch        *b_CentralCKFTrajectories_outlierChi2_end;   //!
    TBranch        *b_CentralCKFTrajectories_trackParameters_begin;   //!
    TBranch        *b_CentralCKFTrajectories_trackParameters_end;   //!
-   TBranch        *b_CentralCKFTrajectories_measurementHits_begin;   //!
-   TBranch        *b_CentralCKFTrajectories_measurementHits_end;   //!
-   TBranch        *b_CentralCKFTrajectories_outlierHits_begin;   //!
-   TBranch        *b_CentralCKFTrajectories_outlierHits_end;   //!
+   TBranch        *b_CentralCKFTrajectories_measurements_deprecated_begin;   //!
+   TBranch        *b_CentralCKFTrajectories_measurements_deprecated_end;   //!
+   TBranch        *b_CentralCKFTrajectories_outliers_deprecated_begin;   //!
+   TBranch        *b_CentralCKFTrajectories_outliers_deprecated_end;   //!
    TBranch        *b__CentralCKFTrajectories_trackParameters_;   //!
    TBranch        *b__CentralCKFTrajectories_trackParameters_index;   //!
    TBranch        *b__CentralCKFTrajectories_trackParameters_collectionID;   //!
-   TBranch        *b__CentralCKFTrajectories_measurementHits_;   //!
-   TBranch        *b__CentralCKFTrajectories_measurementHits_index;   //!
-   TBranch        *b__CentralCKFTrajectories_measurementHits_collectionID;   //!
-   TBranch        *b__CentralCKFTrajectories_outlierHits_;   //!
-   TBranch        *b__CentralCKFTrajectories_outlierHits_index;   //!
-   TBranch        *b__CentralCKFTrajectories_outlierHits_collectionID;   //!
+   TBranch        *b__CentralCKFTrajectories_measurements_deprecated_;   //!
+   TBranch        *b__CentralCKFTrajectories_measurements_deprecated_index;   //!
+   TBranch        *b__CentralCKFTrajectories_measurements_deprecated_collectionID;   //!
+   TBranch        *b__CentralCKFTrajectories_outliers_deprecated_;   //!
+   TBranch        *b__CentralCKFTrajectories_outliers_deprecated_index;   //!
+   TBranch        *b__CentralCKFTrajectories_outliers_deprecated_collectionID;   //!
+   TBranch        *b__CentralCKFTrajectories_seed_;   //!
+   TBranch        *b__CentralCKFTrajectories_seed_index;   //!
+   TBranch        *b__CentralCKFTrajectories_seed_collectionID;   //!
    TBranch        *b__CentralCKFTrajectories_measurementChi2;   //!
    TBranch        *b__CentralCKFTrajectories_outlierChi2;   //!
    TBranch        *b_CentralTrackerMeasurements_;   //!
@@ -3296,26 +3858,15 @@ public :
    TBranch        *b_CentralTrackingRecHits_objIdx_collectionID;   //!
    TBranch        *b_CentralTrackSeedingResults_;   //!
    TBranch        *b_CentralTrackSeedingResults_type;   //!
+   TBranch        *b_CentralTrackSeedingResults_surface;   //!
    TBranch        *b_CentralTrackSeedingResults_loc_a;   //!
    TBranch        *b_CentralTrackSeedingResults_loc_b;   //!
-   TBranch        *b_CentralTrackSeedingResults_locError_xx;   //!
-   TBranch        *b_CentralTrackSeedingResults_locError_yy;   //!
-   TBranch        *b_CentralTrackSeedingResults_locError_xy;   //!
    TBranch        *b_CentralTrackSeedingResults_theta;   //!
    TBranch        *b_CentralTrackSeedingResults_phi;   //!
    TBranch        *b_CentralTrackSeedingResults_qOverP;   //!
-   TBranch        *b_CentralTrackSeedingResults_momentumError_xx;   //!
-   TBranch        *b_CentralTrackSeedingResults_momentumError_yy;   //!
-   TBranch        *b_CentralTrackSeedingResults_momentumError_zz;   //!
-   TBranch        *b_CentralTrackSeedingResults_momentumError_xy;   //!
-   TBranch        *b_CentralTrackSeedingResults_momentumError_xz;   //!
-   TBranch        *b_CentralTrackSeedingResults_momentumError_yz;   //!
    TBranch        *b_CentralTrackSeedingResults_time;   //!
-   TBranch        *b_CentralTrackSeedingResults_timeError;   //!
-   TBranch        *b_CentralTrackSeedingResults_charge;   //!
-   TBranch        *b__CentralTrackSeedingResults_trajectory_;   //!
-   TBranch        *b__CentralTrackSeedingResults_trajectory_index;   //!
-   TBranch        *b__CentralTrackSeedingResults_trajectory_collectionID;   //!
+   TBranch        *b_CentralTrackSeedingResults_pdg;   //!
+   TBranch        *b_CentralTrackSeedingResults_covariance_covariance;   //!
    TBranch        *b_CentralTrackSegments_;   //!
    TBranch        *b_CentralTrackSegments_length;   //!
    TBranch        *b_CentralTrackSegments_lengthError;   //!
@@ -3355,26 +3906,28 @@ public :
    TBranch        *b__CentralTrackSegments_points_pathlength;   //!
    TBranch        *b__CentralTrackSegments_points_pathlengthError;   //!
    TBranch        *b_CentralTrackVertices_;   //!
-   TBranch        *b_CentralTrackVertices_primary;   //!
+   TBranch        *b_CentralTrackVertices_type;   //!
    TBranch        *b_CentralTrackVertices_chi2;   //!
-   TBranch        *b_CentralTrackVertices_probability;   //!
+   TBranch        *b_CentralTrackVertices_ndf;   //!
    TBranch        *b_CentralTrackVertices_position_x;   //!
    TBranch        *b_CentralTrackVertices_position_y;   //!
    TBranch        *b_CentralTrackVertices_position_z;   //!
+   TBranch        *b_CentralTrackVertices_position_t;   //!
    TBranch        *b_CentralTrackVertices_positionError_xx;   //!
    TBranch        *b_CentralTrackVertices_positionError_yy;   //!
    TBranch        *b_CentralTrackVertices_positionError_zz;   //!
+   TBranch        *b_CentralTrackVertices_positionError_tt;   //!
    TBranch        *b_CentralTrackVertices_positionError_xy;   //!
    TBranch        *b_CentralTrackVertices_positionError_xz;   //!
+   TBranch        *b_CentralTrackVertices_positionError_xt;   //!
    TBranch        *b_CentralTrackVertices_positionError_yz;   //!
-   TBranch        *b_CentralTrackVertices_algorithmType;   //!
-   TBranch        *b_CentralTrackVertices_time;   //!
-   TBranch        *b_CentralTrackVertices_parameters_begin;   //!
-   TBranch        *b_CentralTrackVertices_parameters_end;   //!
-   TBranch        *b__CentralTrackVertices_associatedParticle_;   //!
-   TBranch        *b__CentralTrackVertices_associatedParticle_index;   //!
-   TBranch        *b__CentralTrackVertices_associatedParticle_collectionID;   //!
-   TBranch        *b__CentralTrackVertices_parameters;   //!
+   TBranch        *b_CentralTrackVertices_positionError_yt;   //!
+   TBranch        *b_CentralTrackVertices_positionError_zt;   //!
+   TBranch        *b_CentralTrackVertices_associatedParticles_begin;   //!
+   TBranch        *b_CentralTrackVertices_associatedParticles_end;   //!
+   TBranch        *b__CentralTrackVertices_associatedParticles_;   //!
+   TBranch        *b__CentralTrackVertices_associatedParticles_index;   //!
+   TBranch        *b__CentralTrackVertices_associatedParticles_collectionID;   //!
    TBranch        *b_DIRCRawHits_;   //!
    TBranch        *b_DIRCRawHits_cellID;   //!
    TBranch        *b_DIRCRawHits_charge;   //!
@@ -4170,6 +4723,137 @@ public :
    TBranch        *b__EcalEndcapPTruthClusters_shapeParameters;   //!
    TBranch        *b__EcalEndcapPTruthClusters_hitContributions;   //!
    TBranch        *b__EcalEndcapPTruthClusters_subdetectorEnergies;   //!
+   TBranch        *b_EcalFarForwardZDCClusterAssociations_;   //!
+   TBranch        *b_EcalFarForwardZDCClusterAssociations_simID;   //!
+   TBranch        *b_EcalFarForwardZDCClusterAssociations_recID;   //!
+   TBranch        *b_EcalFarForwardZDCClusterAssociations_weight;   //!
+   TBranch        *b__EcalFarForwardZDCClusterAssociations_rec_;   //!
+   TBranch        *b__EcalFarForwardZDCClusterAssociations_rec_index;   //!
+   TBranch        *b__EcalFarForwardZDCClusterAssociations_rec_collectionID;   //!
+   TBranch        *b__EcalFarForwardZDCClusterAssociations_sim_;   //!
+   TBranch        *b__EcalFarForwardZDCClusterAssociations_sim_index;   //!
+   TBranch        *b__EcalFarForwardZDCClusterAssociations_sim_collectionID;   //!
+   TBranch        *b_EcalFarForwardZDCClusters_;   //!
+   TBranch        *b_EcalFarForwardZDCClusters_type;   //!
+   TBranch        *b_EcalFarForwardZDCClusters_energy;   //!
+   TBranch        *b_EcalFarForwardZDCClusters_energyError;   //!
+   TBranch        *b_EcalFarForwardZDCClusters_time;   //!
+   TBranch        *b_EcalFarForwardZDCClusters_timeError;   //!
+   TBranch        *b_EcalFarForwardZDCClusters_nhits;   //!
+   TBranch        *b_EcalFarForwardZDCClusters_position_x;   //!
+   TBranch        *b_EcalFarForwardZDCClusters_position_y;   //!
+   TBranch        *b_EcalFarForwardZDCClusters_position_z;   //!
+   TBranch        *b_EcalFarForwardZDCClusters_positionError_xx;   //!
+   TBranch        *b_EcalFarForwardZDCClusters_positionError_yy;   //!
+   TBranch        *b_EcalFarForwardZDCClusters_positionError_zz;   //!
+   TBranch        *b_EcalFarForwardZDCClusters_positionError_xy;   //!
+   TBranch        *b_EcalFarForwardZDCClusters_positionError_xz;   //!
+   TBranch        *b_EcalFarForwardZDCClusters_positionError_yz;   //!
+   TBranch        *b_EcalFarForwardZDCClusters_intrinsicTheta;   //!
+   TBranch        *b_EcalFarForwardZDCClusters_intrinsicPhi;   //!
+   TBranch        *b_EcalFarForwardZDCClusters_intrinsicDirectionError_xx;   //!
+   TBranch        *b_EcalFarForwardZDCClusters_intrinsicDirectionError_yy;   //!
+   TBranch        *b_EcalFarForwardZDCClusters_intrinsicDirectionError_xy;   //!
+   TBranch        *b_EcalFarForwardZDCClusters_shapeParameters_begin;   //!
+   TBranch        *b_EcalFarForwardZDCClusters_shapeParameters_end;   //!
+   TBranch        *b_EcalFarForwardZDCClusters_hitContributions_begin;   //!
+   TBranch        *b_EcalFarForwardZDCClusters_hitContributions_end;   //!
+   TBranch        *b_EcalFarForwardZDCClusters_subdetectorEnergies_begin;   //!
+   TBranch        *b_EcalFarForwardZDCClusters_subdetectorEnergies_end;   //!
+   TBranch        *b_EcalFarForwardZDCClusters_clusters_begin;   //!
+   TBranch        *b_EcalFarForwardZDCClusters_clusters_end;   //!
+   TBranch        *b_EcalFarForwardZDCClusters_hits_begin;   //!
+   TBranch        *b_EcalFarForwardZDCClusters_hits_end;   //!
+   TBranch        *b_EcalFarForwardZDCClusters_particleIDs_begin;   //!
+   TBranch        *b_EcalFarForwardZDCClusters_particleIDs_end;   //!
+   TBranch        *b__EcalFarForwardZDCClusters_clusters_;   //!
+   TBranch        *b__EcalFarForwardZDCClusters_clusters_index;   //!
+   TBranch        *b__EcalFarForwardZDCClusters_clusters_collectionID;   //!
+   TBranch        *b__EcalFarForwardZDCClusters_hits_;   //!
+   TBranch        *b__EcalFarForwardZDCClusters_hits_index;   //!
+   TBranch        *b__EcalFarForwardZDCClusters_hits_collectionID;   //!
+   TBranch        *b__EcalFarForwardZDCClusters_particleIDs_;   //!
+   TBranch        *b__EcalFarForwardZDCClusters_particleIDs_index;   //!
+   TBranch        *b__EcalFarForwardZDCClusters_particleIDs_collectionID;   //!
+   TBranch        *b__EcalFarForwardZDCClusters_shapeParameters;   //!
+   TBranch        *b__EcalFarForwardZDCClusters_hitContributions;   //!
+   TBranch        *b__EcalFarForwardZDCClusters_subdetectorEnergies;   //!
+   TBranch        *b_EcalFarForwardZDCRawHits_;   //!
+   TBranch        *b_EcalFarForwardZDCRawHits_cellID;   //!
+   TBranch        *b_EcalFarForwardZDCRawHits_amplitude;   //!
+   TBranch        *b_EcalFarForwardZDCRawHits_timeStamp;   //!
+   TBranch        *b_EcalFarForwardZDCRecHits_;   //!
+   TBranch        *b_EcalFarForwardZDCRecHits_cellID;   //!
+   TBranch        *b_EcalFarForwardZDCRecHits_energy;   //!
+   TBranch        *b_EcalFarForwardZDCRecHits_energyError;   //!
+   TBranch        *b_EcalFarForwardZDCRecHits_time;   //!
+   TBranch        *b_EcalFarForwardZDCRecHits_timeError;   //!
+   TBranch        *b_EcalFarForwardZDCRecHits_position_x;   //!
+   TBranch        *b_EcalFarForwardZDCRecHits_position_y;   //!
+   TBranch        *b_EcalFarForwardZDCRecHits_position_z;   //!
+   TBranch        *b_EcalFarForwardZDCRecHits_dimension_x;   //!
+   TBranch        *b_EcalFarForwardZDCRecHits_dimension_y;   //!
+   TBranch        *b_EcalFarForwardZDCRecHits_dimension_z;   //!
+   TBranch        *b_EcalFarForwardZDCRecHits_sector;   //!
+   TBranch        *b_EcalFarForwardZDCRecHits_layer;   //!
+   TBranch        *b_EcalFarForwardZDCRecHits_local_x;   //!
+   TBranch        *b_EcalFarForwardZDCRecHits_local_y;   //!
+   TBranch        *b_EcalFarForwardZDCRecHits_local_z;   //!
+   TBranch        *b_EcalFarForwardZDCTruthClusterAssociations_;   //!
+   TBranch        *b_EcalFarForwardZDCTruthClusterAssociations_simID;   //!
+   TBranch        *b_EcalFarForwardZDCTruthClusterAssociations_recID;   //!
+   TBranch        *b_EcalFarForwardZDCTruthClusterAssociations_weight;   //!
+   TBranch        *b__EcalFarForwardZDCTruthClusterAssociations_rec_;   //!
+   TBranch        *b__EcalFarForwardZDCTruthClusterAssociations_rec_index;   //!
+   TBranch        *b__EcalFarForwardZDCTruthClusterAssociations_rec_collectionID;   //!
+   TBranch        *b__EcalFarForwardZDCTruthClusterAssociations_sim_;   //!
+   TBranch        *b__EcalFarForwardZDCTruthClusterAssociations_sim_index;   //!
+   TBranch        *b__EcalFarForwardZDCTruthClusterAssociations_sim_collectionID;   //!
+   TBranch        *b_EcalFarForwardZDCTruthClusters_;   //!
+   TBranch        *b_EcalFarForwardZDCTruthClusters_type;   //!
+   TBranch        *b_EcalFarForwardZDCTruthClusters_energy;   //!
+   TBranch        *b_EcalFarForwardZDCTruthClusters_energyError;   //!
+   TBranch        *b_EcalFarForwardZDCTruthClusters_time;   //!
+   TBranch        *b_EcalFarForwardZDCTruthClusters_timeError;   //!
+   TBranch        *b_EcalFarForwardZDCTruthClusters_nhits;   //!
+   TBranch        *b_EcalFarForwardZDCTruthClusters_position_x;   //!
+   TBranch        *b_EcalFarForwardZDCTruthClusters_position_y;   //!
+   TBranch        *b_EcalFarForwardZDCTruthClusters_position_z;   //!
+   TBranch        *b_EcalFarForwardZDCTruthClusters_positionError_xx;   //!
+   TBranch        *b_EcalFarForwardZDCTruthClusters_positionError_yy;   //!
+   TBranch        *b_EcalFarForwardZDCTruthClusters_positionError_zz;   //!
+   TBranch        *b_EcalFarForwardZDCTruthClusters_positionError_xy;   //!
+   TBranch        *b_EcalFarForwardZDCTruthClusters_positionError_xz;   //!
+   TBranch        *b_EcalFarForwardZDCTruthClusters_positionError_yz;   //!
+   TBranch        *b_EcalFarForwardZDCTruthClusters_intrinsicTheta;   //!
+   TBranch        *b_EcalFarForwardZDCTruthClusters_intrinsicPhi;   //!
+   TBranch        *b_EcalFarForwardZDCTruthClusters_intrinsicDirectionError_xx;   //!
+   TBranch        *b_EcalFarForwardZDCTruthClusters_intrinsicDirectionError_yy;   //!
+   TBranch        *b_EcalFarForwardZDCTruthClusters_intrinsicDirectionError_xy;   //!
+   TBranch        *b_EcalFarForwardZDCTruthClusters_shapeParameters_begin;   //!
+   TBranch        *b_EcalFarForwardZDCTruthClusters_shapeParameters_end;   //!
+   TBranch        *b_EcalFarForwardZDCTruthClusters_hitContributions_begin;   //!
+   TBranch        *b_EcalFarForwardZDCTruthClusters_hitContributions_end;   //!
+   TBranch        *b_EcalFarForwardZDCTruthClusters_subdetectorEnergies_begin;   //!
+   TBranch        *b_EcalFarForwardZDCTruthClusters_subdetectorEnergies_end;   //!
+   TBranch        *b_EcalFarForwardZDCTruthClusters_clusters_begin;   //!
+   TBranch        *b_EcalFarForwardZDCTruthClusters_clusters_end;   //!
+   TBranch        *b_EcalFarForwardZDCTruthClusters_hits_begin;   //!
+   TBranch        *b_EcalFarForwardZDCTruthClusters_hits_end;   //!
+   TBranch        *b_EcalFarForwardZDCTruthClusters_particleIDs_begin;   //!
+   TBranch        *b_EcalFarForwardZDCTruthClusters_particleIDs_end;   //!
+   TBranch        *b__EcalFarForwardZDCTruthClusters_clusters_;   //!
+   TBranch        *b__EcalFarForwardZDCTruthClusters_clusters_index;   //!
+   TBranch        *b__EcalFarForwardZDCTruthClusters_clusters_collectionID;   //!
+   TBranch        *b__EcalFarForwardZDCTruthClusters_hits_;   //!
+   TBranch        *b__EcalFarForwardZDCTruthClusters_hits_index;   //!
+   TBranch        *b__EcalFarForwardZDCTruthClusters_hits_collectionID;   //!
+   TBranch        *b__EcalFarForwardZDCTruthClusters_particleIDs_;   //!
+   TBranch        *b__EcalFarForwardZDCTruthClusters_particleIDs_index;   //!
+   TBranch        *b__EcalFarForwardZDCTruthClusters_particleIDs_collectionID;   //!
+   TBranch        *b__EcalFarForwardZDCTruthClusters_shapeParameters;   //!
+   TBranch        *b__EcalFarForwardZDCTruthClusters_hitContributions;   //!
+   TBranch        *b__EcalFarForwardZDCTruthClusters_subdetectorEnergies;   //!
    TBranch        *b_EcalLumiSpecClusterAssociations_;   //!
    TBranch        *b_EcalLumiSpecClusterAssociations_simID;   //!
    TBranch        *b_EcalLumiSpecClusterAssociations_recID;   //!
@@ -4306,6 +4990,25 @@ public :
    TBranch        *b_EventHeader_runNumber;   //!
    TBranch        *b_EventHeader_timeStamp;   //!
    TBranch        *b_EventHeader_weight;   //!
+   TBranch        *b_ForwardMPGDEndcapHits_;   //!
+   TBranch        *b_ForwardMPGDEndcapHits_cellID;   //!
+   TBranch        *b_ForwardMPGDEndcapHits_EDep;   //!
+   TBranch        *b_ForwardMPGDEndcapHits_time;   //!
+   TBranch        *b_ForwardMPGDEndcapHits_pathLength;   //!
+   TBranch        *b_ForwardMPGDEndcapHits_quality;   //!
+   TBranch        *b_ForwardMPGDEndcapHits_position_x;   //!
+   TBranch        *b_ForwardMPGDEndcapHits_position_y;   //!
+   TBranch        *b_ForwardMPGDEndcapHits_position_z;   //!
+   TBranch        *b_ForwardMPGDEndcapHits_momentum_x;   //!
+   TBranch        *b_ForwardMPGDEndcapHits_momentum_y;   //!
+   TBranch        *b_ForwardMPGDEndcapHits_momentum_z;   //!
+   TBranch        *b__ForwardMPGDEndcapHits_MCParticle_;   //!
+   TBranch        *b__ForwardMPGDEndcapHits_MCParticle_index;   //!
+   TBranch        *b__ForwardMPGDEndcapHits_MCParticle_collectionID;   //!
+   TBranch        *b_ForwardMPGDEndcapRawHits_;   //!
+   TBranch        *b_ForwardMPGDEndcapRawHits_cellID;   //!
+   TBranch        *b_ForwardMPGDEndcapRawHits_charge;   //!
+   TBranch        *b_ForwardMPGDEndcapRawHits_timeStamp;   //!
    TBranch        *b_ForwardMPGDEndcapRecHits_;   //!
    TBranch        *b_ForwardMPGDEndcapRecHits_cellID;   //!
    TBranch        *b_ForwardMPGDEndcapRecHits_position_x;   //!
@@ -4935,6 +5638,209 @@ public :
    TBranch        *b_HcalEndcapPInsertRecHits_local_x;   //!
    TBranch        *b_HcalEndcapPInsertRecHits_local_y;   //!
    TBranch        *b_HcalEndcapPInsertRecHits_local_z;   //!
+   TBranch        *b_HcalFarForwardZDCClusterAssociations_;   //!
+   TBranch        *b_HcalFarForwardZDCClusterAssociations_simID;   //!
+   TBranch        *b_HcalFarForwardZDCClusterAssociations_recID;   //!
+   TBranch        *b_HcalFarForwardZDCClusterAssociations_weight;   //!
+   TBranch        *b__HcalFarForwardZDCClusterAssociations_rec_;   //!
+   TBranch        *b__HcalFarForwardZDCClusterAssociations_rec_index;   //!
+   TBranch        *b__HcalFarForwardZDCClusterAssociations_rec_collectionID;   //!
+   TBranch        *b__HcalFarForwardZDCClusterAssociations_sim_;   //!
+   TBranch        *b__HcalFarForwardZDCClusterAssociations_sim_index;   //!
+   TBranch        *b__HcalFarForwardZDCClusterAssociations_sim_collectionID;   //!
+   TBranch        *b_HcalFarForwardZDCClusterAssociationsBaseline_;   //!
+   TBranch        *b_HcalFarForwardZDCClusterAssociationsBaseline_simID;   //!
+   TBranch        *b_HcalFarForwardZDCClusterAssociationsBaseline_recID;   //!
+   TBranch        *b_HcalFarForwardZDCClusterAssociationsBaseline_weight;   //!
+   TBranch        *b__HcalFarForwardZDCClusterAssociationsBaseline_rec_;   //!
+   TBranch        *b__HcalFarForwardZDCClusterAssociationsBaseline_rec_index;   //!
+   TBranch        *b__HcalFarForwardZDCClusterAssociationsBaseline_rec_collectionID;   //!
+   TBranch        *b__HcalFarForwardZDCClusterAssociationsBaseline_sim_;   //!
+   TBranch        *b__HcalFarForwardZDCClusterAssociationsBaseline_sim_index;   //!
+   TBranch        *b__HcalFarForwardZDCClusterAssociationsBaseline_sim_collectionID;   //!
+   TBranch        *b_HcalFarForwardZDCClusters_;   //!
+   TBranch        *b_HcalFarForwardZDCClusters_type;   //!
+   TBranch        *b_HcalFarForwardZDCClusters_energy;   //!
+   TBranch        *b_HcalFarForwardZDCClusters_energyError;   //!
+   TBranch        *b_HcalFarForwardZDCClusters_time;   //!
+   TBranch        *b_HcalFarForwardZDCClusters_timeError;   //!
+   TBranch        *b_HcalFarForwardZDCClusters_nhits;   //!
+   TBranch        *b_HcalFarForwardZDCClusters_position_x;   //!
+   TBranch        *b_HcalFarForwardZDCClusters_position_y;   //!
+   TBranch        *b_HcalFarForwardZDCClusters_position_z;   //!
+   TBranch        *b_HcalFarForwardZDCClusters_positionError_xx;   //!
+   TBranch        *b_HcalFarForwardZDCClusters_positionError_yy;   //!
+   TBranch        *b_HcalFarForwardZDCClusters_positionError_zz;   //!
+   TBranch        *b_HcalFarForwardZDCClusters_positionError_xy;   //!
+   TBranch        *b_HcalFarForwardZDCClusters_positionError_xz;   //!
+   TBranch        *b_HcalFarForwardZDCClusters_positionError_yz;   //!
+   TBranch        *b_HcalFarForwardZDCClusters_intrinsicTheta;   //!
+   TBranch        *b_HcalFarForwardZDCClusters_intrinsicPhi;   //!
+   TBranch        *b_HcalFarForwardZDCClusters_intrinsicDirectionError_xx;   //!
+   TBranch        *b_HcalFarForwardZDCClusters_intrinsicDirectionError_yy;   //!
+   TBranch        *b_HcalFarForwardZDCClusters_intrinsicDirectionError_xy;   //!
+   TBranch        *b_HcalFarForwardZDCClusters_shapeParameters_begin;   //!
+   TBranch        *b_HcalFarForwardZDCClusters_shapeParameters_end;   //!
+   TBranch        *b_HcalFarForwardZDCClusters_hitContributions_begin;   //!
+   TBranch        *b_HcalFarForwardZDCClusters_hitContributions_end;   //!
+   TBranch        *b_HcalFarForwardZDCClusters_subdetectorEnergies_begin;   //!
+   TBranch        *b_HcalFarForwardZDCClusters_subdetectorEnergies_end;   //!
+   TBranch        *b_HcalFarForwardZDCClusters_clusters_begin;   //!
+   TBranch        *b_HcalFarForwardZDCClusters_clusters_end;   //!
+   TBranch        *b_HcalFarForwardZDCClusters_hits_begin;   //!
+   TBranch        *b_HcalFarForwardZDCClusters_hits_end;   //!
+   TBranch        *b_HcalFarForwardZDCClusters_particleIDs_begin;   //!
+   TBranch        *b_HcalFarForwardZDCClusters_particleIDs_end;   //!
+   TBranch        *b__HcalFarForwardZDCClusters_clusters_;   //!
+   TBranch        *b__HcalFarForwardZDCClusters_clusters_index;   //!
+   TBranch        *b__HcalFarForwardZDCClusters_clusters_collectionID;   //!
+   TBranch        *b__HcalFarForwardZDCClusters_hits_;   //!
+   TBranch        *b__HcalFarForwardZDCClusters_hits_index;   //!
+   TBranch        *b__HcalFarForwardZDCClusters_hits_collectionID;   //!
+   TBranch        *b__HcalFarForwardZDCClusters_particleIDs_;   //!
+   TBranch        *b__HcalFarForwardZDCClusters_particleIDs_index;   //!
+   TBranch        *b__HcalFarForwardZDCClusters_particleIDs_collectionID;   //!
+   TBranch        *b__HcalFarForwardZDCClusters_shapeParameters;   //!
+   TBranch        *b__HcalFarForwardZDCClusters_hitContributions;   //!
+   TBranch        *b__HcalFarForwardZDCClusters_subdetectorEnergies;   //!
+   TBranch        *b_HcalFarForwardZDCClustersBaseline_;   //!
+   TBranch        *b_HcalFarForwardZDCClustersBaseline_type;   //!
+   TBranch        *b_HcalFarForwardZDCClustersBaseline_energy;   //!
+   TBranch        *b_HcalFarForwardZDCClustersBaseline_energyError;   //!
+   TBranch        *b_HcalFarForwardZDCClustersBaseline_time;   //!
+   TBranch        *b_HcalFarForwardZDCClustersBaseline_timeError;   //!
+   TBranch        *b_HcalFarForwardZDCClustersBaseline_nhits;   //!
+   TBranch        *b_HcalFarForwardZDCClustersBaseline_position_x;   //!
+   TBranch        *b_HcalFarForwardZDCClustersBaseline_position_y;   //!
+   TBranch        *b_HcalFarForwardZDCClustersBaseline_position_z;   //!
+   TBranch        *b_HcalFarForwardZDCClustersBaseline_positionError_xx;   //!
+   TBranch        *b_HcalFarForwardZDCClustersBaseline_positionError_yy;   //!
+   TBranch        *b_HcalFarForwardZDCClustersBaseline_positionError_zz;   //!
+   TBranch        *b_HcalFarForwardZDCClustersBaseline_positionError_xy;   //!
+   TBranch        *b_HcalFarForwardZDCClustersBaseline_positionError_xz;   //!
+   TBranch        *b_HcalFarForwardZDCClustersBaseline_positionError_yz;   //!
+   TBranch        *b_HcalFarForwardZDCClustersBaseline_intrinsicTheta;   //!
+   TBranch        *b_HcalFarForwardZDCClustersBaseline_intrinsicPhi;   //!
+   TBranch        *b_HcalFarForwardZDCClustersBaseline_intrinsicDirectionError_xx;   //!
+   TBranch        *b_HcalFarForwardZDCClustersBaseline_intrinsicDirectionError_yy;   //!
+   TBranch        *b_HcalFarForwardZDCClustersBaseline_intrinsicDirectionError_xy;   //!
+   TBranch        *b_HcalFarForwardZDCClustersBaseline_shapeParameters_begin;   //!
+   TBranch        *b_HcalFarForwardZDCClustersBaseline_shapeParameters_end;   //!
+   TBranch        *b_HcalFarForwardZDCClustersBaseline_hitContributions_begin;   //!
+   TBranch        *b_HcalFarForwardZDCClustersBaseline_hitContributions_end;   //!
+   TBranch        *b_HcalFarForwardZDCClustersBaseline_subdetectorEnergies_begin;   //!
+   TBranch        *b_HcalFarForwardZDCClustersBaseline_subdetectorEnergies_end;   //!
+   TBranch        *b_HcalFarForwardZDCClustersBaseline_clusters_begin;   //!
+   TBranch        *b_HcalFarForwardZDCClustersBaseline_clusters_end;   //!
+   TBranch        *b_HcalFarForwardZDCClustersBaseline_hits_begin;   //!
+   TBranch        *b_HcalFarForwardZDCClustersBaseline_hits_end;   //!
+   TBranch        *b_HcalFarForwardZDCClustersBaseline_particleIDs_begin;   //!
+   TBranch        *b_HcalFarForwardZDCClustersBaseline_particleIDs_end;   //!
+   TBranch        *b__HcalFarForwardZDCClustersBaseline_clusters_;   //!
+   TBranch        *b__HcalFarForwardZDCClustersBaseline_clusters_index;   //!
+   TBranch        *b__HcalFarForwardZDCClustersBaseline_clusters_collectionID;   //!
+   TBranch        *b__HcalFarForwardZDCClustersBaseline_hits_;   //!
+   TBranch        *b__HcalFarForwardZDCClustersBaseline_hits_index;   //!
+   TBranch        *b__HcalFarForwardZDCClustersBaseline_hits_collectionID;   //!
+   TBranch        *b__HcalFarForwardZDCClustersBaseline_particleIDs_;   //!
+   TBranch        *b__HcalFarForwardZDCClustersBaseline_particleIDs_index;   //!
+   TBranch        *b__HcalFarForwardZDCClustersBaseline_particleIDs_collectionID;   //!
+   TBranch        *b__HcalFarForwardZDCClustersBaseline_shapeParameters;   //!
+   TBranch        *b__HcalFarForwardZDCClustersBaseline_hitContributions;   //!
+   TBranch        *b__HcalFarForwardZDCClustersBaseline_subdetectorEnergies;   //!
+   TBranch        *b_HcalFarForwardZDCRawHits_;   //!
+   TBranch        *b_HcalFarForwardZDCRawHits_cellID;   //!
+   TBranch        *b_HcalFarForwardZDCRawHits_amplitude;   //!
+   TBranch        *b_HcalFarForwardZDCRawHits_timeStamp;   //!
+   TBranch        *b_HcalFarForwardZDCRecHits_;   //!
+   TBranch        *b_HcalFarForwardZDCRecHits_cellID;   //!
+   TBranch        *b_HcalFarForwardZDCRecHits_energy;   //!
+   TBranch        *b_HcalFarForwardZDCRecHits_energyError;   //!
+   TBranch        *b_HcalFarForwardZDCRecHits_time;   //!
+   TBranch        *b_HcalFarForwardZDCRecHits_timeError;   //!
+   TBranch        *b_HcalFarForwardZDCRecHits_position_x;   //!
+   TBranch        *b_HcalFarForwardZDCRecHits_position_y;   //!
+   TBranch        *b_HcalFarForwardZDCRecHits_position_z;   //!
+   TBranch        *b_HcalFarForwardZDCRecHits_dimension_x;   //!
+   TBranch        *b_HcalFarForwardZDCRecHits_dimension_y;   //!
+   TBranch        *b_HcalFarForwardZDCRecHits_dimension_z;   //!
+   TBranch        *b_HcalFarForwardZDCRecHits_sector;   //!
+   TBranch        *b_HcalFarForwardZDCRecHits_layer;   //!
+   TBranch        *b_HcalFarForwardZDCRecHits_local_x;   //!
+   TBranch        *b_HcalFarForwardZDCRecHits_local_y;   //!
+   TBranch        *b_HcalFarForwardZDCRecHits_local_z;   //!
+   TBranch        *b_HcalFarForwardZDCSubcellHits_;   //!
+   TBranch        *b_HcalFarForwardZDCSubcellHits_cellID;   //!
+   TBranch        *b_HcalFarForwardZDCSubcellHits_energy;   //!
+   TBranch        *b_HcalFarForwardZDCSubcellHits_energyError;   //!
+   TBranch        *b_HcalFarForwardZDCSubcellHits_time;   //!
+   TBranch        *b_HcalFarForwardZDCSubcellHits_timeError;   //!
+   TBranch        *b_HcalFarForwardZDCSubcellHits_position_x;   //!
+   TBranch        *b_HcalFarForwardZDCSubcellHits_position_y;   //!
+   TBranch        *b_HcalFarForwardZDCSubcellHits_position_z;   //!
+   TBranch        *b_HcalFarForwardZDCSubcellHits_dimension_x;   //!
+   TBranch        *b_HcalFarForwardZDCSubcellHits_dimension_y;   //!
+   TBranch        *b_HcalFarForwardZDCSubcellHits_dimension_z;   //!
+   TBranch        *b_HcalFarForwardZDCSubcellHits_sector;   //!
+   TBranch        *b_HcalFarForwardZDCSubcellHits_layer;   //!
+   TBranch        *b_HcalFarForwardZDCSubcellHits_local_x;   //!
+   TBranch        *b_HcalFarForwardZDCSubcellHits_local_y;   //!
+   TBranch        *b_HcalFarForwardZDCSubcellHits_local_z;   //!
+   TBranch        *b_HcalFarForwardZDCTruthClusterAssociations_;   //!
+   TBranch        *b_HcalFarForwardZDCTruthClusterAssociations_simID;   //!
+   TBranch        *b_HcalFarForwardZDCTruthClusterAssociations_recID;   //!
+   TBranch        *b_HcalFarForwardZDCTruthClusterAssociations_weight;   //!
+   TBranch        *b__HcalFarForwardZDCTruthClusterAssociations_rec_;   //!
+   TBranch        *b__HcalFarForwardZDCTruthClusterAssociations_rec_index;   //!
+   TBranch        *b__HcalFarForwardZDCTruthClusterAssociations_rec_collectionID;   //!
+   TBranch        *b__HcalFarForwardZDCTruthClusterAssociations_sim_;   //!
+   TBranch        *b__HcalFarForwardZDCTruthClusterAssociations_sim_index;   //!
+   TBranch        *b__HcalFarForwardZDCTruthClusterAssociations_sim_collectionID;   //!
+   TBranch        *b_HcalFarForwardZDCTruthClusters_;   //!
+   TBranch        *b_HcalFarForwardZDCTruthClusters_type;   //!
+   TBranch        *b_HcalFarForwardZDCTruthClusters_energy;   //!
+   TBranch        *b_HcalFarForwardZDCTruthClusters_energyError;   //!
+   TBranch        *b_HcalFarForwardZDCTruthClusters_time;   //!
+   TBranch        *b_HcalFarForwardZDCTruthClusters_timeError;   //!
+   TBranch        *b_HcalFarForwardZDCTruthClusters_nhits;   //!
+   TBranch        *b_HcalFarForwardZDCTruthClusters_position_x;   //!
+   TBranch        *b_HcalFarForwardZDCTruthClusters_position_y;   //!
+   TBranch        *b_HcalFarForwardZDCTruthClusters_position_z;   //!
+   TBranch        *b_HcalFarForwardZDCTruthClusters_positionError_xx;   //!
+   TBranch        *b_HcalFarForwardZDCTruthClusters_positionError_yy;   //!
+   TBranch        *b_HcalFarForwardZDCTruthClusters_positionError_zz;   //!
+   TBranch        *b_HcalFarForwardZDCTruthClusters_positionError_xy;   //!
+   TBranch        *b_HcalFarForwardZDCTruthClusters_positionError_xz;   //!
+   TBranch        *b_HcalFarForwardZDCTruthClusters_positionError_yz;   //!
+   TBranch        *b_HcalFarForwardZDCTruthClusters_intrinsicTheta;   //!
+   TBranch        *b_HcalFarForwardZDCTruthClusters_intrinsicPhi;   //!
+   TBranch        *b_HcalFarForwardZDCTruthClusters_intrinsicDirectionError_xx;   //!
+   TBranch        *b_HcalFarForwardZDCTruthClusters_intrinsicDirectionError_yy;   //!
+   TBranch        *b_HcalFarForwardZDCTruthClusters_intrinsicDirectionError_xy;   //!
+   TBranch        *b_HcalFarForwardZDCTruthClusters_shapeParameters_begin;   //!
+   TBranch        *b_HcalFarForwardZDCTruthClusters_shapeParameters_end;   //!
+   TBranch        *b_HcalFarForwardZDCTruthClusters_hitContributions_begin;   //!
+   TBranch        *b_HcalFarForwardZDCTruthClusters_hitContributions_end;   //!
+   TBranch        *b_HcalFarForwardZDCTruthClusters_subdetectorEnergies_begin;   //!
+   TBranch        *b_HcalFarForwardZDCTruthClusters_subdetectorEnergies_end;   //!
+   TBranch        *b_HcalFarForwardZDCTruthClusters_clusters_begin;   //!
+   TBranch        *b_HcalFarForwardZDCTruthClusters_clusters_end;   //!
+   TBranch        *b_HcalFarForwardZDCTruthClusters_hits_begin;   //!
+   TBranch        *b_HcalFarForwardZDCTruthClusters_hits_end;   //!
+   TBranch        *b_HcalFarForwardZDCTruthClusters_particleIDs_begin;   //!
+   TBranch        *b_HcalFarForwardZDCTruthClusters_particleIDs_end;   //!
+   TBranch        *b__HcalFarForwardZDCTruthClusters_clusters_;   //!
+   TBranch        *b__HcalFarForwardZDCTruthClusters_clusters_index;   //!
+   TBranch        *b__HcalFarForwardZDCTruthClusters_clusters_collectionID;   //!
+   TBranch        *b__HcalFarForwardZDCTruthClusters_hits_;   //!
+   TBranch        *b__HcalFarForwardZDCTruthClusters_hits_index;   //!
+   TBranch        *b__HcalFarForwardZDCTruthClusters_hits_collectionID;   //!
+   TBranch        *b__HcalFarForwardZDCTruthClusters_particleIDs_;   //!
+   TBranch        *b__HcalFarForwardZDCTruthClusters_particleIDs_index;   //!
+   TBranch        *b__HcalFarForwardZDCTruthClusters_particleIDs_collectionID;   //!
+   TBranch        *b__HcalFarForwardZDCTruthClusters_shapeParameters;   //!
+   TBranch        *b__HcalFarForwardZDCTruthClusters_hitContributions;   //!
+   TBranch        *b__HcalFarForwardZDCTruthClusters_subdetectorEnergies;   //!
    TBranch        *b_InclusiveKinematicsDA_;   //!
    TBranch        *b_InclusiveKinematicsDA_x;   //!
    TBranch        *b_InclusiveKinematicsDA_Q2;   //!
@@ -5099,6 +6005,25 @@ public :
    TBranch        *b__MCParticles_daughters_;   //!
    TBranch        *b__MCParticles_daughters_index;   //!
    TBranch        *b__MCParticles_daughters_collectionID;   //!
+   TBranch        *b_MPGDBarrelHits_;   //!
+   TBranch        *b_MPGDBarrelHits_cellID;   //!
+   TBranch        *b_MPGDBarrelHits_EDep;   //!
+   TBranch        *b_MPGDBarrelHits_time;   //!
+   TBranch        *b_MPGDBarrelHits_pathLength;   //!
+   TBranch        *b_MPGDBarrelHits_quality;   //!
+   TBranch        *b_MPGDBarrelHits_position_x;   //!
+   TBranch        *b_MPGDBarrelHits_position_y;   //!
+   TBranch        *b_MPGDBarrelHits_position_z;   //!
+   TBranch        *b_MPGDBarrelHits_momentum_x;   //!
+   TBranch        *b_MPGDBarrelHits_momentum_y;   //!
+   TBranch        *b_MPGDBarrelHits_momentum_z;   //!
+   TBranch        *b__MPGDBarrelHits_MCParticle_;   //!
+   TBranch        *b__MPGDBarrelHits_MCParticle_index;   //!
+   TBranch        *b__MPGDBarrelHits_MCParticle_collectionID;   //!
+   TBranch        *b_MPGDBarrelRawHits_;   //!
+   TBranch        *b_MPGDBarrelRawHits_cellID;   //!
+   TBranch        *b_MPGDBarrelRawHits_charge;   //!
+   TBranch        *b_MPGDBarrelRawHits_timeStamp;   //!
    TBranch        *b_MPGDBarrelRecHits_;   //!
    TBranch        *b_MPGDBarrelRecHits_cellID;   //!
    TBranch        *b_MPGDBarrelRecHits_position_x;   //!
@@ -5111,6 +6036,10 @@ public :
    TBranch        *b_MPGDBarrelRecHits_timeError;   //!
    TBranch        *b_MPGDBarrelRecHits_edep;   //!
    TBranch        *b_MPGDBarrelRecHits_edepError;   //!
+   TBranch        *b_MPGDDIRCRawHits_;   //!
+   TBranch        *b_MPGDDIRCRawHits_cellID;   //!
+   TBranch        *b_MPGDDIRCRawHits_charge;   //!
+   TBranch        *b_MPGDDIRCRawHits_timeStamp;   //!
    TBranch        *b_MPGDDIRCRecHits_;   //!
    TBranch        *b_MPGDDIRCRecHits_cellID;   //!
    TBranch        *b_MPGDDIRCRecHits_position_x;   //!
@@ -5123,6 +6052,25 @@ public :
    TBranch        *b_MPGDDIRCRecHits_timeError;   //!
    TBranch        *b_MPGDDIRCRecHits_edep;   //!
    TBranch        *b_MPGDDIRCRecHits_edepError;   //!
+   TBranch        *b_OuterMPGDBarrelHits_;   //!
+   TBranch        *b_OuterMPGDBarrelHits_cellID;   //!
+   TBranch        *b_OuterMPGDBarrelHits_EDep;   //!
+   TBranch        *b_OuterMPGDBarrelHits_time;   //!
+   TBranch        *b_OuterMPGDBarrelHits_pathLength;   //!
+   TBranch        *b_OuterMPGDBarrelHits_quality;   //!
+   TBranch        *b_OuterMPGDBarrelHits_position_x;   //!
+   TBranch        *b_OuterMPGDBarrelHits_position_y;   //!
+   TBranch        *b_OuterMPGDBarrelHits_position_z;   //!
+   TBranch        *b_OuterMPGDBarrelHits_momentum_x;   //!
+   TBranch        *b_OuterMPGDBarrelHits_momentum_y;   //!
+   TBranch        *b_OuterMPGDBarrelHits_momentum_z;   //!
+   TBranch        *b__OuterMPGDBarrelHits_MCParticle_;   //!
+   TBranch        *b__OuterMPGDBarrelHits_MCParticle_index;   //!
+   TBranch        *b__OuterMPGDBarrelHits_MCParticle_collectionID;   //!
+   TBranch        *b_OuterMPGDBarrelRawHits_;   //!
+   TBranch        *b_OuterMPGDBarrelRawHits_cellID;   //!
+   TBranch        *b_OuterMPGDBarrelRawHits_charge;   //!
+   TBranch        *b_OuterMPGDBarrelRawHits_timeStamp;   //!
    TBranch        *b_OuterMPGDBarrelRecHits_;   //!
    TBranch        *b_OuterMPGDBarrelRecHits_cellID;   //!
    TBranch        *b_OuterMPGDBarrelRecHits_position_x;   //!
@@ -5467,6 +6415,25 @@ public :
    TBranch        *b__ReconstructedSeededChargedParticles_particleIDUsed_;   //!
    TBranch        *b__ReconstructedSeededChargedParticles_particleIDUsed_index;   //!
    TBranch        *b__ReconstructedSeededChargedParticles_particleIDUsed_collectionID;   //!
+   TBranch        *b_SiBarrelHits_;   //!
+   TBranch        *b_SiBarrelHits_cellID;   //!
+   TBranch        *b_SiBarrelHits_EDep;   //!
+   TBranch        *b_SiBarrelHits_time;   //!
+   TBranch        *b_SiBarrelHits_pathLength;   //!
+   TBranch        *b_SiBarrelHits_quality;   //!
+   TBranch        *b_SiBarrelHits_position_x;   //!
+   TBranch        *b_SiBarrelHits_position_y;   //!
+   TBranch        *b_SiBarrelHits_position_z;   //!
+   TBranch        *b_SiBarrelHits_momentum_x;   //!
+   TBranch        *b_SiBarrelHits_momentum_y;   //!
+   TBranch        *b_SiBarrelHits_momentum_z;   //!
+   TBranch        *b__SiBarrelHits_MCParticle_;   //!
+   TBranch        *b__SiBarrelHits_MCParticle_index;   //!
+   TBranch        *b__SiBarrelHits_MCParticle_collectionID;   //!
+   TBranch        *b_SiBarrelRawHits_;   //!
+   TBranch        *b_SiBarrelRawHits_cellID;   //!
+   TBranch        *b_SiBarrelRawHits_charge;   //!
+   TBranch        *b_SiBarrelRawHits_timeStamp;   //!
    TBranch        *b_SiBarrelTrackerRecHits_;   //!
    TBranch        *b_SiBarrelTrackerRecHits_cellID;   //!
    TBranch        *b_SiBarrelTrackerRecHits_position_x;   //!
@@ -5479,6 +6446,10 @@ public :
    TBranch        *b_SiBarrelTrackerRecHits_timeError;   //!
    TBranch        *b_SiBarrelTrackerRecHits_edep;   //!
    TBranch        *b_SiBarrelTrackerRecHits_edepError;   //!
+   TBranch        *b_SiBarrelVertexRawHits_;   //!
+   TBranch        *b_SiBarrelVertexRawHits_cellID;   //!
+   TBranch        *b_SiBarrelVertexRawHits_charge;   //!
+   TBranch        *b_SiBarrelVertexRawHits_timeStamp;   //!
    TBranch        *b_SiBarrelVertexRecHits_;   //!
    TBranch        *b_SiBarrelVertexRecHits_cellID;   //!
    TBranch        *b_SiBarrelVertexRecHits_position_x;   //!
@@ -5491,6 +6462,10 @@ public :
    TBranch        *b_SiBarrelVertexRecHits_timeError;   //!
    TBranch        *b_SiBarrelVertexRecHits_edep;   //!
    TBranch        *b_SiBarrelVertexRecHits_edepError;   //!
+   TBranch        *b_SiEndcapTrackerRawHits_;   //!
+   TBranch        *b_SiEndcapTrackerRawHits_cellID;   //!
+   TBranch        *b_SiEndcapTrackerRawHits_charge;   //!
+   TBranch        *b_SiEndcapTrackerRawHits_timeStamp;   //!
    TBranch        *b_SiEndcapTrackerRecHits_;   //!
    TBranch        *b_SiEndcapTrackerRecHits_cellID;   //!
    TBranch        *b_SiEndcapTrackerRecHits_position_x;   //!
@@ -5507,6 +6482,25 @@ public :
    TBranch        *b_TaggerTrackerRawHits_cellID;   //!
    TBranch        *b_TaggerTrackerRawHits_charge;   //!
    TBranch        *b_TaggerTrackerRawHits_timeStamp;   //!
+   TBranch        *b_TOFBarrelHits_;   //!
+   TBranch        *b_TOFBarrelHits_cellID;   //!
+   TBranch        *b_TOFBarrelHits_EDep;   //!
+   TBranch        *b_TOFBarrelHits_time;   //!
+   TBranch        *b_TOFBarrelHits_pathLength;   //!
+   TBranch        *b_TOFBarrelHits_quality;   //!
+   TBranch        *b_TOFBarrelHits_position_x;   //!
+   TBranch        *b_TOFBarrelHits_position_y;   //!
+   TBranch        *b_TOFBarrelHits_position_z;   //!
+   TBranch        *b_TOFBarrelHits_momentum_x;   //!
+   TBranch        *b_TOFBarrelHits_momentum_y;   //!
+   TBranch        *b_TOFBarrelHits_momentum_z;   //!
+   TBranch        *b__TOFBarrelHits_MCParticle_;   //!
+   TBranch        *b__TOFBarrelHits_MCParticle_index;   //!
+   TBranch        *b__TOFBarrelHits_MCParticle_collectionID;   //!
+   TBranch        *b_TOFBarrelRawHit_;   //!
+   TBranch        *b_TOFBarrelRawHit_cellID;   //!
+   TBranch        *b_TOFBarrelRawHit_charge;   //!
+   TBranch        *b_TOFBarrelRawHit_timeStamp;   //!
    TBranch        *b_TOFBarrelRecHit_;   //!
    TBranch        *b_TOFBarrelRecHit_cellID;   //!
    TBranch        *b_TOFBarrelRecHit_position_x;   //!
@@ -5519,6 +6513,25 @@ public :
    TBranch        *b_TOFBarrelRecHit_timeError;   //!
    TBranch        *b_TOFBarrelRecHit_edep;   //!
    TBranch        *b_TOFBarrelRecHit_edepError;   //!
+   TBranch        *b_TOFEndcapHits_;   //!
+   TBranch        *b_TOFEndcapHits_cellID;   //!
+   TBranch        *b_TOFEndcapHits_EDep;   //!
+   TBranch        *b_TOFEndcapHits_time;   //!
+   TBranch        *b_TOFEndcapHits_pathLength;   //!
+   TBranch        *b_TOFEndcapHits_quality;   //!
+   TBranch        *b_TOFEndcapHits_position_x;   //!
+   TBranch        *b_TOFEndcapHits_position_y;   //!
+   TBranch        *b_TOFEndcapHits_position_z;   //!
+   TBranch        *b_TOFEndcapHits_momentum_x;   //!
+   TBranch        *b_TOFEndcapHits_momentum_y;   //!
+   TBranch        *b_TOFEndcapHits_momentum_z;   //!
+   TBranch        *b__TOFEndcapHits_MCParticle_;   //!
+   TBranch        *b__TOFEndcapHits_MCParticle_index;   //!
+   TBranch        *b__TOFEndcapHits_MCParticle_collectionID;   //!
+   TBranch        *b_TOFEndcapRawHits_;   //!
+   TBranch        *b_TOFEndcapRawHits_cellID;   //!
+   TBranch        *b_TOFEndcapRawHits_charge;   //!
+   TBranch        *b_TOFEndcapRawHits_timeStamp;   //!
    TBranch        *b_TOFEndcapRecHits_;   //!
    TBranch        *b_TOFEndcapRecHits_cellID;   //!
    TBranch        *b_TOFEndcapRecHits_position_x;   //!
@@ -5531,137 +6544,36 @@ public :
    TBranch        *b_TOFEndcapRecHits_timeError;   //!
    TBranch        *b_TOFEndcapRecHits_edep;   //!
    TBranch        *b_TOFEndcapRecHits_edepError;   //!
-   TBranch        *b_ZDCEcalClusterAssociations_;   //!
-   TBranch        *b_ZDCEcalClusterAssociations_simID;   //!
-   TBranch        *b_ZDCEcalClusterAssociations_recID;   //!
-   TBranch        *b_ZDCEcalClusterAssociations_weight;   //!
-   TBranch        *b__ZDCEcalClusterAssociations_rec_;   //!
-   TBranch        *b__ZDCEcalClusterAssociations_rec_index;   //!
-   TBranch        *b__ZDCEcalClusterAssociations_rec_collectionID;   //!
-   TBranch        *b__ZDCEcalClusterAssociations_sim_;   //!
-   TBranch        *b__ZDCEcalClusterAssociations_sim_index;   //!
-   TBranch        *b__ZDCEcalClusterAssociations_sim_collectionID;   //!
-   TBranch        *b_ZDCEcalClusters_;   //!
-   TBranch        *b_ZDCEcalClusters_type;   //!
-   TBranch        *b_ZDCEcalClusters_energy;   //!
-   TBranch        *b_ZDCEcalClusters_energyError;   //!
-   TBranch        *b_ZDCEcalClusters_time;   //!
-   TBranch        *b_ZDCEcalClusters_timeError;   //!
-   TBranch        *b_ZDCEcalClusters_nhits;   //!
-   TBranch        *b_ZDCEcalClusters_position_x;   //!
-   TBranch        *b_ZDCEcalClusters_position_y;   //!
-   TBranch        *b_ZDCEcalClusters_position_z;   //!
-   TBranch        *b_ZDCEcalClusters_positionError_xx;   //!
-   TBranch        *b_ZDCEcalClusters_positionError_yy;   //!
-   TBranch        *b_ZDCEcalClusters_positionError_zz;   //!
-   TBranch        *b_ZDCEcalClusters_positionError_xy;   //!
-   TBranch        *b_ZDCEcalClusters_positionError_xz;   //!
-   TBranch        *b_ZDCEcalClusters_positionError_yz;   //!
-   TBranch        *b_ZDCEcalClusters_intrinsicTheta;   //!
-   TBranch        *b_ZDCEcalClusters_intrinsicPhi;   //!
-   TBranch        *b_ZDCEcalClusters_intrinsicDirectionError_xx;   //!
-   TBranch        *b_ZDCEcalClusters_intrinsicDirectionError_yy;   //!
-   TBranch        *b_ZDCEcalClusters_intrinsicDirectionError_xy;   //!
-   TBranch        *b_ZDCEcalClusters_shapeParameters_begin;   //!
-   TBranch        *b_ZDCEcalClusters_shapeParameters_end;   //!
-   TBranch        *b_ZDCEcalClusters_hitContributions_begin;   //!
-   TBranch        *b_ZDCEcalClusters_hitContributions_end;   //!
-   TBranch        *b_ZDCEcalClusters_subdetectorEnergies_begin;   //!
-   TBranch        *b_ZDCEcalClusters_subdetectorEnergies_end;   //!
-   TBranch        *b_ZDCEcalClusters_clusters_begin;   //!
-   TBranch        *b_ZDCEcalClusters_clusters_end;   //!
-   TBranch        *b_ZDCEcalClusters_hits_begin;   //!
-   TBranch        *b_ZDCEcalClusters_hits_end;   //!
-   TBranch        *b_ZDCEcalClusters_particleIDs_begin;   //!
-   TBranch        *b_ZDCEcalClusters_particleIDs_end;   //!
-   TBranch        *b__ZDCEcalClusters_clusters_;   //!
-   TBranch        *b__ZDCEcalClusters_clusters_index;   //!
-   TBranch        *b__ZDCEcalClusters_clusters_collectionID;   //!
-   TBranch        *b__ZDCEcalClusters_hits_;   //!
-   TBranch        *b__ZDCEcalClusters_hits_index;   //!
-   TBranch        *b__ZDCEcalClusters_hits_collectionID;   //!
-   TBranch        *b__ZDCEcalClusters_particleIDs_;   //!
-   TBranch        *b__ZDCEcalClusters_particleIDs_index;   //!
-   TBranch        *b__ZDCEcalClusters_particleIDs_collectionID;   //!
-   TBranch        *b__ZDCEcalClusters_shapeParameters;   //!
-   TBranch        *b__ZDCEcalClusters_hitContributions;   //!
-   TBranch        *b__ZDCEcalClusters_subdetectorEnergies;   //!
-   TBranch        *b_ZDCEcalRawHits_;   //!
-   TBranch        *b_ZDCEcalRawHits_cellID;   //!
-   TBranch        *b_ZDCEcalRawHits_amplitude;   //!
-   TBranch        *b_ZDCEcalRawHits_timeStamp;   //!
-   TBranch        *b_ZDCEcalRecHits_;   //!
-   TBranch        *b_ZDCEcalRecHits_cellID;   //!
-   TBranch        *b_ZDCEcalRecHits_energy;   //!
-   TBranch        *b_ZDCEcalRecHits_energyError;   //!
-   TBranch        *b_ZDCEcalRecHits_time;   //!
-   TBranch        *b_ZDCEcalRecHits_timeError;   //!
-   TBranch        *b_ZDCEcalRecHits_position_x;   //!
-   TBranch        *b_ZDCEcalRecHits_position_y;   //!
-   TBranch        *b_ZDCEcalRecHits_position_z;   //!
-   TBranch        *b_ZDCEcalRecHits_dimension_x;   //!
-   TBranch        *b_ZDCEcalRecHits_dimension_y;   //!
-   TBranch        *b_ZDCEcalRecHits_dimension_z;   //!
-   TBranch        *b_ZDCEcalRecHits_sector;   //!
-   TBranch        *b_ZDCEcalRecHits_layer;   //!
-   TBranch        *b_ZDCEcalRecHits_local_x;   //!
-   TBranch        *b_ZDCEcalRecHits_local_y;   //!
-   TBranch        *b_ZDCEcalRecHits_local_z;   //!
-   TBranch        *b_ZDCEcalTruthClusterAssociations_;   //!
-   TBranch        *b_ZDCEcalTruthClusterAssociations_simID;   //!
-   TBranch        *b_ZDCEcalTruthClusterAssociations_recID;   //!
-   TBranch        *b_ZDCEcalTruthClusterAssociations_weight;   //!
-   TBranch        *b__ZDCEcalTruthClusterAssociations_rec_;   //!
-   TBranch        *b__ZDCEcalTruthClusterAssociations_rec_index;   //!
-   TBranch        *b__ZDCEcalTruthClusterAssociations_rec_collectionID;   //!
-   TBranch        *b__ZDCEcalTruthClusterAssociations_sim_;   //!
-   TBranch        *b__ZDCEcalTruthClusterAssociations_sim_index;   //!
-   TBranch        *b__ZDCEcalTruthClusterAssociations_sim_collectionID;   //!
-   TBranch        *b_ZDCEcalTruthClusters_;   //!
-   TBranch        *b_ZDCEcalTruthClusters_type;   //!
-   TBranch        *b_ZDCEcalTruthClusters_energy;   //!
-   TBranch        *b_ZDCEcalTruthClusters_energyError;   //!
-   TBranch        *b_ZDCEcalTruthClusters_time;   //!
-   TBranch        *b_ZDCEcalTruthClusters_timeError;   //!
-   TBranch        *b_ZDCEcalTruthClusters_nhits;   //!
-   TBranch        *b_ZDCEcalTruthClusters_position_x;   //!
-   TBranch        *b_ZDCEcalTruthClusters_position_y;   //!
-   TBranch        *b_ZDCEcalTruthClusters_position_z;   //!
-   TBranch        *b_ZDCEcalTruthClusters_positionError_xx;   //!
-   TBranch        *b_ZDCEcalTruthClusters_positionError_yy;   //!
-   TBranch        *b_ZDCEcalTruthClusters_positionError_zz;   //!
-   TBranch        *b_ZDCEcalTruthClusters_positionError_xy;   //!
-   TBranch        *b_ZDCEcalTruthClusters_positionError_xz;   //!
-   TBranch        *b_ZDCEcalTruthClusters_positionError_yz;   //!
-   TBranch        *b_ZDCEcalTruthClusters_intrinsicTheta;   //!
-   TBranch        *b_ZDCEcalTruthClusters_intrinsicPhi;   //!
-   TBranch        *b_ZDCEcalTruthClusters_intrinsicDirectionError_xx;   //!
-   TBranch        *b_ZDCEcalTruthClusters_intrinsicDirectionError_yy;   //!
-   TBranch        *b_ZDCEcalTruthClusters_intrinsicDirectionError_xy;   //!
-   TBranch        *b_ZDCEcalTruthClusters_shapeParameters_begin;   //!
-   TBranch        *b_ZDCEcalTruthClusters_shapeParameters_end;   //!
-   TBranch        *b_ZDCEcalTruthClusters_hitContributions_begin;   //!
-   TBranch        *b_ZDCEcalTruthClusters_hitContributions_end;   //!
-   TBranch        *b_ZDCEcalTruthClusters_subdetectorEnergies_begin;   //!
-   TBranch        *b_ZDCEcalTruthClusters_subdetectorEnergies_end;   //!
-   TBranch        *b_ZDCEcalTruthClusters_clusters_begin;   //!
-   TBranch        *b_ZDCEcalTruthClusters_clusters_end;   //!
-   TBranch        *b_ZDCEcalTruthClusters_hits_begin;   //!
-   TBranch        *b_ZDCEcalTruthClusters_hits_end;   //!
-   TBranch        *b_ZDCEcalTruthClusters_particleIDs_begin;   //!
-   TBranch        *b_ZDCEcalTruthClusters_particleIDs_end;   //!
-   TBranch        *b__ZDCEcalTruthClusters_clusters_;   //!
-   TBranch        *b__ZDCEcalTruthClusters_clusters_index;   //!
-   TBranch        *b__ZDCEcalTruthClusters_clusters_collectionID;   //!
-   TBranch        *b__ZDCEcalTruthClusters_hits_;   //!
-   TBranch        *b__ZDCEcalTruthClusters_hits_index;   //!
-   TBranch        *b__ZDCEcalTruthClusters_hits_collectionID;   //!
-   TBranch        *b__ZDCEcalTruthClusters_particleIDs_;   //!
-   TBranch        *b__ZDCEcalTruthClusters_particleIDs_index;   //!
-   TBranch        *b__ZDCEcalTruthClusters_particleIDs_collectionID;   //!
-   TBranch        *b__ZDCEcalTruthClusters_shapeParameters;   //!
-   TBranch        *b__ZDCEcalTruthClusters_hitContributions;   //!
-   TBranch        *b__ZDCEcalTruthClusters_subdetectorEnergies;   //!
+   TBranch        *b_TrackerEndcapHits_;   //!
+   TBranch        *b_TrackerEndcapHits_cellID;   //!
+   TBranch        *b_TrackerEndcapHits_EDep;   //!
+   TBranch        *b_TrackerEndcapHits_time;   //!
+   TBranch        *b_TrackerEndcapHits_pathLength;   //!
+   TBranch        *b_TrackerEndcapHits_quality;   //!
+   TBranch        *b_TrackerEndcapHits_position_x;   //!
+   TBranch        *b_TrackerEndcapHits_position_y;   //!
+   TBranch        *b_TrackerEndcapHits_position_z;   //!
+   TBranch        *b_TrackerEndcapHits_momentum_x;   //!
+   TBranch        *b_TrackerEndcapHits_momentum_y;   //!
+   TBranch        *b_TrackerEndcapHits_momentum_z;   //!
+   TBranch        *b__TrackerEndcapHits_MCParticle_;   //!
+   TBranch        *b__TrackerEndcapHits_MCParticle_index;   //!
+   TBranch        *b__TrackerEndcapHits_MCParticle_collectionID;   //!
+   TBranch        *b_VertexBarrelHits_;   //!
+   TBranch        *b_VertexBarrelHits_cellID;   //!
+   TBranch        *b_VertexBarrelHits_EDep;   //!
+   TBranch        *b_VertexBarrelHits_time;   //!
+   TBranch        *b_VertexBarrelHits_pathLength;   //!
+   TBranch        *b_VertexBarrelHits_quality;   //!
+   TBranch        *b_VertexBarrelHits_position_x;   //!
+   TBranch        *b_VertexBarrelHits_position_y;   //!
+   TBranch        *b_VertexBarrelHits_position_z;   //!
+   TBranch        *b_VertexBarrelHits_momentum_x;   //!
+   TBranch        *b_VertexBarrelHits_momentum_y;   //!
+   TBranch        *b_VertexBarrelHits_momentum_z;   //!
+   TBranch        *b__VertexBarrelHits_MCParticle_;   //!
+   TBranch        *b__VertexBarrelHits_MCParticle_index;   //!
+   TBranch        *b__VertexBarrelHits_MCParticle_collectionID;   //!
    TBranch        *b_PARAMETERS__intMap_;   //!
    TBranch        *b__intMap_first;   //!
    TBranch        *b__intMap_second;   //!
@@ -5675,8 +6587,8 @@ public :
    TBranch        *b__doubleMap_first;   //!
    TBranch        *b__doubleMap_second;   //!
 
-   protonBeam(TTree *tree=0);
-   virtual ~protonBeam();
+   electronBeam(TTree *tree=0);
+   virtual ~electronBeam();
    virtual Int_t    Cut(Long64_t entry);
    virtual Int_t    GetEntry(Long64_t entry);
    virtual Long64_t LoadTree(Long64_t entry);
@@ -5688,15 +6600,15 @@ public :
 
 #endif
 
-#ifdef protonBeam_cxx
-protonBeam::protonBeam(TTree *tree) : fChain(0) 
+#ifdef electronBeam_cxx
+electronBeam::electronBeam(TTree *tree) : fChain(0) 
 {
 // if parameter tree is not specified (or zero), connect the file
 // used to generate this class and read the Tree.
    if (tree == 0) {
-      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("protonBeamGas_Input.root");
+      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("electronBeam_Input.root");
       if (!f || !f->IsOpen()) {
-         f = new TFile("protonBeamGas_Input.root");
+         f = new TFile("electronBeam_Input.root");
       }
       f->GetObject("events",tree);
 
@@ -5704,19 +6616,19 @@ protonBeam::protonBeam(TTree *tree) : fChain(0)
    Init(tree);
 }
 
-protonBeam::~protonBeam()
+electronBeam::~electronBeam()
 {
    if (!fChain) return;
    delete fChain->GetCurrentFile();
 }
 
-Int_t protonBeam::GetEntry(Long64_t entry)
+Int_t electronBeam::GetEntry(Long64_t entry)
 {
 // Read contents of entry.
    if (!fChain) return 0;
    return fChain->GetEntry(entry);
 }
-Long64_t protonBeam::LoadTree(Long64_t entry)
+Long64_t electronBeam::LoadTree(Long64_t entry)
 {
 // Set the environment to read one entry
    if (!fChain) return -5;
@@ -5729,7 +6641,7 @@ Long64_t protonBeam::LoadTree(Long64_t entry)
    return centry;
 }
 
-void protonBeam::Init(TTree *tree)
+void electronBeam::Init(TTree *tree)
 {
    // The Init() function is called when the selector needs to initialize
    // a new tree or chain. Typically here the branch addresses and branch
@@ -5748,7 +6660,6 @@ void protonBeam::Init(TTree *tree)
    _CentralCKFTrajectories_measurementChi2 = 0;
    _CentralCKFTrajectories_outlierChi2 = 0;
    _CentralTrackerMeasurements_weights = 0;
-   _CentralTrackVertices_parameters = 0;
    _EcalBarrelClusters_shapeParameters = 0;
    _EcalBarrelClusters_hitContributions = 0;
    _EcalBarrelClusters_subdetectorEnergies = 0;
@@ -5779,6 +6690,12 @@ void protonBeam::Init(TTree *tree)
    _EcalEndcapPTruthClusters_shapeParameters = 0;
    _EcalEndcapPTruthClusters_hitContributions = 0;
    _EcalEndcapPTruthClusters_subdetectorEnergies = 0;
+   _EcalFarForwardZDCClusters_shapeParameters = 0;
+   _EcalFarForwardZDCClusters_hitContributions = 0;
+   _EcalFarForwardZDCClusters_subdetectorEnergies = 0;
+   _EcalFarForwardZDCTruthClusters_shapeParameters = 0;
+   _EcalFarForwardZDCTruthClusters_hitContributions = 0;
+   _EcalFarForwardZDCTruthClusters_subdetectorEnergies = 0;
    _EcalLumiSpecClusters_shapeParameters = 0;
    _EcalLumiSpecClusters_hitContributions = 0;
    _EcalLumiSpecClusters_subdetectorEnergies = 0;
@@ -5800,16 +6717,19 @@ void protonBeam::Init(TTree *tree)
    _HcalEndcapPInsertClusters_shapeParameters = 0;
    _HcalEndcapPInsertClusters_hitContributions = 0;
    _HcalEndcapPInsertClusters_subdetectorEnergies = 0;
+   _HcalFarForwardZDCClusters_shapeParameters = 0;
+   _HcalFarForwardZDCClusters_hitContributions = 0;
+   _HcalFarForwardZDCClusters_subdetectorEnergies = 0;
+   _HcalFarForwardZDCClustersBaseline_shapeParameters = 0;
+   _HcalFarForwardZDCClustersBaseline_hitContributions = 0;
+   _HcalFarForwardZDCClustersBaseline_subdetectorEnergies = 0;
+   _HcalFarForwardZDCTruthClusters_shapeParameters = 0;
+   _HcalFarForwardZDCTruthClusters_hitContributions = 0;
+   _HcalFarForwardZDCTruthClusters_subdetectorEnergies = 0;
    _LFHCALClusters_shapeParameters = 0;
    _LFHCALClusters_hitContributions = 0;
    _LFHCALClusters_subdetectorEnergies = 0;
    _ReconstructedChargedParticleIDs_parameters = 0;
-   _ZDCEcalClusters_shapeParameters = 0;
-   _ZDCEcalClusters_hitContributions = 0;
-   _ZDCEcalClusters_subdetectorEnergies = 0;
-   _ZDCEcalTruthClusters_shapeParameters = 0;
-   _ZDCEcalTruthClusters_hitContributions = 0;
-   _ZDCEcalTruthClusters_subdetectorEnergies = 0;
    // Set branch addresses and branch pointers
    if (!tree) return;
    fChain = tree;
@@ -5863,8 +6783,8 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("_B0ECalClusters_clusters.index", &_B0ECalClusters_clusters_index, &b__B0ECalClusters_clusters_index);
    fChain->SetBranchAddress("_B0ECalClusters_clusters.collectionID", &_B0ECalClusters_clusters_collectionID, &b__B0ECalClusters_clusters_collectionID);
    fChain->SetBranchAddress("_B0ECalClusters_hits", &_B0ECalClusters_hits_, &b__B0ECalClusters_hits_);
-   fChain->SetBranchAddress("_B0ECalClusters_hits.index", &_B0ECalClusters_hits_index, &b__B0ECalClusters_hits_index);
-   fChain->SetBranchAddress("_B0ECalClusters_hits.collectionID", &_B0ECalClusters_hits_collectionID, &b__B0ECalClusters_hits_collectionID);
+   fChain->SetBranchAddress("_B0ECalClusters_hits.index", _B0ECalClusters_hits_index, &b__B0ECalClusters_hits_index);
+   fChain->SetBranchAddress("_B0ECalClusters_hits.collectionID", _B0ECalClusters_hits_collectionID, &b__B0ECalClusters_hits_collectionID);
    fChain->SetBranchAddress("_B0ECalClusters_particleIDs", &_B0ECalClusters_particleIDs_, &b__B0ECalClusters_particleIDs_);
    fChain->SetBranchAddress("_B0ECalClusters_particleIDs.index", &_B0ECalClusters_particleIDs_index, &b__B0ECalClusters_particleIDs_index);
    fChain->SetBranchAddress("_B0ECalClusters_particleIDs.collectionID", &_B0ECalClusters_particleIDs_collectionID, &b__B0ECalClusters_particleIDs_collectionID);
@@ -5892,6 +6812,25 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("B0ECalRecHits.local.x", B0ECalRecHits_local_x, &b_B0ECalRecHits_local_x);
    fChain->SetBranchAddress("B0ECalRecHits.local.y", B0ECalRecHits_local_y, &b_B0ECalRecHits_local_y);
    fChain->SetBranchAddress("B0ECalRecHits.local.z", B0ECalRecHits_local_z, &b_B0ECalRecHits_local_z);
+   fChain->SetBranchAddress("B0TrackerHits", &B0TrackerHits_, &b_B0TrackerHits_);
+   fChain->SetBranchAddress("B0TrackerHits.cellID", B0TrackerHits_cellID, &b_B0TrackerHits_cellID);
+   fChain->SetBranchAddress("B0TrackerHits.EDep", B0TrackerHits_EDep, &b_B0TrackerHits_EDep);
+   fChain->SetBranchAddress("B0TrackerHits.time", B0TrackerHits_time, &b_B0TrackerHits_time);
+   fChain->SetBranchAddress("B0TrackerHits.pathLength", B0TrackerHits_pathLength, &b_B0TrackerHits_pathLength);
+   fChain->SetBranchAddress("B0TrackerHits.quality", B0TrackerHits_quality, &b_B0TrackerHits_quality);
+   fChain->SetBranchAddress("B0TrackerHits.position.x", B0TrackerHits_position_x, &b_B0TrackerHits_position_x);
+   fChain->SetBranchAddress("B0TrackerHits.position.y", B0TrackerHits_position_y, &b_B0TrackerHits_position_y);
+   fChain->SetBranchAddress("B0TrackerHits.position.z", B0TrackerHits_position_z, &b_B0TrackerHits_position_z);
+   fChain->SetBranchAddress("B0TrackerHits.momentum.x", B0TrackerHits_momentum_x, &b_B0TrackerHits_momentum_x);
+   fChain->SetBranchAddress("B0TrackerHits.momentum.y", B0TrackerHits_momentum_y, &b_B0TrackerHits_momentum_y);
+   fChain->SetBranchAddress("B0TrackerHits.momentum.z", B0TrackerHits_momentum_z, &b_B0TrackerHits_momentum_z);
+   fChain->SetBranchAddress("_B0TrackerHits_MCParticle", &_B0TrackerHits_MCParticle_, &b__B0TrackerHits_MCParticle_);
+   fChain->SetBranchAddress("_B0TrackerHits_MCParticle.index", _B0TrackerHits_MCParticle_index, &b__B0TrackerHits_MCParticle_index);
+   fChain->SetBranchAddress("_B0TrackerHits_MCParticle.collectionID", _B0TrackerHits_MCParticle_collectionID, &b__B0TrackerHits_MCParticle_collectionID);
+   fChain->SetBranchAddress("B0TrackerRawHits", &B0TrackerRawHits_, &b_B0TrackerRawHits_);
+   fChain->SetBranchAddress("B0TrackerRawHits.cellID", B0TrackerRawHits_cellID, &b_B0TrackerRawHits_cellID);
+   fChain->SetBranchAddress("B0TrackerRawHits.charge", B0TrackerRawHits_charge, &b_B0TrackerRawHits_charge);
+   fChain->SetBranchAddress("B0TrackerRawHits.timeStamp", B0TrackerRawHits_timeStamp, &b_B0TrackerRawHits_timeStamp);
    fChain->SetBranchAddress("B0TrackerRecHits", &B0TrackerRecHits_, &b_B0TrackerRecHits_);
    fChain->SetBranchAddress("B0TrackerRecHits.cellID", B0TrackerRecHits_cellID, &b_B0TrackerRecHits_cellID);
    fChain->SetBranchAddress("B0TrackerRecHits.position.x", B0TrackerRecHits_position_x, &b_B0TrackerRecHits_position_x);
@@ -5904,6 +6843,25 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("B0TrackerRecHits.timeError", B0TrackerRecHits_timeError, &b_B0TrackerRecHits_timeError);
    fChain->SetBranchAddress("B0TrackerRecHits.edep", B0TrackerRecHits_edep, &b_B0TrackerRecHits_edep);
    fChain->SetBranchAddress("B0TrackerRecHits.edepError", B0TrackerRecHits_edepError, &b_B0TrackerRecHits_edepError);
+   fChain->SetBranchAddress("BackwardMPGDEndcapHits", &BackwardMPGDEndcapHits_, &b_BackwardMPGDEndcapHits_);
+   fChain->SetBranchAddress("BackwardMPGDEndcapHits.cellID", BackwardMPGDEndcapHits_cellID, &b_BackwardMPGDEndcapHits_cellID);
+   fChain->SetBranchAddress("BackwardMPGDEndcapHits.EDep", BackwardMPGDEndcapHits_EDep, &b_BackwardMPGDEndcapHits_EDep);
+   fChain->SetBranchAddress("BackwardMPGDEndcapHits.time", BackwardMPGDEndcapHits_time, &b_BackwardMPGDEndcapHits_time);
+   fChain->SetBranchAddress("BackwardMPGDEndcapHits.pathLength", BackwardMPGDEndcapHits_pathLength, &b_BackwardMPGDEndcapHits_pathLength);
+   fChain->SetBranchAddress("BackwardMPGDEndcapHits.quality", BackwardMPGDEndcapHits_quality, &b_BackwardMPGDEndcapHits_quality);
+   fChain->SetBranchAddress("BackwardMPGDEndcapHits.position.x", BackwardMPGDEndcapHits_position_x, &b_BackwardMPGDEndcapHits_position_x);
+   fChain->SetBranchAddress("BackwardMPGDEndcapHits.position.y", BackwardMPGDEndcapHits_position_y, &b_BackwardMPGDEndcapHits_position_y);
+   fChain->SetBranchAddress("BackwardMPGDEndcapHits.position.z", BackwardMPGDEndcapHits_position_z, &b_BackwardMPGDEndcapHits_position_z);
+   fChain->SetBranchAddress("BackwardMPGDEndcapHits.momentum.x", BackwardMPGDEndcapHits_momentum_x, &b_BackwardMPGDEndcapHits_momentum_x);
+   fChain->SetBranchAddress("BackwardMPGDEndcapHits.momentum.y", BackwardMPGDEndcapHits_momentum_y, &b_BackwardMPGDEndcapHits_momentum_y);
+   fChain->SetBranchAddress("BackwardMPGDEndcapHits.momentum.z", BackwardMPGDEndcapHits_momentum_z, &b_BackwardMPGDEndcapHits_momentum_z);
+   fChain->SetBranchAddress("_BackwardMPGDEndcapHits_MCParticle", &_BackwardMPGDEndcapHits_MCParticle_, &b__BackwardMPGDEndcapHits_MCParticle_);
+   fChain->SetBranchAddress("_BackwardMPGDEndcapHits_MCParticle.index", _BackwardMPGDEndcapHits_MCParticle_index, &b__BackwardMPGDEndcapHits_MCParticle_index);
+   fChain->SetBranchAddress("_BackwardMPGDEndcapHits_MCParticle.collectionID", _BackwardMPGDEndcapHits_MCParticle_collectionID, &b__BackwardMPGDEndcapHits_MCParticle_collectionID);
+   fChain->SetBranchAddress("BackwardMPGDEndcapRawHits", &BackwardMPGDEndcapRawHits_, &b_BackwardMPGDEndcapRawHits_);
+   fChain->SetBranchAddress("BackwardMPGDEndcapRawHits.cellID", BackwardMPGDEndcapRawHits_cellID, &b_BackwardMPGDEndcapRawHits_cellID);
+   fChain->SetBranchAddress("BackwardMPGDEndcapRawHits.charge", BackwardMPGDEndcapRawHits_charge, &b_BackwardMPGDEndcapRawHits_charge);
+   fChain->SetBranchAddress("BackwardMPGDEndcapRawHits.timeStamp", BackwardMPGDEndcapRawHits_timeStamp, &b_BackwardMPGDEndcapRawHits_timeStamp);
    fChain->SetBranchAddress("BackwardMPGDEndcapRecHits", &BackwardMPGDEndcapRecHits_, &b_BackwardMPGDEndcapRecHits_);
    fChain->SetBranchAddress("BackwardMPGDEndcapRecHits.cellID", BackwardMPGDEndcapRecHits_cellID, &b_BackwardMPGDEndcapRecHits_cellID);
    fChain->SetBranchAddress("BackwardMPGDEndcapRecHits.position.x", BackwardMPGDEndcapRecHits_position_x, &b_BackwardMPGDEndcapRecHits_position_x);
@@ -5925,65 +6883,80 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("_CalorimeterTrackProjections_track.index", _CalorimeterTrackProjections_track_index, &b__CalorimeterTrackProjections_track_index);
    fChain->SetBranchAddress("_CalorimeterTrackProjections_track.collectionID", _CalorimeterTrackProjections_track_collectionID, &b__CalorimeterTrackProjections_track_collectionID);
    fChain->SetBranchAddress("_CalorimeterTrackProjections_points", &_CalorimeterTrackProjections_points_, &b__CalorimeterTrackProjections_points_);
-   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.surface", _CalorimeterTrackProjections_points_surface, &b__CalorimeterTrackProjections_points_surface);
-   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.system", _CalorimeterTrackProjections_points_system, &b__CalorimeterTrackProjections_points_system);
-   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.position.x", _CalorimeterTrackProjections_points_position_x, &b__CalorimeterTrackProjections_points_position_x);
-   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.position.y", _CalorimeterTrackProjections_points_position_y, &b__CalorimeterTrackProjections_points_position_y);
-   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.position.z", _CalorimeterTrackProjections_points_position_z, &b__CalorimeterTrackProjections_points_position_z);
-   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.positionError.xx", _CalorimeterTrackProjections_points_positionError_xx, &b__CalorimeterTrackProjections_points_positionError_xx);
-   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.positionError.yy", _CalorimeterTrackProjections_points_positionError_yy, &b__CalorimeterTrackProjections_points_positionError_yy);
-   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.positionError.zz", _CalorimeterTrackProjections_points_positionError_zz, &b__CalorimeterTrackProjections_points_positionError_zz);
-   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.positionError.xy", _CalorimeterTrackProjections_points_positionError_xy, &b__CalorimeterTrackProjections_points_positionError_xy);
-   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.positionError.xz", _CalorimeterTrackProjections_points_positionError_xz, &b__CalorimeterTrackProjections_points_positionError_xz);
-   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.positionError.yz", _CalorimeterTrackProjections_points_positionError_yz, &b__CalorimeterTrackProjections_points_positionError_yz);
-   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.momentum.x", _CalorimeterTrackProjections_points_momentum_x, &b__CalorimeterTrackProjections_points_momentum_x);
-   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.momentum.y", _CalorimeterTrackProjections_points_momentum_y, &b__CalorimeterTrackProjections_points_momentum_y);
-   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.momentum.z", _CalorimeterTrackProjections_points_momentum_z, &b__CalorimeterTrackProjections_points_momentum_z);
-   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.momentumError.xx", _CalorimeterTrackProjections_points_momentumError_xx, &b__CalorimeterTrackProjections_points_momentumError_xx);
-   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.momentumError.yy", _CalorimeterTrackProjections_points_momentumError_yy, &b__CalorimeterTrackProjections_points_momentumError_yy);
-   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.momentumError.zz", _CalorimeterTrackProjections_points_momentumError_zz, &b__CalorimeterTrackProjections_points_momentumError_zz);
-   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.momentumError.xy", _CalorimeterTrackProjections_points_momentumError_xy, &b__CalorimeterTrackProjections_points_momentumError_xy);
-   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.momentumError.xz", _CalorimeterTrackProjections_points_momentumError_xz, &b__CalorimeterTrackProjections_points_momentumError_xz);
-   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.momentumError.yz", _CalorimeterTrackProjections_points_momentumError_yz, &b__CalorimeterTrackProjections_points_momentumError_yz);
-   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.time", _CalorimeterTrackProjections_points_time, &b__CalorimeterTrackProjections_points_time);
-   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.timeError", _CalorimeterTrackProjections_points_timeError, &b__CalorimeterTrackProjections_points_timeError);
-   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.theta", _CalorimeterTrackProjections_points_theta, &b__CalorimeterTrackProjections_points_theta);
-   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.phi", _CalorimeterTrackProjections_points_phi, &b__CalorimeterTrackProjections_points_phi);
-   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.directionError.xx", _CalorimeterTrackProjections_points_directionError_xx, &b__CalorimeterTrackProjections_points_directionError_xx);
-   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.directionError.yy", _CalorimeterTrackProjections_points_directionError_yy, &b__CalorimeterTrackProjections_points_directionError_yy);
-   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.directionError.xy", _CalorimeterTrackProjections_points_directionError_xy, &b__CalorimeterTrackProjections_points_directionError_xy);
-   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.pathlength", _CalorimeterTrackProjections_points_pathlength, &b__CalorimeterTrackProjections_points_pathlength);
-   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.pathlengthError", _CalorimeterTrackProjections_points_pathlengthError, &b__CalorimeterTrackProjections_points_pathlengthError);
+   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.surface", &_CalorimeterTrackProjections_points_surface, &b__CalorimeterTrackProjections_points_surface);
+   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.system", &_CalorimeterTrackProjections_points_system, &b__CalorimeterTrackProjections_points_system);
+   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.position.x", &_CalorimeterTrackProjections_points_position_x, &b__CalorimeterTrackProjections_points_position_x);
+   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.position.y", &_CalorimeterTrackProjections_points_position_y, &b__CalorimeterTrackProjections_points_position_y);
+   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.position.z", &_CalorimeterTrackProjections_points_position_z, &b__CalorimeterTrackProjections_points_position_z);
+   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.positionError.xx", &_CalorimeterTrackProjections_points_positionError_xx, &b__CalorimeterTrackProjections_points_positionError_xx);
+   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.positionError.yy", &_CalorimeterTrackProjections_points_positionError_yy, &b__CalorimeterTrackProjections_points_positionError_yy);
+   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.positionError.zz", &_CalorimeterTrackProjections_points_positionError_zz, &b__CalorimeterTrackProjections_points_positionError_zz);
+   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.positionError.xy", &_CalorimeterTrackProjections_points_positionError_xy, &b__CalorimeterTrackProjections_points_positionError_xy);
+   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.positionError.xz", &_CalorimeterTrackProjections_points_positionError_xz, &b__CalorimeterTrackProjections_points_positionError_xz);
+   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.positionError.yz", &_CalorimeterTrackProjections_points_positionError_yz, &b__CalorimeterTrackProjections_points_positionError_yz);
+   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.momentum.x", &_CalorimeterTrackProjections_points_momentum_x, &b__CalorimeterTrackProjections_points_momentum_x);
+   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.momentum.y", &_CalorimeterTrackProjections_points_momentum_y, &b__CalorimeterTrackProjections_points_momentum_y);
+   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.momentum.z", &_CalorimeterTrackProjections_points_momentum_z, &b__CalorimeterTrackProjections_points_momentum_z);
+   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.momentumError.xx", &_CalorimeterTrackProjections_points_momentumError_xx, &b__CalorimeterTrackProjections_points_momentumError_xx);
+   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.momentumError.yy", &_CalorimeterTrackProjections_points_momentumError_yy, &b__CalorimeterTrackProjections_points_momentumError_yy);
+   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.momentumError.zz", &_CalorimeterTrackProjections_points_momentumError_zz, &b__CalorimeterTrackProjections_points_momentumError_zz);
+   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.momentumError.xy", &_CalorimeterTrackProjections_points_momentumError_xy, &b__CalorimeterTrackProjections_points_momentumError_xy);
+   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.momentumError.xz", &_CalorimeterTrackProjections_points_momentumError_xz, &b__CalorimeterTrackProjections_points_momentumError_xz);
+   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.momentumError.yz", &_CalorimeterTrackProjections_points_momentumError_yz, &b__CalorimeterTrackProjections_points_momentumError_yz);
+   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.time", &_CalorimeterTrackProjections_points_time, &b__CalorimeterTrackProjections_points_time);
+   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.timeError", &_CalorimeterTrackProjections_points_timeError, &b__CalorimeterTrackProjections_points_timeError);
+   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.theta", &_CalorimeterTrackProjections_points_theta, &b__CalorimeterTrackProjections_points_theta);
+   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.phi", &_CalorimeterTrackProjections_points_phi, &b__CalorimeterTrackProjections_points_phi);
+   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.directionError.xx", &_CalorimeterTrackProjections_points_directionError_xx, &b__CalorimeterTrackProjections_points_directionError_xx);
+   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.directionError.yy", &_CalorimeterTrackProjections_points_directionError_yy, &b__CalorimeterTrackProjections_points_directionError_yy);
+   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.directionError.xy", &_CalorimeterTrackProjections_points_directionError_xy, &b__CalorimeterTrackProjections_points_directionError_xy);
+   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.pathlength", &_CalorimeterTrackProjections_points_pathlength, &b__CalorimeterTrackProjections_points_pathlength);
+   fChain->SetBranchAddress("_CalorimeterTrackProjections_points.pathlengthError", &_CalorimeterTrackProjections_points_pathlengthError, &b__CalorimeterTrackProjections_points_pathlengthError);
    fChain->SetBranchAddress("CentralCKFSeededTrackParameters", &CentralCKFSeededTrackParameters_, &b_CentralCKFSeededTrackParameters_);
    fChain->SetBranchAddress("CentralCKFSeededTrackParameters.type", CentralCKFSeededTrackParameters_type, &b_CentralCKFSeededTrackParameters_type);
+   fChain->SetBranchAddress("CentralCKFSeededTrackParameters.surface", CentralCKFSeededTrackParameters_surface, &b_CentralCKFSeededTrackParameters_surface);
    fChain->SetBranchAddress("CentralCKFSeededTrackParameters.loc.a", CentralCKFSeededTrackParameters_loc_a, &b_CentralCKFSeededTrackParameters_loc_a);
    fChain->SetBranchAddress("CentralCKFSeededTrackParameters.loc.b", CentralCKFSeededTrackParameters_loc_b, &b_CentralCKFSeededTrackParameters_loc_b);
-   fChain->SetBranchAddress("CentralCKFSeededTrackParameters.locError.xx", CentralCKFSeededTrackParameters_locError_xx, &b_CentralCKFSeededTrackParameters_locError_xx);
-   fChain->SetBranchAddress("CentralCKFSeededTrackParameters.locError.yy", CentralCKFSeededTrackParameters_locError_yy, &b_CentralCKFSeededTrackParameters_locError_yy);
-   fChain->SetBranchAddress("CentralCKFSeededTrackParameters.locError.xy", CentralCKFSeededTrackParameters_locError_xy, &b_CentralCKFSeededTrackParameters_locError_xy);
    fChain->SetBranchAddress("CentralCKFSeededTrackParameters.theta", CentralCKFSeededTrackParameters_theta, &b_CentralCKFSeededTrackParameters_theta);
    fChain->SetBranchAddress("CentralCKFSeededTrackParameters.phi", CentralCKFSeededTrackParameters_phi, &b_CentralCKFSeededTrackParameters_phi);
    fChain->SetBranchAddress("CentralCKFSeededTrackParameters.qOverP", CentralCKFSeededTrackParameters_qOverP, &b_CentralCKFSeededTrackParameters_qOverP);
-   fChain->SetBranchAddress("CentralCKFSeededTrackParameters.momentumError.xx", CentralCKFSeededTrackParameters_momentumError_xx, &b_CentralCKFSeededTrackParameters_momentumError_xx);
-   fChain->SetBranchAddress("CentralCKFSeededTrackParameters.momentumError.yy", CentralCKFSeededTrackParameters_momentumError_yy, &b_CentralCKFSeededTrackParameters_momentumError_yy);
-   fChain->SetBranchAddress("CentralCKFSeededTrackParameters.momentumError.zz", CentralCKFSeededTrackParameters_momentumError_zz, &b_CentralCKFSeededTrackParameters_momentumError_zz);
-   fChain->SetBranchAddress("CentralCKFSeededTrackParameters.momentumError.xy", CentralCKFSeededTrackParameters_momentumError_xy, &b_CentralCKFSeededTrackParameters_momentumError_xy);
-   fChain->SetBranchAddress("CentralCKFSeededTrackParameters.momentumError.xz", CentralCKFSeededTrackParameters_momentumError_xz, &b_CentralCKFSeededTrackParameters_momentumError_xz);
-   fChain->SetBranchAddress("CentralCKFSeededTrackParameters.momentumError.yz", CentralCKFSeededTrackParameters_momentumError_yz, &b_CentralCKFSeededTrackParameters_momentumError_yz);
    fChain->SetBranchAddress("CentralCKFSeededTrackParameters.time", CentralCKFSeededTrackParameters_time, &b_CentralCKFSeededTrackParameters_time);
-   fChain->SetBranchAddress("CentralCKFSeededTrackParameters.timeError", CentralCKFSeededTrackParameters_timeError, &b_CentralCKFSeededTrackParameters_timeError);
-   fChain->SetBranchAddress("CentralCKFSeededTrackParameters.charge", CentralCKFSeededTrackParameters_charge, &b_CentralCKFSeededTrackParameters_charge);
-   fChain->SetBranchAddress("_CentralCKFSeededTrackParameters_trajectory", &_CentralCKFSeededTrackParameters_trajectory_, &b__CentralCKFSeededTrackParameters_trajectory_);
-   fChain->SetBranchAddress("_CentralCKFSeededTrackParameters_trajectory.index", _CentralCKFSeededTrackParameters_trajectory_index, &b__CentralCKFSeededTrackParameters_trajectory_index);
-   fChain->SetBranchAddress("_CentralCKFSeededTrackParameters_trajectory.collectionID", _CentralCKFSeededTrackParameters_trajectory_collectionID, &b__CentralCKFSeededTrackParameters_trajectory_collectionID);
+   fChain->SetBranchAddress("CentralCKFSeededTrackParameters.pdg", CentralCKFSeededTrackParameters_pdg, &b_CentralCKFSeededTrackParameters_pdg);
+   fChain->SetBranchAddress("CentralCKFSeededTrackParameters.covariance.covariance[21]", CentralCKFSeededTrackParameters_covariance_covariance, &b_CentralCKFSeededTrackParameters_covariance_covariance);
+   fChain->SetBranchAddress("CentralCKFSeededTracks", &CentralCKFSeededTracks_, &b_CentralCKFSeededTracks_);
+   fChain->SetBranchAddress("CentralCKFSeededTracks.type", CentralCKFSeededTracks_type, &b_CentralCKFSeededTracks_type);
+   fChain->SetBranchAddress("CentralCKFSeededTracks.position.x", CentralCKFSeededTracks_position_x, &b_CentralCKFSeededTracks_position_x);
+   fChain->SetBranchAddress("CentralCKFSeededTracks.position.y", CentralCKFSeededTracks_position_y, &b_CentralCKFSeededTracks_position_y);
+   fChain->SetBranchAddress("CentralCKFSeededTracks.position.z", CentralCKFSeededTracks_position_z, &b_CentralCKFSeededTracks_position_z);
+   fChain->SetBranchAddress("CentralCKFSeededTracks.momentum.x", CentralCKFSeededTracks_momentum_x, &b_CentralCKFSeededTracks_momentum_x);
+   fChain->SetBranchAddress("CentralCKFSeededTracks.momentum.y", CentralCKFSeededTracks_momentum_y, &b_CentralCKFSeededTracks_momentum_y);
+   fChain->SetBranchAddress("CentralCKFSeededTracks.momentum.z", CentralCKFSeededTracks_momentum_z, &b_CentralCKFSeededTracks_momentum_z);
+   fChain->SetBranchAddress("CentralCKFSeededTracks.positionMomentumCovariance.covariance[21]", CentralCKFSeededTracks_positionMomentumCovariance_covariance, &b_CentralCKFSeededTracks_positionMomentumCovariance_covariance);
+   fChain->SetBranchAddress("CentralCKFSeededTracks.time", CentralCKFSeededTracks_time, &b_CentralCKFSeededTracks_time);
+   fChain->SetBranchAddress("CentralCKFSeededTracks.timeError", CentralCKFSeededTracks_timeError, &b_CentralCKFSeededTracks_timeError);
+   fChain->SetBranchAddress("CentralCKFSeededTracks.charge", CentralCKFSeededTracks_charge, &b_CentralCKFSeededTracks_charge);
+   fChain->SetBranchAddress("CentralCKFSeededTracks.chi2", CentralCKFSeededTracks_chi2, &b_CentralCKFSeededTracks_chi2);
+   fChain->SetBranchAddress("CentralCKFSeededTracks.ndf", CentralCKFSeededTracks_ndf, &b_CentralCKFSeededTracks_ndf);
+   fChain->SetBranchAddress("CentralCKFSeededTracks.pdg", CentralCKFSeededTracks_pdg, &b_CentralCKFSeededTracks_pdg);
+   fChain->SetBranchAddress("CentralCKFSeededTracks.measurements_begin", CentralCKFSeededTracks_measurements_begin, &b_CentralCKFSeededTracks_measurements_begin);
+   fChain->SetBranchAddress("CentralCKFSeededTracks.measurements_end", CentralCKFSeededTracks_measurements_end, &b_CentralCKFSeededTracks_measurements_end);
+   fChain->SetBranchAddress("CentralCKFSeededTracks.tracks_begin", CentralCKFSeededTracks_tracks_begin, &b_CentralCKFSeededTracks_tracks_begin);
+   fChain->SetBranchAddress("CentralCKFSeededTracks.tracks_end", CentralCKFSeededTracks_tracks_end, &b_CentralCKFSeededTracks_tracks_end);
+   fChain->SetBranchAddress("_CentralCKFSeededTracks_measurements", &_CentralCKFSeededTracks_measurements_, &b__CentralCKFSeededTracks_measurements_);
+   fChain->SetBranchAddress("_CentralCKFSeededTracks_measurements.index", _CentralCKFSeededTracks_measurements_index, &b__CentralCKFSeededTracks_measurements_index);
+   fChain->SetBranchAddress("_CentralCKFSeededTracks_measurements.collectionID", _CentralCKFSeededTracks_measurements_collectionID, &b__CentralCKFSeededTracks_measurements_collectionID);
+   fChain->SetBranchAddress("_CentralCKFSeededTracks_tracks", &_CentralCKFSeededTracks_tracks_, &b__CentralCKFSeededTracks_tracks_);
+   fChain->SetBranchAddress("_CentralCKFSeededTracks_tracks.index", &_CentralCKFSeededTracks_tracks_index, &b__CentralCKFSeededTracks_tracks_index);
+   fChain->SetBranchAddress("_CentralCKFSeededTracks_tracks.collectionID", &_CentralCKFSeededTracks_tracks_collectionID, &b__CentralCKFSeededTracks_tracks_collectionID);
+   fChain->SetBranchAddress("_CentralCKFSeededTracks_trajectory", &_CentralCKFSeededTracks_trajectory_, &b__CentralCKFSeededTracks_trajectory_);
+   fChain->SetBranchAddress("_CentralCKFSeededTracks_trajectory.index", _CentralCKFSeededTracks_trajectory_index, &b__CentralCKFSeededTracks_trajectory_index);
+   fChain->SetBranchAddress("_CentralCKFSeededTracks_trajectory.collectionID", _CentralCKFSeededTracks_trajectory_collectionID, &b__CentralCKFSeededTracks_trajectory_collectionID);
    fChain->SetBranchAddress("CentralCKFSeededTrajectories", &CentralCKFSeededTrajectories_, &b_CentralCKFSeededTrajectories_);
    fChain->SetBranchAddress("CentralCKFSeededTrajectories.type", CentralCKFSeededTrajectories_type, &b_CentralCKFSeededTrajectories_type);
    fChain->SetBranchAddress("CentralCKFSeededTrajectories.nStates", CentralCKFSeededTrajectories_nStates, &b_CentralCKFSeededTrajectories_nStates);
    fChain->SetBranchAddress("CentralCKFSeededTrajectories.nMeasurements", CentralCKFSeededTrajectories_nMeasurements, &b_CentralCKFSeededTrajectories_nMeasurements);
    fChain->SetBranchAddress("CentralCKFSeededTrajectories.nOutliers", CentralCKFSeededTrajectories_nOutliers, &b_CentralCKFSeededTrajectories_nOutliers);
    fChain->SetBranchAddress("CentralCKFSeededTrajectories.nHoles", CentralCKFSeededTrajectories_nHoles, &b_CentralCKFSeededTrajectories_nHoles);
-   fChain->SetBranchAddress("CentralCKFSeededTrajectories.chi2", CentralCKFSeededTrajectories_chi2, &b_CentralCKFSeededTrajectories_chi2);
-   fChain->SetBranchAddress("CentralCKFSeededTrajectories.ndf", CentralCKFSeededTrajectories_ndf, &b_CentralCKFSeededTrajectories_ndf);
    fChain->SetBranchAddress("CentralCKFSeededTrajectories.nSharedHits", CentralCKFSeededTrajectories_nSharedHits, &b_CentralCKFSeededTrajectories_nSharedHits);
    fChain->SetBranchAddress("CentralCKFSeededTrajectories.measurementChi2_begin", CentralCKFSeededTrajectories_measurementChi2_begin, &b_CentralCKFSeededTrajectories_measurementChi2_begin);
    fChain->SetBranchAddress("CentralCKFSeededTrajectories.measurementChi2_end", CentralCKFSeededTrajectories_measurementChi2_end, &b_CentralCKFSeededTrajectories_measurementChi2_end);
@@ -5991,71 +6964,92 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("CentralCKFSeededTrajectories.outlierChi2_end", CentralCKFSeededTrajectories_outlierChi2_end, &b_CentralCKFSeededTrajectories_outlierChi2_end);
    fChain->SetBranchAddress("CentralCKFSeededTrajectories.trackParameters_begin", CentralCKFSeededTrajectories_trackParameters_begin, &b_CentralCKFSeededTrajectories_trackParameters_begin);
    fChain->SetBranchAddress("CentralCKFSeededTrajectories.trackParameters_end", CentralCKFSeededTrajectories_trackParameters_end, &b_CentralCKFSeededTrajectories_trackParameters_end);
-   fChain->SetBranchAddress("CentralCKFSeededTrajectories.measurementHits_begin", CentralCKFSeededTrajectories_measurementHits_begin, &b_CentralCKFSeededTrajectories_measurementHits_begin);
-   fChain->SetBranchAddress("CentralCKFSeededTrajectories.measurementHits_end", CentralCKFSeededTrajectories_measurementHits_end, &b_CentralCKFSeededTrajectories_measurementHits_end);
-   fChain->SetBranchAddress("CentralCKFSeededTrajectories.outlierHits_begin", CentralCKFSeededTrajectories_outlierHits_begin, &b_CentralCKFSeededTrajectories_outlierHits_begin);
-   fChain->SetBranchAddress("CentralCKFSeededTrajectories.outlierHits_end", CentralCKFSeededTrajectories_outlierHits_end, &b_CentralCKFSeededTrajectories_outlierHits_end);
+   fChain->SetBranchAddress("CentralCKFSeededTrajectories.measurements_deprecated_begin", CentralCKFSeededTrajectories_measurements_deprecated_begin, &b_CentralCKFSeededTrajectories_measurements_deprecated_begin);
+   fChain->SetBranchAddress("CentralCKFSeededTrajectories.measurements_deprecated_end", CentralCKFSeededTrajectories_measurements_deprecated_end, &b_CentralCKFSeededTrajectories_measurements_deprecated_end);
+   fChain->SetBranchAddress("CentralCKFSeededTrajectories.outliers_deprecated_begin", CentralCKFSeededTrajectories_outliers_deprecated_begin, &b_CentralCKFSeededTrajectories_outliers_deprecated_begin);
+   fChain->SetBranchAddress("CentralCKFSeededTrajectories.outliers_deprecated_end", CentralCKFSeededTrajectories_outliers_deprecated_end, &b_CentralCKFSeededTrajectories_outliers_deprecated_end);
    fChain->SetBranchAddress("_CentralCKFSeededTrajectories_trackParameters", &_CentralCKFSeededTrajectories_trackParameters_, &b__CentralCKFSeededTrajectories_trackParameters_);
    fChain->SetBranchAddress("_CentralCKFSeededTrajectories_trackParameters.index", _CentralCKFSeededTrajectories_trackParameters_index, &b__CentralCKFSeededTrajectories_trackParameters_index);
    fChain->SetBranchAddress("_CentralCKFSeededTrajectories_trackParameters.collectionID", _CentralCKFSeededTrajectories_trackParameters_collectionID, &b__CentralCKFSeededTrajectories_trackParameters_collectionID);
-   fChain->SetBranchAddress("_CentralCKFSeededTrajectories_measurementHits", &_CentralCKFSeededTrajectories_measurementHits_, &b__CentralCKFSeededTrajectories_measurementHits_);
-   fChain->SetBranchAddress("_CentralCKFSeededTrajectories_measurementHits.index", _CentralCKFSeededTrajectories_measurementHits_index, &b__CentralCKFSeededTrajectories_measurementHits_index);
-   fChain->SetBranchAddress("_CentralCKFSeededTrajectories_measurementHits.collectionID", _CentralCKFSeededTrajectories_measurementHits_collectionID, &b__CentralCKFSeededTrajectories_measurementHits_collectionID);
-   fChain->SetBranchAddress("_CentralCKFSeededTrajectories_outlierHits", &_CentralCKFSeededTrajectories_outlierHits_, &b__CentralCKFSeededTrajectories_outlierHits_);
-   fChain->SetBranchAddress("_CentralCKFSeededTrajectories_outlierHits.index", _CentralCKFSeededTrajectories_outlierHits_index, &b__CentralCKFSeededTrajectories_outlierHits_index);
-   fChain->SetBranchAddress("_CentralCKFSeededTrajectories_outlierHits.collectionID", _CentralCKFSeededTrajectories_outlierHits_collectionID, &b__CentralCKFSeededTrajectories_outlierHits_collectionID);
+   fChain->SetBranchAddress("_CentralCKFSeededTrajectories_measurements_deprecated", &_CentralCKFSeededTrajectories_measurements_deprecated_, &b__CentralCKFSeededTrajectories_measurements_deprecated_);
+   fChain->SetBranchAddress("_CentralCKFSeededTrajectories_measurements_deprecated.index", _CentralCKFSeededTrajectories_measurements_deprecated_index, &b__CentralCKFSeededTrajectories_measurements_deprecated_index);
+   fChain->SetBranchAddress("_CentralCKFSeededTrajectories_measurements_deprecated.collectionID", _CentralCKFSeededTrajectories_measurements_deprecated_collectionID, &b__CentralCKFSeededTrajectories_measurements_deprecated_collectionID);
+   fChain->SetBranchAddress("_CentralCKFSeededTrajectories_outliers_deprecated", &_CentralCKFSeededTrajectories_outliers_deprecated_, &b__CentralCKFSeededTrajectories_outliers_deprecated_);
+   fChain->SetBranchAddress("_CentralCKFSeededTrajectories_outliers_deprecated.index", _CentralCKFSeededTrajectories_outliers_deprecated_index, &b__CentralCKFSeededTrajectories_outliers_deprecated_index);
+   fChain->SetBranchAddress("_CentralCKFSeededTrajectories_outliers_deprecated.collectionID", _CentralCKFSeededTrajectories_outliers_deprecated_collectionID, &b__CentralCKFSeededTrajectories_outliers_deprecated_collectionID);
+   fChain->SetBranchAddress("_CentralCKFSeededTrajectories_seed", &_CentralCKFSeededTrajectories_seed_, &b__CentralCKFSeededTrajectories_seed_);
+   fChain->SetBranchAddress("_CentralCKFSeededTrajectories_seed.index", _CentralCKFSeededTrajectories_seed_index, &b__CentralCKFSeededTrajectories_seed_index);
+   fChain->SetBranchAddress("_CentralCKFSeededTrajectories_seed.collectionID", _CentralCKFSeededTrajectories_seed_collectionID, &b__CentralCKFSeededTrajectories_seed_collectionID);
    fChain->SetBranchAddress("_CentralCKFSeededTrajectories_measurementChi2", &_CentralCKFSeededTrajectories_measurementChi2, &b__CentralCKFSeededTrajectories_measurementChi2);
    fChain->SetBranchAddress("_CentralCKFSeededTrajectories_outlierChi2", &_CentralCKFSeededTrajectories_outlierChi2, &b__CentralCKFSeededTrajectories_outlierChi2);
    fChain->SetBranchAddress("CentralCKFTrackParameters", &CentralCKFTrackParameters_, &b_CentralCKFTrackParameters_);
-   fChain->SetBranchAddress("CentralCKFTrackParameters.type", CentralCKFTrackParameters_type, &b_CentralCKFTrackParameters_type);
-   fChain->SetBranchAddress("CentralCKFTrackParameters.loc.a", CentralCKFTrackParameters_loc_a, &b_CentralCKFTrackParameters_loc_a);
-   fChain->SetBranchAddress("CentralCKFTrackParameters.loc.b", CentralCKFTrackParameters_loc_b, &b_CentralCKFTrackParameters_loc_b);
-   fChain->SetBranchAddress("CentralCKFTrackParameters.locError.xx", CentralCKFTrackParameters_locError_xx, &b_CentralCKFTrackParameters_locError_xx);
-   fChain->SetBranchAddress("CentralCKFTrackParameters.locError.yy", CentralCKFTrackParameters_locError_yy, &b_CentralCKFTrackParameters_locError_yy);
-   fChain->SetBranchAddress("CentralCKFTrackParameters.locError.xy", CentralCKFTrackParameters_locError_xy, &b_CentralCKFTrackParameters_locError_xy);
-   fChain->SetBranchAddress("CentralCKFTrackParameters.theta", CentralCKFTrackParameters_theta, &b_CentralCKFTrackParameters_theta);
-   fChain->SetBranchAddress("CentralCKFTrackParameters.phi", CentralCKFTrackParameters_phi, &b_CentralCKFTrackParameters_phi);
-   fChain->SetBranchAddress("CentralCKFTrackParameters.qOverP", CentralCKFTrackParameters_qOverP, &b_CentralCKFTrackParameters_qOverP);
-   fChain->SetBranchAddress("CentralCKFTrackParameters.momentumError.xx", CentralCKFTrackParameters_momentumError_xx, &b_CentralCKFTrackParameters_momentumError_xx);
-   fChain->SetBranchAddress("CentralCKFTrackParameters.momentumError.yy", CentralCKFTrackParameters_momentumError_yy, &b_CentralCKFTrackParameters_momentumError_yy);
-   fChain->SetBranchAddress("CentralCKFTrackParameters.momentumError.zz", CentralCKFTrackParameters_momentumError_zz, &b_CentralCKFTrackParameters_momentumError_zz);
-   fChain->SetBranchAddress("CentralCKFTrackParameters.momentumError.xy", CentralCKFTrackParameters_momentumError_xy, &b_CentralCKFTrackParameters_momentumError_xy);
-   fChain->SetBranchAddress("CentralCKFTrackParameters.momentumError.xz", CentralCKFTrackParameters_momentumError_xz, &b_CentralCKFTrackParameters_momentumError_xz);
-   fChain->SetBranchAddress("CentralCKFTrackParameters.momentumError.yz", CentralCKFTrackParameters_momentumError_yz, &b_CentralCKFTrackParameters_momentumError_yz);
-   fChain->SetBranchAddress("CentralCKFTrackParameters.time", CentralCKFTrackParameters_time, &b_CentralCKFTrackParameters_time);
-   fChain->SetBranchAddress("CentralCKFTrackParameters.timeError", CentralCKFTrackParameters_timeError, &b_CentralCKFTrackParameters_timeError);
-   fChain->SetBranchAddress("CentralCKFTrackParameters.charge", CentralCKFTrackParameters_charge, &b_CentralCKFTrackParameters_charge);
-   fChain->SetBranchAddress("_CentralCKFTrackParameters_trajectory", &_CentralCKFTrackParameters_trajectory_, &b__CentralCKFTrackParameters_trajectory_);
-   fChain->SetBranchAddress("_CentralCKFTrackParameters_trajectory.index", _CentralCKFTrackParameters_trajectory_index, &b__CentralCKFTrackParameters_trajectory_index);
-   fChain->SetBranchAddress("_CentralCKFTrackParameters_trajectory.collectionID", _CentralCKFTrackParameters_trajectory_collectionID, &b__CentralCKFTrackParameters_trajectory_collectionID);
+   fChain->SetBranchAddress("CentralCKFTrackParameters.type", &CentralCKFTrackParameters_type, &b_CentralCKFTrackParameters_type);
+   fChain->SetBranchAddress("CentralCKFTrackParameters.surface", &CentralCKFTrackParameters_surface, &b_CentralCKFTrackParameters_surface);
+   fChain->SetBranchAddress("CentralCKFTrackParameters.loc.a", &CentralCKFTrackParameters_loc_a, &b_CentralCKFTrackParameters_loc_a);
+   fChain->SetBranchAddress("CentralCKFTrackParameters.loc.b", &CentralCKFTrackParameters_loc_b, &b_CentralCKFTrackParameters_loc_b);
+   fChain->SetBranchAddress("CentralCKFTrackParameters.theta", &CentralCKFTrackParameters_theta, &b_CentralCKFTrackParameters_theta);
+   fChain->SetBranchAddress("CentralCKFTrackParameters.phi", &CentralCKFTrackParameters_phi, &b_CentralCKFTrackParameters_phi);
+   fChain->SetBranchAddress("CentralCKFTrackParameters.qOverP", &CentralCKFTrackParameters_qOverP, &b_CentralCKFTrackParameters_qOverP);
+   fChain->SetBranchAddress("CentralCKFTrackParameters.time", &CentralCKFTrackParameters_time, &b_CentralCKFTrackParameters_time);
+   fChain->SetBranchAddress("CentralCKFTrackParameters.pdg", &CentralCKFTrackParameters_pdg, &b_CentralCKFTrackParameters_pdg);
+   fChain->SetBranchAddress("CentralCKFTrackParameters.covariance.covariance[21]", &CentralCKFTrackParameters_covariance_covariance, &b_CentralCKFTrackParameters_covariance_covariance);
+   fChain->SetBranchAddress("CentralCKFTracks", &CentralCKFTracks_, &b_CentralCKFTracks_);
+   fChain->SetBranchAddress("CentralCKFTracks.type", &CentralCKFTracks_type, &b_CentralCKFTracks_type);
+   fChain->SetBranchAddress("CentralCKFTracks.position.x", &CentralCKFTracks_position_x, &b_CentralCKFTracks_position_x);
+   fChain->SetBranchAddress("CentralCKFTracks.position.y", &CentralCKFTracks_position_y, &b_CentralCKFTracks_position_y);
+   fChain->SetBranchAddress("CentralCKFTracks.position.z", &CentralCKFTracks_position_z, &b_CentralCKFTracks_position_z);
+   fChain->SetBranchAddress("CentralCKFTracks.momentum.x", &CentralCKFTracks_momentum_x, &b_CentralCKFTracks_momentum_x);
+   fChain->SetBranchAddress("CentralCKFTracks.momentum.y", &CentralCKFTracks_momentum_y, &b_CentralCKFTracks_momentum_y);
+   fChain->SetBranchAddress("CentralCKFTracks.momentum.z", &CentralCKFTracks_momentum_z, &b_CentralCKFTracks_momentum_z);
+   fChain->SetBranchAddress("CentralCKFTracks.positionMomentumCovariance.covariance[21]", &CentralCKFTracks_positionMomentumCovariance_covariance, &b_CentralCKFTracks_positionMomentumCovariance_covariance);
+   fChain->SetBranchAddress("CentralCKFTracks.time", &CentralCKFTracks_time, &b_CentralCKFTracks_time);
+   fChain->SetBranchAddress("CentralCKFTracks.timeError", &CentralCKFTracks_timeError, &b_CentralCKFTracks_timeError);
+   fChain->SetBranchAddress("CentralCKFTracks.charge", &CentralCKFTracks_charge, &b_CentralCKFTracks_charge);
+   fChain->SetBranchAddress("CentralCKFTracks.chi2", &CentralCKFTracks_chi2, &b_CentralCKFTracks_chi2);
+   fChain->SetBranchAddress("CentralCKFTracks.ndf", &CentralCKFTracks_ndf, &b_CentralCKFTracks_ndf);
+   fChain->SetBranchAddress("CentralCKFTracks.pdg", &CentralCKFTracks_pdg, &b_CentralCKFTracks_pdg);
+   fChain->SetBranchAddress("CentralCKFTracks.measurements_begin", &CentralCKFTracks_measurements_begin, &b_CentralCKFTracks_measurements_begin);
+   fChain->SetBranchAddress("CentralCKFTracks.measurements_end", &CentralCKFTracks_measurements_end, &b_CentralCKFTracks_measurements_end);
+   fChain->SetBranchAddress("CentralCKFTracks.tracks_begin", &CentralCKFTracks_tracks_begin, &b_CentralCKFTracks_tracks_begin);
+   fChain->SetBranchAddress("CentralCKFTracks.tracks_end", &CentralCKFTracks_tracks_end, &b_CentralCKFTracks_tracks_end);
+   fChain->SetBranchAddress("_CentralCKFTracks_measurements", &_CentralCKFTracks_measurements_, &b__CentralCKFTracks_measurements_);
+   fChain->SetBranchAddress("_CentralCKFTracks_measurements.index", &_CentralCKFTracks_measurements_index, &b__CentralCKFTracks_measurements_index);
+   fChain->SetBranchAddress("_CentralCKFTracks_measurements.collectionID", &_CentralCKFTracks_measurements_collectionID, &b__CentralCKFTracks_measurements_collectionID);
+   fChain->SetBranchAddress("_CentralCKFTracks_tracks", &_CentralCKFTracks_tracks_, &b__CentralCKFTracks_tracks_);
+   fChain->SetBranchAddress("_CentralCKFTracks_tracks.index", &_CentralCKFTracks_tracks_index, &b__CentralCKFTracks_tracks_index);
+   fChain->SetBranchAddress("_CentralCKFTracks_tracks.collectionID", &_CentralCKFTracks_tracks_collectionID, &b__CentralCKFTracks_tracks_collectionID);
+   fChain->SetBranchAddress("_CentralCKFTracks_trajectory", &_CentralCKFTracks_trajectory_, &b__CentralCKFTracks_trajectory_);
+   fChain->SetBranchAddress("_CentralCKFTracks_trajectory.index", &_CentralCKFTracks_trajectory_index, &b__CentralCKFTracks_trajectory_index);
+   fChain->SetBranchAddress("_CentralCKFTracks_trajectory.collectionID", &_CentralCKFTracks_trajectory_collectionID, &b__CentralCKFTracks_trajectory_collectionID);
    fChain->SetBranchAddress("CentralCKFTrajectories", &CentralCKFTrajectories_, &b_CentralCKFTrajectories_);
-   fChain->SetBranchAddress("CentralCKFTrajectories.type", CentralCKFTrajectories_type, &b_CentralCKFTrajectories_type);
-   fChain->SetBranchAddress("CentralCKFTrajectories.nStates", CentralCKFTrajectories_nStates, &b_CentralCKFTrajectories_nStates);
-   fChain->SetBranchAddress("CentralCKFTrajectories.nMeasurements", CentralCKFTrajectories_nMeasurements, &b_CentralCKFTrajectories_nMeasurements);
-   fChain->SetBranchAddress("CentralCKFTrajectories.nOutliers", CentralCKFTrajectories_nOutliers, &b_CentralCKFTrajectories_nOutliers);
-   fChain->SetBranchAddress("CentralCKFTrajectories.nHoles", CentralCKFTrajectories_nHoles, &b_CentralCKFTrajectories_nHoles);
-   fChain->SetBranchAddress("CentralCKFTrajectories.chi2", CentralCKFTrajectories_chi2, &b_CentralCKFTrajectories_chi2);
-   fChain->SetBranchAddress("CentralCKFTrajectories.ndf", CentralCKFTrajectories_ndf, &b_CentralCKFTrajectories_ndf);
-   fChain->SetBranchAddress("CentralCKFTrajectories.nSharedHits", CentralCKFTrajectories_nSharedHits, &b_CentralCKFTrajectories_nSharedHits);
-   fChain->SetBranchAddress("CentralCKFTrajectories.measurementChi2_begin", CentralCKFTrajectories_measurementChi2_begin, &b_CentralCKFTrajectories_measurementChi2_begin);
-   fChain->SetBranchAddress("CentralCKFTrajectories.measurementChi2_end", CentralCKFTrajectories_measurementChi2_end, &b_CentralCKFTrajectories_measurementChi2_end);
-   fChain->SetBranchAddress("CentralCKFTrajectories.outlierChi2_begin", CentralCKFTrajectories_outlierChi2_begin, &b_CentralCKFTrajectories_outlierChi2_begin);
-   fChain->SetBranchAddress("CentralCKFTrajectories.outlierChi2_end", CentralCKFTrajectories_outlierChi2_end, &b_CentralCKFTrajectories_outlierChi2_end);
-   fChain->SetBranchAddress("CentralCKFTrajectories.trackParameters_begin", CentralCKFTrajectories_trackParameters_begin, &b_CentralCKFTrajectories_trackParameters_begin);
-   fChain->SetBranchAddress("CentralCKFTrajectories.trackParameters_end", CentralCKFTrajectories_trackParameters_end, &b_CentralCKFTrajectories_trackParameters_end);
-   fChain->SetBranchAddress("CentralCKFTrajectories.measurementHits_begin", CentralCKFTrajectories_measurementHits_begin, &b_CentralCKFTrajectories_measurementHits_begin);
-   fChain->SetBranchAddress("CentralCKFTrajectories.measurementHits_end", CentralCKFTrajectories_measurementHits_end, &b_CentralCKFTrajectories_measurementHits_end);
-   fChain->SetBranchAddress("CentralCKFTrajectories.outlierHits_begin", CentralCKFTrajectories_outlierHits_begin, &b_CentralCKFTrajectories_outlierHits_begin);
-   fChain->SetBranchAddress("CentralCKFTrajectories.outlierHits_end", CentralCKFTrajectories_outlierHits_end, &b_CentralCKFTrajectories_outlierHits_end);
+   fChain->SetBranchAddress("CentralCKFTrajectories.type", &CentralCKFTrajectories_type, &b_CentralCKFTrajectories_type);
+   fChain->SetBranchAddress("CentralCKFTrajectories.nStates", &CentralCKFTrajectories_nStates, &b_CentralCKFTrajectories_nStates);
+   fChain->SetBranchAddress("CentralCKFTrajectories.nMeasurements", &CentralCKFTrajectories_nMeasurements, &b_CentralCKFTrajectories_nMeasurements);
+   fChain->SetBranchAddress("CentralCKFTrajectories.nOutliers", &CentralCKFTrajectories_nOutliers, &b_CentralCKFTrajectories_nOutliers);
+   fChain->SetBranchAddress("CentralCKFTrajectories.nHoles", &CentralCKFTrajectories_nHoles, &b_CentralCKFTrajectories_nHoles);
+   fChain->SetBranchAddress("CentralCKFTrajectories.nSharedHits", &CentralCKFTrajectories_nSharedHits, &b_CentralCKFTrajectories_nSharedHits);
+   fChain->SetBranchAddress("CentralCKFTrajectories.measurementChi2_begin", &CentralCKFTrajectories_measurementChi2_begin, &b_CentralCKFTrajectories_measurementChi2_begin);
+   fChain->SetBranchAddress("CentralCKFTrajectories.measurementChi2_end", &CentralCKFTrajectories_measurementChi2_end, &b_CentralCKFTrajectories_measurementChi2_end);
+   fChain->SetBranchAddress("CentralCKFTrajectories.outlierChi2_begin", &CentralCKFTrajectories_outlierChi2_begin, &b_CentralCKFTrajectories_outlierChi2_begin);
+   fChain->SetBranchAddress("CentralCKFTrajectories.outlierChi2_end", &CentralCKFTrajectories_outlierChi2_end, &b_CentralCKFTrajectories_outlierChi2_end);
+   fChain->SetBranchAddress("CentralCKFTrajectories.trackParameters_begin", &CentralCKFTrajectories_trackParameters_begin, &b_CentralCKFTrajectories_trackParameters_begin);
+   fChain->SetBranchAddress("CentralCKFTrajectories.trackParameters_end", &CentralCKFTrajectories_trackParameters_end, &b_CentralCKFTrajectories_trackParameters_end);
+   fChain->SetBranchAddress("CentralCKFTrajectories.measurements_deprecated_begin", &CentralCKFTrajectories_measurements_deprecated_begin, &b_CentralCKFTrajectories_measurements_deprecated_begin);
+   fChain->SetBranchAddress("CentralCKFTrajectories.measurements_deprecated_end", &CentralCKFTrajectories_measurements_deprecated_end, &b_CentralCKFTrajectories_measurements_deprecated_end);
+   fChain->SetBranchAddress("CentralCKFTrajectories.outliers_deprecated_begin", &CentralCKFTrajectories_outliers_deprecated_begin, &b_CentralCKFTrajectories_outliers_deprecated_begin);
+   fChain->SetBranchAddress("CentralCKFTrajectories.outliers_deprecated_end", &CentralCKFTrajectories_outliers_deprecated_end, &b_CentralCKFTrajectories_outliers_deprecated_end);
    fChain->SetBranchAddress("_CentralCKFTrajectories_trackParameters", &_CentralCKFTrajectories_trackParameters_, &b__CentralCKFTrajectories_trackParameters_);
-   fChain->SetBranchAddress("_CentralCKFTrajectories_trackParameters.index", _CentralCKFTrajectories_trackParameters_index, &b__CentralCKFTrajectories_trackParameters_index);
-   fChain->SetBranchAddress("_CentralCKFTrajectories_trackParameters.collectionID", _CentralCKFTrajectories_trackParameters_collectionID, &b__CentralCKFTrajectories_trackParameters_collectionID);
-   fChain->SetBranchAddress("_CentralCKFTrajectories_measurementHits", &_CentralCKFTrajectories_measurementHits_, &b__CentralCKFTrajectories_measurementHits_);
-   fChain->SetBranchAddress("_CentralCKFTrajectories_measurementHits.index", _CentralCKFTrajectories_measurementHits_index, &b__CentralCKFTrajectories_measurementHits_index);
-   fChain->SetBranchAddress("_CentralCKFTrajectories_measurementHits.collectionID", _CentralCKFTrajectories_measurementHits_collectionID, &b__CentralCKFTrajectories_measurementHits_collectionID);
-   fChain->SetBranchAddress("_CentralCKFTrajectories_outlierHits", &_CentralCKFTrajectories_outlierHits_, &b__CentralCKFTrajectories_outlierHits_);
-   fChain->SetBranchAddress("_CentralCKFTrajectories_outlierHits.index", _CentralCKFTrajectories_outlierHits_index, &b__CentralCKFTrajectories_outlierHits_index);
-   fChain->SetBranchAddress("_CentralCKFTrajectories_outlierHits.collectionID", _CentralCKFTrajectories_outlierHits_collectionID, &b__CentralCKFTrajectories_outlierHits_collectionID);
+   fChain->SetBranchAddress("_CentralCKFTrajectories_trackParameters.index", &_CentralCKFTrajectories_trackParameters_index, &b__CentralCKFTrajectories_trackParameters_index);
+   fChain->SetBranchAddress("_CentralCKFTrajectories_trackParameters.collectionID", &_CentralCKFTrajectories_trackParameters_collectionID, &b__CentralCKFTrajectories_trackParameters_collectionID);
+   fChain->SetBranchAddress("_CentralCKFTrajectories_measurements_deprecated", &_CentralCKFTrajectories_measurements_deprecated_, &b__CentralCKFTrajectories_measurements_deprecated_);
+   fChain->SetBranchAddress("_CentralCKFTrajectories_measurements_deprecated.index", &_CentralCKFTrajectories_measurements_deprecated_index, &b__CentralCKFTrajectories_measurements_deprecated_index);
+   fChain->SetBranchAddress("_CentralCKFTrajectories_measurements_deprecated.collectionID", &_CentralCKFTrajectories_measurements_deprecated_collectionID, &b__CentralCKFTrajectories_measurements_deprecated_collectionID);
+   fChain->SetBranchAddress("_CentralCKFTrajectories_outliers_deprecated", &_CentralCKFTrajectories_outliers_deprecated_, &b__CentralCKFTrajectories_outliers_deprecated_);
+   fChain->SetBranchAddress("_CentralCKFTrajectories_outliers_deprecated.index", &_CentralCKFTrajectories_outliers_deprecated_index, &b__CentralCKFTrajectories_outliers_deprecated_index);
+   fChain->SetBranchAddress("_CentralCKFTrajectories_outliers_deprecated.collectionID", &_CentralCKFTrajectories_outliers_deprecated_collectionID, &b__CentralCKFTrajectories_outliers_deprecated_collectionID);
+   fChain->SetBranchAddress("_CentralCKFTrajectories_seed", &_CentralCKFTrajectories_seed_, &b__CentralCKFTrajectories_seed_);
+   fChain->SetBranchAddress("_CentralCKFTrajectories_seed.index", &_CentralCKFTrajectories_seed_index, &b__CentralCKFTrajectories_seed_index);
+   fChain->SetBranchAddress("_CentralCKFTrajectories_seed.collectionID", &_CentralCKFTrajectories_seed_collectionID, &b__CentralCKFTrajectories_seed_collectionID);
    fChain->SetBranchAddress("_CentralCKFTrajectories_measurementChi2", &_CentralCKFTrajectories_measurementChi2, &b__CentralCKFTrajectories_measurementChi2);
    fChain->SetBranchAddress("_CentralCKFTrajectories_outlierChi2", &_CentralCKFTrajectories_outlierChi2, &b__CentralCKFTrajectories_outlierChi2);
    fChain->SetBranchAddress("CentralTrackerMeasurements", &CentralTrackerMeasurements_, &b_CentralTrackerMeasurements_);
@@ -6082,211 +7076,202 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("CentralTrackingRecHits_objIdx.collectionID", CentralTrackingRecHits_objIdx_collectionID, &b_CentralTrackingRecHits_objIdx_collectionID);
    fChain->SetBranchAddress("CentralTrackSeedingResults", &CentralTrackSeedingResults_, &b_CentralTrackSeedingResults_);
    fChain->SetBranchAddress("CentralTrackSeedingResults.type", CentralTrackSeedingResults_type, &b_CentralTrackSeedingResults_type);
+   fChain->SetBranchAddress("CentralTrackSeedingResults.surface", CentralTrackSeedingResults_surface, &b_CentralTrackSeedingResults_surface);
    fChain->SetBranchAddress("CentralTrackSeedingResults.loc.a", CentralTrackSeedingResults_loc_a, &b_CentralTrackSeedingResults_loc_a);
    fChain->SetBranchAddress("CentralTrackSeedingResults.loc.b", CentralTrackSeedingResults_loc_b, &b_CentralTrackSeedingResults_loc_b);
-   fChain->SetBranchAddress("CentralTrackSeedingResults.locError.xx", CentralTrackSeedingResults_locError_xx, &b_CentralTrackSeedingResults_locError_xx);
-   fChain->SetBranchAddress("CentralTrackSeedingResults.locError.yy", CentralTrackSeedingResults_locError_yy, &b_CentralTrackSeedingResults_locError_yy);
-   fChain->SetBranchAddress("CentralTrackSeedingResults.locError.xy", CentralTrackSeedingResults_locError_xy, &b_CentralTrackSeedingResults_locError_xy);
    fChain->SetBranchAddress("CentralTrackSeedingResults.theta", CentralTrackSeedingResults_theta, &b_CentralTrackSeedingResults_theta);
    fChain->SetBranchAddress("CentralTrackSeedingResults.phi", CentralTrackSeedingResults_phi, &b_CentralTrackSeedingResults_phi);
    fChain->SetBranchAddress("CentralTrackSeedingResults.qOverP", CentralTrackSeedingResults_qOverP, &b_CentralTrackSeedingResults_qOverP);
-   fChain->SetBranchAddress("CentralTrackSeedingResults.momentumError.xx", CentralTrackSeedingResults_momentumError_xx, &b_CentralTrackSeedingResults_momentumError_xx);
-   fChain->SetBranchAddress("CentralTrackSeedingResults.momentumError.yy", CentralTrackSeedingResults_momentumError_yy, &b_CentralTrackSeedingResults_momentumError_yy);
-   fChain->SetBranchAddress("CentralTrackSeedingResults.momentumError.zz", CentralTrackSeedingResults_momentumError_zz, &b_CentralTrackSeedingResults_momentumError_zz);
-   fChain->SetBranchAddress("CentralTrackSeedingResults.momentumError.xy", CentralTrackSeedingResults_momentumError_xy, &b_CentralTrackSeedingResults_momentumError_xy);
-   fChain->SetBranchAddress("CentralTrackSeedingResults.momentumError.xz", CentralTrackSeedingResults_momentumError_xz, &b_CentralTrackSeedingResults_momentumError_xz);
-   fChain->SetBranchAddress("CentralTrackSeedingResults.momentumError.yz", CentralTrackSeedingResults_momentumError_yz, &b_CentralTrackSeedingResults_momentumError_yz);
    fChain->SetBranchAddress("CentralTrackSeedingResults.time", CentralTrackSeedingResults_time, &b_CentralTrackSeedingResults_time);
-   fChain->SetBranchAddress("CentralTrackSeedingResults.timeError", CentralTrackSeedingResults_timeError, &b_CentralTrackSeedingResults_timeError);
-   fChain->SetBranchAddress("CentralTrackSeedingResults.charge", CentralTrackSeedingResults_charge, &b_CentralTrackSeedingResults_charge);
-   fChain->SetBranchAddress("_CentralTrackSeedingResults_trajectory", &_CentralTrackSeedingResults_trajectory_, &b__CentralTrackSeedingResults_trajectory_);
-   fChain->SetBranchAddress("_CentralTrackSeedingResults_trajectory.index", _CentralTrackSeedingResults_trajectory_index, &b__CentralTrackSeedingResults_trajectory_index);
-   fChain->SetBranchAddress("_CentralTrackSeedingResults_trajectory.collectionID", _CentralTrackSeedingResults_trajectory_collectionID, &b__CentralTrackSeedingResults_trajectory_collectionID);
+   fChain->SetBranchAddress("CentralTrackSeedingResults.pdg", CentralTrackSeedingResults_pdg, &b_CentralTrackSeedingResults_pdg);
+   fChain->SetBranchAddress("CentralTrackSeedingResults.covariance.covariance[21]", CentralTrackSeedingResults_covariance_covariance, &b_CentralTrackSeedingResults_covariance_covariance);
    fChain->SetBranchAddress("CentralTrackSegments", &CentralTrackSegments_, &b_CentralTrackSegments_);
-   fChain->SetBranchAddress("CentralTrackSegments.length", CentralTrackSegments_length, &b_CentralTrackSegments_length);
-   fChain->SetBranchAddress("CentralTrackSegments.lengthError", CentralTrackSegments_lengthError, &b_CentralTrackSegments_lengthError);
-   fChain->SetBranchAddress("CentralTrackSegments.points_begin", CentralTrackSegments_points_begin, &b_CentralTrackSegments_points_begin);
-   fChain->SetBranchAddress("CentralTrackSegments.points_end", CentralTrackSegments_points_end, &b_CentralTrackSegments_points_end);
+   fChain->SetBranchAddress("CentralTrackSegments.length", &CentralTrackSegments_length, &b_CentralTrackSegments_length);
+   fChain->SetBranchAddress("CentralTrackSegments.lengthError", &CentralTrackSegments_lengthError, &b_CentralTrackSegments_lengthError);
+   fChain->SetBranchAddress("CentralTrackSegments.points_begin", &CentralTrackSegments_points_begin, &b_CentralTrackSegments_points_begin);
+   fChain->SetBranchAddress("CentralTrackSegments.points_end", &CentralTrackSegments_points_end, &b_CentralTrackSegments_points_end);
    fChain->SetBranchAddress("_CentralTrackSegments_track", &_CentralTrackSegments_track_, &b__CentralTrackSegments_track_);
-   fChain->SetBranchAddress("_CentralTrackSegments_track.index", _CentralTrackSegments_track_index, &b__CentralTrackSegments_track_index);
-   fChain->SetBranchAddress("_CentralTrackSegments_track.collectionID", _CentralTrackSegments_track_collectionID, &b__CentralTrackSegments_track_collectionID);
+   fChain->SetBranchAddress("_CentralTrackSegments_track.index", &_CentralTrackSegments_track_index, &b__CentralTrackSegments_track_index);
+   fChain->SetBranchAddress("_CentralTrackSegments_track.collectionID", &_CentralTrackSegments_track_collectionID, &b__CentralTrackSegments_track_collectionID);
    fChain->SetBranchAddress("_CentralTrackSegments_points", &_CentralTrackSegments_points_, &b__CentralTrackSegments_points_);
-   fChain->SetBranchAddress("_CentralTrackSegments_points.surface", _CentralTrackSegments_points_surface, &b__CentralTrackSegments_points_surface);
-   fChain->SetBranchAddress("_CentralTrackSegments_points.system", _CentralTrackSegments_points_system, &b__CentralTrackSegments_points_system);
-   fChain->SetBranchAddress("_CentralTrackSegments_points.position.x", _CentralTrackSegments_points_position_x, &b__CentralTrackSegments_points_position_x);
-   fChain->SetBranchAddress("_CentralTrackSegments_points.position.y", _CentralTrackSegments_points_position_y, &b__CentralTrackSegments_points_position_y);
-   fChain->SetBranchAddress("_CentralTrackSegments_points.position.z", _CentralTrackSegments_points_position_z, &b__CentralTrackSegments_points_position_z);
-   fChain->SetBranchAddress("_CentralTrackSegments_points.positionError.xx", _CentralTrackSegments_points_positionError_xx, &b__CentralTrackSegments_points_positionError_xx);
-   fChain->SetBranchAddress("_CentralTrackSegments_points.positionError.yy", _CentralTrackSegments_points_positionError_yy, &b__CentralTrackSegments_points_positionError_yy);
-   fChain->SetBranchAddress("_CentralTrackSegments_points.positionError.zz", _CentralTrackSegments_points_positionError_zz, &b__CentralTrackSegments_points_positionError_zz);
-   fChain->SetBranchAddress("_CentralTrackSegments_points.positionError.xy", _CentralTrackSegments_points_positionError_xy, &b__CentralTrackSegments_points_positionError_xy);
-   fChain->SetBranchAddress("_CentralTrackSegments_points.positionError.xz", _CentralTrackSegments_points_positionError_xz, &b__CentralTrackSegments_points_positionError_xz);
-   fChain->SetBranchAddress("_CentralTrackSegments_points.positionError.yz", _CentralTrackSegments_points_positionError_yz, &b__CentralTrackSegments_points_positionError_yz);
-   fChain->SetBranchAddress("_CentralTrackSegments_points.momentum.x", _CentralTrackSegments_points_momentum_x, &b__CentralTrackSegments_points_momentum_x);
-   fChain->SetBranchAddress("_CentralTrackSegments_points.momentum.y", _CentralTrackSegments_points_momentum_y, &b__CentralTrackSegments_points_momentum_y);
-   fChain->SetBranchAddress("_CentralTrackSegments_points.momentum.z", _CentralTrackSegments_points_momentum_z, &b__CentralTrackSegments_points_momentum_z);
-   fChain->SetBranchAddress("_CentralTrackSegments_points.momentumError.xx", _CentralTrackSegments_points_momentumError_xx, &b__CentralTrackSegments_points_momentumError_xx);
-   fChain->SetBranchAddress("_CentralTrackSegments_points.momentumError.yy", _CentralTrackSegments_points_momentumError_yy, &b__CentralTrackSegments_points_momentumError_yy);
-   fChain->SetBranchAddress("_CentralTrackSegments_points.momentumError.zz", _CentralTrackSegments_points_momentumError_zz, &b__CentralTrackSegments_points_momentumError_zz);
-   fChain->SetBranchAddress("_CentralTrackSegments_points.momentumError.xy", _CentralTrackSegments_points_momentumError_xy, &b__CentralTrackSegments_points_momentumError_xy);
-   fChain->SetBranchAddress("_CentralTrackSegments_points.momentumError.xz", _CentralTrackSegments_points_momentumError_xz, &b__CentralTrackSegments_points_momentumError_xz);
-   fChain->SetBranchAddress("_CentralTrackSegments_points.momentumError.yz", _CentralTrackSegments_points_momentumError_yz, &b__CentralTrackSegments_points_momentumError_yz);
-   fChain->SetBranchAddress("_CentralTrackSegments_points.time", _CentralTrackSegments_points_time, &b__CentralTrackSegments_points_time);
-   fChain->SetBranchAddress("_CentralTrackSegments_points.timeError", _CentralTrackSegments_points_timeError, &b__CentralTrackSegments_points_timeError);
-   fChain->SetBranchAddress("_CentralTrackSegments_points.theta", _CentralTrackSegments_points_theta, &b__CentralTrackSegments_points_theta);
-   fChain->SetBranchAddress("_CentralTrackSegments_points.phi", _CentralTrackSegments_points_phi, &b__CentralTrackSegments_points_phi);
-   fChain->SetBranchAddress("_CentralTrackSegments_points.directionError.xx", _CentralTrackSegments_points_directionError_xx, &b__CentralTrackSegments_points_directionError_xx);
-   fChain->SetBranchAddress("_CentralTrackSegments_points.directionError.yy", _CentralTrackSegments_points_directionError_yy, &b__CentralTrackSegments_points_directionError_yy);
-   fChain->SetBranchAddress("_CentralTrackSegments_points.directionError.xy", _CentralTrackSegments_points_directionError_xy, &b__CentralTrackSegments_points_directionError_xy);
-   fChain->SetBranchAddress("_CentralTrackSegments_points.pathlength", _CentralTrackSegments_points_pathlength, &b__CentralTrackSegments_points_pathlength);
-   fChain->SetBranchAddress("_CentralTrackSegments_points.pathlengthError", _CentralTrackSegments_points_pathlengthError, &b__CentralTrackSegments_points_pathlengthError);
+   fChain->SetBranchAddress("_CentralTrackSegments_points.surface", &_CentralTrackSegments_points_surface, &b__CentralTrackSegments_points_surface);
+   fChain->SetBranchAddress("_CentralTrackSegments_points.system", &_CentralTrackSegments_points_system, &b__CentralTrackSegments_points_system);
+   fChain->SetBranchAddress("_CentralTrackSegments_points.position.x", &_CentralTrackSegments_points_position_x, &b__CentralTrackSegments_points_position_x);
+   fChain->SetBranchAddress("_CentralTrackSegments_points.position.y", &_CentralTrackSegments_points_position_y, &b__CentralTrackSegments_points_position_y);
+   fChain->SetBranchAddress("_CentralTrackSegments_points.position.z", &_CentralTrackSegments_points_position_z, &b__CentralTrackSegments_points_position_z);
+   fChain->SetBranchAddress("_CentralTrackSegments_points.positionError.xx", &_CentralTrackSegments_points_positionError_xx, &b__CentralTrackSegments_points_positionError_xx);
+   fChain->SetBranchAddress("_CentralTrackSegments_points.positionError.yy", &_CentralTrackSegments_points_positionError_yy, &b__CentralTrackSegments_points_positionError_yy);
+   fChain->SetBranchAddress("_CentralTrackSegments_points.positionError.zz", &_CentralTrackSegments_points_positionError_zz, &b__CentralTrackSegments_points_positionError_zz);
+   fChain->SetBranchAddress("_CentralTrackSegments_points.positionError.xy", &_CentralTrackSegments_points_positionError_xy, &b__CentralTrackSegments_points_positionError_xy);
+   fChain->SetBranchAddress("_CentralTrackSegments_points.positionError.xz", &_CentralTrackSegments_points_positionError_xz, &b__CentralTrackSegments_points_positionError_xz);
+   fChain->SetBranchAddress("_CentralTrackSegments_points.positionError.yz", &_CentralTrackSegments_points_positionError_yz, &b__CentralTrackSegments_points_positionError_yz);
+   fChain->SetBranchAddress("_CentralTrackSegments_points.momentum.x", &_CentralTrackSegments_points_momentum_x, &b__CentralTrackSegments_points_momentum_x);
+   fChain->SetBranchAddress("_CentralTrackSegments_points.momentum.y", &_CentralTrackSegments_points_momentum_y, &b__CentralTrackSegments_points_momentum_y);
+   fChain->SetBranchAddress("_CentralTrackSegments_points.momentum.z", &_CentralTrackSegments_points_momentum_z, &b__CentralTrackSegments_points_momentum_z);
+   fChain->SetBranchAddress("_CentralTrackSegments_points.momentumError.xx", &_CentralTrackSegments_points_momentumError_xx, &b__CentralTrackSegments_points_momentumError_xx);
+   fChain->SetBranchAddress("_CentralTrackSegments_points.momentumError.yy", &_CentralTrackSegments_points_momentumError_yy, &b__CentralTrackSegments_points_momentumError_yy);
+   fChain->SetBranchAddress("_CentralTrackSegments_points.momentumError.zz", &_CentralTrackSegments_points_momentumError_zz, &b__CentralTrackSegments_points_momentumError_zz);
+   fChain->SetBranchAddress("_CentralTrackSegments_points.momentumError.xy", &_CentralTrackSegments_points_momentumError_xy, &b__CentralTrackSegments_points_momentumError_xy);
+   fChain->SetBranchAddress("_CentralTrackSegments_points.momentumError.xz", &_CentralTrackSegments_points_momentumError_xz, &b__CentralTrackSegments_points_momentumError_xz);
+   fChain->SetBranchAddress("_CentralTrackSegments_points.momentumError.yz", &_CentralTrackSegments_points_momentumError_yz, &b__CentralTrackSegments_points_momentumError_yz);
+   fChain->SetBranchAddress("_CentralTrackSegments_points.time", &_CentralTrackSegments_points_time, &b__CentralTrackSegments_points_time);
+   fChain->SetBranchAddress("_CentralTrackSegments_points.timeError", &_CentralTrackSegments_points_timeError, &b__CentralTrackSegments_points_timeError);
+   fChain->SetBranchAddress("_CentralTrackSegments_points.theta", &_CentralTrackSegments_points_theta, &b__CentralTrackSegments_points_theta);
+   fChain->SetBranchAddress("_CentralTrackSegments_points.phi", &_CentralTrackSegments_points_phi, &b__CentralTrackSegments_points_phi);
+   fChain->SetBranchAddress("_CentralTrackSegments_points.directionError.xx", &_CentralTrackSegments_points_directionError_xx, &b__CentralTrackSegments_points_directionError_xx);
+   fChain->SetBranchAddress("_CentralTrackSegments_points.directionError.yy", &_CentralTrackSegments_points_directionError_yy, &b__CentralTrackSegments_points_directionError_yy);
+   fChain->SetBranchAddress("_CentralTrackSegments_points.directionError.xy", &_CentralTrackSegments_points_directionError_xy, &b__CentralTrackSegments_points_directionError_xy);
+   fChain->SetBranchAddress("_CentralTrackSegments_points.pathlength", &_CentralTrackSegments_points_pathlength, &b__CentralTrackSegments_points_pathlength);
+   fChain->SetBranchAddress("_CentralTrackSegments_points.pathlengthError", &_CentralTrackSegments_points_pathlengthError, &b__CentralTrackSegments_points_pathlengthError);
    fChain->SetBranchAddress("CentralTrackVertices", &CentralTrackVertices_, &b_CentralTrackVertices_);
-   fChain->SetBranchAddress("CentralTrackVertices.primary", CentralTrackVertices_primary, &b_CentralTrackVertices_primary);
-   fChain->SetBranchAddress("CentralTrackVertices.chi2", CentralTrackVertices_chi2, &b_CentralTrackVertices_chi2);
-   fChain->SetBranchAddress("CentralTrackVertices.probability", CentralTrackVertices_probability, &b_CentralTrackVertices_probability);
-   fChain->SetBranchAddress("CentralTrackVertices.position.x", CentralTrackVertices_position_x, &b_CentralTrackVertices_position_x);
-   fChain->SetBranchAddress("CentralTrackVertices.position.y", CentralTrackVertices_position_y, &b_CentralTrackVertices_position_y);
-   fChain->SetBranchAddress("CentralTrackVertices.position.z", CentralTrackVertices_position_z, &b_CentralTrackVertices_position_z);
-   fChain->SetBranchAddress("CentralTrackVertices.positionError.xx", CentralTrackVertices_positionError_xx, &b_CentralTrackVertices_positionError_xx);
-   fChain->SetBranchAddress("CentralTrackVertices.positionError.yy", CentralTrackVertices_positionError_yy, &b_CentralTrackVertices_positionError_yy);
-   fChain->SetBranchAddress("CentralTrackVertices.positionError.zz", CentralTrackVertices_positionError_zz, &b_CentralTrackVertices_positionError_zz);
-   fChain->SetBranchAddress("CentralTrackVertices.positionError.xy", CentralTrackVertices_positionError_xy, &b_CentralTrackVertices_positionError_xy);
-   fChain->SetBranchAddress("CentralTrackVertices.positionError.xz", CentralTrackVertices_positionError_xz, &b_CentralTrackVertices_positionError_xz);
-   fChain->SetBranchAddress("CentralTrackVertices.positionError.yz", CentralTrackVertices_positionError_yz, &b_CentralTrackVertices_positionError_yz);
-   fChain->SetBranchAddress("CentralTrackVertices.algorithmType", CentralTrackVertices_algorithmType, &b_CentralTrackVertices_algorithmType);
-   fChain->SetBranchAddress("CentralTrackVertices.time", CentralTrackVertices_time, &b_CentralTrackVertices_time);
-   fChain->SetBranchAddress("CentralTrackVertices.parameters_begin", CentralTrackVertices_parameters_begin, &b_CentralTrackVertices_parameters_begin);
-   fChain->SetBranchAddress("CentralTrackVertices.parameters_end", CentralTrackVertices_parameters_end, &b_CentralTrackVertices_parameters_end);
-   fChain->SetBranchAddress("_CentralTrackVertices_associatedParticle", &_CentralTrackVertices_associatedParticle_, &b__CentralTrackVertices_associatedParticle_);
-   fChain->SetBranchAddress("_CentralTrackVertices_associatedParticle.index", _CentralTrackVertices_associatedParticle_index, &b__CentralTrackVertices_associatedParticle_index);
-   fChain->SetBranchAddress("_CentralTrackVertices_associatedParticle.collectionID", _CentralTrackVertices_associatedParticle_collectionID, &b__CentralTrackVertices_associatedParticle_collectionID);
-   fChain->SetBranchAddress("_CentralTrackVertices_parameters", &_CentralTrackVertices_parameters, &b__CentralTrackVertices_parameters);
+   fChain->SetBranchAddress("CentralTrackVertices.type", &CentralTrackVertices_type, &b_CentralTrackVertices_type);
+   fChain->SetBranchAddress("CentralTrackVertices.chi2", &CentralTrackVertices_chi2, &b_CentralTrackVertices_chi2);
+   fChain->SetBranchAddress("CentralTrackVertices.ndf", &CentralTrackVertices_ndf, &b_CentralTrackVertices_ndf);
+   fChain->SetBranchAddress("CentralTrackVertices.position.x", &CentralTrackVertices_position_x, &b_CentralTrackVertices_position_x);
+   fChain->SetBranchAddress("CentralTrackVertices.position.y", &CentralTrackVertices_position_y, &b_CentralTrackVertices_position_y);
+   fChain->SetBranchAddress("CentralTrackVertices.position.z", &CentralTrackVertices_position_z, &b_CentralTrackVertices_position_z);
+   fChain->SetBranchAddress("CentralTrackVertices.position.t", &CentralTrackVertices_position_t, &b_CentralTrackVertices_position_t);
+   fChain->SetBranchAddress("CentralTrackVertices.positionError.xx", &CentralTrackVertices_positionError_xx, &b_CentralTrackVertices_positionError_xx);
+   fChain->SetBranchAddress("CentralTrackVertices.positionError.yy", &CentralTrackVertices_positionError_yy, &b_CentralTrackVertices_positionError_yy);
+   fChain->SetBranchAddress("CentralTrackVertices.positionError.zz", &CentralTrackVertices_positionError_zz, &b_CentralTrackVertices_positionError_zz);
+   fChain->SetBranchAddress("CentralTrackVertices.positionError.tt", &CentralTrackVertices_positionError_tt, &b_CentralTrackVertices_positionError_tt);
+   fChain->SetBranchAddress("CentralTrackVertices.positionError.xy", &CentralTrackVertices_positionError_xy, &b_CentralTrackVertices_positionError_xy);
+   fChain->SetBranchAddress("CentralTrackVertices.positionError.xz", &CentralTrackVertices_positionError_xz, &b_CentralTrackVertices_positionError_xz);
+   fChain->SetBranchAddress("CentralTrackVertices.positionError.xt", &CentralTrackVertices_positionError_xt, &b_CentralTrackVertices_positionError_xt);
+   fChain->SetBranchAddress("CentralTrackVertices.positionError.yz", &CentralTrackVertices_positionError_yz, &b_CentralTrackVertices_positionError_yz);
+   fChain->SetBranchAddress("CentralTrackVertices.positionError.yt", &CentralTrackVertices_positionError_yt, &b_CentralTrackVertices_positionError_yt);
+   fChain->SetBranchAddress("CentralTrackVertices.positionError.zt", &CentralTrackVertices_positionError_zt, &b_CentralTrackVertices_positionError_zt);
+   fChain->SetBranchAddress("CentralTrackVertices.associatedParticles_begin", &CentralTrackVertices_associatedParticles_begin, &b_CentralTrackVertices_associatedParticles_begin);
+   fChain->SetBranchAddress("CentralTrackVertices.associatedParticles_end", &CentralTrackVertices_associatedParticles_end, &b_CentralTrackVertices_associatedParticles_end);
+   fChain->SetBranchAddress("_CentralTrackVertices_associatedParticles", &_CentralTrackVertices_associatedParticles_, &b__CentralTrackVertices_associatedParticles_);
+   fChain->SetBranchAddress("_CentralTrackVertices_associatedParticles.index", &_CentralTrackVertices_associatedParticles_index, &b__CentralTrackVertices_associatedParticles_index);
+   fChain->SetBranchAddress("_CentralTrackVertices_associatedParticles.collectionID", &_CentralTrackVertices_associatedParticles_collectionID, &b__CentralTrackVertices_associatedParticles_collectionID);
    fChain->SetBranchAddress("DIRCRawHits", &DIRCRawHits_, &b_DIRCRawHits_);
    fChain->SetBranchAddress("DIRCRawHits.cellID", &DIRCRawHits_cellID, &b_DIRCRawHits_cellID);
    fChain->SetBranchAddress("DIRCRawHits.charge", &DIRCRawHits_charge, &b_DIRCRawHits_charge);
    fChain->SetBranchAddress("DIRCRawHits.timeStamp", &DIRCRawHits_timeStamp, &b_DIRCRawHits_timeStamp);
    fChain->SetBranchAddress("DRICHAerogelIrtCherenkovParticleID", &DRICHAerogelIrtCherenkovParticleID_, &b_DRICHAerogelIrtCherenkovParticleID_);
-   fChain->SetBranchAddress("DRICHAerogelIrtCherenkovParticleID.npe", DRICHAerogelIrtCherenkovParticleID_npe, &b_DRICHAerogelIrtCherenkovParticleID_npe);
-   fChain->SetBranchAddress("DRICHAerogelIrtCherenkovParticleID.refractiveIndex", DRICHAerogelIrtCherenkovParticleID_refractiveIndex, &b_DRICHAerogelIrtCherenkovParticleID_refractiveIndex);
-   fChain->SetBranchAddress("DRICHAerogelIrtCherenkovParticleID.photonEnergy", DRICHAerogelIrtCherenkovParticleID_photonEnergy, &b_DRICHAerogelIrtCherenkovParticleID_photonEnergy);
-   fChain->SetBranchAddress("DRICHAerogelIrtCherenkovParticleID.hypotheses_begin", DRICHAerogelIrtCherenkovParticleID_hypotheses_begin, &b_DRICHAerogelIrtCherenkovParticleID_hypotheses_begin);
-   fChain->SetBranchAddress("DRICHAerogelIrtCherenkovParticleID.hypotheses_end", DRICHAerogelIrtCherenkovParticleID_hypotheses_end, &b_DRICHAerogelIrtCherenkovParticleID_hypotheses_end);
-   fChain->SetBranchAddress("DRICHAerogelIrtCherenkovParticleID.thetaPhiPhotons_begin", DRICHAerogelIrtCherenkovParticleID_thetaPhiPhotons_begin, &b_DRICHAerogelIrtCherenkovParticleID_thetaPhiPhotons_begin);
-   fChain->SetBranchAddress("DRICHAerogelIrtCherenkovParticleID.thetaPhiPhotons_end", DRICHAerogelIrtCherenkovParticleID_thetaPhiPhotons_end, &b_DRICHAerogelIrtCherenkovParticleID_thetaPhiPhotons_end);
-   fChain->SetBranchAddress("DRICHAerogelIrtCherenkovParticleID.rawHitAssociations_begin", DRICHAerogelIrtCherenkovParticleID_rawHitAssociations_begin, &b_DRICHAerogelIrtCherenkovParticleID_rawHitAssociations_begin);
-   fChain->SetBranchAddress("DRICHAerogelIrtCherenkovParticleID.rawHitAssociations_end", DRICHAerogelIrtCherenkovParticleID_rawHitAssociations_end, &b_DRICHAerogelIrtCherenkovParticleID_rawHitAssociations_end);
+   fChain->SetBranchAddress("DRICHAerogelIrtCherenkovParticleID.npe", &DRICHAerogelIrtCherenkovParticleID_npe, &b_DRICHAerogelIrtCherenkovParticleID_npe);
+   fChain->SetBranchAddress("DRICHAerogelIrtCherenkovParticleID.refractiveIndex", &DRICHAerogelIrtCherenkovParticleID_refractiveIndex, &b_DRICHAerogelIrtCherenkovParticleID_refractiveIndex);
+   fChain->SetBranchAddress("DRICHAerogelIrtCherenkovParticleID.photonEnergy", &DRICHAerogelIrtCherenkovParticleID_photonEnergy, &b_DRICHAerogelIrtCherenkovParticleID_photonEnergy);
+   fChain->SetBranchAddress("DRICHAerogelIrtCherenkovParticleID.hypotheses_begin", &DRICHAerogelIrtCherenkovParticleID_hypotheses_begin, &b_DRICHAerogelIrtCherenkovParticleID_hypotheses_begin);
+   fChain->SetBranchAddress("DRICHAerogelIrtCherenkovParticleID.hypotheses_end", &DRICHAerogelIrtCherenkovParticleID_hypotheses_end, &b_DRICHAerogelIrtCherenkovParticleID_hypotheses_end);
+   fChain->SetBranchAddress("DRICHAerogelIrtCherenkovParticleID.thetaPhiPhotons_begin", &DRICHAerogelIrtCherenkovParticleID_thetaPhiPhotons_begin, &b_DRICHAerogelIrtCherenkovParticleID_thetaPhiPhotons_begin);
+   fChain->SetBranchAddress("DRICHAerogelIrtCherenkovParticleID.thetaPhiPhotons_end", &DRICHAerogelIrtCherenkovParticleID_thetaPhiPhotons_end, &b_DRICHAerogelIrtCherenkovParticleID_thetaPhiPhotons_end);
+   fChain->SetBranchAddress("DRICHAerogelIrtCherenkovParticleID.rawHitAssociations_begin", &DRICHAerogelIrtCherenkovParticleID_rawHitAssociations_begin, &b_DRICHAerogelIrtCherenkovParticleID_rawHitAssociations_begin);
+   fChain->SetBranchAddress("DRICHAerogelIrtCherenkovParticleID.rawHitAssociations_end", &DRICHAerogelIrtCherenkovParticleID_rawHitAssociations_end, &b_DRICHAerogelIrtCherenkovParticleID_rawHitAssociations_end);
    fChain->SetBranchAddress("_DRICHAerogelIrtCherenkovParticleID_rawHitAssociations", &_DRICHAerogelIrtCherenkovParticleID_rawHitAssociations_, &b__DRICHAerogelIrtCherenkovParticleID_rawHitAssociations_);
-   fChain->SetBranchAddress("_DRICHAerogelIrtCherenkovParticleID_rawHitAssociations.index", _DRICHAerogelIrtCherenkovParticleID_rawHitAssociations_index, &b__DRICHAerogelIrtCherenkovParticleID_rawHitAssociations_index);
-   fChain->SetBranchAddress("_DRICHAerogelIrtCherenkovParticleID_rawHitAssociations.collectionID", _DRICHAerogelIrtCherenkovParticleID_rawHitAssociations_collectionID, &b__DRICHAerogelIrtCherenkovParticleID_rawHitAssociations_collectionID);
+   fChain->SetBranchAddress("_DRICHAerogelIrtCherenkovParticleID_rawHitAssociations.index", &_DRICHAerogelIrtCherenkovParticleID_rawHitAssociations_index, &b__DRICHAerogelIrtCherenkovParticleID_rawHitAssociations_index);
+   fChain->SetBranchAddress("_DRICHAerogelIrtCherenkovParticleID_rawHitAssociations.collectionID", &_DRICHAerogelIrtCherenkovParticleID_rawHitAssociations_collectionID, &b__DRICHAerogelIrtCherenkovParticleID_rawHitAssociations_collectionID);
    fChain->SetBranchAddress("_DRICHAerogelIrtCherenkovParticleID_chargedParticle", &_DRICHAerogelIrtCherenkovParticleID_chargedParticle_, &b__DRICHAerogelIrtCherenkovParticleID_chargedParticle_);
-   fChain->SetBranchAddress("_DRICHAerogelIrtCherenkovParticleID_chargedParticle.index", _DRICHAerogelIrtCherenkovParticleID_chargedParticle_index, &b__DRICHAerogelIrtCherenkovParticleID_chargedParticle_index);
-   fChain->SetBranchAddress("_DRICHAerogelIrtCherenkovParticleID_chargedParticle.collectionID", _DRICHAerogelIrtCherenkovParticleID_chargedParticle_collectionID, &b__DRICHAerogelIrtCherenkovParticleID_chargedParticle_collectionID);
+   fChain->SetBranchAddress("_DRICHAerogelIrtCherenkovParticleID_chargedParticle.index", &_DRICHAerogelIrtCherenkovParticleID_chargedParticle_index, &b__DRICHAerogelIrtCherenkovParticleID_chargedParticle_index);
+   fChain->SetBranchAddress("_DRICHAerogelIrtCherenkovParticleID_chargedParticle.collectionID", &_DRICHAerogelIrtCherenkovParticleID_chargedParticle_collectionID, &b__DRICHAerogelIrtCherenkovParticleID_chargedParticle_collectionID);
    fChain->SetBranchAddress("_DRICHAerogelIrtCherenkovParticleID_hypotheses", &_DRICHAerogelIrtCherenkovParticleID_hypotheses_, &b__DRICHAerogelIrtCherenkovParticleID_hypotheses_);
-   fChain->SetBranchAddress("_DRICHAerogelIrtCherenkovParticleID_hypotheses.PDG", _DRICHAerogelIrtCherenkovParticleID_hypotheses_PDG, &b__DRICHAerogelIrtCherenkovParticleID_hypotheses_PDG);
-   fChain->SetBranchAddress("_DRICHAerogelIrtCherenkovParticleID_hypotheses.npe", _DRICHAerogelIrtCherenkovParticleID_hypotheses_npe, &b__DRICHAerogelIrtCherenkovParticleID_hypotheses_npe);
-   fChain->SetBranchAddress("_DRICHAerogelIrtCherenkovParticleID_hypotheses.weight", _DRICHAerogelIrtCherenkovParticleID_hypotheses_weight, &b__DRICHAerogelIrtCherenkovParticleID_hypotheses_weight);
+   fChain->SetBranchAddress("_DRICHAerogelIrtCherenkovParticleID_hypotheses.PDG", &_DRICHAerogelIrtCherenkovParticleID_hypotheses_PDG, &b__DRICHAerogelIrtCherenkovParticleID_hypotheses_PDG);
+   fChain->SetBranchAddress("_DRICHAerogelIrtCherenkovParticleID_hypotheses.npe", &_DRICHAerogelIrtCherenkovParticleID_hypotheses_npe, &b__DRICHAerogelIrtCherenkovParticleID_hypotheses_npe);
+   fChain->SetBranchAddress("_DRICHAerogelIrtCherenkovParticleID_hypotheses.weight", &_DRICHAerogelIrtCherenkovParticleID_hypotheses_weight, &b__DRICHAerogelIrtCherenkovParticleID_hypotheses_weight);
    fChain->SetBranchAddress("_DRICHAerogelIrtCherenkovParticleID_thetaPhiPhotons", &_DRICHAerogelIrtCherenkovParticleID_thetaPhiPhotons_, &b__DRICHAerogelIrtCherenkovParticleID_thetaPhiPhotons_);
-   fChain->SetBranchAddress("_DRICHAerogelIrtCherenkovParticleID_thetaPhiPhotons.a", _DRICHAerogelIrtCherenkovParticleID_thetaPhiPhotons_a, &b__DRICHAerogelIrtCherenkovParticleID_thetaPhiPhotons_a);
-   fChain->SetBranchAddress("_DRICHAerogelIrtCherenkovParticleID_thetaPhiPhotons.b", _DRICHAerogelIrtCherenkovParticleID_thetaPhiPhotons_b, &b__DRICHAerogelIrtCherenkovParticleID_thetaPhiPhotons_b);
+   fChain->SetBranchAddress("_DRICHAerogelIrtCherenkovParticleID_thetaPhiPhotons.a", &_DRICHAerogelIrtCherenkovParticleID_thetaPhiPhotons_a, &b__DRICHAerogelIrtCherenkovParticleID_thetaPhiPhotons_a);
+   fChain->SetBranchAddress("_DRICHAerogelIrtCherenkovParticleID_thetaPhiPhotons.b", &_DRICHAerogelIrtCherenkovParticleID_thetaPhiPhotons_b, &b__DRICHAerogelIrtCherenkovParticleID_thetaPhiPhotons_b);
    fChain->SetBranchAddress("DRICHAerogelTracks", &DRICHAerogelTracks_, &b_DRICHAerogelTracks_);
-   fChain->SetBranchAddress("DRICHAerogelTracks.length", DRICHAerogelTracks_length, &b_DRICHAerogelTracks_length);
-   fChain->SetBranchAddress("DRICHAerogelTracks.lengthError", DRICHAerogelTracks_lengthError, &b_DRICHAerogelTracks_lengthError);
-   fChain->SetBranchAddress("DRICHAerogelTracks.points_begin", DRICHAerogelTracks_points_begin, &b_DRICHAerogelTracks_points_begin);
-   fChain->SetBranchAddress("DRICHAerogelTracks.points_end", DRICHAerogelTracks_points_end, &b_DRICHAerogelTracks_points_end);
+   fChain->SetBranchAddress("DRICHAerogelTracks.length", &DRICHAerogelTracks_length, &b_DRICHAerogelTracks_length);
+   fChain->SetBranchAddress("DRICHAerogelTracks.lengthError", &DRICHAerogelTracks_lengthError, &b_DRICHAerogelTracks_lengthError);
+   fChain->SetBranchAddress("DRICHAerogelTracks.points_begin", &DRICHAerogelTracks_points_begin, &b_DRICHAerogelTracks_points_begin);
+   fChain->SetBranchAddress("DRICHAerogelTracks.points_end", &DRICHAerogelTracks_points_end, &b_DRICHAerogelTracks_points_end);
    fChain->SetBranchAddress("_DRICHAerogelTracks_track", &_DRICHAerogelTracks_track_, &b__DRICHAerogelTracks_track_);
-   fChain->SetBranchAddress("_DRICHAerogelTracks_track.index", _DRICHAerogelTracks_track_index, &b__DRICHAerogelTracks_track_index);
-   fChain->SetBranchAddress("_DRICHAerogelTracks_track.collectionID", _DRICHAerogelTracks_track_collectionID, &b__DRICHAerogelTracks_track_collectionID);
+   fChain->SetBranchAddress("_DRICHAerogelTracks_track.index", &_DRICHAerogelTracks_track_index, &b__DRICHAerogelTracks_track_index);
+   fChain->SetBranchAddress("_DRICHAerogelTracks_track.collectionID", &_DRICHAerogelTracks_track_collectionID, &b__DRICHAerogelTracks_track_collectionID);
    fChain->SetBranchAddress("_DRICHAerogelTracks_points", &_DRICHAerogelTracks_points_, &b__DRICHAerogelTracks_points_);
-   fChain->SetBranchAddress("_DRICHAerogelTracks_points.surface", _DRICHAerogelTracks_points_surface, &b__DRICHAerogelTracks_points_surface);
-   fChain->SetBranchAddress("_DRICHAerogelTracks_points.system", _DRICHAerogelTracks_points_system, &b__DRICHAerogelTracks_points_system);
-   fChain->SetBranchAddress("_DRICHAerogelTracks_points.position.x", _DRICHAerogelTracks_points_position_x, &b__DRICHAerogelTracks_points_position_x);
-   fChain->SetBranchAddress("_DRICHAerogelTracks_points.position.y", _DRICHAerogelTracks_points_position_y, &b__DRICHAerogelTracks_points_position_y);
-   fChain->SetBranchAddress("_DRICHAerogelTracks_points.position.z", _DRICHAerogelTracks_points_position_z, &b__DRICHAerogelTracks_points_position_z);
-   fChain->SetBranchAddress("_DRICHAerogelTracks_points.positionError.xx", _DRICHAerogelTracks_points_positionError_xx, &b__DRICHAerogelTracks_points_positionError_xx);
-   fChain->SetBranchAddress("_DRICHAerogelTracks_points.positionError.yy", _DRICHAerogelTracks_points_positionError_yy, &b__DRICHAerogelTracks_points_positionError_yy);
-   fChain->SetBranchAddress("_DRICHAerogelTracks_points.positionError.zz", _DRICHAerogelTracks_points_positionError_zz, &b__DRICHAerogelTracks_points_positionError_zz);
-   fChain->SetBranchAddress("_DRICHAerogelTracks_points.positionError.xy", _DRICHAerogelTracks_points_positionError_xy, &b__DRICHAerogelTracks_points_positionError_xy);
-   fChain->SetBranchAddress("_DRICHAerogelTracks_points.positionError.xz", _DRICHAerogelTracks_points_positionError_xz, &b__DRICHAerogelTracks_points_positionError_xz);
-   fChain->SetBranchAddress("_DRICHAerogelTracks_points.positionError.yz", _DRICHAerogelTracks_points_positionError_yz, &b__DRICHAerogelTracks_points_positionError_yz);
-   fChain->SetBranchAddress("_DRICHAerogelTracks_points.momentum.x", _DRICHAerogelTracks_points_momentum_x, &b__DRICHAerogelTracks_points_momentum_x);
-   fChain->SetBranchAddress("_DRICHAerogelTracks_points.momentum.y", _DRICHAerogelTracks_points_momentum_y, &b__DRICHAerogelTracks_points_momentum_y);
-   fChain->SetBranchAddress("_DRICHAerogelTracks_points.momentum.z", _DRICHAerogelTracks_points_momentum_z, &b__DRICHAerogelTracks_points_momentum_z);
-   fChain->SetBranchAddress("_DRICHAerogelTracks_points.momentumError.xx", _DRICHAerogelTracks_points_momentumError_xx, &b__DRICHAerogelTracks_points_momentumError_xx);
-   fChain->SetBranchAddress("_DRICHAerogelTracks_points.momentumError.yy", _DRICHAerogelTracks_points_momentumError_yy, &b__DRICHAerogelTracks_points_momentumError_yy);
-   fChain->SetBranchAddress("_DRICHAerogelTracks_points.momentumError.zz", _DRICHAerogelTracks_points_momentumError_zz, &b__DRICHAerogelTracks_points_momentumError_zz);
-   fChain->SetBranchAddress("_DRICHAerogelTracks_points.momentumError.xy", _DRICHAerogelTracks_points_momentumError_xy, &b__DRICHAerogelTracks_points_momentumError_xy);
-   fChain->SetBranchAddress("_DRICHAerogelTracks_points.momentumError.xz", _DRICHAerogelTracks_points_momentumError_xz, &b__DRICHAerogelTracks_points_momentumError_xz);
-   fChain->SetBranchAddress("_DRICHAerogelTracks_points.momentumError.yz", _DRICHAerogelTracks_points_momentumError_yz, &b__DRICHAerogelTracks_points_momentumError_yz);
-   fChain->SetBranchAddress("_DRICHAerogelTracks_points.time", _DRICHAerogelTracks_points_time, &b__DRICHAerogelTracks_points_time);
-   fChain->SetBranchAddress("_DRICHAerogelTracks_points.timeError", _DRICHAerogelTracks_points_timeError, &b__DRICHAerogelTracks_points_timeError);
-   fChain->SetBranchAddress("_DRICHAerogelTracks_points.theta", _DRICHAerogelTracks_points_theta, &b__DRICHAerogelTracks_points_theta);
-   fChain->SetBranchAddress("_DRICHAerogelTracks_points.phi", _DRICHAerogelTracks_points_phi, &b__DRICHAerogelTracks_points_phi);
-   fChain->SetBranchAddress("_DRICHAerogelTracks_points.directionError.xx", _DRICHAerogelTracks_points_directionError_xx, &b__DRICHAerogelTracks_points_directionError_xx);
-   fChain->SetBranchAddress("_DRICHAerogelTracks_points.directionError.yy", _DRICHAerogelTracks_points_directionError_yy, &b__DRICHAerogelTracks_points_directionError_yy);
-   fChain->SetBranchAddress("_DRICHAerogelTracks_points.directionError.xy", _DRICHAerogelTracks_points_directionError_xy, &b__DRICHAerogelTracks_points_directionError_xy);
-   fChain->SetBranchAddress("_DRICHAerogelTracks_points.pathlength", _DRICHAerogelTracks_points_pathlength, &b__DRICHAerogelTracks_points_pathlength);
-   fChain->SetBranchAddress("_DRICHAerogelTracks_points.pathlengthError", _DRICHAerogelTracks_points_pathlengthError, &b__DRICHAerogelTracks_points_pathlengthError);
+   fChain->SetBranchAddress("_DRICHAerogelTracks_points.surface", &_DRICHAerogelTracks_points_surface, &b__DRICHAerogelTracks_points_surface);
+   fChain->SetBranchAddress("_DRICHAerogelTracks_points.system", &_DRICHAerogelTracks_points_system, &b__DRICHAerogelTracks_points_system);
+   fChain->SetBranchAddress("_DRICHAerogelTracks_points.position.x", &_DRICHAerogelTracks_points_position_x, &b__DRICHAerogelTracks_points_position_x);
+   fChain->SetBranchAddress("_DRICHAerogelTracks_points.position.y", &_DRICHAerogelTracks_points_position_y, &b__DRICHAerogelTracks_points_position_y);
+   fChain->SetBranchAddress("_DRICHAerogelTracks_points.position.z", &_DRICHAerogelTracks_points_position_z, &b__DRICHAerogelTracks_points_position_z);
+   fChain->SetBranchAddress("_DRICHAerogelTracks_points.positionError.xx", &_DRICHAerogelTracks_points_positionError_xx, &b__DRICHAerogelTracks_points_positionError_xx);
+   fChain->SetBranchAddress("_DRICHAerogelTracks_points.positionError.yy", &_DRICHAerogelTracks_points_positionError_yy, &b__DRICHAerogelTracks_points_positionError_yy);
+   fChain->SetBranchAddress("_DRICHAerogelTracks_points.positionError.zz", &_DRICHAerogelTracks_points_positionError_zz, &b__DRICHAerogelTracks_points_positionError_zz);
+   fChain->SetBranchAddress("_DRICHAerogelTracks_points.positionError.xy", &_DRICHAerogelTracks_points_positionError_xy, &b__DRICHAerogelTracks_points_positionError_xy);
+   fChain->SetBranchAddress("_DRICHAerogelTracks_points.positionError.xz", &_DRICHAerogelTracks_points_positionError_xz, &b__DRICHAerogelTracks_points_positionError_xz);
+   fChain->SetBranchAddress("_DRICHAerogelTracks_points.positionError.yz", &_DRICHAerogelTracks_points_positionError_yz, &b__DRICHAerogelTracks_points_positionError_yz);
+   fChain->SetBranchAddress("_DRICHAerogelTracks_points.momentum.x", &_DRICHAerogelTracks_points_momentum_x, &b__DRICHAerogelTracks_points_momentum_x);
+   fChain->SetBranchAddress("_DRICHAerogelTracks_points.momentum.y", &_DRICHAerogelTracks_points_momentum_y, &b__DRICHAerogelTracks_points_momentum_y);
+   fChain->SetBranchAddress("_DRICHAerogelTracks_points.momentum.z", &_DRICHAerogelTracks_points_momentum_z, &b__DRICHAerogelTracks_points_momentum_z);
+   fChain->SetBranchAddress("_DRICHAerogelTracks_points.momentumError.xx", &_DRICHAerogelTracks_points_momentumError_xx, &b__DRICHAerogelTracks_points_momentumError_xx);
+   fChain->SetBranchAddress("_DRICHAerogelTracks_points.momentumError.yy", &_DRICHAerogelTracks_points_momentumError_yy, &b__DRICHAerogelTracks_points_momentumError_yy);
+   fChain->SetBranchAddress("_DRICHAerogelTracks_points.momentumError.zz", &_DRICHAerogelTracks_points_momentumError_zz, &b__DRICHAerogelTracks_points_momentumError_zz);
+   fChain->SetBranchAddress("_DRICHAerogelTracks_points.momentumError.xy", &_DRICHAerogelTracks_points_momentumError_xy, &b__DRICHAerogelTracks_points_momentumError_xy);
+   fChain->SetBranchAddress("_DRICHAerogelTracks_points.momentumError.xz", &_DRICHAerogelTracks_points_momentumError_xz, &b__DRICHAerogelTracks_points_momentumError_xz);
+   fChain->SetBranchAddress("_DRICHAerogelTracks_points.momentumError.yz", &_DRICHAerogelTracks_points_momentumError_yz, &b__DRICHAerogelTracks_points_momentumError_yz);
+   fChain->SetBranchAddress("_DRICHAerogelTracks_points.time", &_DRICHAerogelTracks_points_time, &b__DRICHAerogelTracks_points_time);
+   fChain->SetBranchAddress("_DRICHAerogelTracks_points.timeError", &_DRICHAerogelTracks_points_timeError, &b__DRICHAerogelTracks_points_timeError);
+   fChain->SetBranchAddress("_DRICHAerogelTracks_points.theta", &_DRICHAerogelTracks_points_theta, &b__DRICHAerogelTracks_points_theta);
+   fChain->SetBranchAddress("_DRICHAerogelTracks_points.phi", &_DRICHAerogelTracks_points_phi, &b__DRICHAerogelTracks_points_phi);
+   fChain->SetBranchAddress("_DRICHAerogelTracks_points.directionError.xx", &_DRICHAerogelTracks_points_directionError_xx, &b__DRICHAerogelTracks_points_directionError_xx);
+   fChain->SetBranchAddress("_DRICHAerogelTracks_points.directionError.yy", &_DRICHAerogelTracks_points_directionError_yy, &b__DRICHAerogelTracks_points_directionError_yy);
+   fChain->SetBranchAddress("_DRICHAerogelTracks_points.directionError.xy", &_DRICHAerogelTracks_points_directionError_xy, &b__DRICHAerogelTracks_points_directionError_xy);
+   fChain->SetBranchAddress("_DRICHAerogelTracks_points.pathlength", &_DRICHAerogelTracks_points_pathlength, &b__DRICHAerogelTracks_points_pathlength);
+   fChain->SetBranchAddress("_DRICHAerogelTracks_points.pathlengthError", &_DRICHAerogelTracks_points_pathlengthError, &b__DRICHAerogelTracks_points_pathlengthError);
    fChain->SetBranchAddress("DRICHGasIrtCherenkovParticleID", &DRICHGasIrtCherenkovParticleID_, &b_DRICHGasIrtCherenkovParticleID_);
-   fChain->SetBranchAddress("DRICHGasIrtCherenkovParticleID.npe", DRICHGasIrtCherenkovParticleID_npe, &b_DRICHGasIrtCherenkovParticleID_npe);
-   fChain->SetBranchAddress("DRICHGasIrtCherenkovParticleID.refractiveIndex", DRICHGasIrtCherenkovParticleID_refractiveIndex, &b_DRICHGasIrtCherenkovParticleID_refractiveIndex);
-   fChain->SetBranchAddress("DRICHGasIrtCherenkovParticleID.photonEnergy", DRICHGasIrtCherenkovParticleID_photonEnergy, &b_DRICHGasIrtCherenkovParticleID_photonEnergy);
-   fChain->SetBranchAddress("DRICHGasIrtCherenkovParticleID.hypotheses_begin", DRICHGasIrtCherenkovParticleID_hypotheses_begin, &b_DRICHGasIrtCherenkovParticleID_hypotheses_begin);
-   fChain->SetBranchAddress("DRICHGasIrtCherenkovParticleID.hypotheses_end", DRICHGasIrtCherenkovParticleID_hypotheses_end, &b_DRICHGasIrtCherenkovParticleID_hypotheses_end);
-   fChain->SetBranchAddress("DRICHGasIrtCherenkovParticleID.thetaPhiPhotons_begin", DRICHGasIrtCherenkovParticleID_thetaPhiPhotons_begin, &b_DRICHGasIrtCherenkovParticleID_thetaPhiPhotons_begin);
-   fChain->SetBranchAddress("DRICHGasIrtCherenkovParticleID.thetaPhiPhotons_end", DRICHGasIrtCherenkovParticleID_thetaPhiPhotons_end, &b_DRICHGasIrtCherenkovParticleID_thetaPhiPhotons_end);
-   fChain->SetBranchAddress("DRICHGasIrtCherenkovParticleID.rawHitAssociations_begin", DRICHGasIrtCherenkovParticleID_rawHitAssociations_begin, &b_DRICHGasIrtCherenkovParticleID_rawHitAssociations_begin);
-   fChain->SetBranchAddress("DRICHGasIrtCherenkovParticleID.rawHitAssociations_end", DRICHGasIrtCherenkovParticleID_rawHitAssociations_end, &b_DRICHGasIrtCherenkovParticleID_rawHitAssociations_end);
+   fChain->SetBranchAddress("DRICHGasIrtCherenkovParticleID.npe", &DRICHGasIrtCherenkovParticleID_npe, &b_DRICHGasIrtCherenkovParticleID_npe);
+   fChain->SetBranchAddress("DRICHGasIrtCherenkovParticleID.refractiveIndex", &DRICHGasIrtCherenkovParticleID_refractiveIndex, &b_DRICHGasIrtCherenkovParticleID_refractiveIndex);
+   fChain->SetBranchAddress("DRICHGasIrtCherenkovParticleID.photonEnergy", &DRICHGasIrtCherenkovParticleID_photonEnergy, &b_DRICHGasIrtCherenkovParticleID_photonEnergy);
+   fChain->SetBranchAddress("DRICHGasIrtCherenkovParticleID.hypotheses_begin", &DRICHGasIrtCherenkovParticleID_hypotheses_begin, &b_DRICHGasIrtCherenkovParticleID_hypotheses_begin);
+   fChain->SetBranchAddress("DRICHGasIrtCherenkovParticleID.hypotheses_end", &DRICHGasIrtCherenkovParticleID_hypotheses_end, &b_DRICHGasIrtCherenkovParticleID_hypotheses_end);
+   fChain->SetBranchAddress("DRICHGasIrtCherenkovParticleID.thetaPhiPhotons_begin", &DRICHGasIrtCherenkovParticleID_thetaPhiPhotons_begin, &b_DRICHGasIrtCherenkovParticleID_thetaPhiPhotons_begin);
+   fChain->SetBranchAddress("DRICHGasIrtCherenkovParticleID.thetaPhiPhotons_end", &DRICHGasIrtCherenkovParticleID_thetaPhiPhotons_end, &b_DRICHGasIrtCherenkovParticleID_thetaPhiPhotons_end);
+   fChain->SetBranchAddress("DRICHGasIrtCherenkovParticleID.rawHitAssociations_begin", &DRICHGasIrtCherenkovParticleID_rawHitAssociations_begin, &b_DRICHGasIrtCherenkovParticleID_rawHitAssociations_begin);
+   fChain->SetBranchAddress("DRICHGasIrtCherenkovParticleID.rawHitAssociations_end", &DRICHGasIrtCherenkovParticleID_rawHitAssociations_end, &b_DRICHGasIrtCherenkovParticleID_rawHitAssociations_end);
    fChain->SetBranchAddress("_DRICHGasIrtCherenkovParticleID_rawHitAssociations", &_DRICHGasIrtCherenkovParticleID_rawHitAssociations_, &b__DRICHGasIrtCherenkovParticleID_rawHitAssociations_);
-   fChain->SetBranchAddress("_DRICHGasIrtCherenkovParticleID_rawHitAssociations.index", _DRICHGasIrtCherenkovParticleID_rawHitAssociations_index, &b__DRICHGasIrtCherenkovParticleID_rawHitAssociations_index);
-   fChain->SetBranchAddress("_DRICHGasIrtCherenkovParticleID_rawHitAssociations.collectionID", _DRICHGasIrtCherenkovParticleID_rawHitAssociations_collectionID, &b__DRICHGasIrtCherenkovParticleID_rawHitAssociations_collectionID);
+   fChain->SetBranchAddress("_DRICHGasIrtCherenkovParticleID_rawHitAssociations.index", &_DRICHGasIrtCherenkovParticleID_rawHitAssociations_index, &b__DRICHGasIrtCherenkovParticleID_rawHitAssociations_index);
+   fChain->SetBranchAddress("_DRICHGasIrtCherenkovParticleID_rawHitAssociations.collectionID", &_DRICHGasIrtCherenkovParticleID_rawHitAssociations_collectionID, &b__DRICHGasIrtCherenkovParticleID_rawHitAssociations_collectionID);
    fChain->SetBranchAddress("_DRICHGasIrtCherenkovParticleID_chargedParticle", &_DRICHGasIrtCherenkovParticleID_chargedParticle_, &b__DRICHGasIrtCherenkovParticleID_chargedParticle_);
-   fChain->SetBranchAddress("_DRICHGasIrtCherenkovParticleID_chargedParticle.index", _DRICHGasIrtCherenkovParticleID_chargedParticle_index, &b__DRICHGasIrtCherenkovParticleID_chargedParticle_index);
-   fChain->SetBranchAddress("_DRICHGasIrtCherenkovParticleID_chargedParticle.collectionID", _DRICHGasIrtCherenkovParticleID_chargedParticle_collectionID, &b__DRICHGasIrtCherenkovParticleID_chargedParticle_collectionID);
+   fChain->SetBranchAddress("_DRICHGasIrtCherenkovParticleID_chargedParticle.index", &_DRICHGasIrtCherenkovParticleID_chargedParticle_index, &b__DRICHGasIrtCherenkovParticleID_chargedParticle_index);
+   fChain->SetBranchAddress("_DRICHGasIrtCherenkovParticleID_chargedParticle.collectionID", &_DRICHGasIrtCherenkovParticleID_chargedParticle_collectionID, &b__DRICHGasIrtCherenkovParticleID_chargedParticle_collectionID);
    fChain->SetBranchAddress("_DRICHGasIrtCherenkovParticleID_hypotheses", &_DRICHGasIrtCherenkovParticleID_hypotheses_, &b__DRICHGasIrtCherenkovParticleID_hypotheses_);
-   fChain->SetBranchAddress("_DRICHGasIrtCherenkovParticleID_hypotheses.PDG", _DRICHGasIrtCherenkovParticleID_hypotheses_PDG, &b__DRICHGasIrtCherenkovParticleID_hypotheses_PDG);
-   fChain->SetBranchAddress("_DRICHGasIrtCherenkovParticleID_hypotheses.npe", _DRICHGasIrtCherenkovParticleID_hypotheses_npe, &b__DRICHGasIrtCherenkovParticleID_hypotheses_npe);
-   fChain->SetBranchAddress("_DRICHGasIrtCherenkovParticleID_hypotheses.weight", _DRICHGasIrtCherenkovParticleID_hypotheses_weight, &b__DRICHGasIrtCherenkovParticleID_hypotheses_weight);
+   fChain->SetBranchAddress("_DRICHGasIrtCherenkovParticleID_hypotheses.PDG", &_DRICHGasIrtCherenkovParticleID_hypotheses_PDG, &b__DRICHGasIrtCherenkovParticleID_hypotheses_PDG);
+   fChain->SetBranchAddress("_DRICHGasIrtCherenkovParticleID_hypotheses.npe", &_DRICHGasIrtCherenkovParticleID_hypotheses_npe, &b__DRICHGasIrtCherenkovParticleID_hypotheses_npe);
+   fChain->SetBranchAddress("_DRICHGasIrtCherenkovParticleID_hypotheses.weight", &_DRICHGasIrtCherenkovParticleID_hypotheses_weight, &b__DRICHGasIrtCherenkovParticleID_hypotheses_weight);
    fChain->SetBranchAddress("_DRICHGasIrtCherenkovParticleID_thetaPhiPhotons", &_DRICHGasIrtCherenkovParticleID_thetaPhiPhotons_, &b__DRICHGasIrtCherenkovParticleID_thetaPhiPhotons_);
-   fChain->SetBranchAddress("_DRICHGasIrtCherenkovParticleID_thetaPhiPhotons.a", _DRICHGasIrtCherenkovParticleID_thetaPhiPhotons_a, &b__DRICHGasIrtCherenkovParticleID_thetaPhiPhotons_a);
-   fChain->SetBranchAddress("_DRICHGasIrtCherenkovParticleID_thetaPhiPhotons.b", _DRICHGasIrtCherenkovParticleID_thetaPhiPhotons_b, &b__DRICHGasIrtCherenkovParticleID_thetaPhiPhotons_b);
+   fChain->SetBranchAddress("_DRICHGasIrtCherenkovParticleID_thetaPhiPhotons.a", &_DRICHGasIrtCherenkovParticleID_thetaPhiPhotons_a, &b__DRICHGasIrtCherenkovParticleID_thetaPhiPhotons_a);
+   fChain->SetBranchAddress("_DRICHGasIrtCherenkovParticleID_thetaPhiPhotons.b", &_DRICHGasIrtCherenkovParticleID_thetaPhiPhotons_b, &b__DRICHGasIrtCherenkovParticleID_thetaPhiPhotons_b);
    fChain->SetBranchAddress("DRICHGasTracks", &DRICHGasTracks_, &b_DRICHGasTracks_);
-   fChain->SetBranchAddress("DRICHGasTracks.length", DRICHGasTracks_length, &b_DRICHGasTracks_length);
-   fChain->SetBranchAddress("DRICHGasTracks.lengthError", DRICHGasTracks_lengthError, &b_DRICHGasTracks_lengthError);
-   fChain->SetBranchAddress("DRICHGasTracks.points_begin", DRICHGasTracks_points_begin, &b_DRICHGasTracks_points_begin);
-   fChain->SetBranchAddress("DRICHGasTracks.points_end", DRICHGasTracks_points_end, &b_DRICHGasTracks_points_end);
+   fChain->SetBranchAddress("DRICHGasTracks.length", &DRICHGasTracks_length, &b_DRICHGasTracks_length);
+   fChain->SetBranchAddress("DRICHGasTracks.lengthError", &DRICHGasTracks_lengthError, &b_DRICHGasTracks_lengthError);
+   fChain->SetBranchAddress("DRICHGasTracks.points_begin", &DRICHGasTracks_points_begin, &b_DRICHGasTracks_points_begin);
+   fChain->SetBranchAddress("DRICHGasTracks.points_end", &DRICHGasTracks_points_end, &b_DRICHGasTracks_points_end);
    fChain->SetBranchAddress("_DRICHGasTracks_track", &_DRICHGasTracks_track_, &b__DRICHGasTracks_track_);
-   fChain->SetBranchAddress("_DRICHGasTracks_track.index", _DRICHGasTracks_track_index, &b__DRICHGasTracks_track_index);
-   fChain->SetBranchAddress("_DRICHGasTracks_track.collectionID", _DRICHGasTracks_track_collectionID, &b__DRICHGasTracks_track_collectionID);
+   fChain->SetBranchAddress("_DRICHGasTracks_track.index", &_DRICHGasTracks_track_index, &b__DRICHGasTracks_track_index);
+   fChain->SetBranchAddress("_DRICHGasTracks_track.collectionID", &_DRICHGasTracks_track_collectionID, &b__DRICHGasTracks_track_collectionID);
    fChain->SetBranchAddress("_DRICHGasTracks_points", &_DRICHGasTracks_points_, &b__DRICHGasTracks_points_);
-   fChain->SetBranchAddress("_DRICHGasTracks_points.surface", _DRICHGasTracks_points_surface, &b__DRICHGasTracks_points_surface);
-   fChain->SetBranchAddress("_DRICHGasTracks_points.system", _DRICHGasTracks_points_system, &b__DRICHGasTracks_points_system);
-   fChain->SetBranchAddress("_DRICHGasTracks_points.position.x", _DRICHGasTracks_points_position_x, &b__DRICHGasTracks_points_position_x);
-   fChain->SetBranchAddress("_DRICHGasTracks_points.position.y", _DRICHGasTracks_points_position_y, &b__DRICHGasTracks_points_position_y);
-   fChain->SetBranchAddress("_DRICHGasTracks_points.position.z", _DRICHGasTracks_points_position_z, &b__DRICHGasTracks_points_position_z);
-   fChain->SetBranchAddress("_DRICHGasTracks_points.positionError.xx", _DRICHGasTracks_points_positionError_xx, &b__DRICHGasTracks_points_positionError_xx);
-   fChain->SetBranchAddress("_DRICHGasTracks_points.positionError.yy", _DRICHGasTracks_points_positionError_yy, &b__DRICHGasTracks_points_positionError_yy);
-   fChain->SetBranchAddress("_DRICHGasTracks_points.positionError.zz", _DRICHGasTracks_points_positionError_zz, &b__DRICHGasTracks_points_positionError_zz);
-   fChain->SetBranchAddress("_DRICHGasTracks_points.positionError.xy", _DRICHGasTracks_points_positionError_xy, &b__DRICHGasTracks_points_positionError_xy);
-   fChain->SetBranchAddress("_DRICHGasTracks_points.positionError.xz", _DRICHGasTracks_points_positionError_xz, &b__DRICHGasTracks_points_positionError_xz);
-   fChain->SetBranchAddress("_DRICHGasTracks_points.positionError.yz", _DRICHGasTracks_points_positionError_yz, &b__DRICHGasTracks_points_positionError_yz);
-   fChain->SetBranchAddress("_DRICHGasTracks_points.momentum.x", _DRICHGasTracks_points_momentum_x, &b__DRICHGasTracks_points_momentum_x);
-   fChain->SetBranchAddress("_DRICHGasTracks_points.momentum.y", _DRICHGasTracks_points_momentum_y, &b__DRICHGasTracks_points_momentum_y);
-   fChain->SetBranchAddress("_DRICHGasTracks_points.momentum.z", _DRICHGasTracks_points_momentum_z, &b__DRICHGasTracks_points_momentum_z);
-   fChain->SetBranchAddress("_DRICHGasTracks_points.momentumError.xx", _DRICHGasTracks_points_momentumError_xx, &b__DRICHGasTracks_points_momentumError_xx);
-   fChain->SetBranchAddress("_DRICHGasTracks_points.momentumError.yy", _DRICHGasTracks_points_momentumError_yy, &b__DRICHGasTracks_points_momentumError_yy);
-   fChain->SetBranchAddress("_DRICHGasTracks_points.momentumError.zz", _DRICHGasTracks_points_momentumError_zz, &b__DRICHGasTracks_points_momentumError_zz);
-   fChain->SetBranchAddress("_DRICHGasTracks_points.momentumError.xy", _DRICHGasTracks_points_momentumError_xy, &b__DRICHGasTracks_points_momentumError_xy);
-   fChain->SetBranchAddress("_DRICHGasTracks_points.momentumError.xz", _DRICHGasTracks_points_momentumError_xz, &b__DRICHGasTracks_points_momentumError_xz);
-   fChain->SetBranchAddress("_DRICHGasTracks_points.momentumError.yz", _DRICHGasTracks_points_momentumError_yz, &b__DRICHGasTracks_points_momentumError_yz);
-   fChain->SetBranchAddress("_DRICHGasTracks_points.time", _DRICHGasTracks_points_time, &b__DRICHGasTracks_points_time);
-   fChain->SetBranchAddress("_DRICHGasTracks_points.timeError", _DRICHGasTracks_points_timeError, &b__DRICHGasTracks_points_timeError);
-   fChain->SetBranchAddress("_DRICHGasTracks_points.theta", _DRICHGasTracks_points_theta, &b__DRICHGasTracks_points_theta);
-   fChain->SetBranchAddress("_DRICHGasTracks_points.phi", _DRICHGasTracks_points_phi, &b__DRICHGasTracks_points_phi);
-   fChain->SetBranchAddress("_DRICHGasTracks_points.directionError.xx", _DRICHGasTracks_points_directionError_xx, &b__DRICHGasTracks_points_directionError_xx);
-   fChain->SetBranchAddress("_DRICHGasTracks_points.directionError.yy", _DRICHGasTracks_points_directionError_yy, &b__DRICHGasTracks_points_directionError_yy);
-   fChain->SetBranchAddress("_DRICHGasTracks_points.directionError.xy", _DRICHGasTracks_points_directionError_xy, &b__DRICHGasTracks_points_directionError_xy);
-   fChain->SetBranchAddress("_DRICHGasTracks_points.pathlength", _DRICHGasTracks_points_pathlength, &b__DRICHGasTracks_points_pathlength);
-   fChain->SetBranchAddress("_DRICHGasTracks_points.pathlengthError", _DRICHGasTracks_points_pathlengthError, &b__DRICHGasTracks_points_pathlengthError);
+   fChain->SetBranchAddress("_DRICHGasTracks_points.surface", &_DRICHGasTracks_points_surface, &b__DRICHGasTracks_points_surface);
+   fChain->SetBranchAddress("_DRICHGasTracks_points.system", &_DRICHGasTracks_points_system, &b__DRICHGasTracks_points_system);
+   fChain->SetBranchAddress("_DRICHGasTracks_points.position.x", &_DRICHGasTracks_points_position_x, &b__DRICHGasTracks_points_position_x);
+   fChain->SetBranchAddress("_DRICHGasTracks_points.position.y", &_DRICHGasTracks_points_position_y, &b__DRICHGasTracks_points_position_y);
+   fChain->SetBranchAddress("_DRICHGasTracks_points.position.z", &_DRICHGasTracks_points_position_z, &b__DRICHGasTracks_points_position_z);
+   fChain->SetBranchAddress("_DRICHGasTracks_points.positionError.xx", &_DRICHGasTracks_points_positionError_xx, &b__DRICHGasTracks_points_positionError_xx);
+   fChain->SetBranchAddress("_DRICHGasTracks_points.positionError.yy", &_DRICHGasTracks_points_positionError_yy, &b__DRICHGasTracks_points_positionError_yy);
+   fChain->SetBranchAddress("_DRICHGasTracks_points.positionError.zz", &_DRICHGasTracks_points_positionError_zz, &b__DRICHGasTracks_points_positionError_zz);
+   fChain->SetBranchAddress("_DRICHGasTracks_points.positionError.xy", &_DRICHGasTracks_points_positionError_xy, &b__DRICHGasTracks_points_positionError_xy);
+   fChain->SetBranchAddress("_DRICHGasTracks_points.positionError.xz", &_DRICHGasTracks_points_positionError_xz, &b__DRICHGasTracks_points_positionError_xz);
+   fChain->SetBranchAddress("_DRICHGasTracks_points.positionError.yz", &_DRICHGasTracks_points_positionError_yz, &b__DRICHGasTracks_points_positionError_yz);
+   fChain->SetBranchAddress("_DRICHGasTracks_points.momentum.x", &_DRICHGasTracks_points_momentum_x, &b__DRICHGasTracks_points_momentum_x);
+   fChain->SetBranchAddress("_DRICHGasTracks_points.momentum.y", &_DRICHGasTracks_points_momentum_y, &b__DRICHGasTracks_points_momentum_y);
+   fChain->SetBranchAddress("_DRICHGasTracks_points.momentum.z", &_DRICHGasTracks_points_momentum_z, &b__DRICHGasTracks_points_momentum_z);
+   fChain->SetBranchAddress("_DRICHGasTracks_points.momentumError.xx", &_DRICHGasTracks_points_momentumError_xx, &b__DRICHGasTracks_points_momentumError_xx);
+   fChain->SetBranchAddress("_DRICHGasTracks_points.momentumError.yy", &_DRICHGasTracks_points_momentumError_yy, &b__DRICHGasTracks_points_momentumError_yy);
+   fChain->SetBranchAddress("_DRICHGasTracks_points.momentumError.zz", &_DRICHGasTracks_points_momentumError_zz, &b__DRICHGasTracks_points_momentumError_zz);
+   fChain->SetBranchAddress("_DRICHGasTracks_points.momentumError.xy", &_DRICHGasTracks_points_momentumError_xy, &b__DRICHGasTracks_points_momentumError_xy);
+   fChain->SetBranchAddress("_DRICHGasTracks_points.momentumError.xz", &_DRICHGasTracks_points_momentumError_xz, &b__DRICHGasTracks_points_momentumError_xz);
+   fChain->SetBranchAddress("_DRICHGasTracks_points.momentumError.yz", &_DRICHGasTracks_points_momentumError_yz, &b__DRICHGasTracks_points_momentumError_yz);
+   fChain->SetBranchAddress("_DRICHGasTracks_points.time", &_DRICHGasTracks_points_time, &b__DRICHGasTracks_points_time);
+   fChain->SetBranchAddress("_DRICHGasTracks_points.timeError", &_DRICHGasTracks_points_timeError, &b__DRICHGasTracks_points_timeError);
+   fChain->SetBranchAddress("_DRICHGasTracks_points.theta", &_DRICHGasTracks_points_theta, &b__DRICHGasTracks_points_theta);
+   fChain->SetBranchAddress("_DRICHGasTracks_points.phi", &_DRICHGasTracks_points_phi, &b__DRICHGasTracks_points_phi);
+   fChain->SetBranchAddress("_DRICHGasTracks_points.directionError.xx", &_DRICHGasTracks_points_directionError_xx, &b__DRICHGasTracks_points_directionError_xx);
+   fChain->SetBranchAddress("_DRICHGasTracks_points.directionError.yy", &_DRICHGasTracks_points_directionError_yy, &b__DRICHGasTracks_points_directionError_yy);
+   fChain->SetBranchAddress("_DRICHGasTracks_points.directionError.xy", &_DRICHGasTracks_points_directionError_xy, &b__DRICHGasTracks_points_directionError_xy);
+   fChain->SetBranchAddress("_DRICHGasTracks_points.pathlength", &_DRICHGasTracks_points_pathlength, &b__DRICHGasTracks_points_pathlength);
+   fChain->SetBranchAddress("_DRICHGasTracks_points.pathlengthError", &_DRICHGasTracks_points_pathlengthError, &b__DRICHGasTracks_points_pathlengthError);
    fChain->SetBranchAddress("DRICHRawHits", &DRICHRawHits_, &b_DRICHRawHits_);
    fChain->SetBranchAddress("DRICHRawHits.cellID", DRICHRawHits_cellID, &b_DRICHRawHits_cellID);
    fChain->SetBranchAddress("DRICHRawHits.charge", DRICHRawHits_charge, &b_DRICHRawHits_charge);
@@ -6479,8 +7464,8 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("_EcalBarrelScFiClusters_clusters.index", &_EcalBarrelScFiClusters_clusters_index, &b__EcalBarrelScFiClusters_clusters_index);
    fChain->SetBranchAddress("_EcalBarrelScFiClusters_clusters.collectionID", &_EcalBarrelScFiClusters_clusters_collectionID, &b__EcalBarrelScFiClusters_clusters_collectionID);
    fChain->SetBranchAddress("_EcalBarrelScFiClusters_hits", &_EcalBarrelScFiClusters_hits_, &b__EcalBarrelScFiClusters_hits_);
-   fChain->SetBranchAddress("_EcalBarrelScFiClusters_hits.index", &_EcalBarrelScFiClusters_hits_index, &b__EcalBarrelScFiClusters_hits_index);
-   fChain->SetBranchAddress("_EcalBarrelScFiClusters_hits.collectionID", &_EcalBarrelScFiClusters_hits_collectionID, &b__EcalBarrelScFiClusters_hits_collectionID);
+   fChain->SetBranchAddress("_EcalBarrelScFiClusters_hits.index", _EcalBarrelScFiClusters_hits_index, &b__EcalBarrelScFiClusters_hits_index);
+   fChain->SetBranchAddress("_EcalBarrelScFiClusters_hits.collectionID", _EcalBarrelScFiClusters_hits_collectionID, &b__EcalBarrelScFiClusters_hits_collectionID);
    fChain->SetBranchAddress("_EcalBarrelScFiClusters_particleIDs", &_EcalBarrelScFiClusters_particleIDs_, &b__EcalBarrelScFiClusters_particleIDs_);
    fChain->SetBranchAddress("_EcalBarrelScFiClusters_particleIDs.index", &_EcalBarrelScFiClusters_particleIDs_index, &b__EcalBarrelScFiClusters_particleIDs_index);
    fChain->SetBranchAddress("_EcalBarrelScFiClusters_particleIDs.collectionID", &_EcalBarrelScFiClusters_particleIDs_collectionID, &b__EcalBarrelScFiClusters_particleIDs_collectionID);
@@ -6610,8 +7595,8 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("_EcalEndcapNClusters_clusters.index", &_EcalEndcapNClusters_clusters_index, &b__EcalEndcapNClusters_clusters_index);
    fChain->SetBranchAddress("_EcalEndcapNClusters_clusters.collectionID", &_EcalEndcapNClusters_clusters_collectionID, &b__EcalEndcapNClusters_clusters_collectionID);
    fChain->SetBranchAddress("_EcalEndcapNClusters_hits", &_EcalEndcapNClusters_hits_, &b__EcalEndcapNClusters_hits_);
-   fChain->SetBranchAddress("_EcalEndcapNClusters_hits.index", &_EcalEndcapNClusters_hits_index, &b__EcalEndcapNClusters_hits_index);
-   fChain->SetBranchAddress("_EcalEndcapNClusters_hits.collectionID", &_EcalEndcapNClusters_hits_collectionID, &b__EcalEndcapNClusters_hits_collectionID);
+   fChain->SetBranchAddress("_EcalEndcapNClusters_hits.index", _EcalEndcapNClusters_hits_index, &b__EcalEndcapNClusters_hits_index);
+   fChain->SetBranchAddress("_EcalEndcapNClusters_hits.collectionID", _EcalEndcapNClusters_hits_collectionID, &b__EcalEndcapNClusters_hits_collectionID);
    fChain->SetBranchAddress("_EcalEndcapNClusters_particleIDs", &_EcalEndcapNClusters_particleIDs_, &b__EcalEndcapNClusters_particleIDs_);
    fChain->SetBranchAddress("_EcalEndcapNClusters_particleIDs.index", &_EcalEndcapNClusters_particleIDs_index, &b__EcalEndcapNClusters_particleIDs_index);
    fChain->SetBranchAddress("_EcalEndcapNClusters_particleIDs.collectionID", &_EcalEndcapNClusters_particleIDs_collectionID, &b__EcalEndcapNClusters_particleIDs_collectionID);
@@ -6686,8 +7671,8 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("_EcalEndcapNTruthClusters_clusters.index", &_EcalEndcapNTruthClusters_clusters_index, &b__EcalEndcapNTruthClusters_clusters_index);
    fChain->SetBranchAddress("_EcalEndcapNTruthClusters_clusters.collectionID", &_EcalEndcapNTruthClusters_clusters_collectionID, &b__EcalEndcapNTruthClusters_clusters_collectionID);
    fChain->SetBranchAddress("_EcalEndcapNTruthClusters_hits", &_EcalEndcapNTruthClusters_hits_, &b__EcalEndcapNTruthClusters_hits_);
-   fChain->SetBranchAddress("_EcalEndcapNTruthClusters_hits.index", &_EcalEndcapNTruthClusters_hits_index, &b__EcalEndcapNTruthClusters_hits_index);
-   fChain->SetBranchAddress("_EcalEndcapNTruthClusters_hits.collectionID", &_EcalEndcapNTruthClusters_hits_collectionID, &b__EcalEndcapNTruthClusters_hits_collectionID);
+   fChain->SetBranchAddress("_EcalEndcapNTruthClusters_hits.index", _EcalEndcapNTruthClusters_hits_index, &b__EcalEndcapNTruthClusters_hits_index);
+   fChain->SetBranchAddress("_EcalEndcapNTruthClusters_hits.collectionID", _EcalEndcapNTruthClusters_hits_collectionID, &b__EcalEndcapNTruthClusters_hits_collectionID);
    fChain->SetBranchAddress("_EcalEndcapNTruthClusters_particleIDs", &_EcalEndcapNTruthClusters_particleIDs_, &b__EcalEndcapNTruthClusters_particleIDs_);
    fChain->SetBranchAddress("_EcalEndcapNTruthClusters_particleIDs.index", &_EcalEndcapNTruthClusters_particleIDs_index, &b__EcalEndcapNTruthClusters_particleIDs_index);
    fChain->SetBranchAddress("_EcalEndcapNTruthClusters_particleIDs.collectionID", &_EcalEndcapNTruthClusters_particleIDs_collectionID, &b__EcalEndcapNTruthClusters_particleIDs_collectionID);
@@ -6741,8 +7726,8 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("_EcalEndcapPClusters_clusters.index", &_EcalEndcapPClusters_clusters_index, &b__EcalEndcapPClusters_clusters_index);
    fChain->SetBranchAddress("_EcalEndcapPClusters_clusters.collectionID", &_EcalEndcapPClusters_clusters_collectionID, &b__EcalEndcapPClusters_clusters_collectionID);
    fChain->SetBranchAddress("_EcalEndcapPClusters_hits", &_EcalEndcapPClusters_hits_, &b__EcalEndcapPClusters_hits_);
-   fChain->SetBranchAddress("_EcalEndcapPClusters_hits.index", &_EcalEndcapPClusters_hits_index, &b__EcalEndcapPClusters_hits_index);
-   fChain->SetBranchAddress("_EcalEndcapPClusters_hits.collectionID", &_EcalEndcapPClusters_hits_collectionID, &b__EcalEndcapPClusters_hits_collectionID);
+   fChain->SetBranchAddress("_EcalEndcapPClusters_hits.index", _EcalEndcapPClusters_hits_index, &b__EcalEndcapPClusters_hits_index);
+   fChain->SetBranchAddress("_EcalEndcapPClusters_hits.collectionID", _EcalEndcapPClusters_hits_collectionID, &b__EcalEndcapPClusters_hits_collectionID);
    fChain->SetBranchAddress("_EcalEndcapPClusters_particleIDs", &_EcalEndcapPClusters_particleIDs_, &b__EcalEndcapPClusters_particleIDs_);
    fChain->SetBranchAddress("_EcalEndcapPClusters_particleIDs.index", &_EcalEndcapPClusters_particleIDs_index, &b__EcalEndcapPClusters_particleIDs_index);
    fChain->SetBranchAddress("_EcalEndcapPClusters_particleIDs.collectionID", &_EcalEndcapPClusters_particleIDs_collectionID, &b__EcalEndcapPClusters_particleIDs_collectionID);
@@ -6796,8 +7781,8 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("_EcalEndcapPInsertClusters_clusters.index", &_EcalEndcapPInsertClusters_clusters_index, &b__EcalEndcapPInsertClusters_clusters_index);
    fChain->SetBranchAddress("_EcalEndcapPInsertClusters_clusters.collectionID", &_EcalEndcapPInsertClusters_clusters_collectionID, &b__EcalEndcapPInsertClusters_clusters_collectionID);
    fChain->SetBranchAddress("_EcalEndcapPInsertClusters_hits", &_EcalEndcapPInsertClusters_hits_, &b__EcalEndcapPInsertClusters_hits_);
-   fChain->SetBranchAddress("_EcalEndcapPInsertClusters_hits.index", &_EcalEndcapPInsertClusters_hits_index, &b__EcalEndcapPInsertClusters_hits_index);
-   fChain->SetBranchAddress("_EcalEndcapPInsertClusters_hits.collectionID", &_EcalEndcapPInsertClusters_hits_collectionID, &b__EcalEndcapPInsertClusters_hits_collectionID);
+   fChain->SetBranchAddress("_EcalEndcapPInsertClusters_hits.index", _EcalEndcapPInsertClusters_hits_index, &b__EcalEndcapPInsertClusters_hits_index);
+   fChain->SetBranchAddress("_EcalEndcapPInsertClusters_hits.collectionID", _EcalEndcapPInsertClusters_hits_collectionID, &b__EcalEndcapPInsertClusters_hits_collectionID);
    fChain->SetBranchAddress("_EcalEndcapPInsertClusters_particleIDs", &_EcalEndcapPInsertClusters_particleIDs_, &b__EcalEndcapPInsertClusters_particleIDs_);
    fChain->SetBranchAddress("_EcalEndcapPInsertClusters_particleIDs.index", &_EcalEndcapPInsertClusters_particleIDs_index, &b__EcalEndcapPInsertClusters_particleIDs_index);
    fChain->SetBranchAddress("_EcalEndcapPInsertClusters_particleIDs.collectionID", &_EcalEndcapPInsertClusters_particleIDs_collectionID, &b__EcalEndcapPInsertClusters_particleIDs_collectionID);
@@ -6872,8 +7857,8 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("_EcalEndcapPInsertTruthClusters_clusters.index", &_EcalEndcapPInsertTruthClusters_clusters_index, &b__EcalEndcapPInsertTruthClusters_clusters_index);
    fChain->SetBranchAddress("_EcalEndcapPInsertTruthClusters_clusters.collectionID", &_EcalEndcapPInsertTruthClusters_clusters_collectionID, &b__EcalEndcapPInsertTruthClusters_clusters_collectionID);
    fChain->SetBranchAddress("_EcalEndcapPInsertTruthClusters_hits", &_EcalEndcapPInsertTruthClusters_hits_, &b__EcalEndcapPInsertTruthClusters_hits_);
-   fChain->SetBranchAddress("_EcalEndcapPInsertTruthClusters_hits.index", &_EcalEndcapPInsertTruthClusters_hits_index, &b__EcalEndcapPInsertTruthClusters_hits_index);
-   fChain->SetBranchAddress("_EcalEndcapPInsertTruthClusters_hits.collectionID", &_EcalEndcapPInsertTruthClusters_hits_collectionID, &b__EcalEndcapPInsertTruthClusters_hits_collectionID);
+   fChain->SetBranchAddress("_EcalEndcapPInsertTruthClusters_hits.index", _EcalEndcapPInsertTruthClusters_hits_index, &b__EcalEndcapPInsertTruthClusters_hits_index);
+   fChain->SetBranchAddress("_EcalEndcapPInsertTruthClusters_hits.collectionID", _EcalEndcapPInsertTruthClusters_hits_collectionID, &b__EcalEndcapPInsertTruthClusters_hits_collectionID);
    fChain->SetBranchAddress("_EcalEndcapPInsertTruthClusters_particleIDs", &_EcalEndcapPInsertTruthClusters_particleIDs_, &b__EcalEndcapPInsertTruthClusters_particleIDs_);
    fChain->SetBranchAddress("_EcalEndcapPInsertTruthClusters_particleIDs.index", &_EcalEndcapPInsertTruthClusters_particleIDs_index, &b__EcalEndcapPInsertTruthClusters_particleIDs_index);
    fChain->SetBranchAddress("_EcalEndcapPInsertTruthClusters_particleIDs.collectionID", &_EcalEndcapPInsertTruthClusters_particleIDs_collectionID, &b__EcalEndcapPInsertTruthClusters_particleIDs_collectionID);
@@ -6948,14 +7933,145 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("_EcalEndcapPTruthClusters_clusters.index", &_EcalEndcapPTruthClusters_clusters_index, &b__EcalEndcapPTruthClusters_clusters_index);
    fChain->SetBranchAddress("_EcalEndcapPTruthClusters_clusters.collectionID", &_EcalEndcapPTruthClusters_clusters_collectionID, &b__EcalEndcapPTruthClusters_clusters_collectionID);
    fChain->SetBranchAddress("_EcalEndcapPTruthClusters_hits", &_EcalEndcapPTruthClusters_hits_, &b__EcalEndcapPTruthClusters_hits_);
-   fChain->SetBranchAddress("_EcalEndcapPTruthClusters_hits.index", &_EcalEndcapPTruthClusters_hits_index, &b__EcalEndcapPTruthClusters_hits_index);
-   fChain->SetBranchAddress("_EcalEndcapPTruthClusters_hits.collectionID", &_EcalEndcapPTruthClusters_hits_collectionID, &b__EcalEndcapPTruthClusters_hits_collectionID);
+   fChain->SetBranchAddress("_EcalEndcapPTruthClusters_hits.index", _EcalEndcapPTruthClusters_hits_index, &b__EcalEndcapPTruthClusters_hits_index);
+   fChain->SetBranchAddress("_EcalEndcapPTruthClusters_hits.collectionID", _EcalEndcapPTruthClusters_hits_collectionID, &b__EcalEndcapPTruthClusters_hits_collectionID);
    fChain->SetBranchAddress("_EcalEndcapPTruthClusters_particleIDs", &_EcalEndcapPTruthClusters_particleIDs_, &b__EcalEndcapPTruthClusters_particleIDs_);
    fChain->SetBranchAddress("_EcalEndcapPTruthClusters_particleIDs.index", &_EcalEndcapPTruthClusters_particleIDs_index, &b__EcalEndcapPTruthClusters_particleIDs_index);
    fChain->SetBranchAddress("_EcalEndcapPTruthClusters_particleIDs.collectionID", &_EcalEndcapPTruthClusters_particleIDs_collectionID, &b__EcalEndcapPTruthClusters_particleIDs_collectionID);
    fChain->SetBranchAddress("_EcalEndcapPTruthClusters_shapeParameters", &_EcalEndcapPTruthClusters_shapeParameters, &b__EcalEndcapPTruthClusters_shapeParameters);
    fChain->SetBranchAddress("_EcalEndcapPTruthClusters_hitContributions", &_EcalEndcapPTruthClusters_hitContributions, &b__EcalEndcapPTruthClusters_hitContributions);
    fChain->SetBranchAddress("_EcalEndcapPTruthClusters_subdetectorEnergies", &_EcalEndcapPTruthClusters_subdetectorEnergies, &b__EcalEndcapPTruthClusters_subdetectorEnergies);
+   fChain->SetBranchAddress("EcalFarForwardZDCClusterAssociations", &EcalFarForwardZDCClusterAssociations_, &b_EcalFarForwardZDCClusterAssociations_);
+   fChain->SetBranchAddress("EcalFarForwardZDCClusterAssociations.simID", &EcalFarForwardZDCClusterAssociations_simID, &b_EcalFarForwardZDCClusterAssociations_simID);
+   fChain->SetBranchAddress("EcalFarForwardZDCClusterAssociations.recID", &EcalFarForwardZDCClusterAssociations_recID, &b_EcalFarForwardZDCClusterAssociations_recID);
+   fChain->SetBranchAddress("EcalFarForwardZDCClusterAssociations.weight", &EcalFarForwardZDCClusterAssociations_weight, &b_EcalFarForwardZDCClusterAssociations_weight);
+   fChain->SetBranchAddress("_EcalFarForwardZDCClusterAssociations_rec", &_EcalFarForwardZDCClusterAssociations_rec_, &b__EcalFarForwardZDCClusterAssociations_rec_);
+   fChain->SetBranchAddress("_EcalFarForwardZDCClusterAssociations_rec.index", &_EcalFarForwardZDCClusterAssociations_rec_index, &b__EcalFarForwardZDCClusterAssociations_rec_index);
+   fChain->SetBranchAddress("_EcalFarForwardZDCClusterAssociations_rec.collectionID", &_EcalFarForwardZDCClusterAssociations_rec_collectionID, &b__EcalFarForwardZDCClusterAssociations_rec_collectionID);
+   fChain->SetBranchAddress("_EcalFarForwardZDCClusterAssociations_sim", &_EcalFarForwardZDCClusterAssociations_sim_, &b__EcalFarForwardZDCClusterAssociations_sim_);
+   fChain->SetBranchAddress("_EcalFarForwardZDCClusterAssociations_sim.index", &_EcalFarForwardZDCClusterAssociations_sim_index, &b__EcalFarForwardZDCClusterAssociations_sim_index);
+   fChain->SetBranchAddress("_EcalFarForwardZDCClusterAssociations_sim.collectionID", &_EcalFarForwardZDCClusterAssociations_sim_collectionID, &b__EcalFarForwardZDCClusterAssociations_sim_collectionID);
+   fChain->SetBranchAddress("EcalFarForwardZDCClusters", &EcalFarForwardZDCClusters_, &b_EcalFarForwardZDCClusters_);
+   fChain->SetBranchAddress("EcalFarForwardZDCClusters.type", &EcalFarForwardZDCClusters_type, &b_EcalFarForwardZDCClusters_type);
+   fChain->SetBranchAddress("EcalFarForwardZDCClusters.energy", &EcalFarForwardZDCClusters_energy, &b_EcalFarForwardZDCClusters_energy);
+   fChain->SetBranchAddress("EcalFarForwardZDCClusters.energyError", &EcalFarForwardZDCClusters_energyError, &b_EcalFarForwardZDCClusters_energyError);
+   fChain->SetBranchAddress("EcalFarForwardZDCClusters.time", &EcalFarForwardZDCClusters_time, &b_EcalFarForwardZDCClusters_time);
+   fChain->SetBranchAddress("EcalFarForwardZDCClusters.timeError", &EcalFarForwardZDCClusters_timeError, &b_EcalFarForwardZDCClusters_timeError);
+   fChain->SetBranchAddress("EcalFarForwardZDCClusters.nhits", &EcalFarForwardZDCClusters_nhits, &b_EcalFarForwardZDCClusters_nhits);
+   fChain->SetBranchAddress("EcalFarForwardZDCClusters.position.x", &EcalFarForwardZDCClusters_position_x, &b_EcalFarForwardZDCClusters_position_x);
+   fChain->SetBranchAddress("EcalFarForwardZDCClusters.position.y", &EcalFarForwardZDCClusters_position_y, &b_EcalFarForwardZDCClusters_position_y);
+   fChain->SetBranchAddress("EcalFarForwardZDCClusters.position.z", &EcalFarForwardZDCClusters_position_z, &b_EcalFarForwardZDCClusters_position_z);
+   fChain->SetBranchAddress("EcalFarForwardZDCClusters.positionError.xx", &EcalFarForwardZDCClusters_positionError_xx, &b_EcalFarForwardZDCClusters_positionError_xx);
+   fChain->SetBranchAddress("EcalFarForwardZDCClusters.positionError.yy", &EcalFarForwardZDCClusters_positionError_yy, &b_EcalFarForwardZDCClusters_positionError_yy);
+   fChain->SetBranchAddress("EcalFarForwardZDCClusters.positionError.zz", &EcalFarForwardZDCClusters_positionError_zz, &b_EcalFarForwardZDCClusters_positionError_zz);
+   fChain->SetBranchAddress("EcalFarForwardZDCClusters.positionError.xy", &EcalFarForwardZDCClusters_positionError_xy, &b_EcalFarForwardZDCClusters_positionError_xy);
+   fChain->SetBranchAddress("EcalFarForwardZDCClusters.positionError.xz", &EcalFarForwardZDCClusters_positionError_xz, &b_EcalFarForwardZDCClusters_positionError_xz);
+   fChain->SetBranchAddress("EcalFarForwardZDCClusters.positionError.yz", &EcalFarForwardZDCClusters_positionError_yz, &b_EcalFarForwardZDCClusters_positionError_yz);
+   fChain->SetBranchAddress("EcalFarForwardZDCClusters.intrinsicTheta", &EcalFarForwardZDCClusters_intrinsicTheta, &b_EcalFarForwardZDCClusters_intrinsicTheta);
+   fChain->SetBranchAddress("EcalFarForwardZDCClusters.intrinsicPhi", &EcalFarForwardZDCClusters_intrinsicPhi, &b_EcalFarForwardZDCClusters_intrinsicPhi);
+   fChain->SetBranchAddress("EcalFarForwardZDCClusters.intrinsicDirectionError.xx", &EcalFarForwardZDCClusters_intrinsicDirectionError_xx, &b_EcalFarForwardZDCClusters_intrinsicDirectionError_xx);
+   fChain->SetBranchAddress("EcalFarForwardZDCClusters.intrinsicDirectionError.yy", &EcalFarForwardZDCClusters_intrinsicDirectionError_yy, &b_EcalFarForwardZDCClusters_intrinsicDirectionError_yy);
+   fChain->SetBranchAddress("EcalFarForwardZDCClusters.intrinsicDirectionError.xy", &EcalFarForwardZDCClusters_intrinsicDirectionError_xy, &b_EcalFarForwardZDCClusters_intrinsicDirectionError_xy);
+   fChain->SetBranchAddress("EcalFarForwardZDCClusters.shapeParameters_begin", &EcalFarForwardZDCClusters_shapeParameters_begin, &b_EcalFarForwardZDCClusters_shapeParameters_begin);
+   fChain->SetBranchAddress("EcalFarForwardZDCClusters.shapeParameters_end", &EcalFarForwardZDCClusters_shapeParameters_end, &b_EcalFarForwardZDCClusters_shapeParameters_end);
+   fChain->SetBranchAddress("EcalFarForwardZDCClusters.hitContributions_begin", &EcalFarForwardZDCClusters_hitContributions_begin, &b_EcalFarForwardZDCClusters_hitContributions_begin);
+   fChain->SetBranchAddress("EcalFarForwardZDCClusters.hitContributions_end", &EcalFarForwardZDCClusters_hitContributions_end, &b_EcalFarForwardZDCClusters_hitContributions_end);
+   fChain->SetBranchAddress("EcalFarForwardZDCClusters.subdetectorEnergies_begin", &EcalFarForwardZDCClusters_subdetectorEnergies_begin, &b_EcalFarForwardZDCClusters_subdetectorEnergies_begin);
+   fChain->SetBranchAddress("EcalFarForwardZDCClusters.subdetectorEnergies_end", &EcalFarForwardZDCClusters_subdetectorEnergies_end, &b_EcalFarForwardZDCClusters_subdetectorEnergies_end);
+   fChain->SetBranchAddress("EcalFarForwardZDCClusters.clusters_begin", &EcalFarForwardZDCClusters_clusters_begin, &b_EcalFarForwardZDCClusters_clusters_begin);
+   fChain->SetBranchAddress("EcalFarForwardZDCClusters.clusters_end", &EcalFarForwardZDCClusters_clusters_end, &b_EcalFarForwardZDCClusters_clusters_end);
+   fChain->SetBranchAddress("EcalFarForwardZDCClusters.hits_begin", &EcalFarForwardZDCClusters_hits_begin, &b_EcalFarForwardZDCClusters_hits_begin);
+   fChain->SetBranchAddress("EcalFarForwardZDCClusters.hits_end", &EcalFarForwardZDCClusters_hits_end, &b_EcalFarForwardZDCClusters_hits_end);
+   fChain->SetBranchAddress("EcalFarForwardZDCClusters.particleIDs_begin", &EcalFarForwardZDCClusters_particleIDs_begin, &b_EcalFarForwardZDCClusters_particleIDs_begin);
+   fChain->SetBranchAddress("EcalFarForwardZDCClusters.particleIDs_end", &EcalFarForwardZDCClusters_particleIDs_end, &b_EcalFarForwardZDCClusters_particleIDs_end);
+   fChain->SetBranchAddress("_EcalFarForwardZDCClusters_clusters", &_EcalFarForwardZDCClusters_clusters_, &b__EcalFarForwardZDCClusters_clusters_);
+   fChain->SetBranchAddress("_EcalFarForwardZDCClusters_clusters.index", &_EcalFarForwardZDCClusters_clusters_index, &b__EcalFarForwardZDCClusters_clusters_index);
+   fChain->SetBranchAddress("_EcalFarForwardZDCClusters_clusters.collectionID", &_EcalFarForwardZDCClusters_clusters_collectionID, &b__EcalFarForwardZDCClusters_clusters_collectionID);
+   fChain->SetBranchAddress("_EcalFarForwardZDCClusters_hits", &_EcalFarForwardZDCClusters_hits_, &b__EcalFarForwardZDCClusters_hits_);
+   fChain->SetBranchAddress("_EcalFarForwardZDCClusters_hits.index", &_EcalFarForwardZDCClusters_hits_index, &b__EcalFarForwardZDCClusters_hits_index);
+   fChain->SetBranchAddress("_EcalFarForwardZDCClusters_hits.collectionID", &_EcalFarForwardZDCClusters_hits_collectionID, &b__EcalFarForwardZDCClusters_hits_collectionID);
+   fChain->SetBranchAddress("_EcalFarForwardZDCClusters_particleIDs", &_EcalFarForwardZDCClusters_particleIDs_, &b__EcalFarForwardZDCClusters_particleIDs_);
+   fChain->SetBranchAddress("_EcalFarForwardZDCClusters_particleIDs.index", &_EcalFarForwardZDCClusters_particleIDs_index, &b__EcalFarForwardZDCClusters_particleIDs_index);
+   fChain->SetBranchAddress("_EcalFarForwardZDCClusters_particleIDs.collectionID", &_EcalFarForwardZDCClusters_particleIDs_collectionID, &b__EcalFarForwardZDCClusters_particleIDs_collectionID);
+   fChain->SetBranchAddress("_EcalFarForwardZDCClusters_shapeParameters", &_EcalFarForwardZDCClusters_shapeParameters, &b__EcalFarForwardZDCClusters_shapeParameters);
+   fChain->SetBranchAddress("_EcalFarForwardZDCClusters_hitContributions", &_EcalFarForwardZDCClusters_hitContributions, &b__EcalFarForwardZDCClusters_hitContributions);
+   fChain->SetBranchAddress("_EcalFarForwardZDCClusters_subdetectorEnergies", &_EcalFarForwardZDCClusters_subdetectorEnergies, &b__EcalFarForwardZDCClusters_subdetectorEnergies);
+   fChain->SetBranchAddress("EcalFarForwardZDCRawHits", &EcalFarForwardZDCRawHits_, &b_EcalFarForwardZDCRawHits_);
+   fChain->SetBranchAddress("EcalFarForwardZDCRawHits.cellID", &EcalFarForwardZDCRawHits_cellID, &b_EcalFarForwardZDCRawHits_cellID);
+   fChain->SetBranchAddress("EcalFarForwardZDCRawHits.amplitude", &EcalFarForwardZDCRawHits_amplitude, &b_EcalFarForwardZDCRawHits_amplitude);
+   fChain->SetBranchAddress("EcalFarForwardZDCRawHits.timeStamp", &EcalFarForwardZDCRawHits_timeStamp, &b_EcalFarForwardZDCRawHits_timeStamp);
+   fChain->SetBranchAddress("EcalFarForwardZDCRecHits", &EcalFarForwardZDCRecHits_, &b_EcalFarForwardZDCRecHits_);
+   fChain->SetBranchAddress("EcalFarForwardZDCRecHits.cellID", &EcalFarForwardZDCRecHits_cellID, &b_EcalFarForwardZDCRecHits_cellID);
+   fChain->SetBranchAddress("EcalFarForwardZDCRecHits.energy", &EcalFarForwardZDCRecHits_energy, &b_EcalFarForwardZDCRecHits_energy);
+   fChain->SetBranchAddress("EcalFarForwardZDCRecHits.energyError", &EcalFarForwardZDCRecHits_energyError, &b_EcalFarForwardZDCRecHits_energyError);
+   fChain->SetBranchAddress("EcalFarForwardZDCRecHits.time", &EcalFarForwardZDCRecHits_time, &b_EcalFarForwardZDCRecHits_time);
+   fChain->SetBranchAddress("EcalFarForwardZDCRecHits.timeError", &EcalFarForwardZDCRecHits_timeError, &b_EcalFarForwardZDCRecHits_timeError);
+   fChain->SetBranchAddress("EcalFarForwardZDCRecHits.position.x", &EcalFarForwardZDCRecHits_position_x, &b_EcalFarForwardZDCRecHits_position_x);
+   fChain->SetBranchAddress("EcalFarForwardZDCRecHits.position.y", &EcalFarForwardZDCRecHits_position_y, &b_EcalFarForwardZDCRecHits_position_y);
+   fChain->SetBranchAddress("EcalFarForwardZDCRecHits.position.z", &EcalFarForwardZDCRecHits_position_z, &b_EcalFarForwardZDCRecHits_position_z);
+   fChain->SetBranchAddress("EcalFarForwardZDCRecHits.dimension.x", &EcalFarForwardZDCRecHits_dimension_x, &b_EcalFarForwardZDCRecHits_dimension_x);
+   fChain->SetBranchAddress("EcalFarForwardZDCRecHits.dimension.y", &EcalFarForwardZDCRecHits_dimension_y, &b_EcalFarForwardZDCRecHits_dimension_y);
+   fChain->SetBranchAddress("EcalFarForwardZDCRecHits.dimension.z", &EcalFarForwardZDCRecHits_dimension_z, &b_EcalFarForwardZDCRecHits_dimension_z);
+   fChain->SetBranchAddress("EcalFarForwardZDCRecHits.sector", &EcalFarForwardZDCRecHits_sector, &b_EcalFarForwardZDCRecHits_sector);
+   fChain->SetBranchAddress("EcalFarForwardZDCRecHits.layer", &EcalFarForwardZDCRecHits_layer, &b_EcalFarForwardZDCRecHits_layer);
+   fChain->SetBranchAddress("EcalFarForwardZDCRecHits.local.x", &EcalFarForwardZDCRecHits_local_x, &b_EcalFarForwardZDCRecHits_local_x);
+   fChain->SetBranchAddress("EcalFarForwardZDCRecHits.local.y", &EcalFarForwardZDCRecHits_local_y, &b_EcalFarForwardZDCRecHits_local_y);
+   fChain->SetBranchAddress("EcalFarForwardZDCRecHits.local.z", &EcalFarForwardZDCRecHits_local_z, &b_EcalFarForwardZDCRecHits_local_z);
+   fChain->SetBranchAddress("EcalFarForwardZDCTruthClusterAssociations", &EcalFarForwardZDCTruthClusterAssociations_, &b_EcalFarForwardZDCTruthClusterAssociations_);
+   fChain->SetBranchAddress("EcalFarForwardZDCTruthClusterAssociations.simID", &EcalFarForwardZDCTruthClusterAssociations_simID, &b_EcalFarForwardZDCTruthClusterAssociations_simID);
+   fChain->SetBranchAddress("EcalFarForwardZDCTruthClusterAssociations.recID", &EcalFarForwardZDCTruthClusterAssociations_recID, &b_EcalFarForwardZDCTruthClusterAssociations_recID);
+   fChain->SetBranchAddress("EcalFarForwardZDCTruthClusterAssociations.weight", &EcalFarForwardZDCTruthClusterAssociations_weight, &b_EcalFarForwardZDCTruthClusterAssociations_weight);
+   fChain->SetBranchAddress("_EcalFarForwardZDCTruthClusterAssociations_rec", &_EcalFarForwardZDCTruthClusterAssociations_rec_, &b__EcalFarForwardZDCTruthClusterAssociations_rec_);
+   fChain->SetBranchAddress("_EcalFarForwardZDCTruthClusterAssociations_rec.index", &_EcalFarForwardZDCTruthClusterAssociations_rec_index, &b__EcalFarForwardZDCTruthClusterAssociations_rec_index);
+   fChain->SetBranchAddress("_EcalFarForwardZDCTruthClusterAssociations_rec.collectionID", &_EcalFarForwardZDCTruthClusterAssociations_rec_collectionID, &b__EcalFarForwardZDCTruthClusterAssociations_rec_collectionID);
+   fChain->SetBranchAddress("_EcalFarForwardZDCTruthClusterAssociations_sim", &_EcalFarForwardZDCTruthClusterAssociations_sim_, &b__EcalFarForwardZDCTruthClusterAssociations_sim_);
+   fChain->SetBranchAddress("_EcalFarForwardZDCTruthClusterAssociations_sim.index", &_EcalFarForwardZDCTruthClusterAssociations_sim_index, &b__EcalFarForwardZDCTruthClusterAssociations_sim_index);
+   fChain->SetBranchAddress("_EcalFarForwardZDCTruthClusterAssociations_sim.collectionID", &_EcalFarForwardZDCTruthClusterAssociations_sim_collectionID, &b__EcalFarForwardZDCTruthClusterAssociations_sim_collectionID);
+   fChain->SetBranchAddress("EcalFarForwardZDCTruthClusters", &EcalFarForwardZDCTruthClusters_, &b_EcalFarForwardZDCTruthClusters_);
+   fChain->SetBranchAddress("EcalFarForwardZDCTruthClusters.type", &EcalFarForwardZDCTruthClusters_type, &b_EcalFarForwardZDCTruthClusters_type);
+   fChain->SetBranchAddress("EcalFarForwardZDCTruthClusters.energy", &EcalFarForwardZDCTruthClusters_energy, &b_EcalFarForwardZDCTruthClusters_energy);
+   fChain->SetBranchAddress("EcalFarForwardZDCTruthClusters.energyError", &EcalFarForwardZDCTruthClusters_energyError, &b_EcalFarForwardZDCTruthClusters_energyError);
+   fChain->SetBranchAddress("EcalFarForwardZDCTruthClusters.time", &EcalFarForwardZDCTruthClusters_time, &b_EcalFarForwardZDCTruthClusters_time);
+   fChain->SetBranchAddress("EcalFarForwardZDCTruthClusters.timeError", &EcalFarForwardZDCTruthClusters_timeError, &b_EcalFarForwardZDCTruthClusters_timeError);
+   fChain->SetBranchAddress("EcalFarForwardZDCTruthClusters.nhits", &EcalFarForwardZDCTruthClusters_nhits, &b_EcalFarForwardZDCTruthClusters_nhits);
+   fChain->SetBranchAddress("EcalFarForwardZDCTruthClusters.position.x", &EcalFarForwardZDCTruthClusters_position_x, &b_EcalFarForwardZDCTruthClusters_position_x);
+   fChain->SetBranchAddress("EcalFarForwardZDCTruthClusters.position.y", &EcalFarForwardZDCTruthClusters_position_y, &b_EcalFarForwardZDCTruthClusters_position_y);
+   fChain->SetBranchAddress("EcalFarForwardZDCTruthClusters.position.z", &EcalFarForwardZDCTruthClusters_position_z, &b_EcalFarForwardZDCTruthClusters_position_z);
+   fChain->SetBranchAddress("EcalFarForwardZDCTruthClusters.positionError.xx", &EcalFarForwardZDCTruthClusters_positionError_xx, &b_EcalFarForwardZDCTruthClusters_positionError_xx);
+   fChain->SetBranchAddress("EcalFarForwardZDCTruthClusters.positionError.yy", &EcalFarForwardZDCTruthClusters_positionError_yy, &b_EcalFarForwardZDCTruthClusters_positionError_yy);
+   fChain->SetBranchAddress("EcalFarForwardZDCTruthClusters.positionError.zz", &EcalFarForwardZDCTruthClusters_positionError_zz, &b_EcalFarForwardZDCTruthClusters_positionError_zz);
+   fChain->SetBranchAddress("EcalFarForwardZDCTruthClusters.positionError.xy", &EcalFarForwardZDCTruthClusters_positionError_xy, &b_EcalFarForwardZDCTruthClusters_positionError_xy);
+   fChain->SetBranchAddress("EcalFarForwardZDCTruthClusters.positionError.xz", &EcalFarForwardZDCTruthClusters_positionError_xz, &b_EcalFarForwardZDCTruthClusters_positionError_xz);
+   fChain->SetBranchAddress("EcalFarForwardZDCTruthClusters.positionError.yz", &EcalFarForwardZDCTruthClusters_positionError_yz, &b_EcalFarForwardZDCTruthClusters_positionError_yz);
+   fChain->SetBranchAddress("EcalFarForwardZDCTruthClusters.intrinsicTheta", &EcalFarForwardZDCTruthClusters_intrinsicTheta, &b_EcalFarForwardZDCTruthClusters_intrinsicTheta);
+   fChain->SetBranchAddress("EcalFarForwardZDCTruthClusters.intrinsicPhi", &EcalFarForwardZDCTruthClusters_intrinsicPhi, &b_EcalFarForwardZDCTruthClusters_intrinsicPhi);
+   fChain->SetBranchAddress("EcalFarForwardZDCTruthClusters.intrinsicDirectionError.xx", &EcalFarForwardZDCTruthClusters_intrinsicDirectionError_xx, &b_EcalFarForwardZDCTruthClusters_intrinsicDirectionError_xx);
+   fChain->SetBranchAddress("EcalFarForwardZDCTruthClusters.intrinsicDirectionError.yy", &EcalFarForwardZDCTruthClusters_intrinsicDirectionError_yy, &b_EcalFarForwardZDCTruthClusters_intrinsicDirectionError_yy);
+   fChain->SetBranchAddress("EcalFarForwardZDCTruthClusters.intrinsicDirectionError.xy", &EcalFarForwardZDCTruthClusters_intrinsicDirectionError_xy, &b_EcalFarForwardZDCTruthClusters_intrinsicDirectionError_xy);
+   fChain->SetBranchAddress("EcalFarForwardZDCTruthClusters.shapeParameters_begin", &EcalFarForwardZDCTruthClusters_shapeParameters_begin, &b_EcalFarForwardZDCTruthClusters_shapeParameters_begin);
+   fChain->SetBranchAddress("EcalFarForwardZDCTruthClusters.shapeParameters_end", &EcalFarForwardZDCTruthClusters_shapeParameters_end, &b_EcalFarForwardZDCTruthClusters_shapeParameters_end);
+   fChain->SetBranchAddress("EcalFarForwardZDCTruthClusters.hitContributions_begin", &EcalFarForwardZDCTruthClusters_hitContributions_begin, &b_EcalFarForwardZDCTruthClusters_hitContributions_begin);
+   fChain->SetBranchAddress("EcalFarForwardZDCTruthClusters.hitContributions_end", &EcalFarForwardZDCTruthClusters_hitContributions_end, &b_EcalFarForwardZDCTruthClusters_hitContributions_end);
+   fChain->SetBranchAddress("EcalFarForwardZDCTruthClusters.subdetectorEnergies_begin", &EcalFarForwardZDCTruthClusters_subdetectorEnergies_begin, &b_EcalFarForwardZDCTruthClusters_subdetectorEnergies_begin);
+   fChain->SetBranchAddress("EcalFarForwardZDCTruthClusters.subdetectorEnergies_end", &EcalFarForwardZDCTruthClusters_subdetectorEnergies_end, &b_EcalFarForwardZDCTruthClusters_subdetectorEnergies_end);
+   fChain->SetBranchAddress("EcalFarForwardZDCTruthClusters.clusters_begin", &EcalFarForwardZDCTruthClusters_clusters_begin, &b_EcalFarForwardZDCTruthClusters_clusters_begin);
+   fChain->SetBranchAddress("EcalFarForwardZDCTruthClusters.clusters_end", &EcalFarForwardZDCTruthClusters_clusters_end, &b_EcalFarForwardZDCTruthClusters_clusters_end);
+   fChain->SetBranchAddress("EcalFarForwardZDCTruthClusters.hits_begin", &EcalFarForwardZDCTruthClusters_hits_begin, &b_EcalFarForwardZDCTruthClusters_hits_begin);
+   fChain->SetBranchAddress("EcalFarForwardZDCTruthClusters.hits_end", &EcalFarForwardZDCTruthClusters_hits_end, &b_EcalFarForwardZDCTruthClusters_hits_end);
+   fChain->SetBranchAddress("EcalFarForwardZDCTruthClusters.particleIDs_begin", &EcalFarForwardZDCTruthClusters_particleIDs_begin, &b_EcalFarForwardZDCTruthClusters_particleIDs_begin);
+   fChain->SetBranchAddress("EcalFarForwardZDCTruthClusters.particleIDs_end", &EcalFarForwardZDCTruthClusters_particleIDs_end, &b_EcalFarForwardZDCTruthClusters_particleIDs_end);
+   fChain->SetBranchAddress("_EcalFarForwardZDCTruthClusters_clusters", &_EcalFarForwardZDCTruthClusters_clusters_, &b__EcalFarForwardZDCTruthClusters_clusters_);
+   fChain->SetBranchAddress("_EcalFarForwardZDCTruthClusters_clusters.index", &_EcalFarForwardZDCTruthClusters_clusters_index, &b__EcalFarForwardZDCTruthClusters_clusters_index);
+   fChain->SetBranchAddress("_EcalFarForwardZDCTruthClusters_clusters.collectionID", &_EcalFarForwardZDCTruthClusters_clusters_collectionID, &b__EcalFarForwardZDCTruthClusters_clusters_collectionID);
+   fChain->SetBranchAddress("_EcalFarForwardZDCTruthClusters_hits", &_EcalFarForwardZDCTruthClusters_hits_, &b__EcalFarForwardZDCTruthClusters_hits_);
+   fChain->SetBranchAddress("_EcalFarForwardZDCTruthClusters_hits.index", &_EcalFarForwardZDCTruthClusters_hits_index, &b__EcalFarForwardZDCTruthClusters_hits_index);
+   fChain->SetBranchAddress("_EcalFarForwardZDCTruthClusters_hits.collectionID", &_EcalFarForwardZDCTruthClusters_hits_collectionID, &b__EcalFarForwardZDCTruthClusters_hits_collectionID);
+   fChain->SetBranchAddress("_EcalFarForwardZDCTruthClusters_particleIDs", &_EcalFarForwardZDCTruthClusters_particleIDs_, &b__EcalFarForwardZDCTruthClusters_particleIDs_);
+   fChain->SetBranchAddress("_EcalFarForwardZDCTruthClusters_particleIDs.index", &_EcalFarForwardZDCTruthClusters_particleIDs_index, &b__EcalFarForwardZDCTruthClusters_particleIDs_index);
+   fChain->SetBranchAddress("_EcalFarForwardZDCTruthClusters_particleIDs.collectionID", &_EcalFarForwardZDCTruthClusters_particleIDs_collectionID, &b__EcalFarForwardZDCTruthClusters_particleIDs_collectionID);
+   fChain->SetBranchAddress("_EcalFarForwardZDCTruthClusters_shapeParameters", &_EcalFarForwardZDCTruthClusters_shapeParameters, &b__EcalFarForwardZDCTruthClusters_shapeParameters);
+   fChain->SetBranchAddress("_EcalFarForwardZDCTruthClusters_hitContributions", &_EcalFarForwardZDCTruthClusters_hitContributions, &b__EcalFarForwardZDCTruthClusters_hitContributions);
+   fChain->SetBranchAddress("_EcalFarForwardZDCTruthClusters_subdetectorEnergies", &_EcalFarForwardZDCTruthClusters_subdetectorEnergies, &b__EcalFarForwardZDCTruthClusters_subdetectorEnergies);
    fChain->SetBranchAddress("EcalLumiSpecClusterAssociations", &EcalLumiSpecClusterAssociations_, &b_EcalLumiSpecClusterAssociations_);
    fChain->SetBranchAddress("EcalLumiSpecClusterAssociations.simID", EcalLumiSpecClusterAssociations_simID, &b_EcalLumiSpecClusterAssociations_simID);
    fChain->SetBranchAddress("EcalLumiSpecClusterAssociations.recID", EcalLumiSpecClusterAssociations_recID, &b_EcalLumiSpecClusterAssociations_recID);
@@ -7003,8 +8119,8 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("_EcalLumiSpecClusters_clusters.index", &_EcalLumiSpecClusters_clusters_index, &b__EcalLumiSpecClusters_clusters_index);
    fChain->SetBranchAddress("_EcalLumiSpecClusters_clusters.collectionID", &_EcalLumiSpecClusters_clusters_collectionID, &b__EcalLumiSpecClusters_clusters_collectionID);
    fChain->SetBranchAddress("_EcalLumiSpecClusters_hits", &_EcalLumiSpecClusters_hits_, &b__EcalLumiSpecClusters_hits_);
-   fChain->SetBranchAddress("_EcalLumiSpecClusters_hits.index", &_EcalLumiSpecClusters_hits_index, &b__EcalLumiSpecClusters_hits_index);
-   fChain->SetBranchAddress("_EcalLumiSpecClusters_hits.collectionID", &_EcalLumiSpecClusters_hits_collectionID, &b__EcalLumiSpecClusters_hits_collectionID);
+   fChain->SetBranchAddress("_EcalLumiSpecClusters_hits.index", _EcalLumiSpecClusters_hits_index, &b__EcalLumiSpecClusters_hits_index);
+   fChain->SetBranchAddress("_EcalLumiSpecClusters_hits.collectionID", _EcalLumiSpecClusters_hits_collectionID, &b__EcalLumiSpecClusters_hits_collectionID);
    fChain->SetBranchAddress("_EcalLumiSpecClusters_particleIDs", &_EcalLumiSpecClusters_particleIDs_, &b__EcalLumiSpecClusters_particleIDs_);
    fChain->SetBranchAddress("_EcalLumiSpecClusters_particleIDs.index", &_EcalLumiSpecClusters_particleIDs_index, &b__EcalLumiSpecClusters_particleIDs_index);
    fChain->SetBranchAddress("_EcalLumiSpecClusters_particleIDs.collectionID", &_EcalLumiSpecClusters_particleIDs_collectionID, &b__EcalLumiSpecClusters_particleIDs_collectionID);
@@ -7079,8 +8195,8 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("_EcalLumiSpecTruthClusters_clusters.index", &_EcalLumiSpecTruthClusters_clusters_index, &b__EcalLumiSpecTruthClusters_clusters_index);
    fChain->SetBranchAddress("_EcalLumiSpecTruthClusters_clusters.collectionID", &_EcalLumiSpecTruthClusters_clusters_collectionID, &b__EcalLumiSpecTruthClusters_clusters_collectionID);
    fChain->SetBranchAddress("_EcalLumiSpecTruthClusters_hits", &_EcalLumiSpecTruthClusters_hits_, &b__EcalLumiSpecTruthClusters_hits_);
-   fChain->SetBranchAddress("_EcalLumiSpecTruthClusters_hits.index", &_EcalLumiSpecTruthClusters_hits_index, &b__EcalLumiSpecTruthClusters_hits_index);
-   fChain->SetBranchAddress("_EcalLumiSpecTruthClusters_hits.collectionID", &_EcalLumiSpecTruthClusters_hits_collectionID, &b__EcalLumiSpecTruthClusters_hits_collectionID);
+   fChain->SetBranchAddress("_EcalLumiSpecTruthClusters_hits.index", _EcalLumiSpecTruthClusters_hits_index, &b__EcalLumiSpecTruthClusters_hits_index);
+   fChain->SetBranchAddress("_EcalLumiSpecTruthClusters_hits.collectionID", _EcalLumiSpecTruthClusters_hits_collectionID, &b__EcalLumiSpecTruthClusters_hits_collectionID);
    fChain->SetBranchAddress("_EcalLumiSpecTruthClusters_particleIDs", &_EcalLumiSpecTruthClusters_particleIDs_, &b__EcalLumiSpecTruthClusters_particleIDs_);
    fChain->SetBranchAddress("_EcalLumiSpecTruthClusters_particleIDs.index", &_EcalLumiSpecTruthClusters_particleIDs_index, &b__EcalLumiSpecTruthClusters_particleIDs_index);
    fChain->SetBranchAddress("_EcalLumiSpecTruthClusters_particleIDs.collectionID", &_EcalLumiSpecTruthClusters_particleIDs_collectionID, &b__EcalLumiSpecTruthClusters_particleIDs_collectionID);
@@ -7092,6 +8208,25 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("EventHeader.runNumber", EventHeader_runNumber, &b_EventHeader_runNumber);
    fChain->SetBranchAddress("EventHeader.timeStamp", EventHeader_timeStamp, &b_EventHeader_timeStamp);
    fChain->SetBranchAddress("EventHeader.weight", EventHeader_weight, &b_EventHeader_weight);
+   fChain->SetBranchAddress("ForwardMPGDEndcapHits", &ForwardMPGDEndcapHits_, &b_ForwardMPGDEndcapHits_);
+   fChain->SetBranchAddress("ForwardMPGDEndcapHits.cellID", ForwardMPGDEndcapHits_cellID, &b_ForwardMPGDEndcapHits_cellID);
+   fChain->SetBranchAddress("ForwardMPGDEndcapHits.EDep", ForwardMPGDEndcapHits_EDep, &b_ForwardMPGDEndcapHits_EDep);
+   fChain->SetBranchAddress("ForwardMPGDEndcapHits.time", ForwardMPGDEndcapHits_time, &b_ForwardMPGDEndcapHits_time);
+   fChain->SetBranchAddress("ForwardMPGDEndcapHits.pathLength", ForwardMPGDEndcapHits_pathLength, &b_ForwardMPGDEndcapHits_pathLength);
+   fChain->SetBranchAddress("ForwardMPGDEndcapHits.quality", ForwardMPGDEndcapHits_quality, &b_ForwardMPGDEndcapHits_quality);
+   fChain->SetBranchAddress("ForwardMPGDEndcapHits.position.x", ForwardMPGDEndcapHits_position_x, &b_ForwardMPGDEndcapHits_position_x);
+   fChain->SetBranchAddress("ForwardMPGDEndcapHits.position.y", ForwardMPGDEndcapHits_position_y, &b_ForwardMPGDEndcapHits_position_y);
+   fChain->SetBranchAddress("ForwardMPGDEndcapHits.position.z", ForwardMPGDEndcapHits_position_z, &b_ForwardMPGDEndcapHits_position_z);
+   fChain->SetBranchAddress("ForwardMPGDEndcapHits.momentum.x", ForwardMPGDEndcapHits_momentum_x, &b_ForwardMPGDEndcapHits_momentum_x);
+   fChain->SetBranchAddress("ForwardMPGDEndcapHits.momentum.y", ForwardMPGDEndcapHits_momentum_y, &b_ForwardMPGDEndcapHits_momentum_y);
+   fChain->SetBranchAddress("ForwardMPGDEndcapHits.momentum.z", ForwardMPGDEndcapHits_momentum_z, &b_ForwardMPGDEndcapHits_momentum_z);
+   fChain->SetBranchAddress("_ForwardMPGDEndcapHits_MCParticle", &_ForwardMPGDEndcapHits_MCParticle_, &b__ForwardMPGDEndcapHits_MCParticle_);
+   fChain->SetBranchAddress("_ForwardMPGDEndcapHits_MCParticle.index", _ForwardMPGDEndcapHits_MCParticle_index, &b__ForwardMPGDEndcapHits_MCParticle_index);
+   fChain->SetBranchAddress("_ForwardMPGDEndcapHits_MCParticle.collectionID", _ForwardMPGDEndcapHits_MCParticle_collectionID, &b__ForwardMPGDEndcapHits_MCParticle_collectionID);
+   fChain->SetBranchAddress("ForwardMPGDEndcapRawHits", &ForwardMPGDEndcapRawHits_, &b_ForwardMPGDEndcapRawHits_);
+   fChain->SetBranchAddress("ForwardMPGDEndcapRawHits.cellID", ForwardMPGDEndcapRawHits_cellID, &b_ForwardMPGDEndcapRawHits_cellID);
+   fChain->SetBranchAddress("ForwardMPGDEndcapRawHits.charge", ForwardMPGDEndcapRawHits_charge, &b_ForwardMPGDEndcapRawHits_charge);
+   fChain->SetBranchAddress("ForwardMPGDEndcapRawHits.timeStamp", ForwardMPGDEndcapRawHits_timeStamp, &b_ForwardMPGDEndcapRawHits_timeStamp);
    fChain->SetBranchAddress("ForwardMPGDEndcapRecHits", &ForwardMPGDEndcapRecHits_, &b_ForwardMPGDEndcapRecHits_);
    fChain->SetBranchAddress("ForwardMPGDEndcapRecHits.cellID", ForwardMPGDEndcapRecHits_cellID, &b_ForwardMPGDEndcapRecHits_cellID);
    fChain->SetBranchAddress("ForwardMPGDEndcapRecHits.position.x", ForwardMPGDEndcapRecHits_position_x, &b_ForwardMPGDEndcapRecHits_position_x);
@@ -7105,36 +8240,36 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("ForwardMPGDEndcapRecHits.edep", ForwardMPGDEndcapRecHits_edep, &b_ForwardMPGDEndcapRecHits_edep);
    fChain->SetBranchAddress("ForwardMPGDEndcapRecHits.edepError", ForwardMPGDEndcapRecHits_edepError, &b_ForwardMPGDEndcapRecHits_edepError);
    fChain->SetBranchAddress("ForwardOffMRecParticles", &ForwardOffMRecParticles_, &b_ForwardOffMRecParticles_);
-   fChain->SetBranchAddress("ForwardOffMRecParticles.type", ForwardOffMRecParticles_type, &b_ForwardOffMRecParticles_type);
-   fChain->SetBranchAddress("ForwardOffMRecParticles.energy", ForwardOffMRecParticles_energy, &b_ForwardOffMRecParticles_energy);
-   fChain->SetBranchAddress("ForwardOffMRecParticles.momentum.x", ForwardOffMRecParticles_momentum_x, &b_ForwardOffMRecParticles_momentum_x);
-   fChain->SetBranchAddress("ForwardOffMRecParticles.momentum.y", ForwardOffMRecParticles_momentum_y, &b_ForwardOffMRecParticles_momentum_y);
-   fChain->SetBranchAddress("ForwardOffMRecParticles.momentum.z", ForwardOffMRecParticles_momentum_z, &b_ForwardOffMRecParticles_momentum_z);
-   fChain->SetBranchAddress("ForwardOffMRecParticles.referencePoint.x", ForwardOffMRecParticles_referencePoint_x, &b_ForwardOffMRecParticles_referencePoint_x);
-   fChain->SetBranchAddress("ForwardOffMRecParticles.referencePoint.y", ForwardOffMRecParticles_referencePoint_y, &b_ForwardOffMRecParticles_referencePoint_y);
-   fChain->SetBranchAddress("ForwardOffMRecParticles.referencePoint.z", ForwardOffMRecParticles_referencePoint_z, &b_ForwardOffMRecParticles_referencePoint_z);
-   fChain->SetBranchAddress("ForwardOffMRecParticles.charge", ForwardOffMRecParticles_charge, &b_ForwardOffMRecParticles_charge);
-   fChain->SetBranchAddress("ForwardOffMRecParticles.mass", ForwardOffMRecParticles_mass, &b_ForwardOffMRecParticles_mass);
-   fChain->SetBranchAddress("ForwardOffMRecParticles.goodnessOfPID", ForwardOffMRecParticles_goodnessOfPID, &b_ForwardOffMRecParticles_goodnessOfPID);
-   fChain->SetBranchAddress("ForwardOffMRecParticles.covMatrix.xx", ForwardOffMRecParticles_covMatrix_xx, &b_ForwardOffMRecParticles_covMatrix_xx);
-   fChain->SetBranchAddress("ForwardOffMRecParticles.covMatrix.yy", ForwardOffMRecParticles_covMatrix_yy, &b_ForwardOffMRecParticles_covMatrix_yy);
-   fChain->SetBranchAddress("ForwardOffMRecParticles.covMatrix.zz", ForwardOffMRecParticles_covMatrix_zz, &b_ForwardOffMRecParticles_covMatrix_zz);
-   fChain->SetBranchAddress("ForwardOffMRecParticles.covMatrix.tt", ForwardOffMRecParticles_covMatrix_tt, &b_ForwardOffMRecParticles_covMatrix_tt);
-   fChain->SetBranchAddress("ForwardOffMRecParticles.covMatrix.xy", ForwardOffMRecParticles_covMatrix_xy, &b_ForwardOffMRecParticles_covMatrix_xy);
-   fChain->SetBranchAddress("ForwardOffMRecParticles.covMatrix.xz", ForwardOffMRecParticles_covMatrix_xz, &b_ForwardOffMRecParticles_covMatrix_xz);
-   fChain->SetBranchAddress("ForwardOffMRecParticles.covMatrix.xt", ForwardOffMRecParticles_covMatrix_xt, &b_ForwardOffMRecParticles_covMatrix_xt);
-   fChain->SetBranchAddress("ForwardOffMRecParticles.covMatrix.yz", ForwardOffMRecParticles_covMatrix_yz, &b_ForwardOffMRecParticles_covMatrix_yz);
-   fChain->SetBranchAddress("ForwardOffMRecParticles.covMatrix.yt", ForwardOffMRecParticles_covMatrix_yt, &b_ForwardOffMRecParticles_covMatrix_yt);
-   fChain->SetBranchAddress("ForwardOffMRecParticles.covMatrix.zt", ForwardOffMRecParticles_covMatrix_zt, &b_ForwardOffMRecParticles_covMatrix_zt);
-   fChain->SetBranchAddress("ForwardOffMRecParticles.PDG", ForwardOffMRecParticles_PDG, &b_ForwardOffMRecParticles_PDG);
-   fChain->SetBranchAddress("ForwardOffMRecParticles.clusters_begin", ForwardOffMRecParticles_clusters_begin, &b_ForwardOffMRecParticles_clusters_begin);
-   fChain->SetBranchAddress("ForwardOffMRecParticles.clusters_end", ForwardOffMRecParticles_clusters_end, &b_ForwardOffMRecParticles_clusters_end);
-   fChain->SetBranchAddress("ForwardOffMRecParticles.tracks_begin", ForwardOffMRecParticles_tracks_begin, &b_ForwardOffMRecParticles_tracks_begin);
-   fChain->SetBranchAddress("ForwardOffMRecParticles.tracks_end", ForwardOffMRecParticles_tracks_end, &b_ForwardOffMRecParticles_tracks_end);
-   fChain->SetBranchAddress("ForwardOffMRecParticles.particles_begin", ForwardOffMRecParticles_particles_begin, &b_ForwardOffMRecParticles_particles_begin);
-   fChain->SetBranchAddress("ForwardOffMRecParticles.particles_end", ForwardOffMRecParticles_particles_end, &b_ForwardOffMRecParticles_particles_end);
-   fChain->SetBranchAddress("ForwardOffMRecParticles.particleIDs_begin", ForwardOffMRecParticles_particleIDs_begin, &b_ForwardOffMRecParticles_particleIDs_begin);
-   fChain->SetBranchAddress("ForwardOffMRecParticles.particleIDs_end", ForwardOffMRecParticles_particleIDs_end, &b_ForwardOffMRecParticles_particleIDs_end);
+   fChain->SetBranchAddress("ForwardOffMRecParticles.type", &ForwardOffMRecParticles_type, &b_ForwardOffMRecParticles_type);
+   fChain->SetBranchAddress("ForwardOffMRecParticles.energy", &ForwardOffMRecParticles_energy, &b_ForwardOffMRecParticles_energy);
+   fChain->SetBranchAddress("ForwardOffMRecParticles.momentum.x", &ForwardOffMRecParticles_momentum_x, &b_ForwardOffMRecParticles_momentum_x);
+   fChain->SetBranchAddress("ForwardOffMRecParticles.momentum.y", &ForwardOffMRecParticles_momentum_y, &b_ForwardOffMRecParticles_momentum_y);
+   fChain->SetBranchAddress("ForwardOffMRecParticles.momentum.z", &ForwardOffMRecParticles_momentum_z, &b_ForwardOffMRecParticles_momentum_z);
+   fChain->SetBranchAddress("ForwardOffMRecParticles.referencePoint.x", &ForwardOffMRecParticles_referencePoint_x, &b_ForwardOffMRecParticles_referencePoint_x);
+   fChain->SetBranchAddress("ForwardOffMRecParticles.referencePoint.y", &ForwardOffMRecParticles_referencePoint_y, &b_ForwardOffMRecParticles_referencePoint_y);
+   fChain->SetBranchAddress("ForwardOffMRecParticles.referencePoint.z", &ForwardOffMRecParticles_referencePoint_z, &b_ForwardOffMRecParticles_referencePoint_z);
+   fChain->SetBranchAddress("ForwardOffMRecParticles.charge", &ForwardOffMRecParticles_charge, &b_ForwardOffMRecParticles_charge);
+   fChain->SetBranchAddress("ForwardOffMRecParticles.mass", &ForwardOffMRecParticles_mass, &b_ForwardOffMRecParticles_mass);
+   fChain->SetBranchAddress("ForwardOffMRecParticles.goodnessOfPID", &ForwardOffMRecParticles_goodnessOfPID, &b_ForwardOffMRecParticles_goodnessOfPID);
+   fChain->SetBranchAddress("ForwardOffMRecParticles.covMatrix.xx", &ForwardOffMRecParticles_covMatrix_xx, &b_ForwardOffMRecParticles_covMatrix_xx);
+   fChain->SetBranchAddress("ForwardOffMRecParticles.covMatrix.yy", &ForwardOffMRecParticles_covMatrix_yy, &b_ForwardOffMRecParticles_covMatrix_yy);
+   fChain->SetBranchAddress("ForwardOffMRecParticles.covMatrix.zz", &ForwardOffMRecParticles_covMatrix_zz, &b_ForwardOffMRecParticles_covMatrix_zz);
+   fChain->SetBranchAddress("ForwardOffMRecParticles.covMatrix.tt", &ForwardOffMRecParticles_covMatrix_tt, &b_ForwardOffMRecParticles_covMatrix_tt);
+   fChain->SetBranchAddress("ForwardOffMRecParticles.covMatrix.xy", &ForwardOffMRecParticles_covMatrix_xy, &b_ForwardOffMRecParticles_covMatrix_xy);
+   fChain->SetBranchAddress("ForwardOffMRecParticles.covMatrix.xz", &ForwardOffMRecParticles_covMatrix_xz, &b_ForwardOffMRecParticles_covMatrix_xz);
+   fChain->SetBranchAddress("ForwardOffMRecParticles.covMatrix.xt", &ForwardOffMRecParticles_covMatrix_xt, &b_ForwardOffMRecParticles_covMatrix_xt);
+   fChain->SetBranchAddress("ForwardOffMRecParticles.covMatrix.yz", &ForwardOffMRecParticles_covMatrix_yz, &b_ForwardOffMRecParticles_covMatrix_yz);
+   fChain->SetBranchAddress("ForwardOffMRecParticles.covMatrix.yt", &ForwardOffMRecParticles_covMatrix_yt, &b_ForwardOffMRecParticles_covMatrix_yt);
+   fChain->SetBranchAddress("ForwardOffMRecParticles.covMatrix.zt", &ForwardOffMRecParticles_covMatrix_zt, &b_ForwardOffMRecParticles_covMatrix_zt);
+   fChain->SetBranchAddress("ForwardOffMRecParticles.PDG", &ForwardOffMRecParticles_PDG, &b_ForwardOffMRecParticles_PDG);
+   fChain->SetBranchAddress("ForwardOffMRecParticles.clusters_begin", &ForwardOffMRecParticles_clusters_begin, &b_ForwardOffMRecParticles_clusters_begin);
+   fChain->SetBranchAddress("ForwardOffMRecParticles.clusters_end", &ForwardOffMRecParticles_clusters_end, &b_ForwardOffMRecParticles_clusters_end);
+   fChain->SetBranchAddress("ForwardOffMRecParticles.tracks_begin", &ForwardOffMRecParticles_tracks_begin, &b_ForwardOffMRecParticles_tracks_begin);
+   fChain->SetBranchAddress("ForwardOffMRecParticles.tracks_end", &ForwardOffMRecParticles_tracks_end, &b_ForwardOffMRecParticles_tracks_end);
+   fChain->SetBranchAddress("ForwardOffMRecParticles.particles_begin", &ForwardOffMRecParticles_particles_begin, &b_ForwardOffMRecParticles_particles_begin);
+   fChain->SetBranchAddress("ForwardOffMRecParticles.particles_end", &ForwardOffMRecParticles_particles_end, &b_ForwardOffMRecParticles_particles_end);
+   fChain->SetBranchAddress("ForwardOffMRecParticles.particleIDs_begin", &ForwardOffMRecParticles_particleIDs_begin, &b_ForwardOffMRecParticles_particleIDs_begin);
+   fChain->SetBranchAddress("ForwardOffMRecParticles.particleIDs_end", &ForwardOffMRecParticles_particleIDs_end, &b_ForwardOffMRecParticles_particleIDs_end);
    fChain->SetBranchAddress("_ForwardOffMRecParticles_clusters", &_ForwardOffMRecParticles_clusters_, &b__ForwardOffMRecParticles_clusters_);
    fChain->SetBranchAddress("_ForwardOffMRecParticles_clusters.index", &_ForwardOffMRecParticles_clusters_index, &b__ForwardOffMRecParticles_clusters_index);
    fChain->SetBranchAddress("_ForwardOffMRecParticles_clusters.collectionID", &_ForwardOffMRecParticles_clusters_collectionID, &b__ForwardOffMRecParticles_clusters_collectionID);
@@ -7148,42 +8283,42 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("_ForwardOffMRecParticles_particleIDs.index", &_ForwardOffMRecParticles_particleIDs_index, &b__ForwardOffMRecParticles_particleIDs_index);
    fChain->SetBranchAddress("_ForwardOffMRecParticles_particleIDs.collectionID", &_ForwardOffMRecParticles_particleIDs_collectionID, &b__ForwardOffMRecParticles_particleIDs_collectionID);
    fChain->SetBranchAddress("_ForwardOffMRecParticles_startVertex", &_ForwardOffMRecParticles_startVertex_, &b__ForwardOffMRecParticles_startVertex_);
-   fChain->SetBranchAddress("_ForwardOffMRecParticles_startVertex.index", _ForwardOffMRecParticles_startVertex_index, &b__ForwardOffMRecParticles_startVertex_index);
-   fChain->SetBranchAddress("_ForwardOffMRecParticles_startVertex.collectionID", _ForwardOffMRecParticles_startVertex_collectionID, &b__ForwardOffMRecParticles_startVertex_collectionID);
+   fChain->SetBranchAddress("_ForwardOffMRecParticles_startVertex.index", &_ForwardOffMRecParticles_startVertex_index, &b__ForwardOffMRecParticles_startVertex_index);
+   fChain->SetBranchAddress("_ForwardOffMRecParticles_startVertex.collectionID", &_ForwardOffMRecParticles_startVertex_collectionID, &b__ForwardOffMRecParticles_startVertex_collectionID);
    fChain->SetBranchAddress("_ForwardOffMRecParticles_particleIDUsed", &_ForwardOffMRecParticles_particleIDUsed_, &b__ForwardOffMRecParticles_particleIDUsed_);
-   fChain->SetBranchAddress("_ForwardOffMRecParticles_particleIDUsed.index", _ForwardOffMRecParticles_particleIDUsed_index, &b__ForwardOffMRecParticles_particleIDUsed_index);
-   fChain->SetBranchAddress("_ForwardOffMRecParticles_particleIDUsed.collectionID", _ForwardOffMRecParticles_particleIDUsed_collectionID, &b__ForwardOffMRecParticles_particleIDUsed_collectionID);
+   fChain->SetBranchAddress("_ForwardOffMRecParticles_particleIDUsed.index", &_ForwardOffMRecParticles_particleIDUsed_index, &b__ForwardOffMRecParticles_particleIDUsed_index);
+   fChain->SetBranchAddress("_ForwardOffMRecParticles_particleIDUsed.collectionID", &_ForwardOffMRecParticles_particleIDUsed_collectionID, &b__ForwardOffMRecParticles_particleIDUsed_collectionID);
    fChain->SetBranchAddress("ForwardRomanPotRecParticles", &ForwardRomanPotRecParticles_, &b_ForwardRomanPotRecParticles_);
-   fChain->SetBranchAddress("ForwardRomanPotRecParticles.type", ForwardRomanPotRecParticles_type, &b_ForwardRomanPotRecParticles_type);
-   fChain->SetBranchAddress("ForwardRomanPotRecParticles.energy", ForwardRomanPotRecParticles_energy, &b_ForwardRomanPotRecParticles_energy);
-   fChain->SetBranchAddress("ForwardRomanPotRecParticles.momentum.x", ForwardRomanPotRecParticles_momentum_x, &b_ForwardRomanPotRecParticles_momentum_x);
-   fChain->SetBranchAddress("ForwardRomanPotRecParticles.momentum.y", ForwardRomanPotRecParticles_momentum_y, &b_ForwardRomanPotRecParticles_momentum_y);
-   fChain->SetBranchAddress("ForwardRomanPotRecParticles.momentum.z", ForwardRomanPotRecParticles_momentum_z, &b_ForwardRomanPotRecParticles_momentum_z);
-   fChain->SetBranchAddress("ForwardRomanPotRecParticles.referencePoint.x", ForwardRomanPotRecParticles_referencePoint_x, &b_ForwardRomanPotRecParticles_referencePoint_x);
-   fChain->SetBranchAddress("ForwardRomanPotRecParticles.referencePoint.y", ForwardRomanPotRecParticles_referencePoint_y, &b_ForwardRomanPotRecParticles_referencePoint_y);
-   fChain->SetBranchAddress("ForwardRomanPotRecParticles.referencePoint.z", ForwardRomanPotRecParticles_referencePoint_z, &b_ForwardRomanPotRecParticles_referencePoint_z);
-   fChain->SetBranchAddress("ForwardRomanPotRecParticles.charge", ForwardRomanPotRecParticles_charge, &b_ForwardRomanPotRecParticles_charge);
-   fChain->SetBranchAddress("ForwardRomanPotRecParticles.mass", ForwardRomanPotRecParticles_mass, &b_ForwardRomanPotRecParticles_mass);
-   fChain->SetBranchAddress("ForwardRomanPotRecParticles.goodnessOfPID", ForwardRomanPotRecParticles_goodnessOfPID, &b_ForwardRomanPotRecParticles_goodnessOfPID);
-   fChain->SetBranchAddress("ForwardRomanPotRecParticles.covMatrix.xx", ForwardRomanPotRecParticles_covMatrix_xx, &b_ForwardRomanPotRecParticles_covMatrix_xx);
-   fChain->SetBranchAddress("ForwardRomanPotRecParticles.covMatrix.yy", ForwardRomanPotRecParticles_covMatrix_yy, &b_ForwardRomanPotRecParticles_covMatrix_yy);
-   fChain->SetBranchAddress("ForwardRomanPotRecParticles.covMatrix.zz", ForwardRomanPotRecParticles_covMatrix_zz, &b_ForwardRomanPotRecParticles_covMatrix_zz);
-   fChain->SetBranchAddress("ForwardRomanPotRecParticles.covMatrix.tt", ForwardRomanPotRecParticles_covMatrix_tt, &b_ForwardRomanPotRecParticles_covMatrix_tt);
-   fChain->SetBranchAddress("ForwardRomanPotRecParticles.covMatrix.xy", ForwardRomanPotRecParticles_covMatrix_xy, &b_ForwardRomanPotRecParticles_covMatrix_xy);
-   fChain->SetBranchAddress("ForwardRomanPotRecParticles.covMatrix.xz", ForwardRomanPotRecParticles_covMatrix_xz, &b_ForwardRomanPotRecParticles_covMatrix_xz);
-   fChain->SetBranchAddress("ForwardRomanPotRecParticles.covMatrix.xt", ForwardRomanPotRecParticles_covMatrix_xt, &b_ForwardRomanPotRecParticles_covMatrix_xt);
-   fChain->SetBranchAddress("ForwardRomanPotRecParticles.covMatrix.yz", ForwardRomanPotRecParticles_covMatrix_yz, &b_ForwardRomanPotRecParticles_covMatrix_yz);
-   fChain->SetBranchAddress("ForwardRomanPotRecParticles.covMatrix.yt", ForwardRomanPotRecParticles_covMatrix_yt, &b_ForwardRomanPotRecParticles_covMatrix_yt);
-   fChain->SetBranchAddress("ForwardRomanPotRecParticles.covMatrix.zt", ForwardRomanPotRecParticles_covMatrix_zt, &b_ForwardRomanPotRecParticles_covMatrix_zt);
-   fChain->SetBranchAddress("ForwardRomanPotRecParticles.PDG", ForwardRomanPotRecParticles_PDG, &b_ForwardRomanPotRecParticles_PDG);
-   fChain->SetBranchAddress("ForwardRomanPotRecParticles.clusters_begin", ForwardRomanPotRecParticles_clusters_begin, &b_ForwardRomanPotRecParticles_clusters_begin);
-   fChain->SetBranchAddress("ForwardRomanPotRecParticles.clusters_end", ForwardRomanPotRecParticles_clusters_end, &b_ForwardRomanPotRecParticles_clusters_end);
-   fChain->SetBranchAddress("ForwardRomanPotRecParticles.tracks_begin", ForwardRomanPotRecParticles_tracks_begin, &b_ForwardRomanPotRecParticles_tracks_begin);
-   fChain->SetBranchAddress("ForwardRomanPotRecParticles.tracks_end", ForwardRomanPotRecParticles_tracks_end, &b_ForwardRomanPotRecParticles_tracks_end);
-   fChain->SetBranchAddress("ForwardRomanPotRecParticles.particles_begin", ForwardRomanPotRecParticles_particles_begin, &b_ForwardRomanPotRecParticles_particles_begin);
-   fChain->SetBranchAddress("ForwardRomanPotRecParticles.particles_end", ForwardRomanPotRecParticles_particles_end, &b_ForwardRomanPotRecParticles_particles_end);
-   fChain->SetBranchAddress("ForwardRomanPotRecParticles.particleIDs_begin", ForwardRomanPotRecParticles_particleIDs_begin, &b_ForwardRomanPotRecParticles_particleIDs_begin);
-   fChain->SetBranchAddress("ForwardRomanPotRecParticles.particleIDs_end", ForwardRomanPotRecParticles_particleIDs_end, &b_ForwardRomanPotRecParticles_particleIDs_end);
+   fChain->SetBranchAddress("ForwardRomanPotRecParticles.type", &ForwardRomanPotRecParticles_type, &b_ForwardRomanPotRecParticles_type);
+   fChain->SetBranchAddress("ForwardRomanPotRecParticles.energy", &ForwardRomanPotRecParticles_energy, &b_ForwardRomanPotRecParticles_energy);
+   fChain->SetBranchAddress("ForwardRomanPotRecParticles.momentum.x", &ForwardRomanPotRecParticles_momentum_x, &b_ForwardRomanPotRecParticles_momentum_x);
+   fChain->SetBranchAddress("ForwardRomanPotRecParticles.momentum.y", &ForwardRomanPotRecParticles_momentum_y, &b_ForwardRomanPotRecParticles_momentum_y);
+   fChain->SetBranchAddress("ForwardRomanPotRecParticles.momentum.z", &ForwardRomanPotRecParticles_momentum_z, &b_ForwardRomanPotRecParticles_momentum_z);
+   fChain->SetBranchAddress("ForwardRomanPotRecParticles.referencePoint.x", &ForwardRomanPotRecParticles_referencePoint_x, &b_ForwardRomanPotRecParticles_referencePoint_x);
+   fChain->SetBranchAddress("ForwardRomanPotRecParticles.referencePoint.y", &ForwardRomanPotRecParticles_referencePoint_y, &b_ForwardRomanPotRecParticles_referencePoint_y);
+   fChain->SetBranchAddress("ForwardRomanPotRecParticles.referencePoint.z", &ForwardRomanPotRecParticles_referencePoint_z, &b_ForwardRomanPotRecParticles_referencePoint_z);
+   fChain->SetBranchAddress("ForwardRomanPotRecParticles.charge", &ForwardRomanPotRecParticles_charge, &b_ForwardRomanPotRecParticles_charge);
+   fChain->SetBranchAddress("ForwardRomanPotRecParticles.mass", &ForwardRomanPotRecParticles_mass, &b_ForwardRomanPotRecParticles_mass);
+   fChain->SetBranchAddress("ForwardRomanPotRecParticles.goodnessOfPID", &ForwardRomanPotRecParticles_goodnessOfPID, &b_ForwardRomanPotRecParticles_goodnessOfPID);
+   fChain->SetBranchAddress("ForwardRomanPotRecParticles.covMatrix.xx", &ForwardRomanPotRecParticles_covMatrix_xx, &b_ForwardRomanPotRecParticles_covMatrix_xx);
+   fChain->SetBranchAddress("ForwardRomanPotRecParticles.covMatrix.yy", &ForwardRomanPotRecParticles_covMatrix_yy, &b_ForwardRomanPotRecParticles_covMatrix_yy);
+   fChain->SetBranchAddress("ForwardRomanPotRecParticles.covMatrix.zz", &ForwardRomanPotRecParticles_covMatrix_zz, &b_ForwardRomanPotRecParticles_covMatrix_zz);
+   fChain->SetBranchAddress("ForwardRomanPotRecParticles.covMatrix.tt", &ForwardRomanPotRecParticles_covMatrix_tt, &b_ForwardRomanPotRecParticles_covMatrix_tt);
+   fChain->SetBranchAddress("ForwardRomanPotRecParticles.covMatrix.xy", &ForwardRomanPotRecParticles_covMatrix_xy, &b_ForwardRomanPotRecParticles_covMatrix_xy);
+   fChain->SetBranchAddress("ForwardRomanPotRecParticles.covMatrix.xz", &ForwardRomanPotRecParticles_covMatrix_xz, &b_ForwardRomanPotRecParticles_covMatrix_xz);
+   fChain->SetBranchAddress("ForwardRomanPotRecParticles.covMatrix.xt", &ForwardRomanPotRecParticles_covMatrix_xt, &b_ForwardRomanPotRecParticles_covMatrix_xt);
+   fChain->SetBranchAddress("ForwardRomanPotRecParticles.covMatrix.yz", &ForwardRomanPotRecParticles_covMatrix_yz, &b_ForwardRomanPotRecParticles_covMatrix_yz);
+   fChain->SetBranchAddress("ForwardRomanPotRecParticles.covMatrix.yt", &ForwardRomanPotRecParticles_covMatrix_yt, &b_ForwardRomanPotRecParticles_covMatrix_yt);
+   fChain->SetBranchAddress("ForwardRomanPotRecParticles.covMatrix.zt", &ForwardRomanPotRecParticles_covMatrix_zt, &b_ForwardRomanPotRecParticles_covMatrix_zt);
+   fChain->SetBranchAddress("ForwardRomanPotRecParticles.PDG", &ForwardRomanPotRecParticles_PDG, &b_ForwardRomanPotRecParticles_PDG);
+   fChain->SetBranchAddress("ForwardRomanPotRecParticles.clusters_begin", &ForwardRomanPotRecParticles_clusters_begin, &b_ForwardRomanPotRecParticles_clusters_begin);
+   fChain->SetBranchAddress("ForwardRomanPotRecParticles.clusters_end", &ForwardRomanPotRecParticles_clusters_end, &b_ForwardRomanPotRecParticles_clusters_end);
+   fChain->SetBranchAddress("ForwardRomanPotRecParticles.tracks_begin", &ForwardRomanPotRecParticles_tracks_begin, &b_ForwardRomanPotRecParticles_tracks_begin);
+   fChain->SetBranchAddress("ForwardRomanPotRecParticles.tracks_end", &ForwardRomanPotRecParticles_tracks_end, &b_ForwardRomanPotRecParticles_tracks_end);
+   fChain->SetBranchAddress("ForwardRomanPotRecParticles.particles_begin", &ForwardRomanPotRecParticles_particles_begin, &b_ForwardRomanPotRecParticles_particles_begin);
+   fChain->SetBranchAddress("ForwardRomanPotRecParticles.particles_end", &ForwardRomanPotRecParticles_particles_end, &b_ForwardRomanPotRecParticles_particles_end);
+   fChain->SetBranchAddress("ForwardRomanPotRecParticles.particleIDs_begin", &ForwardRomanPotRecParticles_particleIDs_begin, &b_ForwardRomanPotRecParticles_particleIDs_begin);
+   fChain->SetBranchAddress("ForwardRomanPotRecParticles.particleIDs_end", &ForwardRomanPotRecParticles_particleIDs_end, &b_ForwardRomanPotRecParticles_particleIDs_end);
    fChain->SetBranchAddress("_ForwardRomanPotRecParticles_clusters", &_ForwardRomanPotRecParticles_clusters_, &b__ForwardRomanPotRecParticles_clusters_);
    fChain->SetBranchAddress("_ForwardRomanPotRecParticles_clusters.index", &_ForwardRomanPotRecParticles_clusters_index, &b__ForwardRomanPotRecParticles_clusters_index);
    fChain->SetBranchAddress("_ForwardRomanPotRecParticles_clusters.collectionID", &_ForwardRomanPotRecParticles_clusters_collectionID, &b__ForwardRomanPotRecParticles_clusters_collectionID);
@@ -7197,42 +8332,42 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("_ForwardRomanPotRecParticles_particleIDs.index", &_ForwardRomanPotRecParticles_particleIDs_index, &b__ForwardRomanPotRecParticles_particleIDs_index);
    fChain->SetBranchAddress("_ForwardRomanPotRecParticles_particleIDs.collectionID", &_ForwardRomanPotRecParticles_particleIDs_collectionID, &b__ForwardRomanPotRecParticles_particleIDs_collectionID);
    fChain->SetBranchAddress("_ForwardRomanPotRecParticles_startVertex", &_ForwardRomanPotRecParticles_startVertex_, &b__ForwardRomanPotRecParticles_startVertex_);
-   fChain->SetBranchAddress("_ForwardRomanPotRecParticles_startVertex.index", _ForwardRomanPotRecParticles_startVertex_index, &b__ForwardRomanPotRecParticles_startVertex_index);
-   fChain->SetBranchAddress("_ForwardRomanPotRecParticles_startVertex.collectionID", _ForwardRomanPotRecParticles_startVertex_collectionID, &b__ForwardRomanPotRecParticles_startVertex_collectionID);
+   fChain->SetBranchAddress("_ForwardRomanPotRecParticles_startVertex.index", &_ForwardRomanPotRecParticles_startVertex_index, &b__ForwardRomanPotRecParticles_startVertex_index);
+   fChain->SetBranchAddress("_ForwardRomanPotRecParticles_startVertex.collectionID", &_ForwardRomanPotRecParticles_startVertex_collectionID, &b__ForwardRomanPotRecParticles_startVertex_collectionID);
    fChain->SetBranchAddress("_ForwardRomanPotRecParticles_particleIDUsed", &_ForwardRomanPotRecParticles_particleIDUsed_, &b__ForwardRomanPotRecParticles_particleIDUsed_);
-   fChain->SetBranchAddress("_ForwardRomanPotRecParticles_particleIDUsed.index", _ForwardRomanPotRecParticles_particleIDUsed_index, &b__ForwardRomanPotRecParticles_particleIDUsed_index);
-   fChain->SetBranchAddress("_ForwardRomanPotRecParticles_particleIDUsed.collectionID", _ForwardRomanPotRecParticles_particleIDUsed_collectionID, &b__ForwardRomanPotRecParticles_particleIDUsed_collectionID);
+   fChain->SetBranchAddress("_ForwardRomanPotRecParticles_particleIDUsed.index", &_ForwardRomanPotRecParticles_particleIDUsed_index, &b__ForwardRomanPotRecParticles_particleIDUsed_index);
+   fChain->SetBranchAddress("_ForwardRomanPotRecParticles_particleIDUsed.collectionID", &_ForwardRomanPotRecParticles_particleIDUsed_collectionID, &b__ForwardRomanPotRecParticles_particleIDUsed_collectionID);
    fChain->SetBranchAddress("GeneratedChargedJets", &GeneratedChargedJets_, &b_GeneratedChargedJets_);
-   fChain->SetBranchAddress("GeneratedChargedJets.type", GeneratedChargedJets_type, &b_GeneratedChargedJets_type);
-   fChain->SetBranchAddress("GeneratedChargedJets.energy", GeneratedChargedJets_energy, &b_GeneratedChargedJets_energy);
-   fChain->SetBranchAddress("GeneratedChargedJets.momentum.x", GeneratedChargedJets_momentum_x, &b_GeneratedChargedJets_momentum_x);
-   fChain->SetBranchAddress("GeneratedChargedJets.momentum.y", GeneratedChargedJets_momentum_y, &b_GeneratedChargedJets_momentum_y);
-   fChain->SetBranchAddress("GeneratedChargedJets.momentum.z", GeneratedChargedJets_momentum_z, &b_GeneratedChargedJets_momentum_z);
-   fChain->SetBranchAddress("GeneratedChargedJets.referencePoint.x", GeneratedChargedJets_referencePoint_x, &b_GeneratedChargedJets_referencePoint_x);
-   fChain->SetBranchAddress("GeneratedChargedJets.referencePoint.y", GeneratedChargedJets_referencePoint_y, &b_GeneratedChargedJets_referencePoint_y);
-   fChain->SetBranchAddress("GeneratedChargedJets.referencePoint.z", GeneratedChargedJets_referencePoint_z, &b_GeneratedChargedJets_referencePoint_z);
-   fChain->SetBranchAddress("GeneratedChargedJets.charge", GeneratedChargedJets_charge, &b_GeneratedChargedJets_charge);
-   fChain->SetBranchAddress("GeneratedChargedJets.mass", GeneratedChargedJets_mass, &b_GeneratedChargedJets_mass);
-   fChain->SetBranchAddress("GeneratedChargedJets.goodnessOfPID", GeneratedChargedJets_goodnessOfPID, &b_GeneratedChargedJets_goodnessOfPID);
-   fChain->SetBranchAddress("GeneratedChargedJets.covMatrix.xx", GeneratedChargedJets_covMatrix_xx, &b_GeneratedChargedJets_covMatrix_xx);
-   fChain->SetBranchAddress("GeneratedChargedJets.covMatrix.yy", GeneratedChargedJets_covMatrix_yy, &b_GeneratedChargedJets_covMatrix_yy);
-   fChain->SetBranchAddress("GeneratedChargedJets.covMatrix.zz", GeneratedChargedJets_covMatrix_zz, &b_GeneratedChargedJets_covMatrix_zz);
-   fChain->SetBranchAddress("GeneratedChargedJets.covMatrix.tt", GeneratedChargedJets_covMatrix_tt, &b_GeneratedChargedJets_covMatrix_tt);
-   fChain->SetBranchAddress("GeneratedChargedJets.covMatrix.xy", GeneratedChargedJets_covMatrix_xy, &b_GeneratedChargedJets_covMatrix_xy);
-   fChain->SetBranchAddress("GeneratedChargedJets.covMatrix.xz", GeneratedChargedJets_covMatrix_xz, &b_GeneratedChargedJets_covMatrix_xz);
-   fChain->SetBranchAddress("GeneratedChargedJets.covMatrix.xt", GeneratedChargedJets_covMatrix_xt, &b_GeneratedChargedJets_covMatrix_xt);
-   fChain->SetBranchAddress("GeneratedChargedJets.covMatrix.yz", GeneratedChargedJets_covMatrix_yz, &b_GeneratedChargedJets_covMatrix_yz);
-   fChain->SetBranchAddress("GeneratedChargedJets.covMatrix.yt", GeneratedChargedJets_covMatrix_yt, &b_GeneratedChargedJets_covMatrix_yt);
-   fChain->SetBranchAddress("GeneratedChargedJets.covMatrix.zt", GeneratedChargedJets_covMatrix_zt, &b_GeneratedChargedJets_covMatrix_zt);
-   fChain->SetBranchAddress("GeneratedChargedJets.PDG", GeneratedChargedJets_PDG, &b_GeneratedChargedJets_PDG);
-   fChain->SetBranchAddress("GeneratedChargedJets.clusters_begin", GeneratedChargedJets_clusters_begin, &b_GeneratedChargedJets_clusters_begin);
-   fChain->SetBranchAddress("GeneratedChargedJets.clusters_end", GeneratedChargedJets_clusters_end, &b_GeneratedChargedJets_clusters_end);
-   fChain->SetBranchAddress("GeneratedChargedJets.tracks_begin", GeneratedChargedJets_tracks_begin, &b_GeneratedChargedJets_tracks_begin);
-   fChain->SetBranchAddress("GeneratedChargedJets.tracks_end", GeneratedChargedJets_tracks_end, &b_GeneratedChargedJets_tracks_end);
-   fChain->SetBranchAddress("GeneratedChargedJets.particles_begin", GeneratedChargedJets_particles_begin, &b_GeneratedChargedJets_particles_begin);
-   fChain->SetBranchAddress("GeneratedChargedJets.particles_end", GeneratedChargedJets_particles_end, &b_GeneratedChargedJets_particles_end);
-   fChain->SetBranchAddress("GeneratedChargedJets.particleIDs_begin", GeneratedChargedJets_particleIDs_begin, &b_GeneratedChargedJets_particleIDs_begin);
-   fChain->SetBranchAddress("GeneratedChargedJets.particleIDs_end", GeneratedChargedJets_particleIDs_end, &b_GeneratedChargedJets_particleIDs_end);
+   fChain->SetBranchAddress("GeneratedChargedJets.type", &GeneratedChargedJets_type, &b_GeneratedChargedJets_type);
+   fChain->SetBranchAddress("GeneratedChargedJets.energy", &GeneratedChargedJets_energy, &b_GeneratedChargedJets_energy);
+   fChain->SetBranchAddress("GeneratedChargedJets.momentum.x", &GeneratedChargedJets_momentum_x, &b_GeneratedChargedJets_momentum_x);
+   fChain->SetBranchAddress("GeneratedChargedJets.momentum.y", &GeneratedChargedJets_momentum_y, &b_GeneratedChargedJets_momentum_y);
+   fChain->SetBranchAddress("GeneratedChargedJets.momentum.z", &GeneratedChargedJets_momentum_z, &b_GeneratedChargedJets_momentum_z);
+   fChain->SetBranchAddress("GeneratedChargedJets.referencePoint.x", &GeneratedChargedJets_referencePoint_x, &b_GeneratedChargedJets_referencePoint_x);
+   fChain->SetBranchAddress("GeneratedChargedJets.referencePoint.y", &GeneratedChargedJets_referencePoint_y, &b_GeneratedChargedJets_referencePoint_y);
+   fChain->SetBranchAddress("GeneratedChargedJets.referencePoint.z", &GeneratedChargedJets_referencePoint_z, &b_GeneratedChargedJets_referencePoint_z);
+   fChain->SetBranchAddress("GeneratedChargedJets.charge", &GeneratedChargedJets_charge, &b_GeneratedChargedJets_charge);
+   fChain->SetBranchAddress("GeneratedChargedJets.mass", &GeneratedChargedJets_mass, &b_GeneratedChargedJets_mass);
+   fChain->SetBranchAddress("GeneratedChargedJets.goodnessOfPID", &GeneratedChargedJets_goodnessOfPID, &b_GeneratedChargedJets_goodnessOfPID);
+   fChain->SetBranchAddress("GeneratedChargedJets.covMatrix.xx", &GeneratedChargedJets_covMatrix_xx, &b_GeneratedChargedJets_covMatrix_xx);
+   fChain->SetBranchAddress("GeneratedChargedJets.covMatrix.yy", &GeneratedChargedJets_covMatrix_yy, &b_GeneratedChargedJets_covMatrix_yy);
+   fChain->SetBranchAddress("GeneratedChargedJets.covMatrix.zz", &GeneratedChargedJets_covMatrix_zz, &b_GeneratedChargedJets_covMatrix_zz);
+   fChain->SetBranchAddress("GeneratedChargedJets.covMatrix.tt", &GeneratedChargedJets_covMatrix_tt, &b_GeneratedChargedJets_covMatrix_tt);
+   fChain->SetBranchAddress("GeneratedChargedJets.covMatrix.xy", &GeneratedChargedJets_covMatrix_xy, &b_GeneratedChargedJets_covMatrix_xy);
+   fChain->SetBranchAddress("GeneratedChargedJets.covMatrix.xz", &GeneratedChargedJets_covMatrix_xz, &b_GeneratedChargedJets_covMatrix_xz);
+   fChain->SetBranchAddress("GeneratedChargedJets.covMatrix.xt", &GeneratedChargedJets_covMatrix_xt, &b_GeneratedChargedJets_covMatrix_xt);
+   fChain->SetBranchAddress("GeneratedChargedJets.covMatrix.yz", &GeneratedChargedJets_covMatrix_yz, &b_GeneratedChargedJets_covMatrix_yz);
+   fChain->SetBranchAddress("GeneratedChargedJets.covMatrix.yt", &GeneratedChargedJets_covMatrix_yt, &b_GeneratedChargedJets_covMatrix_yt);
+   fChain->SetBranchAddress("GeneratedChargedJets.covMatrix.zt", &GeneratedChargedJets_covMatrix_zt, &b_GeneratedChargedJets_covMatrix_zt);
+   fChain->SetBranchAddress("GeneratedChargedJets.PDG", &GeneratedChargedJets_PDG, &b_GeneratedChargedJets_PDG);
+   fChain->SetBranchAddress("GeneratedChargedJets.clusters_begin", &GeneratedChargedJets_clusters_begin, &b_GeneratedChargedJets_clusters_begin);
+   fChain->SetBranchAddress("GeneratedChargedJets.clusters_end", &GeneratedChargedJets_clusters_end, &b_GeneratedChargedJets_clusters_end);
+   fChain->SetBranchAddress("GeneratedChargedJets.tracks_begin", &GeneratedChargedJets_tracks_begin, &b_GeneratedChargedJets_tracks_begin);
+   fChain->SetBranchAddress("GeneratedChargedJets.tracks_end", &GeneratedChargedJets_tracks_end, &b_GeneratedChargedJets_tracks_end);
+   fChain->SetBranchAddress("GeneratedChargedJets.particles_begin", &GeneratedChargedJets_particles_begin, &b_GeneratedChargedJets_particles_begin);
+   fChain->SetBranchAddress("GeneratedChargedJets.particles_end", &GeneratedChargedJets_particles_end, &b_GeneratedChargedJets_particles_end);
+   fChain->SetBranchAddress("GeneratedChargedJets.particleIDs_begin", &GeneratedChargedJets_particleIDs_begin, &b_GeneratedChargedJets_particleIDs_begin);
+   fChain->SetBranchAddress("GeneratedChargedJets.particleIDs_end", &GeneratedChargedJets_particleIDs_end, &b_GeneratedChargedJets_particleIDs_end);
    fChain->SetBranchAddress("_GeneratedChargedJets_clusters", &_GeneratedChargedJets_clusters_, &b__GeneratedChargedJets_clusters_);
    fChain->SetBranchAddress("_GeneratedChargedJets_clusters.index", &_GeneratedChargedJets_clusters_index, &b__GeneratedChargedJets_clusters_index);
    fChain->SetBranchAddress("_GeneratedChargedJets_clusters.collectionID", &_GeneratedChargedJets_clusters_collectionID, &b__GeneratedChargedJets_clusters_collectionID);
@@ -7246,42 +8381,42 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("_GeneratedChargedJets_particleIDs.index", &_GeneratedChargedJets_particleIDs_index, &b__GeneratedChargedJets_particleIDs_index);
    fChain->SetBranchAddress("_GeneratedChargedJets_particleIDs.collectionID", &_GeneratedChargedJets_particleIDs_collectionID, &b__GeneratedChargedJets_particleIDs_collectionID);
    fChain->SetBranchAddress("_GeneratedChargedJets_startVertex", &_GeneratedChargedJets_startVertex_, &b__GeneratedChargedJets_startVertex_);
-   fChain->SetBranchAddress("_GeneratedChargedJets_startVertex.index", _GeneratedChargedJets_startVertex_index, &b__GeneratedChargedJets_startVertex_index);
-   fChain->SetBranchAddress("_GeneratedChargedJets_startVertex.collectionID", _GeneratedChargedJets_startVertex_collectionID, &b__GeneratedChargedJets_startVertex_collectionID);
+   fChain->SetBranchAddress("_GeneratedChargedJets_startVertex.index", &_GeneratedChargedJets_startVertex_index, &b__GeneratedChargedJets_startVertex_index);
+   fChain->SetBranchAddress("_GeneratedChargedJets_startVertex.collectionID", &_GeneratedChargedJets_startVertex_collectionID, &b__GeneratedChargedJets_startVertex_collectionID);
    fChain->SetBranchAddress("_GeneratedChargedJets_particleIDUsed", &_GeneratedChargedJets_particleIDUsed_, &b__GeneratedChargedJets_particleIDUsed_);
-   fChain->SetBranchAddress("_GeneratedChargedJets_particleIDUsed.index", _GeneratedChargedJets_particleIDUsed_index, &b__GeneratedChargedJets_particleIDUsed_index);
-   fChain->SetBranchAddress("_GeneratedChargedJets_particleIDUsed.collectionID", _GeneratedChargedJets_particleIDUsed_collectionID, &b__GeneratedChargedJets_particleIDUsed_collectionID);
+   fChain->SetBranchAddress("_GeneratedChargedJets_particleIDUsed.index", &_GeneratedChargedJets_particleIDUsed_index, &b__GeneratedChargedJets_particleIDUsed_index);
+   fChain->SetBranchAddress("_GeneratedChargedJets_particleIDUsed.collectionID", &_GeneratedChargedJets_particleIDUsed_collectionID, &b__GeneratedChargedJets_particleIDUsed_collectionID);
    fChain->SetBranchAddress("GeneratedJets", &GeneratedJets_, &b_GeneratedJets_);
-   fChain->SetBranchAddress("GeneratedJets.type", GeneratedJets_type, &b_GeneratedJets_type);
-   fChain->SetBranchAddress("GeneratedJets.energy", GeneratedJets_energy, &b_GeneratedJets_energy);
-   fChain->SetBranchAddress("GeneratedJets.momentum.x", GeneratedJets_momentum_x, &b_GeneratedJets_momentum_x);
-   fChain->SetBranchAddress("GeneratedJets.momentum.y", GeneratedJets_momentum_y, &b_GeneratedJets_momentum_y);
-   fChain->SetBranchAddress("GeneratedJets.momentum.z", GeneratedJets_momentum_z, &b_GeneratedJets_momentum_z);
-   fChain->SetBranchAddress("GeneratedJets.referencePoint.x", GeneratedJets_referencePoint_x, &b_GeneratedJets_referencePoint_x);
-   fChain->SetBranchAddress("GeneratedJets.referencePoint.y", GeneratedJets_referencePoint_y, &b_GeneratedJets_referencePoint_y);
-   fChain->SetBranchAddress("GeneratedJets.referencePoint.z", GeneratedJets_referencePoint_z, &b_GeneratedJets_referencePoint_z);
-   fChain->SetBranchAddress("GeneratedJets.charge", GeneratedJets_charge, &b_GeneratedJets_charge);
-   fChain->SetBranchAddress("GeneratedJets.mass", GeneratedJets_mass, &b_GeneratedJets_mass);
-   fChain->SetBranchAddress("GeneratedJets.goodnessOfPID", GeneratedJets_goodnessOfPID, &b_GeneratedJets_goodnessOfPID);
-   fChain->SetBranchAddress("GeneratedJets.covMatrix.xx", GeneratedJets_covMatrix_xx, &b_GeneratedJets_covMatrix_xx);
-   fChain->SetBranchAddress("GeneratedJets.covMatrix.yy", GeneratedJets_covMatrix_yy, &b_GeneratedJets_covMatrix_yy);
-   fChain->SetBranchAddress("GeneratedJets.covMatrix.zz", GeneratedJets_covMatrix_zz, &b_GeneratedJets_covMatrix_zz);
-   fChain->SetBranchAddress("GeneratedJets.covMatrix.tt", GeneratedJets_covMatrix_tt, &b_GeneratedJets_covMatrix_tt);
-   fChain->SetBranchAddress("GeneratedJets.covMatrix.xy", GeneratedJets_covMatrix_xy, &b_GeneratedJets_covMatrix_xy);
-   fChain->SetBranchAddress("GeneratedJets.covMatrix.xz", GeneratedJets_covMatrix_xz, &b_GeneratedJets_covMatrix_xz);
-   fChain->SetBranchAddress("GeneratedJets.covMatrix.xt", GeneratedJets_covMatrix_xt, &b_GeneratedJets_covMatrix_xt);
-   fChain->SetBranchAddress("GeneratedJets.covMatrix.yz", GeneratedJets_covMatrix_yz, &b_GeneratedJets_covMatrix_yz);
-   fChain->SetBranchAddress("GeneratedJets.covMatrix.yt", GeneratedJets_covMatrix_yt, &b_GeneratedJets_covMatrix_yt);
-   fChain->SetBranchAddress("GeneratedJets.covMatrix.zt", GeneratedJets_covMatrix_zt, &b_GeneratedJets_covMatrix_zt);
-   fChain->SetBranchAddress("GeneratedJets.PDG", GeneratedJets_PDG, &b_GeneratedJets_PDG);
-   fChain->SetBranchAddress("GeneratedJets.clusters_begin", GeneratedJets_clusters_begin, &b_GeneratedJets_clusters_begin);
-   fChain->SetBranchAddress("GeneratedJets.clusters_end", GeneratedJets_clusters_end, &b_GeneratedJets_clusters_end);
-   fChain->SetBranchAddress("GeneratedJets.tracks_begin", GeneratedJets_tracks_begin, &b_GeneratedJets_tracks_begin);
-   fChain->SetBranchAddress("GeneratedJets.tracks_end", GeneratedJets_tracks_end, &b_GeneratedJets_tracks_end);
-   fChain->SetBranchAddress("GeneratedJets.particles_begin", GeneratedJets_particles_begin, &b_GeneratedJets_particles_begin);
-   fChain->SetBranchAddress("GeneratedJets.particles_end", GeneratedJets_particles_end, &b_GeneratedJets_particles_end);
-   fChain->SetBranchAddress("GeneratedJets.particleIDs_begin", GeneratedJets_particleIDs_begin, &b_GeneratedJets_particleIDs_begin);
-   fChain->SetBranchAddress("GeneratedJets.particleIDs_end", GeneratedJets_particleIDs_end, &b_GeneratedJets_particleIDs_end);
+   fChain->SetBranchAddress("GeneratedJets.type", &GeneratedJets_type, &b_GeneratedJets_type);
+   fChain->SetBranchAddress("GeneratedJets.energy", &GeneratedJets_energy, &b_GeneratedJets_energy);
+   fChain->SetBranchAddress("GeneratedJets.momentum.x", &GeneratedJets_momentum_x, &b_GeneratedJets_momentum_x);
+   fChain->SetBranchAddress("GeneratedJets.momentum.y", &GeneratedJets_momentum_y, &b_GeneratedJets_momentum_y);
+   fChain->SetBranchAddress("GeneratedJets.momentum.z", &GeneratedJets_momentum_z, &b_GeneratedJets_momentum_z);
+   fChain->SetBranchAddress("GeneratedJets.referencePoint.x", &GeneratedJets_referencePoint_x, &b_GeneratedJets_referencePoint_x);
+   fChain->SetBranchAddress("GeneratedJets.referencePoint.y", &GeneratedJets_referencePoint_y, &b_GeneratedJets_referencePoint_y);
+   fChain->SetBranchAddress("GeneratedJets.referencePoint.z", &GeneratedJets_referencePoint_z, &b_GeneratedJets_referencePoint_z);
+   fChain->SetBranchAddress("GeneratedJets.charge", &GeneratedJets_charge, &b_GeneratedJets_charge);
+   fChain->SetBranchAddress("GeneratedJets.mass", &GeneratedJets_mass, &b_GeneratedJets_mass);
+   fChain->SetBranchAddress("GeneratedJets.goodnessOfPID", &GeneratedJets_goodnessOfPID, &b_GeneratedJets_goodnessOfPID);
+   fChain->SetBranchAddress("GeneratedJets.covMatrix.xx", &GeneratedJets_covMatrix_xx, &b_GeneratedJets_covMatrix_xx);
+   fChain->SetBranchAddress("GeneratedJets.covMatrix.yy", &GeneratedJets_covMatrix_yy, &b_GeneratedJets_covMatrix_yy);
+   fChain->SetBranchAddress("GeneratedJets.covMatrix.zz", &GeneratedJets_covMatrix_zz, &b_GeneratedJets_covMatrix_zz);
+   fChain->SetBranchAddress("GeneratedJets.covMatrix.tt", &GeneratedJets_covMatrix_tt, &b_GeneratedJets_covMatrix_tt);
+   fChain->SetBranchAddress("GeneratedJets.covMatrix.xy", &GeneratedJets_covMatrix_xy, &b_GeneratedJets_covMatrix_xy);
+   fChain->SetBranchAddress("GeneratedJets.covMatrix.xz", &GeneratedJets_covMatrix_xz, &b_GeneratedJets_covMatrix_xz);
+   fChain->SetBranchAddress("GeneratedJets.covMatrix.xt", &GeneratedJets_covMatrix_xt, &b_GeneratedJets_covMatrix_xt);
+   fChain->SetBranchAddress("GeneratedJets.covMatrix.yz", &GeneratedJets_covMatrix_yz, &b_GeneratedJets_covMatrix_yz);
+   fChain->SetBranchAddress("GeneratedJets.covMatrix.yt", &GeneratedJets_covMatrix_yt, &b_GeneratedJets_covMatrix_yt);
+   fChain->SetBranchAddress("GeneratedJets.covMatrix.zt", &GeneratedJets_covMatrix_zt, &b_GeneratedJets_covMatrix_zt);
+   fChain->SetBranchAddress("GeneratedJets.PDG", &GeneratedJets_PDG, &b_GeneratedJets_PDG);
+   fChain->SetBranchAddress("GeneratedJets.clusters_begin", &GeneratedJets_clusters_begin, &b_GeneratedJets_clusters_begin);
+   fChain->SetBranchAddress("GeneratedJets.clusters_end", &GeneratedJets_clusters_end, &b_GeneratedJets_clusters_end);
+   fChain->SetBranchAddress("GeneratedJets.tracks_begin", &GeneratedJets_tracks_begin, &b_GeneratedJets_tracks_begin);
+   fChain->SetBranchAddress("GeneratedJets.tracks_end", &GeneratedJets_tracks_end, &b_GeneratedJets_tracks_end);
+   fChain->SetBranchAddress("GeneratedJets.particles_begin", &GeneratedJets_particles_begin, &b_GeneratedJets_particles_begin);
+   fChain->SetBranchAddress("GeneratedJets.particles_end", &GeneratedJets_particles_end, &b_GeneratedJets_particles_end);
+   fChain->SetBranchAddress("GeneratedJets.particleIDs_begin", &GeneratedJets_particleIDs_begin, &b_GeneratedJets_particleIDs_begin);
+   fChain->SetBranchAddress("GeneratedJets.particleIDs_end", &GeneratedJets_particleIDs_end, &b_GeneratedJets_particleIDs_end);
    fChain->SetBranchAddress("_GeneratedJets_clusters", &_GeneratedJets_clusters_, &b__GeneratedJets_clusters_);
    fChain->SetBranchAddress("_GeneratedJets_clusters.index", &_GeneratedJets_clusters_index, &b__GeneratedJets_clusters_index);
    fChain->SetBranchAddress("_GeneratedJets_clusters.collectionID", &_GeneratedJets_clusters_collectionID, &b__GeneratedJets_clusters_collectionID);
@@ -7295,11 +8430,11 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("_GeneratedJets_particleIDs.index", &_GeneratedJets_particleIDs_index, &b__GeneratedJets_particleIDs_index);
    fChain->SetBranchAddress("_GeneratedJets_particleIDs.collectionID", &_GeneratedJets_particleIDs_collectionID, &b__GeneratedJets_particleIDs_collectionID);
    fChain->SetBranchAddress("_GeneratedJets_startVertex", &_GeneratedJets_startVertex_, &b__GeneratedJets_startVertex_);
-   fChain->SetBranchAddress("_GeneratedJets_startVertex.index", _GeneratedJets_startVertex_index, &b__GeneratedJets_startVertex_index);
-   fChain->SetBranchAddress("_GeneratedJets_startVertex.collectionID", _GeneratedJets_startVertex_collectionID, &b__GeneratedJets_startVertex_collectionID);
+   fChain->SetBranchAddress("_GeneratedJets_startVertex.index", &_GeneratedJets_startVertex_index, &b__GeneratedJets_startVertex_index);
+   fChain->SetBranchAddress("_GeneratedJets_startVertex.collectionID", &_GeneratedJets_startVertex_collectionID, &b__GeneratedJets_startVertex_collectionID);
    fChain->SetBranchAddress("_GeneratedJets_particleIDUsed", &_GeneratedJets_particleIDUsed_, &b__GeneratedJets_particleIDUsed_);
-   fChain->SetBranchAddress("_GeneratedJets_particleIDUsed.index", _GeneratedJets_particleIDUsed_index, &b__GeneratedJets_particleIDUsed_index);
-   fChain->SetBranchAddress("_GeneratedJets_particleIDUsed.collectionID", _GeneratedJets_particleIDUsed_collectionID, &b__GeneratedJets_particleIDUsed_collectionID);
+   fChain->SetBranchAddress("_GeneratedJets_particleIDUsed.index", &_GeneratedJets_particleIDUsed_index, &b__GeneratedJets_particleIDUsed_index);
+   fChain->SetBranchAddress("_GeneratedJets_particleIDUsed.collectionID", &_GeneratedJets_particleIDUsed_collectionID, &b__GeneratedJets_particleIDUsed_collectionID);
    fChain->SetBranchAddress("GeneratedParticles", &GeneratedParticles_, &b_GeneratedParticles_);
    fChain->SetBranchAddress("GeneratedParticles.type", GeneratedParticles_type, &b_GeneratedParticles_type);
    fChain->SetBranchAddress("GeneratedParticles.energy", GeneratedParticles_energy, &b_GeneratedParticles_energy);
@@ -7396,8 +8531,8 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("_HcalBarrelClusters_clusters.index", &_HcalBarrelClusters_clusters_index, &b__HcalBarrelClusters_clusters_index);
    fChain->SetBranchAddress("_HcalBarrelClusters_clusters.collectionID", &_HcalBarrelClusters_clusters_collectionID, &b__HcalBarrelClusters_clusters_collectionID);
    fChain->SetBranchAddress("_HcalBarrelClusters_hits", &_HcalBarrelClusters_hits_, &b__HcalBarrelClusters_hits_);
-   fChain->SetBranchAddress("_HcalBarrelClusters_hits.index", &_HcalBarrelClusters_hits_index, &b__HcalBarrelClusters_hits_index);
-   fChain->SetBranchAddress("_HcalBarrelClusters_hits.collectionID", &_HcalBarrelClusters_hits_collectionID, &b__HcalBarrelClusters_hits_collectionID);
+   fChain->SetBranchAddress("_HcalBarrelClusters_hits.index", _HcalBarrelClusters_hits_index, &b__HcalBarrelClusters_hits_index);
+   fChain->SetBranchAddress("_HcalBarrelClusters_hits.collectionID", _HcalBarrelClusters_hits_collectionID, &b__HcalBarrelClusters_hits_collectionID);
    fChain->SetBranchAddress("_HcalBarrelClusters_particleIDs", &_HcalBarrelClusters_particleIDs_, &b__HcalBarrelClusters_particleIDs_);
    fChain->SetBranchAddress("_HcalBarrelClusters_particleIDs.index", &_HcalBarrelClusters_particleIDs_index, &b__HcalBarrelClusters_particleIDs_index);
    fChain->SetBranchAddress("_HcalBarrelClusters_particleIDs.collectionID", &_HcalBarrelClusters_particleIDs_collectionID, &b__HcalBarrelClusters_particleIDs_collectionID);
@@ -7472,8 +8607,8 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("_HcalBarrelTruthClusters_clusters.index", &_HcalBarrelTruthClusters_clusters_index, &b__HcalBarrelTruthClusters_clusters_index);
    fChain->SetBranchAddress("_HcalBarrelTruthClusters_clusters.collectionID", &_HcalBarrelTruthClusters_clusters_collectionID, &b__HcalBarrelTruthClusters_clusters_collectionID);
    fChain->SetBranchAddress("_HcalBarrelTruthClusters_hits", &_HcalBarrelTruthClusters_hits_, &b__HcalBarrelTruthClusters_hits_);
-   fChain->SetBranchAddress("_HcalBarrelTruthClusters_hits.index", &_HcalBarrelTruthClusters_hits_index, &b__HcalBarrelTruthClusters_hits_index);
-   fChain->SetBranchAddress("_HcalBarrelTruthClusters_hits.collectionID", &_HcalBarrelTruthClusters_hits_collectionID, &b__HcalBarrelTruthClusters_hits_collectionID);
+   fChain->SetBranchAddress("_HcalBarrelTruthClusters_hits.index", _HcalBarrelTruthClusters_hits_index, &b__HcalBarrelTruthClusters_hits_index);
+   fChain->SetBranchAddress("_HcalBarrelTruthClusters_hits.collectionID", _HcalBarrelTruthClusters_hits_collectionID, &b__HcalBarrelTruthClusters_hits_collectionID);
    fChain->SetBranchAddress("_HcalBarrelTruthClusters_particleIDs", &_HcalBarrelTruthClusters_particleIDs_, &b__HcalBarrelTruthClusters_particleIDs_);
    fChain->SetBranchAddress("_HcalBarrelTruthClusters_particleIDs.index", &_HcalBarrelTruthClusters_particleIDs_index, &b__HcalBarrelTruthClusters_particleIDs_index);
    fChain->SetBranchAddress("_HcalBarrelTruthClusters_particleIDs.collectionID", &_HcalBarrelTruthClusters_particleIDs_collectionID, &b__HcalBarrelTruthClusters_particleIDs_collectionID);
@@ -7527,8 +8662,8 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("_HcalEndcapNClusters_clusters.index", &_HcalEndcapNClusters_clusters_index, &b__HcalEndcapNClusters_clusters_index);
    fChain->SetBranchAddress("_HcalEndcapNClusters_clusters.collectionID", &_HcalEndcapNClusters_clusters_collectionID, &b__HcalEndcapNClusters_clusters_collectionID);
    fChain->SetBranchAddress("_HcalEndcapNClusters_hits", &_HcalEndcapNClusters_hits_, &b__HcalEndcapNClusters_hits_);
-   fChain->SetBranchAddress("_HcalEndcapNClusters_hits.index", &_HcalEndcapNClusters_hits_index, &b__HcalEndcapNClusters_hits_index);
-   fChain->SetBranchAddress("_HcalEndcapNClusters_hits.collectionID", &_HcalEndcapNClusters_hits_collectionID, &b__HcalEndcapNClusters_hits_collectionID);
+   fChain->SetBranchAddress("_HcalEndcapNClusters_hits.index", _HcalEndcapNClusters_hits_index, &b__HcalEndcapNClusters_hits_index);
+   fChain->SetBranchAddress("_HcalEndcapNClusters_hits.collectionID", _HcalEndcapNClusters_hits_collectionID, &b__HcalEndcapNClusters_hits_collectionID);
    fChain->SetBranchAddress("_HcalEndcapNClusters_particleIDs", &_HcalEndcapNClusters_particleIDs_, &b__HcalEndcapNClusters_particleIDs_);
    fChain->SetBranchAddress("_HcalEndcapNClusters_particleIDs.index", &_HcalEndcapNClusters_particleIDs_index, &b__HcalEndcapNClusters_particleIDs_index);
    fChain->SetBranchAddress("_HcalEndcapNClusters_particleIDs.collectionID", &_HcalEndcapNClusters_particleIDs_collectionID, &b__HcalEndcapNClusters_particleIDs_collectionID);
@@ -7620,8 +8755,8 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("_HcalEndcapNTruthClusters_clusters.index", &_HcalEndcapNTruthClusters_clusters_index, &b__HcalEndcapNTruthClusters_clusters_index);
    fChain->SetBranchAddress("_HcalEndcapNTruthClusters_clusters.collectionID", &_HcalEndcapNTruthClusters_clusters_collectionID, &b__HcalEndcapNTruthClusters_clusters_collectionID);
    fChain->SetBranchAddress("_HcalEndcapNTruthClusters_hits", &_HcalEndcapNTruthClusters_hits_, &b__HcalEndcapNTruthClusters_hits_);
-   fChain->SetBranchAddress("_HcalEndcapNTruthClusters_hits.index", &_HcalEndcapNTruthClusters_hits_index, &b__HcalEndcapNTruthClusters_hits_index);
-   fChain->SetBranchAddress("_HcalEndcapNTruthClusters_hits.collectionID", &_HcalEndcapNTruthClusters_hits_collectionID, &b__HcalEndcapNTruthClusters_hits_collectionID);
+   fChain->SetBranchAddress("_HcalEndcapNTruthClusters_hits.index", _HcalEndcapNTruthClusters_hits_index, &b__HcalEndcapNTruthClusters_hits_index);
+   fChain->SetBranchAddress("_HcalEndcapNTruthClusters_hits.collectionID", _HcalEndcapNTruthClusters_hits_collectionID, &b__HcalEndcapNTruthClusters_hits_collectionID);
    fChain->SetBranchAddress("_HcalEndcapNTruthClusters_particleIDs", &_HcalEndcapNTruthClusters_particleIDs_, &b__HcalEndcapNTruthClusters_particleIDs_);
    fChain->SetBranchAddress("_HcalEndcapNTruthClusters_particleIDs.index", &_HcalEndcapNTruthClusters_particleIDs_index, &b__HcalEndcapNTruthClusters_particleIDs_index);
    fChain->SetBranchAddress("_HcalEndcapNTruthClusters_particleIDs.collectionID", &_HcalEndcapNTruthClusters_particleIDs_collectionID, &b__HcalEndcapNTruthClusters_particleIDs_collectionID);
@@ -7675,8 +8810,8 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("_HcalEndcapPInsertClusters_clusters.index", &_HcalEndcapPInsertClusters_clusters_index, &b__HcalEndcapPInsertClusters_clusters_index);
    fChain->SetBranchAddress("_HcalEndcapPInsertClusters_clusters.collectionID", &_HcalEndcapPInsertClusters_clusters_collectionID, &b__HcalEndcapPInsertClusters_clusters_collectionID);
    fChain->SetBranchAddress("_HcalEndcapPInsertClusters_hits", &_HcalEndcapPInsertClusters_hits_, &b__HcalEndcapPInsertClusters_hits_);
-   fChain->SetBranchAddress("_HcalEndcapPInsertClusters_hits.index", &_HcalEndcapPInsertClusters_hits_index, &b__HcalEndcapPInsertClusters_hits_index);
-   fChain->SetBranchAddress("_HcalEndcapPInsertClusters_hits.collectionID", &_HcalEndcapPInsertClusters_hits_collectionID, &b__HcalEndcapPInsertClusters_hits_collectionID);
+   fChain->SetBranchAddress("_HcalEndcapPInsertClusters_hits.index", _HcalEndcapPInsertClusters_hits_index, &b__HcalEndcapPInsertClusters_hits_index);
+   fChain->SetBranchAddress("_HcalEndcapPInsertClusters_hits.collectionID", _HcalEndcapPInsertClusters_hits_collectionID, &b__HcalEndcapPInsertClusters_hits_collectionID);
    fChain->SetBranchAddress("_HcalEndcapPInsertClusters_particleIDs", &_HcalEndcapPInsertClusters_particleIDs_, &b__HcalEndcapPInsertClusters_particleIDs_);
    fChain->SetBranchAddress("_HcalEndcapPInsertClusters_particleIDs.index", &_HcalEndcapPInsertClusters_particleIDs_index, &b__HcalEndcapPInsertClusters_particleIDs_index);
    fChain->SetBranchAddress("_HcalEndcapPInsertClusters_particleIDs.collectionID", &_HcalEndcapPInsertClusters_particleIDs_collectionID, &b__HcalEndcapPInsertClusters_particleIDs_collectionID);
@@ -7721,6 +8856,209 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("HcalEndcapPInsertRecHits.local.x", HcalEndcapPInsertRecHits_local_x, &b_HcalEndcapPInsertRecHits_local_x);
    fChain->SetBranchAddress("HcalEndcapPInsertRecHits.local.y", HcalEndcapPInsertRecHits_local_y, &b_HcalEndcapPInsertRecHits_local_y);
    fChain->SetBranchAddress("HcalEndcapPInsertRecHits.local.z", HcalEndcapPInsertRecHits_local_z, &b_HcalEndcapPInsertRecHits_local_z);
+   fChain->SetBranchAddress("HcalFarForwardZDCClusterAssociations", &HcalFarForwardZDCClusterAssociations_, &b_HcalFarForwardZDCClusterAssociations_);
+   fChain->SetBranchAddress("HcalFarForwardZDCClusterAssociations.simID", &HcalFarForwardZDCClusterAssociations_simID, &b_HcalFarForwardZDCClusterAssociations_simID);
+   fChain->SetBranchAddress("HcalFarForwardZDCClusterAssociations.recID", &HcalFarForwardZDCClusterAssociations_recID, &b_HcalFarForwardZDCClusterAssociations_recID);
+   fChain->SetBranchAddress("HcalFarForwardZDCClusterAssociations.weight", &HcalFarForwardZDCClusterAssociations_weight, &b_HcalFarForwardZDCClusterAssociations_weight);
+   fChain->SetBranchAddress("_HcalFarForwardZDCClusterAssociations_rec", &_HcalFarForwardZDCClusterAssociations_rec_, &b__HcalFarForwardZDCClusterAssociations_rec_);
+   fChain->SetBranchAddress("_HcalFarForwardZDCClusterAssociations_rec.index", &_HcalFarForwardZDCClusterAssociations_rec_index, &b__HcalFarForwardZDCClusterAssociations_rec_index);
+   fChain->SetBranchAddress("_HcalFarForwardZDCClusterAssociations_rec.collectionID", &_HcalFarForwardZDCClusterAssociations_rec_collectionID, &b__HcalFarForwardZDCClusterAssociations_rec_collectionID);
+   fChain->SetBranchAddress("_HcalFarForwardZDCClusterAssociations_sim", &_HcalFarForwardZDCClusterAssociations_sim_, &b__HcalFarForwardZDCClusterAssociations_sim_);
+   fChain->SetBranchAddress("_HcalFarForwardZDCClusterAssociations_sim.index", &_HcalFarForwardZDCClusterAssociations_sim_index, &b__HcalFarForwardZDCClusterAssociations_sim_index);
+   fChain->SetBranchAddress("_HcalFarForwardZDCClusterAssociations_sim.collectionID", &_HcalFarForwardZDCClusterAssociations_sim_collectionID, &b__HcalFarForwardZDCClusterAssociations_sim_collectionID);
+   fChain->SetBranchAddress("HcalFarForwardZDCClusterAssociationsBaseline", &HcalFarForwardZDCClusterAssociationsBaseline_, &b_HcalFarForwardZDCClusterAssociationsBaseline_);
+   fChain->SetBranchAddress("HcalFarForwardZDCClusterAssociationsBaseline.simID", &HcalFarForwardZDCClusterAssociationsBaseline_simID, &b_HcalFarForwardZDCClusterAssociationsBaseline_simID);
+   fChain->SetBranchAddress("HcalFarForwardZDCClusterAssociationsBaseline.recID", &HcalFarForwardZDCClusterAssociationsBaseline_recID, &b_HcalFarForwardZDCClusterAssociationsBaseline_recID);
+   fChain->SetBranchAddress("HcalFarForwardZDCClusterAssociationsBaseline.weight", &HcalFarForwardZDCClusterAssociationsBaseline_weight, &b_HcalFarForwardZDCClusterAssociationsBaseline_weight);
+   fChain->SetBranchAddress("_HcalFarForwardZDCClusterAssociationsBaseline_rec", &_HcalFarForwardZDCClusterAssociationsBaseline_rec_, &b__HcalFarForwardZDCClusterAssociationsBaseline_rec_);
+   fChain->SetBranchAddress("_HcalFarForwardZDCClusterAssociationsBaseline_rec.index", &_HcalFarForwardZDCClusterAssociationsBaseline_rec_index, &b__HcalFarForwardZDCClusterAssociationsBaseline_rec_index);
+   fChain->SetBranchAddress("_HcalFarForwardZDCClusterAssociationsBaseline_rec.collectionID", &_HcalFarForwardZDCClusterAssociationsBaseline_rec_collectionID, &b__HcalFarForwardZDCClusterAssociationsBaseline_rec_collectionID);
+   fChain->SetBranchAddress("_HcalFarForwardZDCClusterAssociationsBaseline_sim", &_HcalFarForwardZDCClusterAssociationsBaseline_sim_, &b__HcalFarForwardZDCClusterAssociationsBaseline_sim_);
+   fChain->SetBranchAddress("_HcalFarForwardZDCClusterAssociationsBaseline_sim.index", &_HcalFarForwardZDCClusterAssociationsBaseline_sim_index, &b__HcalFarForwardZDCClusterAssociationsBaseline_sim_index);
+   fChain->SetBranchAddress("_HcalFarForwardZDCClusterAssociationsBaseline_sim.collectionID", &_HcalFarForwardZDCClusterAssociationsBaseline_sim_collectionID, &b__HcalFarForwardZDCClusterAssociationsBaseline_sim_collectionID);
+   fChain->SetBranchAddress("HcalFarForwardZDCClusters", &HcalFarForwardZDCClusters_, &b_HcalFarForwardZDCClusters_);
+   fChain->SetBranchAddress("HcalFarForwardZDCClusters.type", &HcalFarForwardZDCClusters_type, &b_HcalFarForwardZDCClusters_type);
+   fChain->SetBranchAddress("HcalFarForwardZDCClusters.energy", &HcalFarForwardZDCClusters_energy, &b_HcalFarForwardZDCClusters_energy);
+   fChain->SetBranchAddress("HcalFarForwardZDCClusters.energyError", &HcalFarForwardZDCClusters_energyError, &b_HcalFarForwardZDCClusters_energyError);
+   fChain->SetBranchAddress("HcalFarForwardZDCClusters.time", &HcalFarForwardZDCClusters_time, &b_HcalFarForwardZDCClusters_time);
+   fChain->SetBranchAddress("HcalFarForwardZDCClusters.timeError", &HcalFarForwardZDCClusters_timeError, &b_HcalFarForwardZDCClusters_timeError);
+   fChain->SetBranchAddress("HcalFarForwardZDCClusters.nhits", &HcalFarForwardZDCClusters_nhits, &b_HcalFarForwardZDCClusters_nhits);
+   fChain->SetBranchAddress("HcalFarForwardZDCClusters.position.x", &HcalFarForwardZDCClusters_position_x, &b_HcalFarForwardZDCClusters_position_x);
+   fChain->SetBranchAddress("HcalFarForwardZDCClusters.position.y", &HcalFarForwardZDCClusters_position_y, &b_HcalFarForwardZDCClusters_position_y);
+   fChain->SetBranchAddress("HcalFarForwardZDCClusters.position.z", &HcalFarForwardZDCClusters_position_z, &b_HcalFarForwardZDCClusters_position_z);
+   fChain->SetBranchAddress("HcalFarForwardZDCClusters.positionError.xx", &HcalFarForwardZDCClusters_positionError_xx, &b_HcalFarForwardZDCClusters_positionError_xx);
+   fChain->SetBranchAddress("HcalFarForwardZDCClusters.positionError.yy", &HcalFarForwardZDCClusters_positionError_yy, &b_HcalFarForwardZDCClusters_positionError_yy);
+   fChain->SetBranchAddress("HcalFarForwardZDCClusters.positionError.zz", &HcalFarForwardZDCClusters_positionError_zz, &b_HcalFarForwardZDCClusters_positionError_zz);
+   fChain->SetBranchAddress("HcalFarForwardZDCClusters.positionError.xy", &HcalFarForwardZDCClusters_positionError_xy, &b_HcalFarForwardZDCClusters_positionError_xy);
+   fChain->SetBranchAddress("HcalFarForwardZDCClusters.positionError.xz", &HcalFarForwardZDCClusters_positionError_xz, &b_HcalFarForwardZDCClusters_positionError_xz);
+   fChain->SetBranchAddress("HcalFarForwardZDCClusters.positionError.yz", &HcalFarForwardZDCClusters_positionError_yz, &b_HcalFarForwardZDCClusters_positionError_yz);
+   fChain->SetBranchAddress("HcalFarForwardZDCClusters.intrinsicTheta", &HcalFarForwardZDCClusters_intrinsicTheta, &b_HcalFarForwardZDCClusters_intrinsicTheta);
+   fChain->SetBranchAddress("HcalFarForwardZDCClusters.intrinsicPhi", &HcalFarForwardZDCClusters_intrinsicPhi, &b_HcalFarForwardZDCClusters_intrinsicPhi);
+   fChain->SetBranchAddress("HcalFarForwardZDCClusters.intrinsicDirectionError.xx", &HcalFarForwardZDCClusters_intrinsicDirectionError_xx, &b_HcalFarForwardZDCClusters_intrinsicDirectionError_xx);
+   fChain->SetBranchAddress("HcalFarForwardZDCClusters.intrinsicDirectionError.yy", &HcalFarForwardZDCClusters_intrinsicDirectionError_yy, &b_HcalFarForwardZDCClusters_intrinsicDirectionError_yy);
+   fChain->SetBranchAddress("HcalFarForwardZDCClusters.intrinsicDirectionError.xy", &HcalFarForwardZDCClusters_intrinsicDirectionError_xy, &b_HcalFarForwardZDCClusters_intrinsicDirectionError_xy);
+   fChain->SetBranchAddress("HcalFarForwardZDCClusters.shapeParameters_begin", &HcalFarForwardZDCClusters_shapeParameters_begin, &b_HcalFarForwardZDCClusters_shapeParameters_begin);
+   fChain->SetBranchAddress("HcalFarForwardZDCClusters.shapeParameters_end", &HcalFarForwardZDCClusters_shapeParameters_end, &b_HcalFarForwardZDCClusters_shapeParameters_end);
+   fChain->SetBranchAddress("HcalFarForwardZDCClusters.hitContributions_begin", &HcalFarForwardZDCClusters_hitContributions_begin, &b_HcalFarForwardZDCClusters_hitContributions_begin);
+   fChain->SetBranchAddress("HcalFarForwardZDCClusters.hitContributions_end", &HcalFarForwardZDCClusters_hitContributions_end, &b_HcalFarForwardZDCClusters_hitContributions_end);
+   fChain->SetBranchAddress("HcalFarForwardZDCClusters.subdetectorEnergies_begin", &HcalFarForwardZDCClusters_subdetectorEnergies_begin, &b_HcalFarForwardZDCClusters_subdetectorEnergies_begin);
+   fChain->SetBranchAddress("HcalFarForwardZDCClusters.subdetectorEnergies_end", &HcalFarForwardZDCClusters_subdetectorEnergies_end, &b_HcalFarForwardZDCClusters_subdetectorEnergies_end);
+   fChain->SetBranchAddress("HcalFarForwardZDCClusters.clusters_begin", &HcalFarForwardZDCClusters_clusters_begin, &b_HcalFarForwardZDCClusters_clusters_begin);
+   fChain->SetBranchAddress("HcalFarForwardZDCClusters.clusters_end", &HcalFarForwardZDCClusters_clusters_end, &b_HcalFarForwardZDCClusters_clusters_end);
+   fChain->SetBranchAddress("HcalFarForwardZDCClusters.hits_begin", &HcalFarForwardZDCClusters_hits_begin, &b_HcalFarForwardZDCClusters_hits_begin);
+   fChain->SetBranchAddress("HcalFarForwardZDCClusters.hits_end", &HcalFarForwardZDCClusters_hits_end, &b_HcalFarForwardZDCClusters_hits_end);
+   fChain->SetBranchAddress("HcalFarForwardZDCClusters.particleIDs_begin", &HcalFarForwardZDCClusters_particleIDs_begin, &b_HcalFarForwardZDCClusters_particleIDs_begin);
+   fChain->SetBranchAddress("HcalFarForwardZDCClusters.particleIDs_end", &HcalFarForwardZDCClusters_particleIDs_end, &b_HcalFarForwardZDCClusters_particleIDs_end);
+   fChain->SetBranchAddress("_HcalFarForwardZDCClusters_clusters", &_HcalFarForwardZDCClusters_clusters_, &b__HcalFarForwardZDCClusters_clusters_);
+   fChain->SetBranchAddress("_HcalFarForwardZDCClusters_clusters.index", &_HcalFarForwardZDCClusters_clusters_index, &b__HcalFarForwardZDCClusters_clusters_index);
+   fChain->SetBranchAddress("_HcalFarForwardZDCClusters_clusters.collectionID", &_HcalFarForwardZDCClusters_clusters_collectionID, &b__HcalFarForwardZDCClusters_clusters_collectionID);
+   fChain->SetBranchAddress("_HcalFarForwardZDCClusters_hits", &_HcalFarForwardZDCClusters_hits_, &b__HcalFarForwardZDCClusters_hits_);
+   fChain->SetBranchAddress("_HcalFarForwardZDCClusters_hits.index", &_HcalFarForwardZDCClusters_hits_index, &b__HcalFarForwardZDCClusters_hits_index);
+   fChain->SetBranchAddress("_HcalFarForwardZDCClusters_hits.collectionID", &_HcalFarForwardZDCClusters_hits_collectionID, &b__HcalFarForwardZDCClusters_hits_collectionID);
+   fChain->SetBranchAddress("_HcalFarForwardZDCClusters_particleIDs", &_HcalFarForwardZDCClusters_particleIDs_, &b__HcalFarForwardZDCClusters_particleIDs_);
+   fChain->SetBranchAddress("_HcalFarForwardZDCClusters_particleIDs.index", &_HcalFarForwardZDCClusters_particleIDs_index, &b__HcalFarForwardZDCClusters_particleIDs_index);
+   fChain->SetBranchAddress("_HcalFarForwardZDCClusters_particleIDs.collectionID", &_HcalFarForwardZDCClusters_particleIDs_collectionID, &b__HcalFarForwardZDCClusters_particleIDs_collectionID);
+   fChain->SetBranchAddress("_HcalFarForwardZDCClusters_shapeParameters", &_HcalFarForwardZDCClusters_shapeParameters, &b__HcalFarForwardZDCClusters_shapeParameters);
+   fChain->SetBranchAddress("_HcalFarForwardZDCClusters_hitContributions", &_HcalFarForwardZDCClusters_hitContributions, &b__HcalFarForwardZDCClusters_hitContributions);
+   fChain->SetBranchAddress("_HcalFarForwardZDCClusters_subdetectorEnergies", &_HcalFarForwardZDCClusters_subdetectorEnergies, &b__HcalFarForwardZDCClusters_subdetectorEnergies);
+   fChain->SetBranchAddress("HcalFarForwardZDCClustersBaseline", &HcalFarForwardZDCClustersBaseline_, &b_HcalFarForwardZDCClustersBaseline_);
+   fChain->SetBranchAddress("HcalFarForwardZDCClustersBaseline.type", &HcalFarForwardZDCClustersBaseline_type, &b_HcalFarForwardZDCClustersBaseline_type);
+   fChain->SetBranchAddress("HcalFarForwardZDCClustersBaseline.energy", &HcalFarForwardZDCClustersBaseline_energy, &b_HcalFarForwardZDCClustersBaseline_energy);
+   fChain->SetBranchAddress("HcalFarForwardZDCClustersBaseline.energyError", &HcalFarForwardZDCClustersBaseline_energyError, &b_HcalFarForwardZDCClustersBaseline_energyError);
+   fChain->SetBranchAddress("HcalFarForwardZDCClustersBaseline.time", &HcalFarForwardZDCClustersBaseline_time, &b_HcalFarForwardZDCClustersBaseline_time);
+   fChain->SetBranchAddress("HcalFarForwardZDCClustersBaseline.timeError", &HcalFarForwardZDCClustersBaseline_timeError, &b_HcalFarForwardZDCClustersBaseline_timeError);
+   fChain->SetBranchAddress("HcalFarForwardZDCClustersBaseline.nhits", &HcalFarForwardZDCClustersBaseline_nhits, &b_HcalFarForwardZDCClustersBaseline_nhits);
+   fChain->SetBranchAddress("HcalFarForwardZDCClustersBaseline.position.x", &HcalFarForwardZDCClustersBaseline_position_x, &b_HcalFarForwardZDCClustersBaseline_position_x);
+   fChain->SetBranchAddress("HcalFarForwardZDCClustersBaseline.position.y", &HcalFarForwardZDCClustersBaseline_position_y, &b_HcalFarForwardZDCClustersBaseline_position_y);
+   fChain->SetBranchAddress("HcalFarForwardZDCClustersBaseline.position.z", &HcalFarForwardZDCClustersBaseline_position_z, &b_HcalFarForwardZDCClustersBaseline_position_z);
+   fChain->SetBranchAddress("HcalFarForwardZDCClustersBaseline.positionError.xx", &HcalFarForwardZDCClustersBaseline_positionError_xx, &b_HcalFarForwardZDCClustersBaseline_positionError_xx);
+   fChain->SetBranchAddress("HcalFarForwardZDCClustersBaseline.positionError.yy", &HcalFarForwardZDCClustersBaseline_positionError_yy, &b_HcalFarForwardZDCClustersBaseline_positionError_yy);
+   fChain->SetBranchAddress("HcalFarForwardZDCClustersBaseline.positionError.zz", &HcalFarForwardZDCClustersBaseline_positionError_zz, &b_HcalFarForwardZDCClustersBaseline_positionError_zz);
+   fChain->SetBranchAddress("HcalFarForwardZDCClustersBaseline.positionError.xy", &HcalFarForwardZDCClustersBaseline_positionError_xy, &b_HcalFarForwardZDCClustersBaseline_positionError_xy);
+   fChain->SetBranchAddress("HcalFarForwardZDCClustersBaseline.positionError.xz", &HcalFarForwardZDCClustersBaseline_positionError_xz, &b_HcalFarForwardZDCClustersBaseline_positionError_xz);
+   fChain->SetBranchAddress("HcalFarForwardZDCClustersBaseline.positionError.yz", &HcalFarForwardZDCClustersBaseline_positionError_yz, &b_HcalFarForwardZDCClustersBaseline_positionError_yz);
+   fChain->SetBranchAddress("HcalFarForwardZDCClustersBaseline.intrinsicTheta", &HcalFarForwardZDCClustersBaseline_intrinsicTheta, &b_HcalFarForwardZDCClustersBaseline_intrinsicTheta);
+   fChain->SetBranchAddress("HcalFarForwardZDCClustersBaseline.intrinsicPhi", &HcalFarForwardZDCClustersBaseline_intrinsicPhi, &b_HcalFarForwardZDCClustersBaseline_intrinsicPhi);
+   fChain->SetBranchAddress("HcalFarForwardZDCClustersBaseline.intrinsicDirectionError.xx", &HcalFarForwardZDCClustersBaseline_intrinsicDirectionError_xx, &b_HcalFarForwardZDCClustersBaseline_intrinsicDirectionError_xx);
+   fChain->SetBranchAddress("HcalFarForwardZDCClustersBaseline.intrinsicDirectionError.yy", &HcalFarForwardZDCClustersBaseline_intrinsicDirectionError_yy, &b_HcalFarForwardZDCClustersBaseline_intrinsicDirectionError_yy);
+   fChain->SetBranchAddress("HcalFarForwardZDCClustersBaseline.intrinsicDirectionError.xy", &HcalFarForwardZDCClustersBaseline_intrinsicDirectionError_xy, &b_HcalFarForwardZDCClustersBaseline_intrinsicDirectionError_xy);
+   fChain->SetBranchAddress("HcalFarForwardZDCClustersBaseline.shapeParameters_begin", &HcalFarForwardZDCClustersBaseline_shapeParameters_begin, &b_HcalFarForwardZDCClustersBaseline_shapeParameters_begin);
+   fChain->SetBranchAddress("HcalFarForwardZDCClustersBaseline.shapeParameters_end", &HcalFarForwardZDCClustersBaseline_shapeParameters_end, &b_HcalFarForwardZDCClustersBaseline_shapeParameters_end);
+   fChain->SetBranchAddress("HcalFarForwardZDCClustersBaseline.hitContributions_begin", &HcalFarForwardZDCClustersBaseline_hitContributions_begin, &b_HcalFarForwardZDCClustersBaseline_hitContributions_begin);
+   fChain->SetBranchAddress("HcalFarForwardZDCClustersBaseline.hitContributions_end", &HcalFarForwardZDCClustersBaseline_hitContributions_end, &b_HcalFarForwardZDCClustersBaseline_hitContributions_end);
+   fChain->SetBranchAddress("HcalFarForwardZDCClustersBaseline.subdetectorEnergies_begin", &HcalFarForwardZDCClustersBaseline_subdetectorEnergies_begin, &b_HcalFarForwardZDCClustersBaseline_subdetectorEnergies_begin);
+   fChain->SetBranchAddress("HcalFarForwardZDCClustersBaseline.subdetectorEnergies_end", &HcalFarForwardZDCClustersBaseline_subdetectorEnergies_end, &b_HcalFarForwardZDCClustersBaseline_subdetectorEnergies_end);
+   fChain->SetBranchAddress("HcalFarForwardZDCClustersBaseline.clusters_begin", &HcalFarForwardZDCClustersBaseline_clusters_begin, &b_HcalFarForwardZDCClustersBaseline_clusters_begin);
+   fChain->SetBranchAddress("HcalFarForwardZDCClustersBaseline.clusters_end", &HcalFarForwardZDCClustersBaseline_clusters_end, &b_HcalFarForwardZDCClustersBaseline_clusters_end);
+   fChain->SetBranchAddress("HcalFarForwardZDCClustersBaseline.hits_begin", &HcalFarForwardZDCClustersBaseline_hits_begin, &b_HcalFarForwardZDCClustersBaseline_hits_begin);
+   fChain->SetBranchAddress("HcalFarForwardZDCClustersBaseline.hits_end", &HcalFarForwardZDCClustersBaseline_hits_end, &b_HcalFarForwardZDCClustersBaseline_hits_end);
+   fChain->SetBranchAddress("HcalFarForwardZDCClustersBaseline.particleIDs_begin", &HcalFarForwardZDCClustersBaseline_particleIDs_begin, &b_HcalFarForwardZDCClustersBaseline_particleIDs_begin);
+   fChain->SetBranchAddress("HcalFarForwardZDCClustersBaseline.particleIDs_end", &HcalFarForwardZDCClustersBaseline_particleIDs_end, &b_HcalFarForwardZDCClustersBaseline_particleIDs_end);
+   fChain->SetBranchAddress("_HcalFarForwardZDCClustersBaseline_clusters", &_HcalFarForwardZDCClustersBaseline_clusters_, &b__HcalFarForwardZDCClustersBaseline_clusters_);
+   fChain->SetBranchAddress("_HcalFarForwardZDCClustersBaseline_clusters.index", &_HcalFarForwardZDCClustersBaseline_clusters_index, &b__HcalFarForwardZDCClustersBaseline_clusters_index);
+   fChain->SetBranchAddress("_HcalFarForwardZDCClustersBaseline_clusters.collectionID", &_HcalFarForwardZDCClustersBaseline_clusters_collectionID, &b__HcalFarForwardZDCClustersBaseline_clusters_collectionID);
+   fChain->SetBranchAddress("_HcalFarForwardZDCClustersBaseline_hits", &_HcalFarForwardZDCClustersBaseline_hits_, &b__HcalFarForwardZDCClustersBaseline_hits_);
+   fChain->SetBranchAddress("_HcalFarForwardZDCClustersBaseline_hits.index", &_HcalFarForwardZDCClustersBaseline_hits_index, &b__HcalFarForwardZDCClustersBaseline_hits_index);
+   fChain->SetBranchAddress("_HcalFarForwardZDCClustersBaseline_hits.collectionID", &_HcalFarForwardZDCClustersBaseline_hits_collectionID, &b__HcalFarForwardZDCClustersBaseline_hits_collectionID);
+   fChain->SetBranchAddress("_HcalFarForwardZDCClustersBaseline_particleIDs", &_HcalFarForwardZDCClustersBaseline_particleIDs_, &b__HcalFarForwardZDCClustersBaseline_particleIDs_);
+   fChain->SetBranchAddress("_HcalFarForwardZDCClustersBaseline_particleIDs.index", &_HcalFarForwardZDCClustersBaseline_particleIDs_index, &b__HcalFarForwardZDCClustersBaseline_particleIDs_index);
+   fChain->SetBranchAddress("_HcalFarForwardZDCClustersBaseline_particleIDs.collectionID", &_HcalFarForwardZDCClustersBaseline_particleIDs_collectionID, &b__HcalFarForwardZDCClustersBaseline_particleIDs_collectionID);
+   fChain->SetBranchAddress("_HcalFarForwardZDCClustersBaseline_shapeParameters", &_HcalFarForwardZDCClustersBaseline_shapeParameters, &b__HcalFarForwardZDCClustersBaseline_shapeParameters);
+   fChain->SetBranchAddress("_HcalFarForwardZDCClustersBaseline_hitContributions", &_HcalFarForwardZDCClustersBaseline_hitContributions, &b__HcalFarForwardZDCClustersBaseline_hitContributions);
+   fChain->SetBranchAddress("_HcalFarForwardZDCClustersBaseline_subdetectorEnergies", &_HcalFarForwardZDCClustersBaseline_subdetectorEnergies, &b__HcalFarForwardZDCClustersBaseline_subdetectorEnergies);
+   fChain->SetBranchAddress("HcalFarForwardZDCRawHits", &HcalFarForwardZDCRawHits_, &b_HcalFarForwardZDCRawHits_);
+   fChain->SetBranchAddress("HcalFarForwardZDCRawHits.cellID", &HcalFarForwardZDCRawHits_cellID, &b_HcalFarForwardZDCRawHits_cellID);
+   fChain->SetBranchAddress("HcalFarForwardZDCRawHits.amplitude", &HcalFarForwardZDCRawHits_amplitude, &b_HcalFarForwardZDCRawHits_amplitude);
+   fChain->SetBranchAddress("HcalFarForwardZDCRawHits.timeStamp", &HcalFarForwardZDCRawHits_timeStamp, &b_HcalFarForwardZDCRawHits_timeStamp);
+   fChain->SetBranchAddress("HcalFarForwardZDCRecHits", &HcalFarForwardZDCRecHits_, &b_HcalFarForwardZDCRecHits_);
+   fChain->SetBranchAddress("HcalFarForwardZDCRecHits.cellID", &HcalFarForwardZDCRecHits_cellID, &b_HcalFarForwardZDCRecHits_cellID);
+   fChain->SetBranchAddress("HcalFarForwardZDCRecHits.energy", &HcalFarForwardZDCRecHits_energy, &b_HcalFarForwardZDCRecHits_energy);
+   fChain->SetBranchAddress("HcalFarForwardZDCRecHits.energyError", &HcalFarForwardZDCRecHits_energyError, &b_HcalFarForwardZDCRecHits_energyError);
+   fChain->SetBranchAddress("HcalFarForwardZDCRecHits.time", &HcalFarForwardZDCRecHits_time, &b_HcalFarForwardZDCRecHits_time);
+   fChain->SetBranchAddress("HcalFarForwardZDCRecHits.timeError", &HcalFarForwardZDCRecHits_timeError, &b_HcalFarForwardZDCRecHits_timeError);
+   fChain->SetBranchAddress("HcalFarForwardZDCRecHits.position.x", &HcalFarForwardZDCRecHits_position_x, &b_HcalFarForwardZDCRecHits_position_x);
+   fChain->SetBranchAddress("HcalFarForwardZDCRecHits.position.y", &HcalFarForwardZDCRecHits_position_y, &b_HcalFarForwardZDCRecHits_position_y);
+   fChain->SetBranchAddress("HcalFarForwardZDCRecHits.position.z", &HcalFarForwardZDCRecHits_position_z, &b_HcalFarForwardZDCRecHits_position_z);
+   fChain->SetBranchAddress("HcalFarForwardZDCRecHits.dimension.x", &HcalFarForwardZDCRecHits_dimension_x, &b_HcalFarForwardZDCRecHits_dimension_x);
+   fChain->SetBranchAddress("HcalFarForwardZDCRecHits.dimension.y", &HcalFarForwardZDCRecHits_dimension_y, &b_HcalFarForwardZDCRecHits_dimension_y);
+   fChain->SetBranchAddress("HcalFarForwardZDCRecHits.dimension.z", &HcalFarForwardZDCRecHits_dimension_z, &b_HcalFarForwardZDCRecHits_dimension_z);
+   fChain->SetBranchAddress("HcalFarForwardZDCRecHits.sector", &HcalFarForwardZDCRecHits_sector, &b_HcalFarForwardZDCRecHits_sector);
+   fChain->SetBranchAddress("HcalFarForwardZDCRecHits.layer", &HcalFarForwardZDCRecHits_layer, &b_HcalFarForwardZDCRecHits_layer);
+   fChain->SetBranchAddress("HcalFarForwardZDCRecHits.local.x", &HcalFarForwardZDCRecHits_local_x, &b_HcalFarForwardZDCRecHits_local_x);
+   fChain->SetBranchAddress("HcalFarForwardZDCRecHits.local.y", &HcalFarForwardZDCRecHits_local_y, &b_HcalFarForwardZDCRecHits_local_y);
+   fChain->SetBranchAddress("HcalFarForwardZDCRecHits.local.z", &HcalFarForwardZDCRecHits_local_z, &b_HcalFarForwardZDCRecHits_local_z);
+   fChain->SetBranchAddress("HcalFarForwardZDCSubcellHits", &HcalFarForwardZDCSubcellHits_, &b_HcalFarForwardZDCSubcellHits_);
+   fChain->SetBranchAddress("HcalFarForwardZDCSubcellHits.cellID", &HcalFarForwardZDCSubcellHits_cellID, &b_HcalFarForwardZDCSubcellHits_cellID);
+   fChain->SetBranchAddress("HcalFarForwardZDCSubcellHits.energy", &HcalFarForwardZDCSubcellHits_energy, &b_HcalFarForwardZDCSubcellHits_energy);
+   fChain->SetBranchAddress("HcalFarForwardZDCSubcellHits.energyError", &HcalFarForwardZDCSubcellHits_energyError, &b_HcalFarForwardZDCSubcellHits_energyError);
+   fChain->SetBranchAddress("HcalFarForwardZDCSubcellHits.time", &HcalFarForwardZDCSubcellHits_time, &b_HcalFarForwardZDCSubcellHits_time);
+   fChain->SetBranchAddress("HcalFarForwardZDCSubcellHits.timeError", &HcalFarForwardZDCSubcellHits_timeError, &b_HcalFarForwardZDCSubcellHits_timeError);
+   fChain->SetBranchAddress("HcalFarForwardZDCSubcellHits.position.x", &HcalFarForwardZDCSubcellHits_position_x, &b_HcalFarForwardZDCSubcellHits_position_x);
+   fChain->SetBranchAddress("HcalFarForwardZDCSubcellHits.position.y", &HcalFarForwardZDCSubcellHits_position_y, &b_HcalFarForwardZDCSubcellHits_position_y);
+   fChain->SetBranchAddress("HcalFarForwardZDCSubcellHits.position.z", &HcalFarForwardZDCSubcellHits_position_z, &b_HcalFarForwardZDCSubcellHits_position_z);
+   fChain->SetBranchAddress("HcalFarForwardZDCSubcellHits.dimension.x", &HcalFarForwardZDCSubcellHits_dimension_x, &b_HcalFarForwardZDCSubcellHits_dimension_x);
+   fChain->SetBranchAddress("HcalFarForwardZDCSubcellHits.dimension.y", &HcalFarForwardZDCSubcellHits_dimension_y, &b_HcalFarForwardZDCSubcellHits_dimension_y);
+   fChain->SetBranchAddress("HcalFarForwardZDCSubcellHits.dimension.z", &HcalFarForwardZDCSubcellHits_dimension_z, &b_HcalFarForwardZDCSubcellHits_dimension_z);
+   fChain->SetBranchAddress("HcalFarForwardZDCSubcellHits.sector", &HcalFarForwardZDCSubcellHits_sector, &b_HcalFarForwardZDCSubcellHits_sector);
+   fChain->SetBranchAddress("HcalFarForwardZDCSubcellHits.layer", &HcalFarForwardZDCSubcellHits_layer, &b_HcalFarForwardZDCSubcellHits_layer);
+   fChain->SetBranchAddress("HcalFarForwardZDCSubcellHits.local.x", &HcalFarForwardZDCSubcellHits_local_x, &b_HcalFarForwardZDCSubcellHits_local_x);
+   fChain->SetBranchAddress("HcalFarForwardZDCSubcellHits.local.y", &HcalFarForwardZDCSubcellHits_local_y, &b_HcalFarForwardZDCSubcellHits_local_y);
+   fChain->SetBranchAddress("HcalFarForwardZDCSubcellHits.local.z", &HcalFarForwardZDCSubcellHits_local_z, &b_HcalFarForwardZDCSubcellHits_local_z);
+   fChain->SetBranchAddress("HcalFarForwardZDCTruthClusterAssociations", &HcalFarForwardZDCTruthClusterAssociations_, &b_HcalFarForwardZDCTruthClusterAssociations_);
+   fChain->SetBranchAddress("HcalFarForwardZDCTruthClusterAssociations.simID", &HcalFarForwardZDCTruthClusterAssociations_simID, &b_HcalFarForwardZDCTruthClusterAssociations_simID);
+   fChain->SetBranchAddress("HcalFarForwardZDCTruthClusterAssociations.recID", &HcalFarForwardZDCTruthClusterAssociations_recID, &b_HcalFarForwardZDCTruthClusterAssociations_recID);
+   fChain->SetBranchAddress("HcalFarForwardZDCTruthClusterAssociations.weight", &HcalFarForwardZDCTruthClusterAssociations_weight, &b_HcalFarForwardZDCTruthClusterAssociations_weight);
+   fChain->SetBranchAddress("_HcalFarForwardZDCTruthClusterAssociations_rec", &_HcalFarForwardZDCTruthClusterAssociations_rec_, &b__HcalFarForwardZDCTruthClusterAssociations_rec_);
+   fChain->SetBranchAddress("_HcalFarForwardZDCTruthClusterAssociations_rec.index", &_HcalFarForwardZDCTruthClusterAssociations_rec_index, &b__HcalFarForwardZDCTruthClusterAssociations_rec_index);
+   fChain->SetBranchAddress("_HcalFarForwardZDCTruthClusterAssociations_rec.collectionID", &_HcalFarForwardZDCTruthClusterAssociations_rec_collectionID, &b__HcalFarForwardZDCTruthClusterAssociations_rec_collectionID);
+   fChain->SetBranchAddress("_HcalFarForwardZDCTruthClusterAssociations_sim", &_HcalFarForwardZDCTruthClusterAssociations_sim_, &b__HcalFarForwardZDCTruthClusterAssociations_sim_);
+   fChain->SetBranchAddress("_HcalFarForwardZDCTruthClusterAssociations_sim.index", &_HcalFarForwardZDCTruthClusterAssociations_sim_index, &b__HcalFarForwardZDCTruthClusterAssociations_sim_index);
+   fChain->SetBranchAddress("_HcalFarForwardZDCTruthClusterAssociations_sim.collectionID", &_HcalFarForwardZDCTruthClusterAssociations_sim_collectionID, &b__HcalFarForwardZDCTruthClusterAssociations_sim_collectionID);
+   fChain->SetBranchAddress("HcalFarForwardZDCTruthClusters", &HcalFarForwardZDCTruthClusters_, &b_HcalFarForwardZDCTruthClusters_);
+   fChain->SetBranchAddress("HcalFarForwardZDCTruthClusters.type", &HcalFarForwardZDCTruthClusters_type, &b_HcalFarForwardZDCTruthClusters_type);
+   fChain->SetBranchAddress("HcalFarForwardZDCTruthClusters.energy", &HcalFarForwardZDCTruthClusters_energy, &b_HcalFarForwardZDCTruthClusters_energy);
+   fChain->SetBranchAddress("HcalFarForwardZDCTruthClusters.energyError", &HcalFarForwardZDCTruthClusters_energyError, &b_HcalFarForwardZDCTruthClusters_energyError);
+   fChain->SetBranchAddress("HcalFarForwardZDCTruthClusters.time", &HcalFarForwardZDCTruthClusters_time, &b_HcalFarForwardZDCTruthClusters_time);
+   fChain->SetBranchAddress("HcalFarForwardZDCTruthClusters.timeError", &HcalFarForwardZDCTruthClusters_timeError, &b_HcalFarForwardZDCTruthClusters_timeError);
+   fChain->SetBranchAddress("HcalFarForwardZDCTruthClusters.nhits", &HcalFarForwardZDCTruthClusters_nhits, &b_HcalFarForwardZDCTruthClusters_nhits);
+   fChain->SetBranchAddress("HcalFarForwardZDCTruthClusters.position.x", &HcalFarForwardZDCTruthClusters_position_x, &b_HcalFarForwardZDCTruthClusters_position_x);
+   fChain->SetBranchAddress("HcalFarForwardZDCTruthClusters.position.y", &HcalFarForwardZDCTruthClusters_position_y, &b_HcalFarForwardZDCTruthClusters_position_y);
+   fChain->SetBranchAddress("HcalFarForwardZDCTruthClusters.position.z", &HcalFarForwardZDCTruthClusters_position_z, &b_HcalFarForwardZDCTruthClusters_position_z);
+   fChain->SetBranchAddress("HcalFarForwardZDCTruthClusters.positionError.xx", &HcalFarForwardZDCTruthClusters_positionError_xx, &b_HcalFarForwardZDCTruthClusters_positionError_xx);
+   fChain->SetBranchAddress("HcalFarForwardZDCTruthClusters.positionError.yy", &HcalFarForwardZDCTruthClusters_positionError_yy, &b_HcalFarForwardZDCTruthClusters_positionError_yy);
+   fChain->SetBranchAddress("HcalFarForwardZDCTruthClusters.positionError.zz", &HcalFarForwardZDCTruthClusters_positionError_zz, &b_HcalFarForwardZDCTruthClusters_positionError_zz);
+   fChain->SetBranchAddress("HcalFarForwardZDCTruthClusters.positionError.xy", &HcalFarForwardZDCTruthClusters_positionError_xy, &b_HcalFarForwardZDCTruthClusters_positionError_xy);
+   fChain->SetBranchAddress("HcalFarForwardZDCTruthClusters.positionError.xz", &HcalFarForwardZDCTruthClusters_positionError_xz, &b_HcalFarForwardZDCTruthClusters_positionError_xz);
+   fChain->SetBranchAddress("HcalFarForwardZDCTruthClusters.positionError.yz", &HcalFarForwardZDCTruthClusters_positionError_yz, &b_HcalFarForwardZDCTruthClusters_positionError_yz);
+   fChain->SetBranchAddress("HcalFarForwardZDCTruthClusters.intrinsicTheta", &HcalFarForwardZDCTruthClusters_intrinsicTheta, &b_HcalFarForwardZDCTruthClusters_intrinsicTheta);
+   fChain->SetBranchAddress("HcalFarForwardZDCTruthClusters.intrinsicPhi", &HcalFarForwardZDCTruthClusters_intrinsicPhi, &b_HcalFarForwardZDCTruthClusters_intrinsicPhi);
+   fChain->SetBranchAddress("HcalFarForwardZDCTruthClusters.intrinsicDirectionError.xx", &HcalFarForwardZDCTruthClusters_intrinsicDirectionError_xx, &b_HcalFarForwardZDCTruthClusters_intrinsicDirectionError_xx);
+   fChain->SetBranchAddress("HcalFarForwardZDCTruthClusters.intrinsicDirectionError.yy", &HcalFarForwardZDCTruthClusters_intrinsicDirectionError_yy, &b_HcalFarForwardZDCTruthClusters_intrinsicDirectionError_yy);
+   fChain->SetBranchAddress("HcalFarForwardZDCTruthClusters.intrinsicDirectionError.xy", &HcalFarForwardZDCTruthClusters_intrinsicDirectionError_xy, &b_HcalFarForwardZDCTruthClusters_intrinsicDirectionError_xy);
+   fChain->SetBranchAddress("HcalFarForwardZDCTruthClusters.shapeParameters_begin", &HcalFarForwardZDCTruthClusters_shapeParameters_begin, &b_HcalFarForwardZDCTruthClusters_shapeParameters_begin);
+   fChain->SetBranchAddress("HcalFarForwardZDCTruthClusters.shapeParameters_end", &HcalFarForwardZDCTruthClusters_shapeParameters_end, &b_HcalFarForwardZDCTruthClusters_shapeParameters_end);
+   fChain->SetBranchAddress("HcalFarForwardZDCTruthClusters.hitContributions_begin", &HcalFarForwardZDCTruthClusters_hitContributions_begin, &b_HcalFarForwardZDCTruthClusters_hitContributions_begin);
+   fChain->SetBranchAddress("HcalFarForwardZDCTruthClusters.hitContributions_end", &HcalFarForwardZDCTruthClusters_hitContributions_end, &b_HcalFarForwardZDCTruthClusters_hitContributions_end);
+   fChain->SetBranchAddress("HcalFarForwardZDCTruthClusters.subdetectorEnergies_begin", &HcalFarForwardZDCTruthClusters_subdetectorEnergies_begin, &b_HcalFarForwardZDCTruthClusters_subdetectorEnergies_begin);
+   fChain->SetBranchAddress("HcalFarForwardZDCTruthClusters.subdetectorEnergies_end", &HcalFarForwardZDCTruthClusters_subdetectorEnergies_end, &b_HcalFarForwardZDCTruthClusters_subdetectorEnergies_end);
+   fChain->SetBranchAddress("HcalFarForwardZDCTruthClusters.clusters_begin", &HcalFarForwardZDCTruthClusters_clusters_begin, &b_HcalFarForwardZDCTruthClusters_clusters_begin);
+   fChain->SetBranchAddress("HcalFarForwardZDCTruthClusters.clusters_end", &HcalFarForwardZDCTruthClusters_clusters_end, &b_HcalFarForwardZDCTruthClusters_clusters_end);
+   fChain->SetBranchAddress("HcalFarForwardZDCTruthClusters.hits_begin", &HcalFarForwardZDCTruthClusters_hits_begin, &b_HcalFarForwardZDCTruthClusters_hits_begin);
+   fChain->SetBranchAddress("HcalFarForwardZDCTruthClusters.hits_end", &HcalFarForwardZDCTruthClusters_hits_end, &b_HcalFarForwardZDCTruthClusters_hits_end);
+   fChain->SetBranchAddress("HcalFarForwardZDCTruthClusters.particleIDs_begin", &HcalFarForwardZDCTruthClusters_particleIDs_begin, &b_HcalFarForwardZDCTruthClusters_particleIDs_begin);
+   fChain->SetBranchAddress("HcalFarForwardZDCTruthClusters.particleIDs_end", &HcalFarForwardZDCTruthClusters_particleIDs_end, &b_HcalFarForwardZDCTruthClusters_particleIDs_end);
+   fChain->SetBranchAddress("_HcalFarForwardZDCTruthClusters_clusters", &_HcalFarForwardZDCTruthClusters_clusters_, &b__HcalFarForwardZDCTruthClusters_clusters_);
+   fChain->SetBranchAddress("_HcalFarForwardZDCTruthClusters_clusters.index", &_HcalFarForwardZDCTruthClusters_clusters_index, &b__HcalFarForwardZDCTruthClusters_clusters_index);
+   fChain->SetBranchAddress("_HcalFarForwardZDCTruthClusters_clusters.collectionID", &_HcalFarForwardZDCTruthClusters_clusters_collectionID, &b__HcalFarForwardZDCTruthClusters_clusters_collectionID);
+   fChain->SetBranchAddress("_HcalFarForwardZDCTruthClusters_hits", &_HcalFarForwardZDCTruthClusters_hits_, &b__HcalFarForwardZDCTruthClusters_hits_);
+   fChain->SetBranchAddress("_HcalFarForwardZDCTruthClusters_hits.index", &_HcalFarForwardZDCTruthClusters_hits_index, &b__HcalFarForwardZDCTruthClusters_hits_index);
+   fChain->SetBranchAddress("_HcalFarForwardZDCTruthClusters_hits.collectionID", &_HcalFarForwardZDCTruthClusters_hits_collectionID, &b__HcalFarForwardZDCTruthClusters_hits_collectionID);
+   fChain->SetBranchAddress("_HcalFarForwardZDCTruthClusters_particleIDs", &_HcalFarForwardZDCTruthClusters_particleIDs_, &b__HcalFarForwardZDCTruthClusters_particleIDs_);
+   fChain->SetBranchAddress("_HcalFarForwardZDCTruthClusters_particleIDs.index", &_HcalFarForwardZDCTruthClusters_particleIDs_index, &b__HcalFarForwardZDCTruthClusters_particleIDs_index);
+   fChain->SetBranchAddress("_HcalFarForwardZDCTruthClusters_particleIDs.collectionID", &_HcalFarForwardZDCTruthClusters_particleIDs_collectionID, &b__HcalFarForwardZDCTruthClusters_particleIDs_collectionID);
+   fChain->SetBranchAddress("_HcalFarForwardZDCTruthClusters_shapeParameters", &_HcalFarForwardZDCTruthClusters_shapeParameters, &b__HcalFarForwardZDCTruthClusters_shapeParameters);
+   fChain->SetBranchAddress("_HcalFarForwardZDCTruthClusters_hitContributions", &_HcalFarForwardZDCTruthClusters_hitContributions, &b__HcalFarForwardZDCTruthClusters_hitContributions);
+   fChain->SetBranchAddress("_HcalFarForwardZDCTruthClusters_subdetectorEnergies", &_HcalFarForwardZDCTruthClusters_subdetectorEnergies, &b__HcalFarForwardZDCTruthClusters_subdetectorEnergies);
    fChain->SetBranchAddress("InclusiveKinematicsDA", &InclusiveKinematicsDA_, &b_InclusiveKinematicsDA_);
    fChain->SetBranchAddress("InclusiveKinematicsDA.x", &InclusiveKinematicsDA_x, &b_InclusiveKinematicsDA_x);
    fChain->SetBranchAddress("InclusiveKinematicsDA.Q2", &InclusiveKinematicsDA_Q2, &b_InclusiveKinematicsDA_Q2);
@@ -7822,8 +9160,8 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("_LFHCALClusters_clusters.index", &_LFHCALClusters_clusters_index, &b__LFHCALClusters_clusters_index);
    fChain->SetBranchAddress("_LFHCALClusters_clusters.collectionID", &_LFHCALClusters_clusters_collectionID, &b__LFHCALClusters_clusters_collectionID);
    fChain->SetBranchAddress("_LFHCALClusters_hits", &_LFHCALClusters_hits_, &b__LFHCALClusters_hits_);
-   fChain->SetBranchAddress("_LFHCALClusters_hits.index", &_LFHCALClusters_hits_index, &b__LFHCALClusters_hits_index);
-   fChain->SetBranchAddress("_LFHCALClusters_hits.collectionID", &_LFHCALClusters_hits_collectionID, &b__LFHCALClusters_hits_collectionID);
+   fChain->SetBranchAddress("_LFHCALClusters_hits.index", _LFHCALClusters_hits_index, &b__LFHCALClusters_hits_index);
+   fChain->SetBranchAddress("_LFHCALClusters_hits.collectionID", _LFHCALClusters_hits_collectionID, &b__LFHCALClusters_hits_collectionID);
    fChain->SetBranchAddress("_LFHCALClusters_particleIDs", &_LFHCALClusters_particleIDs_, &b__LFHCALClusters_particleIDs_);
    fChain->SetBranchAddress("_LFHCALClusters_particleIDs.index", &_LFHCALClusters_particleIDs_index, &b__LFHCALClusters_particleIDs_index);
    fChain->SetBranchAddress("_LFHCALClusters_particleIDs.collectionID", &_LFHCALClusters_particleIDs_collectionID, &b__LFHCALClusters_particleIDs_collectionID);
@@ -7885,6 +9223,25 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("_MCParticles_daughters", &_MCParticles_daughters_, &b__MCParticles_daughters_);
    fChain->SetBranchAddress("_MCParticles_daughters.index", _MCParticles_daughters_index, &b__MCParticles_daughters_index);
    fChain->SetBranchAddress("_MCParticles_daughters.collectionID", _MCParticles_daughters_collectionID, &b__MCParticles_daughters_collectionID);
+   fChain->SetBranchAddress("MPGDBarrelHits", &MPGDBarrelHits_, &b_MPGDBarrelHits_);
+   fChain->SetBranchAddress("MPGDBarrelHits.cellID", MPGDBarrelHits_cellID, &b_MPGDBarrelHits_cellID);
+   fChain->SetBranchAddress("MPGDBarrelHits.EDep", MPGDBarrelHits_EDep, &b_MPGDBarrelHits_EDep);
+   fChain->SetBranchAddress("MPGDBarrelHits.time", MPGDBarrelHits_time, &b_MPGDBarrelHits_time);
+   fChain->SetBranchAddress("MPGDBarrelHits.pathLength", MPGDBarrelHits_pathLength, &b_MPGDBarrelHits_pathLength);
+   fChain->SetBranchAddress("MPGDBarrelHits.quality", MPGDBarrelHits_quality, &b_MPGDBarrelHits_quality);
+   fChain->SetBranchAddress("MPGDBarrelHits.position.x", MPGDBarrelHits_position_x, &b_MPGDBarrelHits_position_x);
+   fChain->SetBranchAddress("MPGDBarrelHits.position.y", MPGDBarrelHits_position_y, &b_MPGDBarrelHits_position_y);
+   fChain->SetBranchAddress("MPGDBarrelHits.position.z", MPGDBarrelHits_position_z, &b_MPGDBarrelHits_position_z);
+   fChain->SetBranchAddress("MPGDBarrelHits.momentum.x", MPGDBarrelHits_momentum_x, &b_MPGDBarrelHits_momentum_x);
+   fChain->SetBranchAddress("MPGDBarrelHits.momentum.y", MPGDBarrelHits_momentum_y, &b_MPGDBarrelHits_momentum_y);
+   fChain->SetBranchAddress("MPGDBarrelHits.momentum.z", MPGDBarrelHits_momentum_z, &b_MPGDBarrelHits_momentum_z);
+   fChain->SetBranchAddress("_MPGDBarrelHits_MCParticle", &_MPGDBarrelHits_MCParticle_, &b__MPGDBarrelHits_MCParticle_);
+   fChain->SetBranchAddress("_MPGDBarrelHits_MCParticle.index", _MPGDBarrelHits_MCParticle_index, &b__MPGDBarrelHits_MCParticle_index);
+   fChain->SetBranchAddress("_MPGDBarrelHits_MCParticle.collectionID", _MPGDBarrelHits_MCParticle_collectionID, &b__MPGDBarrelHits_MCParticle_collectionID);
+   fChain->SetBranchAddress("MPGDBarrelRawHits", &MPGDBarrelRawHits_, &b_MPGDBarrelRawHits_);
+   fChain->SetBranchAddress("MPGDBarrelRawHits.cellID", MPGDBarrelRawHits_cellID, &b_MPGDBarrelRawHits_cellID);
+   fChain->SetBranchAddress("MPGDBarrelRawHits.charge", MPGDBarrelRawHits_charge, &b_MPGDBarrelRawHits_charge);
+   fChain->SetBranchAddress("MPGDBarrelRawHits.timeStamp", MPGDBarrelRawHits_timeStamp, &b_MPGDBarrelRawHits_timeStamp);
    fChain->SetBranchAddress("MPGDBarrelRecHits", &MPGDBarrelRecHits_, &b_MPGDBarrelRecHits_);
    fChain->SetBranchAddress("MPGDBarrelRecHits.cellID", MPGDBarrelRecHits_cellID, &b_MPGDBarrelRecHits_cellID);
    fChain->SetBranchAddress("MPGDBarrelRecHits.position.x", MPGDBarrelRecHits_position_x, &b_MPGDBarrelRecHits_position_x);
@@ -7897,6 +9254,10 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("MPGDBarrelRecHits.timeError", MPGDBarrelRecHits_timeError, &b_MPGDBarrelRecHits_timeError);
    fChain->SetBranchAddress("MPGDBarrelRecHits.edep", MPGDBarrelRecHits_edep, &b_MPGDBarrelRecHits_edep);
    fChain->SetBranchAddress("MPGDBarrelRecHits.edepError", MPGDBarrelRecHits_edepError, &b_MPGDBarrelRecHits_edepError);
+   fChain->SetBranchAddress("MPGDDIRCRawHits", &MPGDDIRCRawHits_, &b_MPGDDIRCRawHits_);
+   fChain->SetBranchAddress("MPGDDIRCRawHits.cellID", &MPGDDIRCRawHits_cellID, &b_MPGDDIRCRawHits_cellID);
+   fChain->SetBranchAddress("MPGDDIRCRawHits.charge", &MPGDDIRCRawHits_charge, &b_MPGDDIRCRawHits_charge);
+   fChain->SetBranchAddress("MPGDDIRCRawHits.timeStamp", &MPGDDIRCRawHits_timeStamp, &b_MPGDDIRCRawHits_timeStamp);
    fChain->SetBranchAddress("MPGDDIRCRecHits", &MPGDDIRCRecHits_, &b_MPGDDIRCRecHits_);
    fChain->SetBranchAddress("MPGDDIRCRecHits.cellID", &MPGDDIRCRecHits_cellID, &b_MPGDDIRCRecHits_cellID);
    fChain->SetBranchAddress("MPGDDIRCRecHits.position.x", &MPGDDIRCRecHits_position_x, &b_MPGDDIRCRecHits_position_x);
@@ -7909,6 +9270,25 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("MPGDDIRCRecHits.timeError", &MPGDDIRCRecHits_timeError, &b_MPGDDIRCRecHits_timeError);
    fChain->SetBranchAddress("MPGDDIRCRecHits.edep", &MPGDDIRCRecHits_edep, &b_MPGDDIRCRecHits_edep);
    fChain->SetBranchAddress("MPGDDIRCRecHits.edepError", &MPGDDIRCRecHits_edepError, &b_MPGDDIRCRecHits_edepError);
+   fChain->SetBranchAddress("OuterMPGDBarrelHits", &OuterMPGDBarrelHits_, &b_OuterMPGDBarrelHits_);
+   fChain->SetBranchAddress("OuterMPGDBarrelHits.cellID", OuterMPGDBarrelHits_cellID, &b_OuterMPGDBarrelHits_cellID);
+   fChain->SetBranchAddress("OuterMPGDBarrelHits.EDep", OuterMPGDBarrelHits_EDep, &b_OuterMPGDBarrelHits_EDep);
+   fChain->SetBranchAddress("OuterMPGDBarrelHits.time", OuterMPGDBarrelHits_time, &b_OuterMPGDBarrelHits_time);
+   fChain->SetBranchAddress("OuterMPGDBarrelHits.pathLength", OuterMPGDBarrelHits_pathLength, &b_OuterMPGDBarrelHits_pathLength);
+   fChain->SetBranchAddress("OuterMPGDBarrelHits.quality", OuterMPGDBarrelHits_quality, &b_OuterMPGDBarrelHits_quality);
+   fChain->SetBranchAddress("OuterMPGDBarrelHits.position.x", OuterMPGDBarrelHits_position_x, &b_OuterMPGDBarrelHits_position_x);
+   fChain->SetBranchAddress("OuterMPGDBarrelHits.position.y", OuterMPGDBarrelHits_position_y, &b_OuterMPGDBarrelHits_position_y);
+   fChain->SetBranchAddress("OuterMPGDBarrelHits.position.z", OuterMPGDBarrelHits_position_z, &b_OuterMPGDBarrelHits_position_z);
+   fChain->SetBranchAddress("OuterMPGDBarrelHits.momentum.x", OuterMPGDBarrelHits_momentum_x, &b_OuterMPGDBarrelHits_momentum_x);
+   fChain->SetBranchAddress("OuterMPGDBarrelHits.momentum.y", OuterMPGDBarrelHits_momentum_y, &b_OuterMPGDBarrelHits_momentum_y);
+   fChain->SetBranchAddress("OuterMPGDBarrelHits.momentum.z", OuterMPGDBarrelHits_momentum_z, &b_OuterMPGDBarrelHits_momentum_z);
+   fChain->SetBranchAddress("_OuterMPGDBarrelHits_MCParticle", &_OuterMPGDBarrelHits_MCParticle_, &b__OuterMPGDBarrelHits_MCParticle_);
+   fChain->SetBranchAddress("_OuterMPGDBarrelHits_MCParticle.index", _OuterMPGDBarrelHits_MCParticle_index, &b__OuterMPGDBarrelHits_MCParticle_index);
+   fChain->SetBranchAddress("_OuterMPGDBarrelHits_MCParticle.collectionID", _OuterMPGDBarrelHits_MCParticle_collectionID, &b__OuterMPGDBarrelHits_MCParticle_collectionID);
+   fChain->SetBranchAddress("OuterMPGDBarrelRawHits", &OuterMPGDBarrelRawHits_, &b_OuterMPGDBarrelRawHits_);
+   fChain->SetBranchAddress("OuterMPGDBarrelRawHits.cellID", OuterMPGDBarrelRawHits_cellID, &b_OuterMPGDBarrelRawHits_cellID);
+   fChain->SetBranchAddress("OuterMPGDBarrelRawHits.charge", OuterMPGDBarrelRawHits_charge, &b_OuterMPGDBarrelRawHits_charge);
+   fChain->SetBranchAddress("OuterMPGDBarrelRawHits.timeStamp", OuterMPGDBarrelRawHits_timeStamp, &b_OuterMPGDBarrelRawHits_timeStamp);
    fChain->SetBranchAddress("OuterMPGDBarrelRecHits", &OuterMPGDBarrelRecHits_, &b_OuterMPGDBarrelRecHits_);
    fChain->SetBranchAddress("OuterMPGDBarrelRecHits.cellID", OuterMPGDBarrelRecHits_cellID, &b_OuterMPGDBarrelRecHits_cellID);
    fChain->SetBranchAddress("OuterMPGDBarrelRecHits.position.x", OuterMPGDBarrelRecHits_position_x, &b_OuterMPGDBarrelRecHits_position_x);
@@ -7922,36 +9302,36 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("OuterMPGDBarrelRecHits.edep", OuterMPGDBarrelRecHits_edep, &b_OuterMPGDBarrelRecHits_edep);
    fChain->SetBranchAddress("OuterMPGDBarrelRecHits.edepError", OuterMPGDBarrelRecHits_edepError, &b_OuterMPGDBarrelRecHits_edepError);
    fChain->SetBranchAddress("ReconstructedChargedJets", &ReconstructedChargedJets_, &b_ReconstructedChargedJets_);
-   fChain->SetBranchAddress("ReconstructedChargedJets.type", ReconstructedChargedJets_type, &b_ReconstructedChargedJets_type);
-   fChain->SetBranchAddress("ReconstructedChargedJets.energy", ReconstructedChargedJets_energy, &b_ReconstructedChargedJets_energy);
-   fChain->SetBranchAddress("ReconstructedChargedJets.momentum.x", ReconstructedChargedJets_momentum_x, &b_ReconstructedChargedJets_momentum_x);
-   fChain->SetBranchAddress("ReconstructedChargedJets.momentum.y", ReconstructedChargedJets_momentum_y, &b_ReconstructedChargedJets_momentum_y);
-   fChain->SetBranchAddress("ReconstructedChargedJets.momentum.z", ReconstructedChargedJets_momentum_z, &b_ReconstructedChargedJets_momentum_z);
-   fChain->SetBranchAddress("ReconstructedChargedJets.referencePoint.x", ReconstructedChargedJets_referencePoint_x, &b_ReconstructedChargedJets_referencePoint_x);
-   fChain->SetBranchAddress("ReconstructedChargedJets.referencePoint.y", ReconstructedChargedJets_referencePoint_y, &b_ReconstructedChargedJets_referencePoint_y);
-   fChain->SetBranchAddress("ReconstructedChargedJets.referencePoint.z", ReconstructedChargedJets_referencePoint_z, &b_ReconstructedChargedJets_referencePoint_z);
-   fChain->SetBranchAddress("ReconstructedChargedJets.charge", ReconstructedChargedJets_charge, &b_ReconstructedChargedJets_charge);
-   fChain->SetBranchAddress("ReconstructedChargedJets.mass", ReconstructedChargedJets_mass, &b_ReconstructedChargedJets_mass);
-   fChain->SetBranchAddress("ReconstructedChargedJets.goodnessOfPID", ReconstructedChargedJets_goodnessOfPID, &b_ReconstructedChargedJets_goodnessOfPID);
-   fChain->SetBranchAddress("ReconstructedChargedJets.covMatrix.xx", ReconstructedChargedJets_covMatrix_xx, &b_ReconstructedChargedJets_covMatrix_xx);
-   fChain->SetBranchAddress("ReconstructedChargedJets.covMatrix.yy", ReconstructedChargedJets_covMatrix_yy, &b_ReconstructedChargedJets_covMatrix_yy);
-   fChain->SetBranchAddress("ReconstructedChargedJets.covMatrix.zz", ReconstructedChargedJets_covMatrix_zz, &b_ReconstructedChargedJets_covMatrix_zz);
-   fChain->SetBranchAddress("ReconstructedChargedJets.covMatrix.tt", ReconstructedChargedJets_covMatrix_tt, &b_ReconstructedChargedJets_covMatrix_tt);
-   fChain->SetBranchAddress("ReconstructedChargedJets.covMatrix.xy", ReconstructedChargedJets_covMatrix_xy, &b_ReconstructedChargedJets_covMatrix_xy);
-   fChain->SetBranchAddress("ReconstructedChargedJets.covMatrix.xz", ReconstructedChargedJets_covMatrix_xz, &b_ReconstructedChargedJets_covMatrix_xz);
-   fChain->SetBranchAddress("ReconstructedChargedJets.covMatrix.xt", ReconstructedChargedJets_covMatrix_xt, &b_ReconstructedChargedJets_covMatrix_xt);
-   fChain->SetBranchAddress("ReconstructedChargedJets.covMatrix.yz", ReconstructedChargedJets_covMatrix_yz, &b_ReconstructedChargedJets_covMatrix_yz);
-   fChain->SetBranchAddress("ReconstructedChargedJets.covMatrix.yt", ReconstructedChargedJets_covMatrix_yt, &b_ReconstructedChargedJets_covMatrix_yt);
-   fChain->SetBranchAddress("ReconstructedChargedJets.covMatrix.zt", ReconstructedChargedJets_covMatrix_zt, &b_ReconstructedChargedJets_covMatrix_zt);
-   fChain->SetBranchAddress("ReconstructedChargedJets.PDG", ReconstructedChargedJets_PDG, &b_ReconstructedChargedJets_PDG);
-   fChain->SetBranchAddress("ReconstructedChargedJets.clusters_begin", ReconstructedChargedJets_clusters_begin, &b_ReconstructedChargedJets_clusters_begin);
-   fChain->SetBranchAddress("ReconstructedChargedJets.clusters_end", ReconstructedChargedJets_clusters_end, &b_ReconstructedChargedJets_clusters_end);
-   fChain->SetBranchAddress("ReconstructedChargedJets.tracks_begin", ReconstructedChargedJets_tracks_begin, &b_ReconstructedChargedJets_tracks_begin);
-   fChain->SetBranchAddress("ReconstructedChargedJets.tracks_end", ReconstructedChargedJets_tracks_end, &b_ReconstructedChargedJets_tracks_end);
-   fChain->SetBranchAddress("ReconstructedChargedJets.particles_begin", ReconstructedChargedJets_particles_begin, &b_ReconstructedChargedJets_particles_begin);
-   fChain->SetBranchAddress("ReconstructedChargedJets.particles_end", ReconstructedChargedJets_particles_end, &b_ReconstructedChargedJets_particles_end);
-   fChain->SetBranchAddress("ReconstructedChargedJets.particleIDs_begin", ReconstructedChargedJets_particleIDs_begin, &b_ReconstructedChargedJets_particleIDs_begin);
-   fChain->SetBranchAddress("ReconstructedChargedJets.particleIDs_end", ReconstructedChargedJets_particleIDs_end, &b_ReconstructedChargedJets_particleIDs_end);
+   fChain->SetBranchAddress("ReconstructedChargedJets.type", &ReconstructedChargedJets_type, &b_ReconstructedChargedJets_type);
+   fChain->SetBranchAddress("ReconstructedChargedJets.energy", &ReconstructedChargedJets_energy, &b_ReconstructedChargedJets_energy);
+   fChain->SetBranchAddress("ReconstructedChargedJets.momentum.x", &ReconstructedChargedJets_momentum_x, &b_ReconstructedChargedJets_momentum_x);
+   fChain->SetBranchAddress("ReconstructedChargedJets.momentum.y", &ReconstructedChargedJets_momentum_y, &b_ReconstructedChargedJets_momentum_y);
+   fChain->SetBranchAddress("ReconstructedChargedJets.momentum.z", &ReconstructedChargedJets_momentum_z, &b_ReconstructedChargedJets_momentum_z);
+   fChain->SetBranchAddress("ReconstructedChargedJets.referencePoint.x", &ReconstructedChargedJets_referencePoint_x, &b_ReconstructedChargedJets_referencePoint_x);
+   fChain->SetBranchAddress("ReconstructedChargedJets.referencePoint.y", &ReconstructedChargedJets_referencePoint_y, &b_ReconstructedChargedJets_referencePoint_y);
+   fChain->SetBranchAddress("ReconstructedChargedJets.referencePoint.z", &ReconstructedChargedJets_referencePoint_z, &b_ReconstructedChargedJets_referencePoint_z);
+   fChain->SetBranchAddress("ReconstructedChargedJets.charge", &ReconstructedChargedJets_charge, &b_ReconstructedChargedJets_charge);
+   fChain->SetBranchAddress("ReconstructedChargedJets.mass", &ReconstructedChargedJets_mass, &b_ReconstructedChargedJets_mass);
+   fChain->SetBranchAddress("ReconstructedChargedJets.goodnessOfPID", &ReconstructedChargedJets_goodnessOfPID, &b_ReconstructedChargedJets_goodnessOfPID);
+   fChain->SetBranchAddress("ReconstructedChargedJets.covMatrix.xx", &ReconstructedChargedJets_covMatrix_xx, &b_ReconstructedChargedJets_covMatrix_xx);
+   fChain->SetBranchAddress("ReconstructedChargedJets.covMatrix.yy", &ReconstructedChargedJets_covMatrix_yy, &b_ReconstructedChargedJets_covMatrix_yy);
+   fChain->SetBranchAddress("ReconstructedChargedJets.covMatrix.zz", &ReconstructedChargedJets_covMatrix_zz, &b_ReconstructedChargedJets_covMatrix_zz);
+   fChain->SetBranchAddress("ReconstructedChargedJets.covMatrix.tt", &ReconstructedChargedJets_covMatrix_tt, &b_ReconstructedChargedJets_covMatrix_tt);
+   fChain->SetBranchAddress("ReconstructedChargedJets.covMatrix.xy", &ReconstructedChargedJets_covMatrix_xy, &b_ReconstructedChargedJets_covMatrix_xy);
+   fChain->SetBranchAddress("ReconstructedChargedJets.covMatrix.xz", &ReconstructedChargedJets_covMatrix_xz, &b_ReconstructedChargedJets_covMatrix_xz);
+   fChain->SetBranchAddress("ReconstructedChargedJets.covMatrix.xt", &ReconstructedChargedJets_covMatrix_xt, &b_ReconstructedChargedJets_covMatrix_xt);
+   fChain->SetBranchAddress("ReconstructedChargedJets.covMatrix.yz", &ReconstructedChargedJets_covMatrix_yz, &b_ReconstructedChargedJets_covMatrix_yz);
+   fChain->SetBranchAddress("ReconstructedChargedJets.covMatrix.yt", &ReconstructedChargedJets_covMatrix_yt, &b_ReconstructedChargedJets_covMatrix_yt);
+   fChain->SetBranchAddress("ReconstructedChargedJets.covMatrix.zt", &ReconstructedChargedJets_covMatrix_zt, &b_ReconstructedChargedJets_covMatrix_zt);
+   fChain->SetBranchAddress("ReconstructedChargedJets.PDG", &ReconstructedChargedJets_PDG, &b_ReconstructedChargedJets_PDG);
+   fChain->SetBranchAddress("ReconstructedChargedJets.clusters_begin", &ReconstructedChargedJets_clusters_begin, &b_ReconstructedChargedJets_clusters_begin);
+   fChain->SetBranchAddress("ReconstructedChargedJets.clusters_end", &ReconstructedChargedJets_clusters_end, &b_ReconstructedChargedJets_clusters_end);
+   fChain->SetBranchAddress("ReconstructedChargedJets.tracks_begin", &ReconstructedChargedJets_tracks_begin, &b_ReconstructedChargedJets_tracks_begin);
+   fChain->SetBranchAddress("ReconstructedChargedJets.tracks_end", &ReconstructedChargedJets_tracks_end, &b_ReconstructedChargedJets_tracks_end);
+   fChain->SetBranchAddress("ReconstructedChargedJets.particles_begin", &ReconstructedChargedJets_particles_begin, &b_ReconstructedChargedJets_particles_begin);
+   fChain->SetBranchAddress("ReconstructedChargedJets.particles_end", &ReconstructedChargedJets_particles_end, &b_ReconstructedChargedJets_particles_end);
+   fChain->SetBranchAddress("ReconstructedChargedJets.particleIDs_begin", &ReconstructedChargedJets_particleIDs_begin, &b_ReconstructedChargedJets_particleIDs_begin);
+   fChain->SetBranchAddress("ReconstructedChargedJets.particleIDs_end", &ReconstructedChargedJets_particleIDs_end, &b_ReconstructedChargedJets_particleIDs_end);
    fChain->SetBranchAddress("_ReconstructedChargedJets_clusters", &_ReconstructedChargedJets_clusters_, &b__ReconstructedChargedJets_clusters_);
    fChain->SetBranchAddress("_ReconstructedChargedJets_clusters.index", &_ReconstructedChargedJets_clusters_index, &b__ReconstructedChargedJets_clusters_index);
    fChain->SetBranchAddress("_ReconstructedChargedJets_clusters.collectionID", &_ReconstructedChargedJets_clusters_collectionID, &b__ReconstructedChargedJets_clusters_collectionID);
@@ -7965,60 +9345,60 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("_ReconstructedChargedJets_particleIDs.index", &_ReconstructedChargedJets_particleIDs_index, &b__ReconstructedChargedJets_particleIDs_index);
    fChain->SetBranchAddress("_ReconstructedChargedJets_particleIDs.collectionID", &_ReconstructedChargedJets_particleIDs_collectionID, &b__ReconstructedChargedJets_particleIDs_collectionID);
    fChain->SetBranchAddress("_ReconstructedChargedJets_startVertex", &_ReconstructedChargedJets_startVertex_, &b__ReconstructedChargedJets_startVertex_);
-   fChain->SetBranchAddress("_ReconstructedChargedJets_startVertex.index", _ReconstructedChargedJets_startVertex_index, &b__ReconstructedChargedJets_startVertex_index);
-   fChain->SetBranchAddress("_ReconstructedChargedJets_startVertex.collectionID", _ReconstructedChargedJets_startVertex_collectionID, &b__ReconstructedChargedJets_startVertex_collectionID);
+   fChain->SetBranchAddress("_ReconstructedChargedJets_startVertex.index", &_ReconstructedChargedJets_startVertex_index, &b__ReconstructedChargedJets_startVertex_index);
+   fChain->SetBranchAddress("_ReconstructedChargedJets_startVertex.collectionID", &_ReconstructedChargedJets_startVertex_collectionID, &b__ReconstructedChargedJets_startVertex_collectionID);
    fChain->SetBranchAddress("_ReconstructedChargedJets_particleIDUsed", &_ReconstructedChargedJets_particleIDUsed_, &b__ReconstructedChargedJets_particleIDUsed_);
-   fChain->SetBranchAddress("_ReconstructedChargedJets_particleIDUsed.index", _ReconstructedChargedJets_particleIDUsed_index, &b__ReconstructedChargedJets_particleIDUsed_index);
-   fChain->SetBranchAddress("_ReconstructedChargedJets_particleIDUsed.collectionID", _ReconstructedChargedJets_particleIDUsed_collectionID, &b__ReconstructedChargedJets_particleIDUsed_collectionID);
+   fChain->SetBranchAddress("_ReconstructedChargedJets_particleIDUsed.index", &_ReconstructedChargedJets_particleIDUsed_index, &b__ReconstructedChargedJets_particleIDUsed_index);
+   fChain->SetBranchAddress("_ReconstructedChargedJets_particleIDUsed.collectionID", &_ReconstructedChargedJets_particleIDUsed_collectionID, &b__ReconstructedChargedJets_particleIDUsed_collectionID);
    fChain->SetBranchAddress("ReconstructedChargedParticleAssociations", &ReconstructedChargedParticleAssociations_, &b_ReconstructedChargedParticleAssociations_);
-   fChain->SetBranchAddress("ReconstructedChargedParticleAssociations.simID", ReconstructedChargedParticleAssociations_simID, &b_ReconstructedChargedParticleAssociations_simID);
-   fChain->SetBranchAddress("ReconstructedChargedParticleAssociations.recID", ReconstructedChargedParticleAssociations_recID, &b_ReconstructedChargedParticleAssociations_recID);
-   fChain->SetBranchAddress("ReconstructedChargedParticleAssociations.weight", ReconstructedChargedParticleAssociations_weight, &b_ReconstructedChargedParticleAssociations_weight);
+   fChain->SetBranchAddress("ReconstructedChargedParticleAssociations.simID", &ReconstructedChargedParticleAssociations_simID, &b_ReconstructedChargedParticleAssociations_simID);
+   fChain->SetBranchAddress("ReconstructedChargedParticleAssociations.recID", &ReconstructedChargedParticleAssociations_recID, &b_ReconstructedChargedParticleAssociations_recID);
+   fChain->SetBranchAddress("ReconstructedChargedParticleAssociations.weight", &ReconstructedChargedParticleAssociations_weight, &b_ReconstructedChargedParticleAssociations_weight);
    fChain->SetBranchAddress("_ReconstructedChargedParticleAssociations_rec", &_ReconstructedChargedParticleAssociations_rec_, &b__ReconstructedChargedParticleAssociations_rec_);
-   fChain->SetBranchAddress("_ReconstructedChargedParticleAssociations_rec.index", _ReconstructedChargedParticleAssociations_rec_index, &b__ReconstructedChargedParticleAssociations_rec_index);
-   fChain->SetBranchAddress("_ReconstructedChargedParticleAssociations_rec.collectionID", _ReconstructedChargedParticleAssociations_rec_collectionID, &b__ReconstructedChargedParticleAssociations_rec_collectionID);
+   fChain->SetBranchAddress("_ReconstructedChargedParticleAssociations_rec.index", &_ReconstructedChargedParticleAssociations_rec_index, &b__ReconstructedChargedParticleAssociations_rec_index);
+   fChain->SetBranchAddress("_ReconstructedChargedParticleAssociations_rec.collectionID", &_ReconstructedChargedParticleAssociations_rec_collectionID, &b__ReconstructedChargedParticleAssociations_rec_collectionID);
    fChain->SetBranchAddress("_ReconstructedChargedParticleAssociations_sim", &_ReconstructedChargedParticleAssociations_sim_, &b__ReconstructedChargedParticleAssociations_sim_);
-   fChain->SetBranchAddress("_ReconstructedChargedParticleAssociations_sim.index", _ReconstructedChargedParticleAssociations_sim_index, &b__ReconstructedChargedParticleAssociations_sim_index);
-   fChain->SetBranchAddress("_ReconstructedChargedParticleAssociations_sim.collectionID", _ReconstructedChargedParticleAssociations_sim_collectionID, &b__ReconstructedChargedParticleAssociations_sim_collectionID);
+   fChain->SetBranchAddress("_ReconstructedChargedParticleAssociations_sim.index", &_ReconstructedChargedParticleAssociations_sim_index, &b__ReconstructedChargedParticleAssociations_sim_index);
+   fChain->SetBranchAddress("_ReconstructedChargedParticleAssociations_sim.collectionID", &_ReconstructedChargedParticleAssociations_sim_collectionID, &b__ReconstructedChargedParticleAssociations_sim_collectionID);
    fChain->SetBranchAddress("ReconstructedChargedParticleIDs", &ReconstructedChargedParticleIDs_, &b_ReconstructedChargedParticleIDs_);
-   fChain->SetBranchAddress("ReconstructedChargedParticleIDs.type", ReconstructedChargedParticleIDs_type, &b_ReconstructedChargedParticleIDs_type);
-   fChain->SetBranchAddress("ReconstructedChargedParticleIDs.PDG", ReconstructedChargedParticleIDs_PDG, &b_ReconstructedChargedParticleIDs_PDG);
-   fChain->SetBranchAddress("ReconstructedChargedParticleIDs.algorithmType", ReconstructedChargedParticleIDs_algorithmType, &b_ReconstructedChargedParticleIDs_algorithmType);
-   fChain->SetBranchAddress("ReconstructedChargedParticleIDs.likelihood", ReconstructedChargedParticleIDs_likelihood, &b_ReconstructedChargedParticleIDs_likelihood);
-   fChain->SetBranchAddress("ReconstructedChargedParticleIDs.parameters_begin", ReconstructedChargedParticleIDs_parameters_begin, &b_ReconstructedChargedParticleIDs_parameters_begin);
-   fChain->SetBranchAddress("ReconstructedChargedParticleIDs.parameters_end", ReconstructedChargedParticleIDs_parameters_end, &b_ReconstructedChargedParticleIDs_parameters_end);
+   fChain->SetBranchAddress("ReconstructedChargedParticleIDs.type", &ReconstructedChargedParticleIDs_type, &b_ReconstructedChargedParticleIDs_type);
+   fChain->SetBranchAddress("ReconstructedChargedParticleIDs.PDG", &ReconstructedChargedParticleIDs_PDG, &b_ReconstructedChargedParticleIDs_PDG);
+   fChain->SetBranchAddress("ReconstructedChargedParticleIDs.algorithmType", &ReconstructedChargedParticleIDs_algorithmType, &b_ReconstructedChargedParticleIDs_algorithmType);
+   fChain->SetBranchAddress("ReconstructedChargedParticleIDs.likelihood", &ReconstructedChargedParticleIDs_likelihood, &b_ReconstructedChargedParticleIDs_likelihood);
+   fChain->SetBranchAddress("ReconstructedChargedParticleIDs.parameters_begin", &ReconstructedChargedParticleIDs_parameters_begin, &b_ReconstructedChargedParticleIDs_parameters_begin);
+   fChain->SetBranchAddress("ReconstructedChargedParticleIDs.parameters_end", &ReconstructedChargedParticleIDs_parameters_end, &b_ReconstructedChargedParticleIDs_parameters_end);
    fChain->SetBranchAddress("_ReconstructedChargedParticleIDs_parameters", &_ReconstructedChargedParticleIDs_parameters, &b__ReconstructedChargedParticleIDs_parameters);
    fChain->SetBranchAddress("ReconstructedChargedParticles", &ReconstructedChargedParticles_, &b_ReconstructedChargedParticles_);
-   fChain->SetBranchAddress("ReconstructedChargedParticles.type", ReconstructedChargedParticles_type, &b_ReconstructedChargedParticles_type);
-   fChain->SetBranchAddress("ReconstructedChargedParticles.energy", ReconstructedChargedParticles_energy, &b_ReconstructedChargedParticles_energy);
-   fChain->SetBranchAddress("ReconstructedChargedParticles.momentum.x", ReconstructedChargedParticles_momentum_x, &b_ReconstructedChargedParticles_momentum_x);
-   fChain->SetBranchAddress("ReconstructedChargedParticles.momentum.y", ReconstructedChargedParticles_momentum_y, &b_ReconstructedChargedParticles_momentum_y);
-   fChain->SetBranchAddress("ReconstructedChargedParticles.momentum.z", ReconstructedChargedParticles_momentum_z, &b_ReconstructedChargedParticles_momentum_z);
-   fChain->SetBranchAddress("ReconstructedChargedParticles.referencePoint.x", ReconstructedChargedParticles_referencePoint_x, &b_ReconstructedChargedParticles_referencePoint_x);
-   fChain->SetBranchAddress("ReconstructedChargedParticles.referencePoint.y", ReconstructedChargedParticles_referencePoint_y, &b_ReconstructedChargedParticles_referencePoint_y);
-   fChain->SetBranchAddress("ReconstructedChargedParticles.referencePoint.z", ReconstructedChargedParticles_referencePoint_z, &b_ReconstructedChargedParticles_referencePoint_z);
-   fChain->SetBranchAddress("ReconstructedChargedParticles.charge", ReconstructedChargedParticles_charge, &b_ReconstructedChargedParticles_charge);
-   fChain->SetBranchAddress("ReconstructedChargedParticles.mass", ReconstructedChargedParticles_mass, &b_ReconstructedChargedParticles_mass);
-   fChain->SetBranchAddress("ReconstructedChargedParticles.goodnessOfPID", ReconstructedChargedParticles_goodnessOfPID, &b_ReconstructedChargedParticles_goodnessOfPID);
-   fChain->SetBranchAddress("ReconstructedChargedParticles.covMatrix.xx", ReconstructedChargedParticles_covMatrix_xx, &b_ReconstructedChargedParticles_covMatrix_xx);
-   fChain->SetBranchAddress("ReconstructedChargedParticles.covMatrix.yy", ReconstructedChargedParticles_covMatrix_yy, &b_ReconstructedChargedParticles_covMatrix_yy);
-   fChain->SetBranchAddress("ReconstructedChargedParticles.covMatrix.zz", ReconstructedChargedParticles_covMatrix_zz, &b_ReconstructedChargedParticles_covMatrix_zz);
-   fChain->SetBranchAddress("ReconstructedChargedParticles.covMatrix.tt", ReconstructedChargedParticles_covMatrix_tt, &b_ReconstructedChargedParticles_covMatrix_tt);
-   fChain->SetBranchAddress("ReconstructedChargedParticles.covMatrix.xy", ReconstructedChargedParticles_covMatrix_xy, &b_ReconstructedChargedParticles_covMatrix_xy);
-   fChain->SetBranchAddress("ReconstructedChargedParticles.covMatrix.xz", ReconstructedChargedParticles_covMatrix_xz, &b_ReconstructedChargedParticles_covMatrix_xz);
-   fChain->SetBranchAddress("ReconstructedChargedParticles.covMatrix.xt", ReconstructedChargedParticles_covMatrix_xt, &b_ReconstructedChargedParticles_covMatrix_xt);
-   fChain->SetBranchAddress("ReconstructedChargedParticles.covMatrix.yz", ReconstructedChargedParticles_covMatrix_yz, &b_ReconstructedChargedParticles_covMatrix_yz);
-   fChain->SetBranchAddress("ReconstructedChargedParticles.covMatrix.yt", ReconstructedChargedParticles_covMatrix_yt, &b_ReconstructedChargedParticles_covMatrix_yt);
-   fChain->SetBranchAddress("ReconstructedChargedParticles.covMatrix.zt", ReconstructedChargedParticles_covMatrix_zt, &b_ReconstructedChargedParticles_covMatrix_zt);
-   fChain->SetBranchAddress("ReconstructedChargedParticles.PDG", ReconstructedChargedParticles_PDG, &b_ReconstructedChargedParticles_PDG);
-   fChain->SetBranchAddress("ReconstructedChargedParticles.clusters_begin", ReconstructedChargedParticles_clusters_begin, &b_ReconstructedChargedParticles_clusters_begin);
-   fChain->SetBranchAddress("ReconstructedChargedParticles.clusters_end", ReconstructedChargedParticles_clusters_end, &b_ReconstructedChargedParticles_clusters_end);
-   fChain->SetBranchAddress("ReconstructedChargedParticles.tracks_begin", ReconstructedChargedParticles_tracks_begin, &b_ReconstructedChargedParticles_tracks_begin);
-   fChain->SetBranchAddress("ReconstructedChargedParticles.tracks_end", ReconstructedChargedParticles_tracks_end, &b_ReconstructedChargedParticles_tracks_end);
-   fChain->SetBranchAddress("ReconstructedChargedParticles.particles_begin", ReconstructedChargedParticles_particles_begin, &b_ReconstructedChargedParticles_particles_begin);
-   fChain->SetBranchAddress("ReconstructedChargedParticles.particles_end", ReconstructedChargedParticles_particles_end, &b_ReconstructedChargedParticles_particles_end);
-   fChain->SetBranchAddress("ReconstructedChargedParticles.particleIDs_begin", ReconstructedChargedParticles_particleIDs_begin, &b_ReconstructedChargedParticles_particleIDs_begin);
-   fChain->SetBranchAddress("ReconstructedChargedParticles.particleIDs_end", ReconstructedChargedParticles_particleIDs_end, &b_ReconstructedChargedParticles_particleIDs_end);
+   fChain->SetBranchAddress("ReconstructedChargedParticles.type", &ReconstructedChargedParticles_type, &b_ReconstructedChargedParticles_type);
+   fChain->SetBranchAddress("ReconstructedChargedParticles.energy", &ReconstructedChargedParticles_energy, &b_ReconstructedChargedParticles_energy);
+   fChain->SetBranchAddress("ReconstructedChargedParticles.momentum.x", &ReconstructedChargedParticles_momentum_x, &b_ReconstructedChargedParticles_momentum_x);
+   fChain->SetBranchAddress("ReconstructedChargedParticles.momentum.y", &ReconstructedChargedParticles_momentum_y, &b_ReconstructedChargedParticles_momentum_y);
+   fChain->SetBranchAddress("ReconstructedChargedParticles.momentum.z", &ReconstructedChargedParticles_momentum_z, &b_ReconstructedChargedParticles_momentum_z);
+   fChain->SetBranchAddress("ReconstructedChargedParticles.referencePoint.x", &ReconstructedChargedParticles_referencePoint_x, &b_ReconstructedChargedParticles_referencePoint_x);
+   fChain->SetBranchAddress("ReconstructedChargedParticles.referencePoint.y", &ReconstructedChargedParticles_referencePoint_y, &b_ReconstructedChargedParticles_referencePoint_y);
+   fChain->SetBranchAddress("ReconstructedChargedParticles.referencePoint.z", &ReconstructedChargedParticles_referencePoint_z, &b_ReconstructedChargedParticles_referencePoint_z);
+   fChain->SetBranchAddress("ReconstructedChargedParticles.charge", &ReconstructedChargedParticles_charge, &b_ReconstructedChargedParticles_charge);
+   fChain->SetBranchAddress("ReconstructedChargedParticles.mass", &ReconstructedChargedParticles_mass, &b_ReconstructedChargedParticles_mass);
+   fChain->SetBranchAddress("ReconstructedChargedParticles.goodnessOfPID", &ReconstructedChargedParticles_goodnessOfPID, &b_ReconstructedChargedParticles_goodnessOfPID);
+   fChain->SetBranchAddress("ReconstructedChargedParticles.covMatrix.xx", &ReconstructedChargedParticles_covMatrix_xx, &b_ReconstructedChargedParticles_covMatrix_xx);
+   fChain->SetBranchAddress("ReconstructedChargedParticles.covMatrix.yy", &ReconstructedChargedParticles_covMatrix_yy, &b_ReconstructedChargedParticles_covMatrix_yy);
+   fChain->SetBranchAddress("ReconstructedChargedParticles.covMatrix.zz", &ReconstructedChargedParticles_covMatrix_zz, &b_ReconstructedChargedParticles_covMatrix_zz);
+   fChain->SetBranchAddress("ReconstructedChargedParticles.covMatrix.tt", &ReconstructedChargedParticles_covMatrix_tt, &b_ReconstructedChargedParticles_covMatrix_tt);
+   fChain->SetBranchAddress("ReconstructedChargedParticles.covMatrix.xy", &ReconstructedChargedParticles_covMatrix_xy, &b_ReconstructedChargedParticles_covMatrix_xy);
+   fChain->SetBranchAddress("ReconstructedChargedParticles.covMatrix.xz", &ReconstructedChargedParticles_covMatrix_xz, &b_ReconstructedChargedParticles_covMatrix_xz);
+   fChain->SetBranchAddress("ReconstructedChargedParticles.covMatrix.xt", &ReconstructedChargedParticles_covMatrix_xt, &b_ReconstructedChargedParticles_covMatrix_xt);
+   fChain->SetBranchAddress("ReconstructedChargedParticles.covMatrix.yz", &ReconstructedChargedParticles_covMatrix_yz, &b_ReconstructedChargedParticles_covMatrix_yz);
+   fChain->SetBranchAddress("ReconstructedChargedParticles.covMatrix.yt", &ReconstructedChargedParticles_covMatrix_yt, &b_ReconstructedChargedParticles_covMatrix_yt);
+   fChain->SetBranchAddress("ReconstructedChargedParticles.covMatrix.zt", &ReconstructedChargedParticles_covMatrix_zt, &b_ReconstructedChargedParticles_covMatrix_zt);
+   fChain->SetBranchAddress("ReconstructedChargedParticles.PDG", &ReconstructedChargedParticles_PDG, &b_ReconstructedChargedParticles_PDG);
+   fChain->SetBranchAddress("ReconstructedChargedParticles.clusters_begin", &ReconstructedChargedParticles_clusters_begin, &b_ReconstructedChargedParticles_clusters_begin);
+   fChain->SetBranchAddress("ReconstructedChargedParticles.clusters_end", &ReconstructedChargedParticles_clusters_end, &b_ReconstructedChargedParticles_clusters_end);
+   fChain->SetBranchAddress("ReconstructedChargedParticles.tracks_begin", &ReconstructedChargedParticles_tracks_begin, &b_ReconstructedChargedParticles_tracks_begin);
+   fChain->SetBranchAddress("ReconstructedChargedParticles.tracks_end", &ReconstructedChargedParticles_tracks_end, &b_ReconstructedChargedParticles_tracks_end);
+   fChain->SetBranchAddress("ReconstructedChargedParticles.particles_begin", &ReconstructedChargedParticles_particles_begin, &b_ReconstructedChargedParticles_particles_begin);
+   fChain->SetBranchAddress("ReconstructedChargedParticles.particles_end", &ReconstructedChargedParticles_particles_end, &b_ReconstructedChargedParticles_particles_end);
+   fChain->SetBranchAddress("ReconstructedChargedParticles.particleIDs_begin", &ReconstructedChargedParticles_particleIDs_begin, &b_ReconstructedChargedParticles_particleIDs_begin);
+   fChain->SetBranchAddress("ReconstructedChargedParticles.particleIDs_end", &ReconstructedChargedParticles_particleIDs_end, &b_ReconstructedChargedParticles_particleIDs_end);
    fChain->SetBranchAddress("_ReconstructedChargedParticles_clusters", &_ReconstructedChargedParticles_clusters_, &b__ReconstructedChargedParticles_clusters_);
    fChain->SetBranchAddress("_ReconstructedChargedParticles_clusters.index", &_ReconstructedChargedParticles_clusters_index, &b__ReconstructedChargedParticles_clusters_index);
    fChain->SetBranchAddress("_ReconstructedChargedParticles_clusters.collectionID", &_ReconstructedChargedParticles_clusters_collectionID, &b__ReconstructedChargedParticles_clusters_collectionID);
@@ -8029,45 +9409,45 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("_ReconstructedChargedParticles_particles.index", &_ReconstructedChargedParticles_particles_index, &b__ReconstructedChargedParticles_particles_index);
    fChain->SetBranchAddress("_ReconstructedChargedParticles_particles.collectionID", &_ReconstructedChargedParticles_particles_collectionID, &b__ReconstructedChargedParticles_particles_collectionID);
    fChain->SetBranchAddress("_ReconstructedChargedParticles_particleIDs", &_ReconstructedChargedParticles_particleIDs_, &b__ReconstructedChargedParticles_particleIDs_);
-   fChain->SetBranchAddress("_ReconstructedChargedParticles_particleIDs.index", _ReconstructedChargedParticles_particleIDs_index, &b__ReconstructedChargedParticles_particleIDs_index);
-   fChain->SetBranchAddress("_ReconstructedChargedParticles_particleIDs.collectionID", _ReconstructedChargedParticles_particleIDs_collectionID, &b__ReconstructedChargedParticles_particleIDs_collectionID);
+   fChain->SetBranchAddress("_ReconstructedChargedParticles_particleIDs.index", &_ReconstructedChargedParticles_particleIDs_index, &b__ReconstructedChargedParticles_particleIDs_index);
+   fChain->SetBranchAddress("_ReconstructedChargedParticles_particleIDs.collectionID", &_ReconstructedChargedParticles_particleIDs_collectionID, &b__ReconstructedChargedParticles_particleIDs_collectionID);
    fChain->SetBranchAddress("_ReconstructedChargedParticles_startVertex", &_ReconstructedChargedParticles_startVertex_, &b__ReconstructedChargedParticles_startVertex_);
-   fChain->SetBranchAddress("_ReconstructedChargedParticles_startVertex.index", _ReconstructedChargedParticles_startVertex_index, &b__ReconstructedChargedParticles_startVertex_index);
-   fChain->SetBranchAddress("_ReconstructedChargedParticles_startVertex.collectionID", _ReconstructedChargedParticles_startVertex_collectionID, &b__ReconstructedChargedParticles_startVertex_collectionID);
+   fChain->SetBranchAddress("_ReconstructedChargedParticles_startVertex.index", &_ReconstructedChargedParticles_startVertex_index, &b__ReconstructedChargedParticles_startVertex_index);
+   fChain->SetBranchAddress("_ReconstructedChargedParticles_startVertex.collectionID", &_ReconstructedChargedParticles_startVertex_collectionID, &b__ReconstructedChargedParticles_startVertex_collectionID);
    fChain->SetBranchAddress("_ReconstructedChargedParticles_particleIDUsed", &_ReconstructedChargedParticles_particleIDUsed_, &b__ReconstructedChargedParticles_particleIDUsed_);
-   fChain->SetBranchAddress("_ReconstructedChargedParticles_particleIDUsed.index", _ReconstructedChargedParticles_particleIDUsed_index, &b__ReconstructedChargedParticles_particleIDUsed_index);
-   fChain->SetBranchAddress("_ReconstructedChargedParticles_particleIDUsed.collectionID", _ReconstructedChargedParticles_particleIDUsed_collectionID, &b__ReconstructedChargedParticles_particleIDUsed_collectionID);
+   fChain->SetBranchAddress("_ReconstructedChargedParticles_particleIDUsed.index", &_ReconstructedChargedParticles_particleIDUsed_index, &b__ReconstructedChargedParticles_particleIDUsed_index);
+   fChain->SetBranchAddress("_ReconstructedChargedParticles_particleIDUsed.collectionID", &_ReconstructedChargedParticles_particleIDUsed_collectionID, &b__ReconstructedChargedParticles_particleIDUsed_collectionID);
    fChain->SetBranchAddress("ReconstructedElectrons", &ReconstructedElectrons_, &b_ReconstructedElectrons_);
-   fChain->SetBranchAddress("ReconstructedElectrons.type", ReconstructedElectrons_type, &b_ReconstructedElectrons_type);
-   fChain->SetBranchAddress("ReconstructedElectrons.energy", ReconstructedElectrons_energy, &b_ReconstructedElectrons_energy);
-   fChain->SetBranchAddress("ReconstructedElectrons.momentum.x", ReconstructedElectrons_momentum_x, &b_ReconstructedElectrons_momentum_x);
-   fChain->SetBranchAddress("ReconstructedElectrons.momentum.y", ReconstructedElectrons_momentum_y, &b_ReconstructedElectrons_momentum_y);
-   fChain->SetBranchAddress("ReconstructedElectrons.momentum.z", ReconstructedElectrons_momentum_z, &b_ReconstructedElectrons_momentum_z);
-   fChain->SetBranchAddress("ReconstructedElectrons.referencePoint.x", ReconstructedElectrons_referencePoint_x, &b_ReconstructedElectrons_referencePoint_x);
-   fChain->SetBranchAddress("ReconstructedElectrons.referencePoint.y", ReconstructedElectrons_referencePoint_y, &b_ReconstructedElectrons_referencePoint_y);
-   fChain->SetBranchAddress("ReconstructedElectrons.referencePoint.z", ReconstructedElectrons_referencePoint_z, &b_ReconstructedElectrons_referencePoint_z);
-   fChain->SetBranchAddress("ReconstructedElectrons.charge", ReconstructedElectrons_charge, &b_ReconstructedElectrons_charge);
-   fChain->SetBranchAddress("ReconstructedElectrons.mass", ReconstructedElectrons_mass, &b_ReconstructedElectrons_mass);
-   fChain->SetBranchAddress("ReconstructedElectrons.goodnessOfPID", ReconstructedElectrons_goodnessOfPID, &b_ReconstructedElectrons_goodnessOfPID);
-   fChain->SetBranchAddress("ReconstructedElectrons.covMatrix.xx", ReconstructedElectrons_covMatrix_xx, &b_ReconstructedElectrons_covMatrix_xx);
-   fChain->SetBranchAddress("ReconstructedElectrons.covMatrix.yy", ReconstructedElectrons_covMatrix_yy, &b_ReconstructedElectrons_covMatrix_yy);
-   fChain->SetBranchAddress("ReconstructedElectrons.covMatrix.zz", ReconstructedElectrons_covMatrix_zz, &b_ReconstructedElectrons_covMatrix_zz);
-   fChain->SetBranchAddress("ReconstructedElectrons.covMatrix.tt", ReconstructedElectrons_covMatrix_tt, &b_ReconstructedElectrons_covMatrix_tt);
-   fChain->SetBranchAddress("ReconstructedElectrons.covMatrix.xy", ReconstructedElectrons_covMatrix_xy, &b_ReconstructedElectrons_covMatrix_xy);
-   fChain->SetBranchAddress("ReconstructedElectrons.covMatrix.xz", ReconstructedElectrons_covMatrix_xz, &b_ReconstructedElectrons_covMatrix_xz);
-   fChain->SetBranchAddress("ReconstructedElectrons.covMatrix.xt", ReconstructedElectrons_covMatrix_xt, &b_ReconstructedElectrons_covMatrix_xt);
-   fChain->SetBranchAddress("ReconstructedElectrons.covMatrix.yz", ReconstructedElectrons_covMatrix_yz, &b_ReconstructedElectrons_covMatrix_yz);
-   fChain->SetBranchAddress("ReconstructedElectrons.covMatrix.yt", ReconstructedElectrons_covMatrix_yt, &b_ReconstructedElectrons_covMatrix_yt);
-   fChain->SetBranchAddress("ReconstructedElectrons.covMatrix.zt", ReconstructedElectrons_covMatrix_zt, &b_ReconstructedElectrons_covMatrix_zt);
-   fChain->SetBranchAddress("ReconstructedElectrons.PDG", ReconstructedElectrons_PDG, &b_ReconstructedElectrons_PDG);
-   fChain->SetBranchAddress("ReconstructedElectrons.clusters_begin", ReconstructedElectrons_clusters_begin, &b_ReconstructedElectrons_clusters_begin);
-   fChain->SetBranchAddress("ReconstructedElectrons.clusters_end", ReconstructedElectrons_clusters_end, &b_ReconstructedElectrons_clusters_end);
-   fChain->SetBranchAddress("ReconstructedElectrons.tracks_begin", ReconstructedElectrons_tracks_begin, &b_ReconstructedElectrons_tracks_begin);
-   fChain->SetBranchAddress("ReconstructedElectrons.tracks_end", ReconstructedElectrons_tracks_end, &b_ReconstructedElectrons_tracks_end);
-   fChain->SetBranchAddress("ReconstructedElectrons.particles_begin", ReconstructedElectrons_particles_begin, &b_ReconstructedElectrons_particles_begin);
-   fChain->SetBranchAddress("ReconstructedElectrons.particles_end", ReconstructedElectrons_particles_end, &b_ReconstructedElectrons_particles_end);
-   fChain->SetBranchAddress("ReconstructedElectrons.particleIDs_begin", ReconstructedElectrons_particleIDs_begin, &b_ReconstructedElectrons_particleIDs_begin);
-   fChain->SetBranchAddress("ReconstructedElectrons.particleIDs_end", ReconstructedElectrons_particleIDs_end, &b_ReconstructedElectrons_particleIDs_end);
+   fChain->SetBranchAddress("ReconstructedElectrons.type", &ReconstructedElectrons_type, &b_ReconstructedElectrons_type);
+   fChain->SetBranchAddress("ReconstructedElectrons.energy", &ReconstructedElectrons_energy, &b_ReconstructedElectrons_energy);
+   fChain->SetBranchAddress("ReconstructedElectrons.momentum.x", &ReconstructedElectrons_momentum_x, &b_ReconstructedElectrons_momentum_x);
+   fChain->SetBranchAddress("ReconstructedElectrons.momentum.y", &ReconstructedElectrons_momentum_y, &b_ReconstructedElectrons_momentum_y);
+   fChain->SetBranchAddress("ReconstructedElectrons.momentum.z", &ReconstructedElectrons_momentum_z, &b_ReconstructedElectrons_momentum_z);
+   fChain->SetBranchAddress("ReconstructedElectrons.referencePoint.x", &ReconstructedElectrons_referencePoint_x, &b_ReconstructedElectrons_referencePoint_x);
+   fChain->SetBranchAddress("ReconstructedElectrons.referencePoint.y", &ReconstructedElectrons_referencePoint_y, &b_ReconstructedElectrons_referencePoint_y);
+   fChain->SetBranchAddress("ReconstructedElectrons.referencePoint.z", &ReconstructedElectrons_referencePoint_z, &b_ReconstructedElectrons_referencePoint_z);
+   fChain->SetBranchAddress("ReconstructedElectrons.charge", &ReconstructedElectrons_charge, &b_ReconstructedElectrons_charge);
+   fChain->SetBranchAddress("ReconstructedElectrons.mass", &ReconstructedElectrons_mass, &b_ReconstructedElectrons_mass);
+   fChain->SetBranchAddress("ReconstructedElectrons.goodnessOfPID", &ReconstructedElectrons_goodnessOfPID, &b_ReconstructedElectrons_goodnessOfPID);
+   fChain->SetBranchAddress("ReconstructedElectrons.covMatrix.xx", &ReconstructedElectrons_covMatrix_xx, &b_ReconstructedElectrons_covMatrix_xx);
+   fChain->SetBranchAddress("ReconstructedElectrons.covMatrix.yy", &ReconstructedElectrons_covMatrix_yy, &b_ReconstructedElectrons_covMatrix_yy);
+   fChain->SetBranchAddress("ReconstructedElectrons.covMatrix.zz", &ReconstructedElectrons_covMatrix_zz, &b_ReconstructedElectrons_covMatrix_zz);
+   fChain->SetBranchAddress("ReconstructedElectrons.covMatrix.tt", &ReconstructedElectrons_covMatrix_tt, &b_ReconstructedElectrons_covMatrix_tt);
+   fChain->SetBranchAddress("ReconstructedElectrons.covMatrix.xy", &ReconstructedElectrons_covMatrix_xy, &b_ReconstructedElectrons_covMatrix_xy);
+   fChain->SetBranchAddress("ReconstructedElectrons.covMatrix.xz", &ReconstructedElectrons_covMatrix_xz, &b_ReconstructedElectrons_covMatrix_xz);
+   fChain->SetBranchAddress("ReconstructedElectrons.covMatrix.xt", &ReconstructedElectrons_covMatrix_xt, &b_ReconstructedElectrons_covMatrix_xt);
+   fChain->SetBranchAddress("ReconstructedElectrons.covMatrix.yz", &ReconstructedElectrons_covMatrix_yz, &b_ReconstructedElectrons_covMatrix_yz);
+   fChain->SetBranchAddress("ReconstructedElectrons.covMatrix.yt", &ReconstructedElectrons_covMatrix_yt, &b_ReconstructedElectrons_covMatrix_yt);
+   fChain->SetBranchAddress("ReconstructedElectrons.covMatrix.zt", &ReconstructedElectrons_covMatrix_zt, &b_ReconstructedElectrons_covMatrix_zt);
+   fChain->SetBranchAddress("ReconstructedElectrons.PDG", &ReconstructedElectrons_PDG, &b_ReconstructedElectrons_PDG);
+   fChain->SetBranchAddress("ReconstructedElectrons.clusters_begin", &ReconstructedElectrons_clusters_begin, &b_ReconstructedElectrons_clusters_begin);
+   fChain->SetBranchAddress("ReconstructedElectrons.clusters_end", &ReconstructedElectrons_clusters_end, &b_ReconstructedElectrons_clusters_end);
+   fChain->SetBranchAddress("ReconstructedElectrons.tracks_begin", &ReconstructedElectrons_tracks_begin, &b_ReconstructedElectrons_tracks_begin);
+   fChain->SetBranchAddress("ReconstructedElectrons.tracks_end", &ReconstructedElectrons_tracks_end, &b_ReconstructedElectrons_tracks_end);
+   fChain->SetBranchAddress("ReconstructedElectrons.particles_begin", &ReconstructedElectrons_particles_begin, &b_ReconstructedElectrons_particles_begin);
+   fChain->SetBranchAddress("ReconstructedElectrons.particles_end", &ReconstructedElectrons_particles_end, &b_ReconstructedElectrons_particles_end);
+   fChain->SetBranchAddress("ReconstructedElectrons.particleIDs_begin", &ReconstructedElectrons_particleIDs_begin, &b_ReconstructedElectrons_particleIDs_begin);
+   fChain->SetBranchAddress("ReconstructedElectrons.particleIDs_end", &ReconstructedElectrons_particleIDs_end, &b_ReconstructedElectrons_particleIDs_end);
    fChain->SetBranchAddress("_ReconstructedElectrons_clusters", &_ReconstructedElectrons_clusters_, &b__ReconstructedElectrons_clusters_);
    fChain->SetBranchAddress("_ReconstructedElectrons_clusters.index", &_ReconstructedElectrons_clusters_index, &b__ReconstructedElectrons_clusters_index);
    fChain->SetBranchAddress("_ReconstructedElectrons_clusters.collectionID", &_ReconstructedElectrons_clusters_collectionID, &b__ReconstructedElectrons_clusters_collectionID);
@@ -8078,14 +9458,14 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("_ReconstructedElectrons_particles.index", &_ReconstructedElectrons_particles_index, &b__ReconstructedElectrons_particles_index);
    fChain->SetBranchAddress("_ReconstructedElectrons_particles.collectionID", &_ReconstructedElectrons_particles_collectionID, &b__ReconstructedElectrons_particles_collectionID);
    fChain->SetBranchAddress("_ReconstructedElectrons_particleIDs", &_ReconstructedElectrons_particleIDs_, &b__ReconstructedElectrons_particleIDs_);
-   fChain->SetBranchAddress("_ReconstructedElectrons_particleIDs.index", _ReconstructedElectrons_particleIDs_index, &b__ReconstructedElectrons_particleIDs_index);
-   fChain->SetBranchAddress("_ReconstructedElectrons_particleIDs.collectionID", _ReconstructedElectrons_particleIDs_collectionID, &b__ReconstructedElectrons_particleIDs_collectionID);
+   fChain->SetBranchAddress("_ReconstructedElectrons_particleIDs.index", &_ReconstructedElectrons_particleIDs_index, &b__ReconstructedElectrons_particleIDs_index);
+   fChain->SetBranchAddress("_ReconstructedElectrons_particleIDs.collectionID", &_ReconstructedElectrons_particleIDs_collectionID, &b__ReconstructedElectrons_particleIDs_collectionID);
    fChain->SetBranchAddress("_ReconstructedElectrons_startVertex", &_ReconstructedElectrons_startVertex_, &b__ReconstructedElectrons_startVertex_);
-   fChain->SetBranchAddress("_ReconstructedElectrons_startVertex.index", _ReconstructedElectrons_startVertex_index, &b__ReconstructedElectrons_startVertex_index);
-   fChain->SetBranchAddress("_ReconstructedElectrons_startVertex.collectionID", _ReconstructedElectrons_startVertex_collectionID, &b__ReconstructedElectrons_startVertex_collectionID);
+   fChain->SetBranchAddress("_ReconstructedElectrons_startVertex.index", &_ReconstructedElectrons_startVertex_index, &b__ReconstructedElectrons_startVertex_index);
+   fChain->SetBranchAddress("_ReconstructedElectrons_startVertex.collectionID", &_ReconstructedElectrons_startVertex_collectionID, &b__ReconstructedElectrons_startVertex_collectionID);
    fChain->SetBranchAddress("_ReconstructedElectrons_particleIDUsed", &_ReconstructedElectrons_particleIDUsed_, &b__ReconstructedElectrons_particleIDUsed_);
-   fChain->SetBranchAddress("_ReconstructedElectrons_particleIDUsed.index", _ReconstructedElectrons_particleIDUsed_index, &b__ReconstructedElectrons_particleIDUsed_index);
-   fChain->SetBranchAddress("_ReconstructedElectrons_particleIDUsed.collectionID", _ReconstructedElectrons_particleIDUsed_collectionID, &b__ReconstructedElectrons_particleIDUsed_collectionID);
+   fChain->SetBranchAddress("_ReconstructedElectrons_particleIDUsed.index", &_ReconstructedElectrons_particleIDUsed_index, &b__ReconstructedElectrons_particleIDUsed_index);
+   fChain->SetBranchAddress("_ReconstructedElectrons_particleIDUsed.collectionID", &_ReconstructedElectrons_particleIDUsed_collectionID, &b__ReconstructedElectrons_particleIDUsed_collectionID);
    fChain->SetBranchAddress("ReconstructedJets", &ReconstructedJets_, &b_ReconstructedJets_);
    fChain->SetBranchAddress("ReconstructedJets.type", ReconstructedJets_type, &b_ReconstructedJets_type);
    fChain->SetBranchAddress("ReconstructedJets.energy", ReconstructedJets_energy, &b_ReconstructedJets_energy);
@@ -8124,8 +9504,8 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("_ReconstructedJets_tracks.index", &_ReconstructedJets_tracks_index, &b__ReconstructedJets_tracks_index);
    fChain->SetBranchAddress("_ReconstructedJets_tracks.collectionID", &_ReconstructedJets_tracks_collectionID, &b__ReconstructedJets_tracks_collectionID);
    fChain->SetBranchAddress("_ReconstructedJets_particles", &_ReconstructedJets_particles_, &b__ReconstructedJets_particles_);
-   fChain->SetBranchAddress("_ReconstructedJets_particles.index", &_ReconstructedJets_particles_index, &b__ReconstructedJets_particles_index);
-   fChain->SetBranchAddress("_ReconstructedJets_particles.collectionID", &_ReconstructedJets_particles_collectionID, &b__ReconstructedJets_particles_collectionID);
+   fChain->SetBranchAddress("_ReconstructedJets_particles.index", _ReconstructedJets_particles_index, &b__ReconstructedJets_particles_index);
+   fChain->SetBranchAddress("_ReconstructedJets_particles.collectionID", _ReconstructedJets_particles_collectionID, &b__ReconstructedJets_particles_collectionID);
    fChain->SetBranchAddress("_ReconstructedJets_particleIDs", &_ReconstructedJets_particleIDs_, &b__ReconstructedJets_particleIDs_);
    fChain->SetBranchAddress("_ReconstructedJets_particleIDs.index", &_ReconstructedJets_particleIDs_index, &b__ReconstructedJets_particleIDs_index);
    fChain->SetBranchAddress("_ReconstructedJets_particleIDs.collectionID", &_ReconstructedJets_particleIDs_collectionID, &b__ReconstructedJets_particleIDs_collectionID);
@@ -8186,8 +9566,8 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("_ReconstructedParticles_particles.index", &_ReconstructedParticles_particles_index, &b__ReconstructedParticles_particles_index);
    fChain->SetBranchAddress("_ReconstructedParticles_particles.collectionID", &_ReconstructedParticles_particles_collectionID, &b__ReconstructedParticles_particles_collectionID);
    fChain->SetBranchAddress("_ReconstructedParticles_particleIDs", &_ReconstructedParticles_particleIDs_, &b__ReconstructedParticles_particleIDs_);
-   fChain->SetBranchAddress("_ReconstructedParticles_particleIDs.index", _ReconstructedParticles_particleIDs_index, &b__ReconstructedParticles_particleIDs_index);
-   fChain->SetBranchAddress("_ReconstructedParticles_particleIDs.collectionID", _ReconstructedParticles_particleIDs_collectionID, &b__ReconstructedParticles_particleIDs_collectionID);
+   fChain->SetBranchAddress("_ReconstructedParticles_particleIDs.index", &_ReconstructedParticles_particleIDs_index, &b__ReconstructedParticles_particleIDs_index);
+   fChain->SetBranchAddress("_ReconstructedParticles_particleIDs.collectionID", &_ReconstructedParticles_particleIDs_collectionID, &b__ReconstructedParticles_particleIDs_collectionID);
    fChain->SetBranchAddress("_ReconstructedParticles_startVertex", &_ReconstructedParticles_startVertex_, &b__ReconstructedParticles_startVertex_);
    fChain->SetBranchAddress("_ReconstructedParticles_startVertex.index", _ReconstructedParticles_startVertex_index, &b__ReconstructedParticles_startVertex_index);
    fChain->SetBranchAddress("_ReconstructedParticles_startVertex.collectionID", _ReconstructedParticles_startVertex_collectionID, &b__ReconstructedParticles_startVertex_collectionID);
@@ -8239,20 +9619,39 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("_ReconstructedSeededChargedParticles_clusters.index", &_ReconstructedSeededChargedParticles_clusters_index, &b__ReconstructedSeededChargedParticles_clusters_index);
    fChain->SetBranchAddress("_ReconstructedSeededChargedParticles_clusters.collectionID", &_ReconstructedSeededChargedParticles_clusters_collectionID, &b__ReconstructedSeededChargedParticles_clusters_collectionID);
    fChain->SetBranchAddress("_ReconstructedSeededChargedParticles_tracks", &_ReconstructedSeededChargedParticles_tracks_, &b__ReconstructedSeededChargedParticles_tracks_);
-   fChain->SetBranchAddress("_ReconstructedSeededChargedParticles_tracks.index", &_ReconstructedSeededChargedParticles_tracks_index, &b__ReconstructedSeededChargedParticles_tracks_index);
-   fChain->SetBranchAddress("_ReconstructedSeededChargedParticles_tracks.collectionID", &_ReconstructedSeededChargedParticles_tracks_collectionID, &b__ReconstructedSeededChargedParticles_tracks_collectionID);
+   fChain->SetBranchAddress("_ReconstructedSeededChargedParticles_tracks.index", _ReconstructedSeededChargedParticles_tracks_index, &b__ReconstructedSeededChargedParticles_tracks_index);
+   fChain->SetBranchAddress("_ReconstructedSeededChargedParticles_tracks.collectionID", _ReconstructedSeededChargedParticles_tracks_collectionID, &b__ReconstructedSeededChargedParticles_tracks_collectionID);
    fChain->SetBranchAddress("_ReconstructedSeededChargedParticles_particles", &_ReconstructedSeededChargedParticles_particles_, &b__ReconstructedSeededChargedParticles_particles_);
    fChain->SetBranchAddress("_ReconstructedSeededChargedParticles_particles.index", &_ReconstructedSeededChargedParticles_particles_index, &b__ReconstructedSeededChargedParticles_particles_index);
    fChain->SetBranchAddress("_ReconstructedSeededChargedParticles_particles.collectionID", &_ReconstructedSeededChargedParticles_particles_collectionID, &b__ReconstructedSeededChargedParticles_particles_collectionID);
    fChain->SetBranchAddress("_ReconstructedSeededChargedParticles_particleIDs", &_ReconstructedSeededChargedParticles_particleIDs_, &b__ReconstructedSeededChargedParticles_particleIDs_);
-   fChain->SetBranchAddress("_ReconstructedSeededChargedParticles_particleIDs.index", _ReconstructedSeededChargedParticles_particleIDs_index, &b__ReconstructedSeededChargedParticles_particleIDs_index);
-   fChain->SetBranchAddress("_ReconstructedSeededChargedParticles_particleIDs.collectionID", _ReconstructedSeededChargedParticles_particleIDs_collectionID, &b__ReconstructedSeededChargedParticles_particleIDs_collectionID);
+   fChain->SetBranchAddress("_ReconstructedSeededChargedParticles_particleIDs.index", &_ReconstructedSeededChargedParticles_particleIDs_index, &b__ReconstructedSeededChargedParticles_particleIDs_index);
+   fChain->SetBranchAddress("_ReconstructedSeededChargedParticles_particleIDs.collectionID", &_ReconstructedSeededChargedParticles_particleIDs_collectionID, &b__ReconstructedSeededChargedParticles_particleIDs_collectionID);
    fChain->SetBranchAddress("_ReconstructedSeededChargedParticles_startVertex", &_ReconstructedSeededChargedParticles_startVertex_, &b__ReconstructedSeededChargedParticles_startVertex_);
    fChain->SetBranchAddress("_ReconstructedSeededChargedParticles_startVertex.index", _ReconstructedSeededChargedParticles_startVertex_index, &b__ReconstructedSeededChargedParticles_startVertex_index);
    fChain->SetBranchAddress("_ReconstructedSeededChargedParticles_startVertex.collectionID", _ReconstructedSeededChargedParticles_startVertex_collectionID, &b__ReconstructedSeededChargedParticles_startVertex_collectionID);
    fChain->SetBranchAddress("_ReconstructedSeededChargedParticles_particleIDUsed", &_ReconstructedSeededChargedParticles_particleIDUsed_, &b__ReconstructedSeededChargedParticles_particleIDUsed_);
    fChain->SetBranchAddress("_ReconstructedSeededChargedParticles_particleIDUsed.index", _ReconstructedSeededChargedParticles_particleIDUsed_index, &b__ReconstructedSeededChargedParticles_particleIDUsed_index);
    fChain->SetBranchAddress("_ReconstructedSeededChargedParticles_particleIDUsed.collectionID", _ReconstructedSeededChargedParticles_particleIDUsed_collectionID, &b__ReconstructedSeededChargedParticles_particleIDUsed_collectionID);
+   fChain->SetBranchAddress("SiBarrelHits", &SiBarrelHits_, &b_SiBarrelHits_);
+   fChain->SetBranchAddress("SiBarrelHits.cellID", SiBarrelHits_cellID, &b_SiBarrelHits_cellID);
+   fChain->SetBranchAddress("SiBarrelHits.EDep", SiBarrelHits_EDep, &b_SiBarrelHits_EDep);
+   fChain->SetBranchAddress("SiBarrelHits.time", SiBarrelHits_time, &b_SiBarrelHits_time);
+   fChain->SetBranchAddress("SiBarrelHits.pathLength", SiBarrelHits_pathLength, &b_SiBarrelHits_pathLength);
+   fChain->SetBranchAddress("SiBarrelHits.quality", SiBarrelHits_quality, &b_SiBarrelHits_quality);
+   fChain->SetBranchAddress("SiBarrelHits.position.x", SiBarrelHits_position_x, &b_SiBarrelHits_position_x);
+   fChain->SetBranchAddress("SiBarrelHits.position.y", SiBarrelHits_position_y, &b_SiBarrelHits_position_y);
+   fChain->SetBranchAddress("SiBarrelHits.position.z", SiBarrelHits_position_z, &b_SiBarrelHits_position_z);
+   fChain->SetBranchAddress("SiBarrelHits.momentum.x", SiBarrelHits_momentum_x, &b_SiBarrelHits_momentum_x);
+   fChain->SetBranchAddress("SiBarrelHits.momentum.y", SiBarrelHits_momentum_y, &b_SiBarrelHits_momentum_y);
+   fChain->SetBranchAddress("SiBarrelHits.momentum.z", SiBarrelHits_momentum_z, &b_SiBarrelHits_momentum_z);
+   fChain->SetBranchAddress("_SiBarrelHits_MCParticle", &_SiBarrelHits_MCParticle_, &b__SiBarrelHits_MCParticle_);
+   fChain->SetBranchAddress("_SiBarrelHits_MCParticle.index", _SiBarrelHits_MCParticle_index, &b__SiBarrelHits_MCParticle_index);
+   fChain->SetBranchAddress("_SiBarrelHits_MCParticle.collectionID", _SiBarrelHits_MCParticle_collectionID, &b__SiBarrelHits_MCParticle_collectionID);
+   fChain->SetBranchAddress("SiBarrelRawHits", &SiBarrelRawHits_, &b_SiBarrelRawHits_);
+   fChain->SetBranchAddress("SiBarrelRawHits.cellID", SiBarrelRawHits_cellID, &b_SiBarrelRawHits_cellID);
+   fChain->SetBranchAddress("SiBarrelRawHits.charge", SiBarrelRawHits_charge, &b_SiBarrelRawHits_charge);
+   fChain->SetBranchAddress("SiBarrelRawHits.timeStamp", SiBarrelRawHits_timeStamp, &b_SiBarrelRawHits_timeStamp);
    fChain->SetBranchAddress("SiBarrelTrackerRecHits", &SiBarrelTrackerRecHits_, &b_SiBarrelTrackerRecHits_);
    fChain->SetBranchAddress("SiBarrelTrackerRecHits.cellID", SiBarrelTrackerRecHits_cellID, &b_SiBarrelTrackerRecHits_cellID);
    fChain->SetBranchAddress("SiBarrelTrackerRecHits.position.x", SiBarrelTrackerRecHits_position_x, &b_SiBarrelTrackerRecHits_position_x);
@@ -8265,6 +9664,10 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("SiBarrelTrackerRecHits.timeError", SiBarrelTrackerRecHits_timeError, &b_SiBarrelTrackerRecHits_timeError);
    fChain->SetBranchAddress("SiBarrelTrackerRecHits.edep", SiBarrelTrackerRecHits_edep, &b_SiBarrelTrackerRecHits_edep);
    fChain->SetBranchAddress("SiBarrelTrackerRecHits.edepError", SiBarrelTrackerRecHits_edepError, &b_SiBarrelTrackerRecHits_edepError);
+   fChain->SetBranchAddress("SiBarrelVertexRawHits", &SiBarrelVertexRawHits_, &b_SiBarrelVertexRawHits_);
+   fChain->SetBranchAddress("SiBarrelVertexRawHits.cellID", SiBarrelVertexRawHits_cellID, &b_SiBarrelVertexRawHits_cellID);
+   fChain->SetBranchAddress("SiBarrelVertexRawHits.charge", SiBarrelVertexRawHits_charge, &b_SiBarrelVertexRawHits_charge);
+   fChain->SetBranchAddress("SiBarrelVertexRawHits.timeStamp", SiBarrelVertexRawHits_timeStamp, &b_SiBarrelVertexRawHits_timeStamp);
    fChain->SetBranchAddress("SiBarrelVertexRecHits", &SiBarrelVertexRecHits_, &b_SiBarrelVertexRecHits_);
    fChain->SetBranchAddress("SiBarrelVertexRecHits.cellID", SiBarrelVertexRecHits_cellID, &b_SiBarrelVertexRecHits_cellID);
    fChain->SetBranchAddress("SiBarrelVertexRecHits.position.x", SiBarrelVertexRecHits_position_x, &b_SiBarrelVertexRecHits_position_x);
@@ -8277,6 +9680,10 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("SiBarrelVertexRecHits.timeError", SiBarrelVertexRecHits_timeError, &b_SiBarrelVertexRecHits_timeError);
    fChain->SetBranchAddress("SiBarrelVertexRecHits.edep", SiBarrelVertexRecHits_edep, &b_SiBarrelVertexRecHits_edep);
    fChain->SetBranchAddress("SiBarrelVertexRecHits.edepError", SiBarrelVertexRecHits_edepError, &b_SiBarrelVertexRecHits_edepError);
+   fChain->SetBranchAddress("SiEndcapTrackerRawHits", &SiEndcapTrackerRawHits_, &b_SiEndcapTrackerRawHits_);
+   fChain->SetBranchAddress("SiEndcapTrackerRawHits.cellID", SiEndcapTrackerRawHits_cellID, &b_SiEndcapTrackerRawHits_cellID);
+   fChain->SetBranchAddress("SiEndcapTrackerRawHits.charge", SiEndcapTrackerRawHits_charge, &b_SiEndcapTrackerRawHits_charge);
+   fChain->SetBranchAddress("SiEndcapTrackerRawHits.timeStamp", SiEndcapTrackerRawHits_timeStamp, &b_SiEndcapTrackerRawHits_timeStamp);
    fChain->SetBranchAddress("SiEndcapTrackerRecHits", &SiEndcapTrackerRecHits_, &b_SiEndcapTrackerRecHits_);
    fChain->SetBranchAddress("SiEndcapTrackerRecHits.cellID", SiEndcapTrackerRecHits_cellID, &b_SiEndcapTrackerRecHits_cellID);
    fChain->SetBranchAddress("SiEndcapTrackerRecHits.position.x", SiEndcapTrackerRecHits_position_x, &b_SiEndcapTrackerRecHits_position_x);
@@ -8293,6 +9700,25 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("TaggerTrackerRawHits.cellID", TaggerTrackerRawHits_cellID, &b_TaggerTrackerRawHits_cellID);
    fChain->SetBranchAddress("TaggerTrackerRawHits.charge", TaggerTrackerRawHits_charge, &b_TaggerTrackerRawHits_charge);
    fChain->SetBranchAddress("TaggerTrackerRawHits.timeStamp", TaggerTrackerRawHits_timeStamp, &b_TaggerTrackerRawHits_timeStamp);
+   fChain->SetBranchAddress("TOFBarrelHits", &TOFBarrelHits_, &b_TOFBarrelHits_);
+   fChain->SetBranchAddress("TOFBarrelHits.cellID", TOFBarrelHits_cellID, &b_TOFBarrelHits_cellID);
+   fChain->SetBranchAddress("TOFBarrelHits.EDep", TOFBarrelHits_EDep, &b_TOFBarrelHits_EDep);
+   fChain->SetBranchAddress("TOFBarrelHits.time", TOFBarrelHits_time, &b_TOFBarrelHits_time);
+   fChain->SetBranchAddress("TOFBarrelHits.pathLength", TOFBarrelHits_pathLength, &b_TOFBarrelHits_pathLength);
+   fChain->SetBranchAddress("TOFBarrelHits.quality", TOFBarrelHits_quality, &b_TOFBarrelHits_quality);
+   fChain->SetBranchAddress("TOFBarrelHits.position.x", TOFBarrelHits_position_x, &b_TOFBarrelHits_position_x);
+   fChain->SetBranchAddress("TOFBarrelHits.position.y", TOFBarrelHits_position_y, &b_TOFBarrelHits_position_y);
+   fChain->SetBranchAddress("TOFBarrelHits.position.z", TOFBarrelHits_position_z, &b_TOFBarrelHits_position_z);
+   fChain->SetBranchAddress("TOFBarrelHits.momentum.x", TOFBarrelHits_momentum_x, &b_TOFBarrelHits_momentum_x);
+   fChain->SetBranchAddress("TOFBarrelHits.momentum.y", TOFBarrelHits_momentum_y, &b_TOFBarrelHits_momentum_y);
+   fChain->SetBranchAddress("TOFBarrelHits.momentum.z", TOFBarrelHits_momentum_z, &b_TOFBarrelHits_momentum_z);
+   fChain->SetBranchAddress("_TOFBarrelHits_MCParticle", &_TOFBarrelHits_MCParticle_, &b__TOFBarrelHits_MCParticle_);
+   fChain->SetBranchAddress("_TOFBarrelHits_MCParticle.index", _TOFBarrelHits_MCParticle_index, &b__TOFBarrelHits_MCParticle_index);
+   fChain->SetBranchAddress("_TOFBarrelHits_MCParticle.collectionID", _TOFBarrelHits_MCParticle_collectionID, &b__TOFBarrelHits_MCParticle_collectionID);
+   fChain->SetBranchAddress("TOFBarrelRawHit", &TOFBarrelRawHit_, &b_TOFBarrelRawHit_);
+   fChain->SetBranchAddress("TOFBarrelRawHit.cellID", TOFBarrelRawHit_cellID, &b_TOFBarrelRawHit_cellID);
+   fChain->SetBranchAddress("TOFBarrelRawHit.charge", TOFBarrelRawHit_charge, &b_TOFBarrelRawHit_charge);
+   fChain->SetBranchAddress("TOFBarrelRawHit.timeStamp", TOFBarrelRawHit_timeStamp, &b_TOFBarrelRawHit_timeStamp);
    fChain->SetBranchAddress("TOFBarrelRecHit", &TOFBarrelRecHit_, &b_TOFBarrelRecHit_);
    fChain->SetBranchAddress("TOFBarrelRecHit.cellID", TOFBarrelRecHit_cellID, &b_TOFBarrelRecHit_cellID);
    fChain->SetBranchAddress("TOFBarrelRecHit.position.x", TOFBarrelRecHit_position_x, &b_TOFBarrelRecHit_position_x);
@@ -8305,6 +9731,25 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("TOFBarrelRecHit.timeError", TOFBarrelRecHit_timeError, &b_TOFBarrelRecHit_timeError);
    fChain->SetBranchAddress("TOFBarrelRecHit.edep", TOFBarrelRecHit_edep, &b_TOFBarrelRecHit_edep);
    fChain->SetBranchAddress("TOFBarrelRecHit.edepError", TOFBarrelRecHit_edepError, &b_TOFBarrelRecHit_edepError);
+   fChain->SetBranchAddress("TOFEndcapHits", &TOFEndcapHits_, &b_TOFEndcapHits_);
+   fChain->SetBranchAddress("TOFEndcapHits.cellID", TOFEndcapHits_cellID, &b_TOFEndcapHits_cellID);
+   fChain->SetBranchAddress("TOFEndcapHits.EDep", TOFEndcapHits_EDep, &b_TOFEndcapHits_EDep);
+   fChain->SetBranchAddress("TOFEndcapHits.time", TOFEndcapHits_time, &b_TOFEndcapHits_time);
+   fChain->SetBranchAddress("TOFEndcapHits.pathLength", TOFEndcapHits_pathLength, &b_TOFEndcapHits_pathLength);
+   fChain->SetBranchAddress("TOFEndcapHits.quality", TOFEndcapHits_quality, &b_TOFEndcapHits_quality);
+   fChain->SetBranchAddress("TOFEndcapHits.position.x", TOFEndcapHits_position_x, &b_TOFEndcapHits_position_x);
+   fChain->SetBranchAddress("TOFEndcapHits.position.y", TOFEndcapHits_position_y, &b_TOFEndcapHits_position_y);
+   fChain->SetBranchAddress("TOFEndcapHits.position.z", TOFEndcapHits_position_z, &b_TOFEndcapHits_position_z);
+   fChain->SetBranchAddress("TOFEndcapHits.momentum.x", TOFEndcapHits_momentum_x, &b_TOFEndcapHits_momentum_x);
+   fChain->SetBranchAddress("TOFEndcapHits.momentum.y", TOFEndcapHits_momentum_y, &b_TOFEndcapHits_momentum_y);
+   fChain->SetBranchAddress("TOFEndcapHits.momentum.z", TOFEndcapHits_momentum_z, &b_TOFEndcapHits_momentum_z);
+   fChain->SetBranchAddress("_TOFEndcapHits_MCParticle", &_TOFEndcapHits_MCParticle_, &b__TOFEndcapHits_MCParticle_);
+   fChain->SetBranchAddress("_TOFEndcapHits_MCParticle.index", _TOFEndcapHits_MCParticle_index, &b__TOFEndcapHits_MCParticle_index);
+   fChain->SetBranchAddress("_TOFEndcapHits_MCParticle.collectionID", _TOFEndcapHits_MCParticle_collectionID, &b__TOFEndcapHits_MCParticle_collectionID);
+   fChain->SetBranchAddress("TOFEndcapRawHits", &TOFEndcapRawHits_, &b_TOFEndcapRawHits_);
+   fChain->SetBranchAddress("TOFEndcapRawHits.cellID", TOFEndcapRawHits_cellID, &b_TOFEndcapRawHits_cellID);
+   fChain->SetBranchAddress("TOFEndcapRawHits.charge", TOFEndcapRawHits_charge, &b_TOFEndcapRawHits_charge);
+   fChain->SetBranchAddress("TOFEndcapRawHits.timeStamp", TOFEndcapRawHits_timeStamp, &b_TOFEndcapRawHits_timeStamp);
    fChain->SetBranchAddress("TOFEndcapRecHits", &TOFEndcapRecHits_, &b_TOFEndcapRecHits_);
    fChain->SetBranchAddress("TOFEndcapRecHits.cellID", TOFEndcapRecHits_cellID, &b_TOFEndcapRecHits_cellID);
    fChain->SetBranchAddress("TOFEndcapRecHits.position.x", TOFEndcapRecHits_position_x, &b_TOFEndcapRecHits_position_x);
@@ -8317,137 +9762,36 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("TOFEndcapRecHits.timeError", TOFEndcapRecHits_timeError, &b_TOFEndcapRecHits_timeError);
    fChain->SetBranchAddress("TOFEndcapRecHits.edep", TOFEndcapRecHits_edep, &b_TOFEndcapRecHits_edep);
    fChain->SetBranchAddress("TOFEndcapRecHits.edepError", TOFEndcapRecHits_edepError, &b_TOFEndcapRecHits_edepError);
-   fChain->SetBranchAddress("ZDCEcalClusterAssociations", &ZDCEcalClusterAssociations_, &b_ZDCEcalClusterAssociations_);
-   fChain->SetBranchAddress("ZDCEcalClusterAssociations.simID", ZDCEcalClusterAssociations_simID, &b_ZDCEcalClusterAssociations_simID);
-   fChain->SetBranchAddress("ZDCEcalClusterAssociations.recID", ZDCEcalClusterAssociations_recID, &b_ZDCEcalClusterAssociations_recID);
-   fChain->SetBranchAddress("ZDCEcalClusterAssociations.weight", ZDCEcalClusterAssociations_weight, &b_ZDCEcalClusterAssociations_weight);
-   fChain->SetBranchAddress("_ZDCEcalClusterAssociations_rec", &_ZDCEcalClusterAssociations_rec_, &b__ZDCEcalClusterAssociations_rec_);
-   fChain->SetBranchAddress("_ZDCEcalClusterAssociations_rec.index", _ZDCEcalClusterAssociations_rec_index, &b__ZDCEcalClusterAssociations_rec_index);
-   fChain->SetBranchAddress("_ZDCEcalClusterAssociations_rec.collectionID", _ZDCEcalClusterAssociations_rec_collectionID, &b__ZDCEcalClusterAssociations_rec_collectionID);
-   fChain->SetBranchAddress("_ZDCEcalClusterAssociations_sim", &_ZDCEcalClusterAssociations_sim_, &b__ZDCEcalClusterAssociations_sim_);
-   fChain->SetBranchAddress("_ZDCEcalClusterAssociations_sim.index", _ZDCEcalClusterAssociations_sim_index, &b__ZDCEcalClusterAssociations_sim_index);
-   fChain->SetBranchAddress("_ZDCEcalClusterAssociations_sim.collectionID", _ZDCEcalClusterAssociations_sim_collectionID, &b__ZDCEcalClusterAssociations_sim_collectionID);
-   fChain->SetBranchAddress("ZDCEcalClusters", &ZDCEcalClusters_, &b_ZDCEcalClusters_);
-   fChain->SetBranchAddress("ZDCEcalClusters.type", ZDCEcalClusters_type, &b_ZDCEcalClusters_type);
-   fChain->SetBranchAddress("ZDCEcalClusters.energy", ZDCEcalClusters_energy, &b_ZDCEcalClusters_energy);
-   fChain->SetBranchAddress("ZDCEcalClusters.energyError", ZDCEcalClusters_energyError, &b_ZDCEcalClusters_energyError);
-   fChain->SetBranchAddress("ZDCEcalClusters.time", ZDCEcalClusters_time, &b_ZDCEcalClusters_time);
-   fChain->SetBranchAddress("ZDCEcalClusters.timeError", ZDCEcalClusters_timeError, &b_ZDCEcalClusters_timeError);
-   fChain->SetBranchAddress("ZDCEcalClusters.nhits", ZDCEcalClusters_nhits, &b_ZDCEcalClusters_nhits);
-   fChain->SetBranchAddress("ZDCEcalClusters.position.x", ZDCEcalClusters_position_x, &b_ZDCEcalClusters_position_x);
-   fChain->SetBranchAddress("ZDCEcalClusters.position.y", ZDCEcalClusters_position_y, &b_ZDCEcalClusters_position_y);
-   fChain->SetBranchAddress("ZDCEcalClusters.position.z", ZDCEcalClusters_position_z, &b_ZDCEcalClusters_position_z);
-   fChain->SetBranchAddress("ZDCEcalClusters.positionError.xx", ZDCEcalClusters_positionError_xx, &b_ZDCEcalClusters_positionError_xx);
-   fChain->SetBranchAddress("ZDCEcalClusters.positionError.yy", ZDCEcalClusters_positionError_yy, &b_ZDCEcalClusters_positionError_yy);
-   fChain->SetBranchAddress("ZDCEcalClusters.positionError.zz", ZDCEcalClusters_positionError_zz, &b_ZDCEcalClusters_positionError_zz);
-   fChain->SetBranchAddress("ZDCEcalClusters.positionError.xy", ZDCEcalClusters_positionError_xy, &b_ZDCEcalClusters_positionError_xy);
-   fChain->SetBranchAddress("ZDCEcalClusters.positionError.xz", ZDCEcalClusters_positionError_xz, &b_ZDCEcalClusters_positionError_xz);
-   fChain->SetBranchAddress("ZDCEcalClusters.positionError.yz", ZDCEcalClusters_positionError_yz, &b_ZDCEcalClusters_positionError_yz);
-   fChain->SetBranchAddress("ZDCEcalClusters.intrinsicTheta", ZDCEcalClusters_intrinsicTheta, &b_ZDCEcalClusters_intrinsicTheta);
-   fChain->SetBranchAddress("ZDCEcalClusters.intrinsicPhi", ZDCEcalClusters_intrinsicPhi, &b_ZDCEcalClusters_intrinsicPhi);
-   fChain->SetBranchAddress("ZDCEcalClusters.intrinsicDirectionError.xx", ZDCEcalClusters_intrinsicDirectionError_xx, &b_ZDCEcalClusters_intrinsicDirectionError_xx);
-   fChain->SetBranchAddress("ZDCEcalClusters.intrinsicDirectionError.yy", ZDCEcalClusters_intrinsicDirectionError_yy, &b_ZDCEcalClusters_intrinsicDirectionError_yy);
-   fChain->SetBranchAddress("ZDCEcalClusters.intrinsicDirectionError.xy", ZDCEcalClusters_intrinsicDirectionError_xy, &b_ZDCEcalClusters_intrinsicDirectionError_xy);
-   fChain->SetBranchAddress("ZDCEcalClusters.shapeParameters_begin", ZDCEcalClusters_shapeParameters_begin, &b_ZDCEcalClusters_shapeParameters_begin);
-   fChain->SetBranchAddress("ZDCEcalClusters.shapeParameters_end", ZDCEcalClusters_shapeParameters_end, &b_ZDCEcalClusters_shapeParameters_end);
-   fChain->SetBranchAddress("ZDCEcalClusters.hitContributions_begin", ZDCEcalClusters_hitContributions_begin, &b_ZDCEcalClusters_hitContributions_begin);
-   fChain->SetBranchAddress("ZDCEcalClusters.hitContributions_end", ZDCEcalClusters_hitContributions_end, &b_ZDCEcalClusters_hitContributions_end);
-   fChain->SetBranchAddress("ZDCEcalClusters.subdetectorEnergies_begin", ZDCEcalClusters_subdetectorEnergies_begin, &b_ZDCEcalClusters_subdetectorEnergies_begin);
-   fChain->SetBranchAddress("ZDCEcalClusters.subdetectorEnergies_end", ZDCEcalClusters_subdetectorEnergies_end, &b_ZDCEcalClusters_subdetectorEnergies_end);
-   fChain->SetBranchAddress("ZDCEcalClusters.clusters_begin", ZDCEcalClusters_clusters_begin, &b_ZDCEcalClusters_clusters_begin);
-   fChain->SetBranchAddress("ZDCEcalClusters.clusters_end", ZDCEcalClusters_clusters_end, &b_ZDCEcalClusters_clusters_end);
-   fChain->SetBranchAddress("ZDCEcalClusters.hits_begin", ZDCEcalClusters_hits_begin, &b_ZDCEcalClusters_hits_begin);
-   fChain->SetBranchAddress("ZDCEcalClusters.hits_end", ZDCEcalClusters_hits_end, &b_ZDCEcalClusters_hits_end);
-   fChain->SetBranchAddress("ZDCEcalClusters.particleIDs_begin", ZDCEcalClusters_particleIDs_begin, &b_ZDCEcalClusters_particleIDs_begin);
-   fChain->SetBranchAddress("ZDCEcalClusters.particleIDs_end", ZDCEcalClusters_particleIDs_end, &b_ZDCEcalClusters_particleIDs_end);
-   fChain->SetBranchAddress("_ZDCEcalClusters_clusters", &_ZDCEcalClusters_clusters_, &b__ZDCEcalClusters_clusters_);
-   fChain->SetBranchAddress("_ZDCEcalClusters_clusters.index", &_ZDCEcalClusters_clusters_index, &b__ZDCEcalClusters_clusters_index);
-   fChain->SetBranchAddress("_ZDCEcalClusters_clusters.collectionID", &_ZDCEcalClusters_clusters_collectionID, &b__ZDCEcalClusters_clusters_collectionID);
-   fChain->SetBranchAddress("_ZDCEcalClusters_hits", &_ZDCEcalClusters_hits_, &b__ZDCEcalClusters_hits_);
-   fChain->SetBranchAddress("_ZDCEcalClusters_hits.index", &_ZDCEcalClusters_hits_index, &b__ZDCEcalClusters_hits_index);
-   fChain->SetBranchAddress("_ZDCEcalClusters_hits.collectionID", &_ZDCEcalClusters_hits_collectionID, &b__ZDCEcalClusters_hits_collectionID);
-   fChain->SetBranchAddress("_ZDCEcalClusters_particleIDs", &_ZDCEcalClusters_particleIDs_, &b__ZDCEcalClusters_particleIDs_);
-   fChain->SetBranchAddress("_ZDCEcalClusters_particleIDs.index", &_ZDCEcalClusters_particleIDs_index, &b__ZDCEcalClusters_particleIDs_index);
-   fChain->SetBranchAddress("_ZDCEcalClusters_particleIDs.collectionID", &_ZDCEcalClusters_particleIDs_collectionID, &b__ZDCEcalClusters_particleIDs_collectionID);
-   fChain->SetBranchAddress("_ZDCEcalClusters_shapeParameters", &_ZDCEcalClusters_shapeParameters, &b__ZDCEcalClusters_shapeParameters);
-   fChain->SetBranchAddress("_ZDCEcalClusters_hitContributions", &_ZDCEcalClusters_hitContributions, &b__ZDCEcalClusters_hitContributions);
-   fChain->SetBranchAddress("_ZDCEcalClusters_subdetectorEnergies", &_ZDCEcalClusters_subdetectorEnergies, &b__ZDCEcalClusters_subdetectorEnergies);
-   fChain->SetBranchAddress("ZDCEcalRawHits", &ZDCEcalRawHits_, &b_ZDCEcalRawHits_);
-   fChain->SetBranchAddress("ZDCEcalRawHits.cellID", ZDCEcalRawHits_cellID, &b_ZDCEcalRawHits_cellID);
-   fChain->SetBranchAddress("ZDCEcalRawHits.amplitude", ZDCEcalRawHits_amplitude, &b_ZDCEcalRawHits_amplitude);
-   fChain->SetBranchAddress("ZDCEcalRawHits.timeStamp", ZDCEcalRawHits_timeStamp, &b_ZDCEcalRawHits_timeStamp);
-   fChain->SetBranchAddress("ZDCEcalRecHits", &ZDCEcalRecHits_, &b_ZDCEcalRecHits_);
-   fChain->SetBranchAddress("ZDCEcalRecHits.cellID", ZDCEcalRecHits_cellID, &b_ZDCEcalRecHits_cellID);
-   fChain->SetBranchAddress("ZDCEcalRecHits.energy", ZDCEcalRecHits_energy, &b_ZDCEcalRecHits_energy);
-   fChain->SetBranchAddress("ZDCEcalRecHits.energyError", ZDCEcalRecHits_energyError, &b_ZDCEcalRecHits_energyError);
-   fChain->SetBranchAddress("ZDCEcalRecHits.time", ZDCEcalRecHits_time, &b_ZDCEcalRecHits_time);
-   fChain->SetBranchAddress("ZDCEcalRecHits.timeError", ZDCEcalRecHits_timeError, &b_ZDCEcalRecHits_timeError);
-   fChain->SetBranchAddress("ZDCEcalRecHits.position.x", ZDCEcalRecHits_position_x, &b_ZDCEcalRecHits_position_x);
-   fChain->SetBranchAddress("ZDCEcalRecHits.position.y", ZDCEcalRecHits_position_y, &b_ZDCEcalRecHits_position_y);
-   fChain->SetBranchAddress("ZDCEcalRecHits.position.z", ZDCEcalRecHits_position_z, &b_ZDCEcalRecHits_position_z);
-   fChain->SetBranchAddress("ZDCEcalRecHits.dimension.x", ZDCEcalRecHits_dimension_x, &b_ZDCEcalRecHits_dimension_x);
-   fChain->SetBranchAddress("ZDCEcalRecHits.dimension.y", ZDCEcalRecHits_dimension_y, &b_ZDCEcalRecHits_dimension_y);
-   fChain->SetBranchAddress("ZDCEcalRecHits.dimension.z", ZDCEcalRecHits_dimension_z, &b_ZDCEcalRecHits_dimension_z);
-   fChain->SetBranchAddress("ZDCEcalRecHits.sector", ZDCEcalRecHits_sector, &b_ZDCEcalRecHits_sector);
-   fChain->SetBranchAddress("ZDCEcalRecHits.layer", ZDCEcalRecHits_layer, &b_ZDCEcalRecHits_layer);
-   fChain->SetBranchAddress("ZDCEcalRecHits.local.x", ZDCEcalRecHits_local_x, &b_ZDCEcalRecHits_local_x);
-   fChain->SetBranchAddress("ZDCEcalRecHits.local.y", ZDCEcalRecHits_local_y, &b_ZDCEcalRecHits_local_y);
-   fChain->SetBranchAddress("ZDCEcalRecHits.local.z", ZDCEcalRecHits_local_z, &b_ZDCEcalRecHits_local_z);
-   fChain->SetBranchAddress("ZDCEcalTruthClusterAssociations", &ZDCEcalTruthClusterAssociations_, &b_ZDCEcalTruthClusterAssociations_);
-   fChain->SetBranchAddress("ZDCEcalTruthClusterAssociations.simID", ZDCEcalTruthClusterAssociations_simID, &b_ZDCEcalTruthClusterAssociations_simID);
-   fChain->SetBranchAddress("ZDCEcalTruthClusterAssociations.recID", ZDCEcalTruthClusterAssociations_recID, &b_ZDCEcalTruthClusterAssociations_recID);
-   fChain->SetBranchAddress("ZDCEcalTruthClusterAssociations.weight", ZDCEcalTruthClusterAssociations_weight, &b_ZDCEcalTruthClusterAssociations_weight);
-   fChain->SetBranchAddress("_ZDCEcalTruthClusterAssociations_rec", &_ZDCEcalTruthClusterAssociations_rec_, &b__ZDCEcalTruthClusterAssociations_rec_);
-   fChain->SetBranchAddress("_ZDCEcalTruthClusterAssociations_rec.index", _ZDCEcalTruthClusterAssociations_rec_index, &b__ZDCEcalTruthClusterAssociations_rec_index);
-   fChain->SetBranchAddress("_ZDCEcalTruthClusterAssociations_rec.collectionID", _ZDCEcalTruthClusterAssociations_rec_collectionID, &b__ZDCEcalTruthClusterAssociations_rec_collectionID);
-   fChain->SetBranchAddress("_ZDCEcalTruthClusterAssociations_sim", &_ZDCEcalTruthClusterAssociations_sim_, &b__ZDCEcalTruthClusterAssociations_sim_);
-   fChain->SetBranchAddress("_ZDCEcalTruthClusterAssociations_sim.index", _ZDCEcalTruthClusterAssociations_sim_index, &b__ZDCEcalTruthClusterAssociations_sim_index);
-   fChain->SetBranchAddress("_ZDCEcalTruthClusterAssociations_sim.collectionID", _ZDCEcalTruthClusterAssociations_sim_collectionID, &b__ZDCEcalTruthClusterAssociations_sim_collectionID);
-   fChain->SetBranchAddress("ZDCEcalTruthClusters", &ZDCEcalTruthClusters_, &b_ZDCEcalTruthClusters_);
-   fChain->SetBranchAddress("ZDCEcalTruthClusters.type", ZDCEcalTruthClusters_type, &b_ZDCEcalTruthClusters_type);
-   fChain->SetBranchAddress("ZDCEcalTruthClusters.energy", ZDCEcalTruthClusters_energy, &b_ZDCEcalTruthClusters_energy);
-   fChain->SetBranchAddress("ZDCEcalTruthClusters.energyError", ZDCEcalTruthClusters_energyError, &b_ZDCEcalTruthClusters_energyError);
-   fChain->SetBranchAddress("ZDCEcalTruthClusters.time", ZDCEcalTruthClusters_time, &b_ZDCEcalTruthClusters_time);
-   fChain->SetBranchAddress("ZDCEcalTruthClusters.timeError", ZDCEcalTruthClusters_timeError, &b_ZDCEcalTruthClusters_timeError);
-   fChain->SetBranchAddress("ZDCEcalTruthClusters.nhits", ZDCEcalTruthClusters_nhits, &b_ZDCEcalTruthClusters_nhits);
-   fChain->SetBranchAddress("ZDCEcalTruthClusters.position.x", ZDCEcalTruthClusters_position_x, &b_ZDCEcalTruthClusters_position_x);
-   fChain->SetBranchAddress("ZDCEcalTruthClusters.position.y", ZDCEcalTruthClusters_position_y, &b_ZDCEcalTruthClusters_position_y);
-   fChain->SetBranchAddress("ZDCEcalTruthClusters.position.z", ZDCEcalTruthClusters_position_z, &b_ZDCEcalTruthClusters_position_z);
-   fChain->SetBranchAddress("ZDCEcalTruthClusters.positionError.xx", ZDCEcalTruthClusters_positionError_xx, &b_ZDCEcalTruthClusters_positionError_xx);
-   fChain->SetBranchAddress("ZDCEcalTruthClusters.positionError.yy", ZDCEcalTruthClusters_positionError_yy, &b_ZDCEcalTruthClusters_positionError_yy);
-   fChain->SetBranchAddress("ZDCEcalTruthClusters.positionError.zz", ZDCEcalTruthClusters_positionError_zz, &b_ZDCEcalTruthClusters_positionError_zz);
-   fChain->SetBranchAddress("ZDCEcalTruthClusters.positionError.xy", ZDCEcalTruthClusters_positionError_xy, &b_ZDCEcalTruthClusters_positionError_xy);
-   fChain->SetBranchAddress("ZDCEcalTruthClusters.positionError.xz", ZDCEcalTruthClusters_positionError_xz, &b_ZDCEcalTruthClusters_positionError_xz);
-   fChain->SetBranchAddress("ZDCEcalTruthClusters.positionError.yz", ZDCEcalTruthClusters_positionError_yz, &b_ZDCEcalTruthClusters_positionError_yz);
-   fChain->SetBranchAddress("ZDCEcalTruthClusters.intrinsicTheta", ZDCEcalTruthClusters_intrinsicTheta, &b_ZDCEcalTruthClusters_intrinsicTheta);
-   fChain->SetBranchAddress("ZDCEcalTruthClusters.intrinsicPhi", ZDCEcalTruthClusters_intrinsicPhi, &b_ZDCEcalTruthClusters_intrinsicPhi);
-   fChain->SetBranchAddress("ZDCEcalTruthClusters.intrinsicDirectionError.xx", ZDCEcalTruthClusters_intrinsicDirectionError_xx, &b_ZDCEcalTruthClusters_intrinsicDirectionError_xx);
-   fChain->SetBranchAddress("ZDCEcalTruthClusters.intrinsicDirectionError.yy", ZDCEcalTruthClusters_intrinsicDirectionError_yy, &b_ZDCEcalTruthClusters_intrinsicDirectionError_yy);
-   fChain->SetBranchAddress("ZDCEcalTruthClusters.intrinsicDirectionError.xy", ZDCEcalTruthClusters_intrinsicDirectionError_xy, &b_ZDCEcalTruthClusters_intrinsicDirectionError_xy);
-   fChain->SetBranchAddress("ZDCEcalTruthClusters.shapeParameters_begin", ZDCEcalTruthClusters_shapeParameters_begin, &b_ZDCEcalTruthClusters_shapeParameters_begin);
-   fChain->SetBranchAddress("ZDCEcalTruthClusters.shapeParameters_end", ZDCEcalTruthClusters_shapeParameters_end, &b_ZDCEcalTruthClusters_shapeParameters_end);
-   fChain->SetBranchAddress("ZDCEcalTruthClusters.hitContributions_begin", ZDCEcalTruthClusters_hitContributions_begin, &b_ZDCEcalTruthClusters_hitContributions_begin);
-   fChain->SetBranchAddress("ZDCEcalTruthClusters.hitContributions_end", ZDCEcalTruthClusters_hitContributions_end, &b_ZDCEcalTruthClusters_hitContributions_end);
-   fChain->SetBranchAddress("ZDCEcalTruthClusters.subdetectorEnergies_begin", ZDCEcalTruthClusters_subdetectorEnergies_begin, &b_ZDCEcalTruthClusters_subdetectorEnergies_begin);
-   fChain->SetBranchAddress("ZDCEcalTruthClusters.subdetectorEnergies_end", ZDCEcalTruthClusters_subdetectorEnergies_end, &b_ZDCEcalTruthClusters_subdetectorEnergies_end);
-   fChain->SetBranchAddress("ZDCEcalTruthClusters.clusters_begin", ZDCEcalTruthClusters_clusters_begin, &b_ZDCEcalTruthClusters_clusters_begin);
-   fChain->SetBranchAddress("ZDCEcalTruthClusters.clusters_end", ZDCEcalTruthClusters_clusters_end, &b_ZDCEcalTruthClusters_clusters_end);
-   fChain->SetBranchAddress("ZDCEcalTruthClusters.hits_begin", ZDCEcalTruthClusters_hits_begin, &b_ZDCEcalTruthClusters_hits_begin);
-   fChain->SetBranchAddress("ZDCEcalTruthClusters.hits_end", ZDCEcalTruthClusters_hits_end, &b_ZDCEcalTruthClusters_hits_end);
-   fChain->SetBranchAddress("ZDCEcalTruthClusters.particleIDs_begin", ZDCEcalTruthClusters_particleIDs_begin, &b_ZDCEcalTruthClusters_particleIDs_begin);
-   fChain->SetBranchAddress("ZDCEcalTruthClusters.particleIDs_end", ZDCEcalTruthClusters_particleIDs_end, &b_ZDCEcalTruthClusters_particleIDs_end);
-   fChain->SetBranchAddress("_ZDCEcalTruthClusters_clusters", &_ZDCEcalTruthClusters_clusters_, &b__ZDCEcalTruthClusters_clusters_);
-   fChain->SetBranchAddress("_ZDCEcalTruthClusters_clusters.index", &_ZDCEcalTruthClusters_clusters_index, &b__ZDCEcalTruthClusters_clusters_index);
-   fChain->SetBranchAddress("_ZDCEcalTruthClusters_clusters.collectionID", &_ZDCEcalTruthClusters_clusters_collectionID, &b__ZDCEcalTruthClusters_clusters_collectionID);
-   fChain->SetBranchAddress("_ZDCEcalTruthClusters_hits", &_ZDCEcalTruthClusters_hits_, &b__ZDCEcalTruthClusters_hits_);
-   fChain->SetBranchAddress("_ZDCEcalTruthClusters_hits.index", &_ZDCEcalTruthClusters_hits_index, &b__ZDCEcalTruthClusters_hits_index);
-   fChain->SetBranchAddress("_ZDCEcalTruthClusters_hits.collectionID", &_ZDCEcalTruthClusters_hits_collectionID, &b__ZDCEcalTruthClusters_hits_collectionID);
-   fChain->SetBranchAddress("_ZDCEcalTruthClusters_particleIDs", &_ZDCEcalTruthClusters_particleIDs_, &b__ZDCEcalTruthClusters_particleIDs_);
-   fChain->SetBranchAddress("_ZDCEcalTruthClusters_particleIDs.index", &_ZDCEcalTruthClusters_particleIDs_index, &b__ZDCEcalTruthClusters_particleIDs_index);
-   fChain->SetBranchAddress("_ZDCEcalTruthClusters_particleIDs.collectionID", &_ZDCEcalTruthClusters_particleIDs_collectionID, &b__ZDCEcalTruthClusters_particleIDs_collectionID);
-   fChain->SetBranchAddress("_ZDCEcalTruthClusters_shapeParameters", &_ZDCEcalTruthClusters_shapeParameters, &b__ZDCEcalTruthClusters_shapeParameters);
-   fChain->SetBranchAddress("_ZDCEcalTruthClusters_hitContributions", &_ZDCEcalTruthClusters_hitContributions, &b__ZDCEcalTruthClusters_hitContributions);
-   fChain->SetBranchAddress("_ZDCEcalTruthClusters_subdetectorEnergies", &_ZDCEcalTruthClusters_subdetectorEnergies, &b__ZDCEcalTruthClusters_subdetectorEnergies);
+   fChain->SetBranchAddress("TrackerEndcapHits", &TrackerEndcapHits_, &b_TrackerEndcapHits_);
+   fChain->SetBranchAddress("TrackerEndcapHits.cellID", TrackerEndcapHits_cellID, &b_TrackerEndcapHits_cellID);
+   fChain->SetBranchAddress("TrackerEndcapHits.EDep", TrackerEndcapHits_EDep, &b_TrackerEndcapHits_EDep);
+   fChain->SetBranchAddress("TrackerEndcapHits.time", TrackerEndcapHits_time, &b_TrackerEndcapHits_time);
+   fChain->SetBranchAddress("TrackerEndcapHits.pathLength", TrackerEndcapHits_pathLength, &b_TrackerEndcapHits_pathLength);
+   fChain->SetBranchAddress("TrackerEndcapHits.quality", TrackerEndcapHits_quality, &b_TrackerEndcapHits_quality);
+   fChain->SetBranchAddress("TrackerEndcapHits.position.x", TrackerEndcapHits_position_x, &b_TrackerEndcapHits_position_x);
+   fChain->SetBranchAddress("TrackerEndcapHits.position.y", TrackerEndcapHits_position_y, &b_TrackerEndcapHits_position_y);
+   fChain->SetBranchAddress("TrackerEndcapHits.position.z", TrackerEndcapHits_position_z, &b_TrackerEndcapHits_position_z);
+   fChain->SetBranchAddress("TrackerEndcapHits.momentum.x", TrackerEndcapHits_momentum_x, &b_TrackerEndcapHits_momentum_x);
+   fChain->SetBranchAddress("TrackerEndcapHits.momentum.y", TrackerEndcapHits_momentum_y, &b_TrackerEndcapHits_momentum_y);
+   fChain->SetBranchAddress("TrackerEndcapHits.momentum.z", TrackerEndcapHits_momentum_z, &b_TrackerEndcapHits_momentum_z);
+   fChain->SetBranchAddress("_TrackerEndcapHits_MCParticle", &_TrackerEndcapHits_MCParticle_, &b__TrackerEndcapHits_MCParticle_);
+   fChain->SetBranchAddress("_TrackerEndcapHits_MCParticle.index", _TrackerEndcapHits_MCParticle_index, &b__TrackerEndcapHits_MCParticle_index);
+   fChain->SetBranchAddress("_TrackerEndcapHits_MCParticle.collectionID", _TrackerEndcapHits_MCParticle_collectionID, &b__TrackerEndcapHits_MCParticle_collectionID);
+   fChain->SetBranchAddress("VertexBarrelHits", &VertexBarrelHits_, &b_VertexBarrelHits_);
+   fChain->SetBranchAddress("VertexBarrelHits.cellID", VertexBarrelHits_cellID, &b_VertexBarrelHits_cellID);
+   fChain->SetBranchAddress("VertexBarrelHits.EDep", VertexBarrelHits_EDep, &b_VertexBarrelHits_EDep);
+   fChain->SetBranchAddress("VertexBarrelHits.time", VertexBarrelHits_time, &b_VertexBarrelHits_time);
+   fChain->SetBranchAddress("VertexBarrelHits.pathLength", VertexBarrelHits_pathLength, &b_VertexBarrelHits_pathLength);
+   fChain->SetBranchAddress("VertexBarrelHits.quality", VertexBarrelHits_quality, &b_VertexBarrelHits_quality);
+   fChain->SetBranchAddress("VertexBarrelHits.position.x", VertexBarrelHits_position_x, &b_VertexBarrelHits_position_x);
+   fChain->SetBranchAddress("VertexBarrelHits.position.y", VertexBarrelHits_position_y, &b_VertexBarrelHits_position_y);
+   fChain->SetBranchAddress("VertexBarrelHits.position.z", VertexBarrelHits_position_z, &b_VertexBarrelHits_position_z);
+   fChain->SetBranchAddress("VertexBarrelHits.momentum.x", VertexBarrelHits_momentum_x, &b_VertexBarrelHits_momentum_x);
+   fChain->SetBranchAddress("VertexBarrelHits.momentum.y", VertexBarrelHits_momentum_y, &b_VertexBarrelHits_momentum_y);
+   fChain->SetBranchAddress("VertexBarrelHits.momentum.z", VertexBarrelHits_momentum_z, &b_VertexBarrelHits_momentum_z);
+   fChain->SetBranchAddress("_VertexBarrelHits_MCParticle", &_VertexBarrelHits_MCParticle_, &b__VertexBarrelHits_MCParticle_);
+   fChain->SetBranchAddress("_VertexBarrelHits_MCParticle.index", _VertexBarrelHits_MCParticle_index, &b__VertexBarrelHits_MCParticle_index);
+   fChain->SetBranchAddress("_VertexBarrelHits_MCParticle.collectionID", _VertexBarrelHits_MCParticle_collectionID, &b__VertexBarrelHits_MCParticle_collectionID);
    fChain->SetBranchAddress("_intMap", &_intMap_, &b_PARAMETERS__intMap_);
    fChain->SetBranchAddress("_intMap.first", &_intMap_first, &b__intMap_first);
    fChain->SetBranchAddress("_intMap.second", &_intMap_second, &b__intMap_second);
@@ -8455,15 +9799,15 @@ void protonBeam::Init(TTree *tree)
    fChain->SetBranchAddress("_floatMap.first", &_floatMap_first, &b__floatMap_first);
    fChain->SetBranchAddress("_floatMap.second", &_floatMap_second, &b__floatMap_second);
    fChain->SetBranchAddress("_stringMap", &_stringMap_, &b_PARAMETERS__stringMap_);
-   fChain->SetBranchAddress("_stringMap.first", _stringMap_first, &b__stringMap_first);
-   fChain->SetBranchAddress("_stringMap.second", _stringMap_second, &b__stringMap_second);
+   fChain->SetBranchAddress("_stringMap.first", &_stringMap_first, &b__stringMap_first);
+   fChain->SetBranchAddress("_stringMap.second", &_stringMap_second, &b__stringMap_second);
    fChain->SetBranchAddress("_doubleMap", &_doubleMap_, &b_PARAMETERS__doubleMap_);
-   fChain->SetBranchAddress("_doubleMap.first", _doubleMap_first, &b__doubleMap_first);
-   fChain->SetBranchAddress("_doubleMap.second", _doubleMap_second, &b__doubleMap_second);
+   fChain->SetBranchAddress("_doubleMap.first", &_doubleMap_first, &b__doubleMap_first);
+   fChain->SetBranchAddress("_doubleMap.second", &_doubleMap_second, &b__doubleMap_second);
    Notify();
 }
 
-Bool_t protonBeam::Notify()
+Bool_t electronBeam::Notify()
 {
    // The Notify() function is called when a new file is opened. This
    // can be either for a new TTree in a TChain or when when a new TTree
@@ -8474,18 +9818,18 @@ Bool_t protonBeam::Notify()
    return kTRUE;
 }
 
-void protonBeam::Show(Long64_t entry)
+void electronBeam::Show(Long64_t entry)
 {
 // Print contents of entry.
 // If entry is not specified, print current entry
    if (!fChain) return;
    fChain->Show(entry);
 }
-Int_t protonBeam::Cut(Long64_t entry)
+Int_t electronBeam::Cut(Long64_t entry)
 {
 // This function may be called from Loop.
 // returns  1 if entry is accepted.
 // returns -1 otherwise.
    return 1;
 }
-#endif // #ifdef protonBeam_cxx
+#endif // #ifdef electronBeam_cxx
