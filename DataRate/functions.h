@@ -80,7 +80,7 @@ class functions {
     Int_t DET_EcalBarrelImaging;
     Int_t DET_EcalBarrelScFi;
     Int_t DET_EcalEndcapN;
-    Int_t DET_EcalEndcapPInsert;
+    //Int_t DET_EcalEndcapPInsert;
     Int_t DET_EcalEndcapP;
     Int_t DET_EcalLumiSpec;
     Int_t DET_ForwardMPGDEndcap;
@@ -198,7 +198,7 @@ class functions {
 	detnames.push_back("LFHCAL");  DET_LFHCAL = DET_cnt; detids.push_back(DET_cnt++);
 	detnames.push_back("HcalEndcapPInsert");   DET_HcalEndcapPInsert = DET_cnt; detids.push_back(DET_cnt++);
 	detnames.push_back("EcalEndcapP");  DET_EcalEndcapP = DET_cnt; detids.push_back(DET_cnt++);
-	detnames.push_back("EcalEndcapPInsert");  DET_EcalEndcapPInsert = DET_cnt; detids.push_back(DET_cnt++);
+	//detnames.push_back("EcalEndcapPInsert");  DET_EcalEndcapPInsert = DET_cnt; detids.push_back(DET_cnt++);
 	// Backward CAL
 	detnames.push_back("HcalEndcapN");  DET_HcalEndcapN = DET_cnt; detids.push_back(DET_cnt++);
 	detnames.push_back("EcalEndcapN");  DET_EcalEndcapN = DET_cnt; detids.push_back(DET_cnt++);
@@ -255,7 +255,7 @@ class functions {
 	//dbgR[DET_HcalEndcapPInsert] = { 200, 3500,5000, 200, 0,500 };      // z,r
 	dbgR[DET_HcalEndcapPInsert] = { 46, -25.5, 20.5, 46 , -25.5, 20.5 };    // xx,yy
 	dbgR[DET_EcalEndcapP] = { 161, -80.5, 80.5, 161 , -80.5, 80.5 };    // xx, yy
-	dbgR[DET_EcalEndcapPInsert] =  { 31, -15.5, 15.5, 31 , -15.5, 15.5 };    // xx, yy
+	//dbgR[DET_EcalEndcapPInsert] =  { 31, -15.5, 15.5, 31 , -15.5, 15.5 };    // xx, yy
 	dbgR[DET_HcalEndcapN] =  { 161, -80.5, 80.5, 161 , -80.5, 80.5 };    // xx, yy
 	dbgR[DET_EcalBarrelScFi] = { 600, -1500,1500, 600, -1500, 1500 };     // X,Y
 	dbgR[DET_EcalEndcapN] =  { 150, -650, 650, 150 , -650, 650 };    // X,Y
@@ -377,12 +377,17 @@ class functions {
 		return 64;      // assume cluster finding reduction
 	}
 
+	else if((detector == DET_EcalEndcapP) ||
+		(detector == DET_EcalEndcapN))   {
+	    if(stage == 1) 
+		return 64*6;   // 4 time bins sampled?
+	    else 
+		return 64;
+	}
+
 	else if((detector == DET_LFHCAL) ||
 		(detector == DET_HcalEndcapPInsert) ||
-		(detector == DET_EcalEndcapP) ||
-		(detector == DET_EcalEndcapPInsert) ||
 		(detector == DET_HcalEndcapN) ||
-		(detector == DET_EcalEndcapN) ||
 		(detector == DET_HcalBarrel) ||
 		(detector == DET_EcalBarrelScFi)) {
 	    if(stage == 1) 
@@ -434,15 +439,23 @@ class functions {
 	    if(stage >= 3) noise_per_channel = 0;                 // assume cluster finding eliminates noise!
 	}
 	
+	else if((detector == DET_EcalEndcapP) ||
+		(detector == DET_EcalEndcapN)) {
+	    noise_per_channel = 1000;
+	    if(stage >= 3) {
+		noise_per_channel = 0;
+	    }
+	}
+
 	else if((detector == DET_LFHCAL) ||
 		(detector == DET_HcalEndcapPInsert) ||
-		(detector == DET_EcalEndcapP) ||
-		(detector == DET_EcalEndcapPInsert) ||
 		(detector == DET_HcalEndcapN) ||
-		(detector == DET_EcalEndcapN) ||
 		(detector == DET_HcalBarrel) ||
 		(detector == DET_EcalBarrelScFi)) {
 	    noise_per_channel = 1000;
+	    if(stage>=3) {
+		noise_per_channel = 0;
+	    }
 	}
 	
 	else if(detector == DET_EcalBarrelImaging) {
@@ -451,6 +464,9 @@ class functions {
 	 
 	else if(detector == DET_TOFBarrel) {
 	    noise_per_channel = 30;
+	    if(stage >= 3) {
+		noise_per_channel = 0;
+	    }
 	}
 
 	else if	(detector == DET_TOFEndcap) {
@@ -589,18 +605,20 @@ class functions {
 	    // r = 199 - 1965
 	    // 24 ch/feb   16 ch/RDO
 	    // ASIC = 790   RDO = 50
-	    nominalChannels[detector] = 16000;
-	    nominalASIC[detector] = 790;          
-	    nominalFEB[detector] = 790;
-	    nominalRDO[detector] = 50;           
+	    nominalChannels[detector] = 14592;
+	    nominalASIC[detector] = 456;          
+	    nominalFEB[detector] = 456;
+	    nominalRDO[detector] = 29;           
 	}
+	/*
 	else if(detector==DET_EcalEndcapPInsert) {
 	    // 536 channels
 	    nominalChannels[detector] = 536;
 	    nominalASIC[detector] = 23;              
 	    nominalFEB[detector] = 23;
 	    nominalRDO[detector] = 2;               
-	}
+	    }
+	*/
 	else if(detector==DET_HcalEndcapN) {
 	    // 2334 x,y positions
 	    // 10 layers
@@ -969,7 +987,7 @@ class functions {
 
 	    //asic = distributeGrid(xx,yy,3,2,100,100);  // 2x2x13 layers = 52 ch/asic
 	    //rdo = distributeGrid(xx,yy,6,4,100,100);   // 16 asics/rdo
-
+	    
 	    asic = distributeRect(x,y,154/7,-500,250,-350,350,130, 1);  //130
 	    asic += 1000000 * (int)((layer-1)/10);    // 7 layers
 	    rdo = distributeRect(x,y,10,-500,250,-350, 350,130, 1);
@@ -981,39 +999,48 @@ class functions {
 
 	    channel = cell;
 	}
-
+	
 	else if(detector==DET_EcalEndcapP) {
 	    const auto &[sys, barrel, module, layer, slice, fiber_x, fiber_y] = tup7(cellToLocal(cell, {8,3,4,8,5,1,1}));
 	    Short_t xx = (cell >>32) & 0xffff;
 	    Short_t yy = (cell >>48) & 0xffff;
+	    
+	    // EcalEndcapPInsert is shifted because gap around beampipe is not centered
+	    if(sys == 106) {
+		xx = xx-4;
+	    }
+	    
 	    //printf("DET_EcalEndcapP- %d %d %d %d %d %d %d %d %d\n", xx,yy, sys, barrel, module, layer, slice, fiber_x, fiber_y);
 	    
 	    // 19k channels
 	    // r = 199 - 1965
 	    // 24 ch/feb   16 ch/RDO
+	    //
 	    // ASIC = 790   RDO = 50
-	    asic = distributeCircle(getR(x,y), 790, 199, 1965);
-	    rdo = distributeCircle(getR(x,y), 50, 199, 1965);
+	    channel = distributeGrid(x,y,25,25,500);
+	    asic = distributeGrid(x, y, 8*25, 4*25, 500);           // towers are 2.5cm x 2.5cm
+	    rdo = distributeGrid(x, y, 4*8*25, 4*4*25, 500);
+	    //printf("x=%f y=%f asic=%d rdo = %d\n",x,y,(int)asic, (int)rdo);
 
 	    addDebugHist(detector, xx, yy);
 	    //buildLimits(x,y,z);
 	    //channel = xx,yy
-	
+	    
 	    channel = cell;
 	}
-
-	else if(detector==DET_EcalEndcapPInsert) {
+	
+	/*  No such detector.  The hits are processed by EcalEndcapP
+	    else if(detector==DET_EcalEndcapPInsert) {
 	    const auto &[sys, barrel, module, layer, slice] = tup5(cellToLocal(cell, {8,3,4,8,5}));
 	    Short_t xx = (cell >>32) & 0xffff;
 	    Short_t yy = (cell >>48) & 0xffff;
 	    addDebugHist(detector, xx, yy);
-	    //printf("DET_EcalEndcapPInsert- %d %d %d %d %d %d %d\n", xx,yy, sys, barrel, module, layer, slice);
-	    //asic = (Int_t)
 	    asic = distributeRect(x,y,24,-400,200, -300,300, 125);
 	    rdo = (y>0) ? 0 : 1;
 	    channel = cell;
-	}
-
+	    }
+	*/
+  
 	else if(detector==DET_HcalEndcapN) {
 	    const auto &[sys, barrel, module, layer, slice] = tup5(cellToLocal(cell, {8,3,4,8,5}));
 	
@@ -1343,9 +1370,12 @@ class functions {
 	debug_hist[det]->SetBinContent(bin, weight);
     }
 
-    void writeData(const char *fn) {
+    void writeData(const char *fn, Int_t actual_events) {
 	TFile f1(fn, "RECREATE");
 	
+	std::vector<Int_t> events_processed;
+	events_processed.push_back(actual_events);
+	f1.WriteObject(&events_processed, "events_processed");
 	f1.WriteObject(&detnames, "detnames");
 	f1.WriteObject(&asic_hits, "asic_hits");
 	f1.WriteObject(&rdo_hits, "rdo_hits");
@@ -1386,15 +1416,21 @@ class functions {
     
     
 
-    void writeHistos(const char *fn, Float_t rate_ratio) {
+    void writeHistos(const char *fn, Double_t actual_events) {
 
 	TFile *store = new TFile(fn,"recreate");
 	
 	int ndets = detnames.size();
+	printf("Writing histograms:  ndets=%d\n", ndets);
+
 	for(int i=0;i<ndets;i++) {
 	    int hits=0;
 	    for(const auto & [cell, count] : asic_hits[i]) hits += count;
-	    hits_number_th->SetBinContent(i+1, hits * rate_ratio);
+	  
+	    Double_t v = hits;
+	    v /= actual_events;
+
+	    hits_number_th->SetBinContent(i+1, v);
 	    hits_number_th->GetXaxis()->SetBinLabel(i+1, detnames[i].c_str());
 	}
 	
@@ -1444,10 +1480,12 @@ class functions {
 	return x_idx + y_idx * 1000;
     }
 
-    Int_t distributeGrid(Int_t x, Int_t y, Int_t dx, Int_t dy, Int_t sx, Int_t sy) {
-	x /= dx;
-	y /= dy;
-	return x + y * ((sx-1)/dx + 1);
+    // If x, y can be negative, make sure that gridMax is the max number of elements in the grid, not the maximum value!
+    Int_t distributeGrid(Double_t x, Double_t y, Double_t dx, Double_t dy, Int_t gridMax) {
+	Int_t xx = floor(x / dx);
+	Int_t yy = floor(y / dy);
+	
+	return xx + yy * gridMax;
     }
     
     Int_t distributeEven(Float_t x, Int_t n, Float_t min, Float_t max) {

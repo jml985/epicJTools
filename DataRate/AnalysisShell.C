@@ -48,7 +48,10 @@
 	    fun.addHitCell(jentry, fun.DET_EcalEndcapN, EcalEndcapNRecHits_cellID[i], EcalEndcapNRecHits_position_x[i], EcalEndcapNRecHits_position_y[i], EcalEndcapNRecHits_position_z[i]);
 	}
 	for(int i = 0;i<EcalEndcapPInsertRecHits_;i++){
-	    fun.addHitCell(jentry, fun.DET_EcalEndcapPInsert, EcalEndcapPInsertRecHits_cellID[i], EcalEndcapPInsertRecHits_position_x[i], EcalEndcapPInsertRecHits_position_y[i], EcalEndcapPInsertRecHits_position_z[i]);
+	    // Note the detector used is EcalEndcapP
+	    // EcalEndcapPInsert is not an actual separate detector
+	    // it is simply part of the EcalEndcapP
+	    fun.addHitCell(jentry, fun.DET_EcalEndcapP, EcalEndcapPInsertRecHits_cellID[i], EcalEndcapPInsertRecHits_position_x[i], EcalEndcapPInsertRecHits_position_y[i], EcalEndcapPInsertRecHits_position_z[i]);
 	}
 	for(int i = 0;i<EcalEndcapPRecHits_;i++){
 	    fun.addHitCell(jentry, fun.DET_EcalEndcapP, EcalEndcapPRecHits_cellID[i], EcalEndcapPRecHits_position_x[i], EcalEndcapPRecHits_position_y[i], EcalEndcapPRecHits_position_z[i]);
@@ -133,7 +136,7 @@
 	 */
     }
 
-    double rate_ratio = base_event_rate/actual_events;
+    //double rate_ratio = base_event_rate/actual_events;
     
     /*
     // Print out rates and cell information 
@@ -155,10 +158,10 @@
 
     */
 
-    fun.writeData(filenameOutput);
+    fun.writeData(filenameOutput, actual_events);
     fun.buildAsicHistos();
     fun.buildRdoHistos();
-    fun.writeHistos(filenameHistograms, rate_ratio);
+    fun.writeHistos(filenameHistograms, actual_events);
  
     fun.printNElectronicTypes();
     fun.printLimits();

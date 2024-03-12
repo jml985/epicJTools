@@ -6,10 +6,11 @@
 #include "functions.h"
 
 const char *filenameHistograms = "DIS_Histo.root";
-const char *filenameOutput = "tmp_DIS_Data.root";
+const char *filenameOutput = "DIS_Data.root";
 
-double base_event_rate = 8.3e4;      // This assumes 
-int n_events_to_process = 10000;
+//double base_event_rate = 8.3e4;      // This assumes 
+//Int_t n_events_to_process = 100000;
+Int_t n_events_to_process = 2000000;
 
 void DIS::Loop()
 #include "AnalysisShell.C"
