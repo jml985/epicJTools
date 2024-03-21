@@ -34,6 +34,20 @@ class functions {
     TH2D *RZ_alldet;
     TH2D *XY_alldet;
 
+    Int_t currEvent;
+    Long_t tot_hits_this_event;
+    int max_hits_per_event;
+    Double_t max_t;
+    Double_t min_t;
+    Double_t max_terror;
+
+    TH1D *hitsPerEvent;
+    TH2D *TvsZo;
+    TH2D *TvsZ;
+    TH2D *TvsZz;
+    TH2D *RCvsZ;
+
+    std::vector<TH1F *> THistos;
     std::vector<TH1F *> asicHistos;
     std::vector<TH1F *> rdoHistos;
     std::vector<TH2D *> debug_hist;
@@ -109,6 +123,14 @@ class functions {
  public:
 
     functions() {
+
+  
+	currEvent = -1;
+	max_hits_per_event = 0;
+	max_t = 0;
+	min_t = 1e15;
+	max_terror = 0;
+	
 	//printf("getPhi %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f\n", getPhi(1,0), getPhi(1,1), getPhi(0,1), getPhi(-1,1), getPhi(-1,0), getPhi(-1,-1), getPhi(0,-1), getPhi(1,-1));
 	
 	
@@ -286,13 +308,22 @@ class functions {
     }
 
     void defineHistograms() {
+	hitsPerEvent = new TH1D("histPerEvent", "hitsPerEvent", 200, 0, 3500);
+	TvsZo = new TH2D("TvsZo", "TvsZo", 400, -6000, 6000, 400, -50, 150000);
+	TvsZ = new TH2D("TvsZ", "TvsZ", 400, -6000, 6000, 400, -50, 1000);
+	TvsZz = new TH2D("TvsZz", "TvsZz", 400, -6000, 6000, 400, -50, 150);
+	RCvsZ = new TH2D("RCvsZ", "RCvsZ", 400, -6000, 6000, 400, -50, 50);
+
 	for(int i=0;i<detnames.size();i++) {
+	    TH1F *Th = new TH1F((detnames[i] + "_T").c_str(), (detnames[i] + "_T").c_str(), 400, 0, 200);
+
 	    TH2D *debug =  new TH2D((detnames[i] + "_debug").c_str(), (detnames[i] + "_debug").c_str(), dbgR[i][0], dbgR[i][1], dbgR[i][2], dbgR[i][3],dbgR[i][4], dbgR[i][5]);
 
 	    TH2D *RZ = new TH2D((detnames[i] +"_RZ").c_str(), (detnames[i]+ "_RZ").c_str(), 1000,-6000,6000,1000,0,3000);
 	    TH2D *XY = new TH2D((detnames[i] + "_XY").c_str(), (detnames[i] + "_XY").c_str(), 1000,-3000,3000,1000,-3000,3000);	
 	    TH2D *ZPhi = new TH2D((detnames[i]+ "_ZPhi").c_str(), (detnames[i] + "_ZPhi").c_str(), 1000, -6000, 6000, 1000, 0, 2*3.14159);
 
+	    THistos.push_back(Th);
 	    debug_hist.push_back(debug);
 	    RZ_hist.push_back(RZ);
 	    XY_hist.push_back(XY);
@@ -353,6 +384,60 @@ class functions {
     void printLimits() {
 	printf("Limits:  x=[%.2f-%.2f] y=[%.2f-%.2f] z=[%.2f-%.2f] r=[%.2f-%.2f] phi=[%.2f-%.2f]\n", 
 	       tmp_min_x, tmp_max_x, tmp_min_y, tmp_max_y, tmp_min_z, tmp_max_z, tmp_min_r, tmp_max_r, tmp_min_phi, tmp_max_phi);
+    }
+
+
+    Float_t noiseHitBits(Int_t detector,Int_t stage) {
+	if(stage == 1) {
+	    return asicBits(detector, stage);
+	}
+
+	// stage == 2,   after analysis
+	// ITS-3
+	if((detector == DET_SiBarrelVertex) ||
+	   (detector == DET_SiBarrelTracker) ||
+	   (detector == DET_SiEndcapTracker)) {
+	    return 2*64;    // 64 bits / pixel + same hit likely in adjoining readouts
+	}
+	
+	else if ((detector == DET_BackwardMPGDEndcap) ||
+		 (detector == DET_ForwardMPGDEndcap) ||
+		 (detector == DET_MPGDBarrel) ||
+		 (detector == DET_OuterMPGDBarrel)) {
+	    return 0;   // assume cluster finding eliminates noise
+	}
+
+	else if((detector == DET_EcalEndcapP) ||
+		(detector == DET_EcalEndcapN))   {
+	    return 0;   // assume cluster finding
+	}
+
+	else if((detector == DET_LFHCAL) ||
+		(detector == DET_HcalEndcapPInsert) ||
+		(detector == DET_HcalEndcapN) ||
+		(detector == DET_HcalBarrel) ||
+		(detector == DET_EcalBarrelScFi)) {
+	    return 0;   // assume cluster finding
+	}
+	
+	else if(detector == DET_EcalBarrelImaging) {
+	    return 64;
+	}
+
+	else if(detector == DET_TOFBarrel) {
+	    return 0;
+	}
+
+	else if (detector == DET_TOFEndcap) {
+	    return 0;
+	}
+
+	else if(detector == DET_dRICH) {
+	    return 64.0/200.0;     // assuming x200 trigger reduction
+	}
+	else {
+	    return 64;
+	}
     }
 
     // Analysis...
@@ -424,7 +509,7 @@ class functions {
 	Float_t noise_per_channel=0;
 
 	
-	    // ITS-3
+	// ITS-3
 	if((detector == DET_SiBarrelVertex) ||
 	   (detector == DET_SiBarrelTracker) ||
 	   (detector == DET_SiEndcapTracker)) {
@@ -481,10 +566,11 @@ class functions {
 	    }
 	}
 	else {
-	    //noise_per_channel = 2.7e-3 * 100e6 / 2;             // 3 sigma   135kHz
-	    //noise_per_channel = 6.3e-5 * 100e6 / 2;             // 4 sigma   3.1kHz
-	    noise_per_channel = 5.7e-7 * 100e6 / 2;               // 5 sigma   30hz
-	    //noise_per_channel = 2.0e-9 * 100e6 / 2;             // 6 sigma   .1hz
+	    //noise_per_channel = 2.700e-3 * 100e6 / 2;             // 3 sigma   135kHz
+	    //noise_per_channel = 6.334e-5 * 100e6 / 2;             // 4 sigma   3.1kHz
+	    noise_per_channel = 5.733e-7 * 100e6 / 2;               // 5 sigma   30hz
+	    //noise_per_channel = 1.973e-9 * 100e6 / 2;             // 6 sigma   .1hz
+	    //noise_per_channel = 2.560e-12 * 100e6 /2;             // 7 sigma   
 	}
 
 	// for simple detectors/no software trigger or clustering
@@ -501,7 +587,7 @@ class functions {
 	    // 892111 mm^2   .02mmx.02mm channel 
 	    // 1578 reticules  
 	    // 50 RDO
-	    nominalChannels[detector] = (Long_t)(892111.0/(.02*.02));
+	    nominalChannels[detector] = (Long_t)((892111.0+1296192)/(.02*.02));
 	    nominalASIC[detector] = 1578 + 2294;
 	    nominalFEB[detector] = 1578 + 2294;
 	    nominalRDO[detector] = 50 + 72;
@@ -510,7 +596,7 @@ class functions {
 	    // A=61041 mm^2
 	    // 108 ASIC
 	    // 4 RDO
-	    nominalChannels[detector] = (Long_t)(61041.0/(.02*.02));
+	    nominalChannels[detector] = (Long_t)((61041.0 + 81388.0 + 203472) /(.02*.02));
 	    nominalASIC[detector] = (108 + 144 + 359);
 	    nominalFEB[detector] = (108 + 144 + 359);
 	    nominalRDO[detector] = (4 + 5 + 12);
@@ -611,13 +697,13 @@ class functions {
 	    nominalRDO[detector] = 29;           
 	}
 	/*
-	else if(detector==DET_EcalEndcapPInsert) {
-	    // 536 channels
-	    nominalChannels[detector] = 536;
-	    nominalASIC[detector] = 23;              
-	    nominalFEB[detector] = 23;
-	    nominalRDO[detector] = 2;               
-	    }
+	  else if(detector==DET_EcalEndcapPInsert) {
+	  // 536 channels
+	  nominalChannels[detector] = 536;
+	  nominalASIC[detector] = 23;              
+	  nominalFEB[detector] = 23;
+	  nominalRDO[detector] = 2;               
+	  }
 	*/
 	else if(detector==DET_HcalEndcapN) {
 	    // 2334 x,y positions
@@ -700,14 +786,35 @@ class functions {
 	}
   
     }
-
-    void addHitCell(int event, Int_t detector, ULong_t cell, Float_t x, Float_t y, Float_t z) {
+    
+    void startEvent(Int_t event) {
+	if(currEvent != -1) {
+	    printf("Bad startEvent: previous event=%d\n", currEvent);
+	}
+	currEvent = event;
+	tot_hits_this_event = 0;
+    }
+    
+    void endEvent(Int_t event) {
+	if(currEvent != event) {
+	    printf("Bad endEvent: %d vs %d\n", currEvent, event);
+	}
+	currEvent = -1;
+	
+	if(tot_hits_this_event > max_hits_per_event) max_hits_per_event = tot_hits_this_event;
+	
+	hitsPerEvent->Fill(tot_hits_this_event);
+    }
+    
+	
+    void addHitCell(int event, Int_t detector, ULong_t cell, Float_t x, Float_t y, Float_t z, Float_t t, Float_t t_err) {
 	ULong_t asic=0xffffffffff;
 	ULong_t rdo =0xffffffffff;
 	ULong_t channel = 0xffffffffff;
 
 	ULong_t bAsic = 0;
 	ULong_t bRdo = 0;
+
 
 	if(detector==DET_SiBarrelTracker) {  //  unit currently 44 staves for inner layer,   69 staves for outer layer
 	    const auto &[sys, layer, module, sensor] = tup4(cellToLocal(cell, {8,4,12,2}));
@@ -1172,7 +1279,7 @@ class functions {
 	    asic_hits[detector][nasic]++;
 	    rdo_hits[detector][nrdo]++;
 	    channel_hits[detector][nchannel]++;
-       
+	    tot_hits_this_event++;
 
 
 	}
@@ -1223,16 +1330,29 @@ class functions {
       
 	XY_alldet->Fill(x,y);
 	RZ_alldet->Fill(z, sqrt(x*x+y*y));
+	//RZ_alldet->Fill(sqrt(z*z+x*x+y*y), 1);
 	ZPhi_hist[detector]->Fill(z, getPhi(x,y));
       
       
 	XY_hist[detector]->Fill(x,y);
 	RZ_hist[detector]->Fill(z, sqrt(x*x+y*y));
-      
 
 	if(asic != 0xffffffffff) {
 	    //printf("daq 0x%lx\n",asic);
 	    asic_hits[detector][asic]++;
+
+
+	    tot_hits_this_event++;
+	    if(t < min_t) min_t = t;
+	    if(t > max_t) max_t = t;
+	    if(t_err > max_terror) max_terror = t_err;
+	    //printf("times: %5d %30s %12.2f %12.2f %12.2f\n", event, detnames[detector].c_str(), z, t , t_err);
+	    
+	    THistos[detector]->Fill(t);
+	    TvsZo->Fill(z, t);
+	    TvsZ->Fill(z, t);
+	    TvsZz->Fill(z, t);
+	    RCvsZ->Fill(z, sqrt(z*z + x*x + y*y)/ 299);
 	}
 
 	if(rdo != 0xffffffffff) {
@@ -1420,9 +1540,16 @@ class functions {
 
 	TFile *store = new TFile(fn,"recreate");
 	
+	
 	int ndets = detnames.size();
 	printf("Writing histograms:  ndets=%d\n", ndets);
 
+	hitsPerEvent->Write();
+	TvsZo->Write();
+	TvsZ->Write();
+	TvsZz->Write();
+	RCvsZ->Write();
+	
 	for(int i=0;i<ndets;i++) {
 	    int hits=0;
 	    for(const auto & [cell, count] : asic_hits[i]) hits += count;
@@ -1444,6 +1571,7 @@ class functions {
 	hits_number_th->Write();
 
 	for(int i=0;i<ndets;i++) {
+	    THistos[i]->Write();
 	    asicHistos[i]->Write();
 	    rdoHistos[i]->Write();
 	    debug_hist[i]->Write();	    

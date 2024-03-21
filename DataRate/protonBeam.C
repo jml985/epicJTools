@@ -5,12 +5,12 @@
 #include <TCanvas.h>
 #include "functions.h"
 
-const char *filenameHistograms = "protonBeam_Histo.root";
-const char *filenameOutput = "protonBeam_Data.root";
+const char *filenameHistograms = "output/protonBeam_Histo.root";
+const char *filenameOutput = "output/protonBeam_Data.root";
 
 double base_event_rate = 3.26e4;
-int n_events_to_process = 750000;
+//int n_events_to_process = 750000;
 //int n_events_to_process = 100000;
-//int n_events_to_process = 10000;
+int n_events_to_process = 15000;
 void protonBeam::Loop()
 #include "AnalysisShell.C"

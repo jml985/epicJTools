@@ -270,7 +270,7 @@ public:
 	    rdo_hits.push_back(tmp);
 	}
 	
-	TFile *f = TFile::Open("DIS_Data.root");
+	TFile *f = TFile::Open("240312/DIS_Data.root");
 	
 	std::vector<Int_t> *nevts;
 	f->GetObject("events_processed", nevts);
@@ -281,7 +281,7 @@ public:
 	f->GetObject("rdo_hits", rdo_hits[0]);
 	f->Close();
 
-	f = TFile::Open("electronBeam_Data.root"); 
+	f = TFile::Open("240312/electronBeam_Data.root"); 
 	f->GetObject("events_processed", nevts);
 	number_of_events[1] = (*nevts)[0];
 	f->GetObject("detnames", detnames[1]);
@@ -290,7 +290,7 @@ public:
 	f->GetObject("rdo_hits", rdo_hits[1]);
 	f->Close();
     
-	f = TFile::Open("protonBeam_Data.root");
+	f = TFile::Open("240312/protonBeam_Data.root");
 	f->GetObject("events_processed", nevts);
 	number_of_events[2] = (*nevts)[0];  
 	f->GetObject("detnames", detnames[2]);
@@ -387,7 +387,8 @@ public:
 	    }
 
 	    for(auto &[cell, vec] : ch_hits_ps[det]) {
-		Double_t noise_hits = fun.detectorNoise(det, 0);
+		//Double_t noise_hits = fun.detectorNoise(det, 0);
+		Double_t noise_hits = 0;
 		vec[IDX_NOISE] = noise_hits;
 		vec[IDX_TOTAL] += noise_hits;
 	    }
@@ -406,12 +407,14 @@ public:
 	    
 	    
 	    for(auto & [cell, vec]: asic_hits_ps[det]) {
-		Double_t noise_hits = fun.detectorNoise(det, 1);
+		//Double_t noise_hits = fun.detectorNoise(det, 1);
+		Double_t noise_hits = 0;	
 		vec[IDX_NOISE] = noise_hits;
 		vec[IDX_TOTAL] += noise_hits;
 	    }
 	    for(auto &[cell, vec]: asic_bits_ps[det]) {
-		Double_t noise_bits = fun.detectorNoise(det, 1) * fun.asicBits(det, 1);
+		//Double_t noise_bits = fun.detectorNoise(det, 1) * fun.asicBits(det, 1);
+		Double_t noise_bits = 0;
 		vec[IDX_NOISE] = noise_bits;
 		vec[IDX_TOTAL] += noise_bits;
 	    }
@@ -434,17 +437,20 @@ public:
 		}
 	    }
 	    for(auto & [cell, vec]: rdo_hits_ps[det]) {
-		Double_t noise_hits = fun.detectorNoise(det, 2);
+		//Double_t noise_hits = fun.detectorNoise(det, 2);
+		Double_t noise_hits = 0;
 		vec[IDX_NOISE] = noise_hits;
 		vec[IDX_TOTAL] += noise_hits;
 	    }
 	    for(auto & [cell, vec]: rdo_bits_ps[det]) {
-		Double_t noise_bits = fun.detectorNoise(det, 2) * fun.asicBits(det,1);
+		//Double_t noise_bits = fun.detectorNoise(det, 2) * fun.asicBits(det,1);
+		Double_t noise_bits = 0;
 		vec[IDX_NOISE] = noise_bits;
 		vec[IDX_TOTAL] += noise_bits;
 	    }   
 	    for(auto & [cell, vec]: rdo_bits_post_trigger_ps[det]) {
-		Double_t noise_bits_post_trigger = fun.detectorNoise(det, 3) * fun.asicBits(det,1);
+		//Double_t noise_bits_post_trigger = fun.detectorNoise(det, 3) * fun.asicBits(det,1);
+		Double_t noise_bits_post_trigger = 0;
 		vec[IDX_NOISE] = noise_bits_post_trigger;
 		vec[IDX_TOTAL] += noise_bits_post_trigger;
 	    }   
@@ -653,9 +659,9 @@ public:
 	printf("\n\n");
 
 	writeDetectorHeader("All Detectors");
-	writeDetectorLineThr("All Detectors", "ASUM: ", all_detectors_asic_bits);
-	writeDetectorLineThr("All Detectors", "Sum: ", all_detectors_rdo_bits);
-	writeDetectorLineThr("All Detectors", "Tape:", all_detectors_rdo_post_trigger_bits);
+	writeDetectorLineThr("All Dets", "ASUM: ", all_detectors_asic_bits);
+	writeDetectorLineThr("All Dets", "Sum: ", all_detectors_rdo_bits);
+	writeDetectorLineThr("All Dets", "Tape: ", all_detectors_rdo_post_trigger_bits);
 
 
 	for(int i=0;i<fun.DET_cnt;i++) {
