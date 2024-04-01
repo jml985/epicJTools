@@ -18,8 +18,11 @@
 std::vector<std::string> datatypes = {"DIS", "Electron", "Proton", "Synchrotron", "noise", "total"};
 
 //std::vector<Double_t> base_rates = { 83e3,  3.177e6, 32.6e3, 0,0,0};  // 18x275,  e-10GeV@10kAhr p-275GeV@10kAhr
-std::vector<Double_t> base_rates = { 500e3, 3.415e7, 350.3e3, 0,0,0}; // 10x275,  e-10GeV@100Ahr p-275GeV@100Ahr   
-std::vector<Double_t> number_of_events = { 1504405, 1992000 , 500000,0,0,0 };
+//std::vector<Double_t> base_rates = { 500e3, 3.415e7, 350.3e3, 0,0,0}; // 10x275,  e-10GeV@100Ahr p-275GeV@100Ahr   
+std::vector<Double_t> base_rates = { 500e3, 3.177e6, 32.6e3, 0,0,0}; // 10x275,  e-10GeV@10kAhr p-275GeV@10kAhr
+
+//std::vector<Double_t> number_of_events = { 1504405, 1992000 , 500000,0,0,0 };
+std::vector<Double_t> number_of_events = { 1, 1, 1, 0, 0, 0 };
 
 std::vector<std::vector<std::string> *> detnames;
 std::vector<std::vector<std::map<ULong_t, Int_t>> *> channel_hits;
@@ -30,9 +33,14 @@ std::vector<std::vector<std::map<ULong_t, Int_t>> *> rdo_hits;
 
 class DataVolumes {
 private:
+    std::string datadir;
     functions fun;
     
 public:
+    DataVolumes(const char *dir) {
+	datadir = dir;
+    }
+
     static Double_t count2rate(Int_t type, Int_t hits) {
 	Double_t rate = hits;
 	rate *= base_rates[type];
@@ -270,7 +278,7 @@ public:
 	    rdo_hits.push_back(tmp);
 	}
 	
-	TFile *f = TFile::Open("240312/DIS_Data.root");
+	TFile *f = TFile::Open((datadir + "/DIS_Data.root").c_str());
 	
 	std::vector<Int_t> *nevts;
 	f->GetObject("events_processed", nevts);
@@ -281,7 +289,7 @@ public:
 	f->GetObject("rdo_hits", rdo_hits[0]);
 	f->Close();
 
-	f = TFile::Open("240312/electronBeam_Data.root"); 
+	f = TFile::Open((datadir + "/electronBeam_Data.root").c_str()); 
 	f->GetObject("events_processed", nevts);
 	number_of_events[1] = (*nevts)[0];
 	f->GetObject("detnames", detnames[1]);
@@ -290,7 +298,7 @@ public:
 	f->GetObject("rdo_hits", rdo_hits[1]);
 	f->Close();
     
-	f = TFile::Open("240312/protonBeam_Data.root");
+	f = TFile::Open((datadir + "/protonBeam_Data.root").c_str());
 	f->GetObject("events_processed", nevts);
 	number_of_events[2] = (*nevts)[0];  
 	f->GetObject("detnames", detnames[2]);
@@ -716,8 +724,8 @@ public:
 	
 
 	
-	const char *fn = "FinalRateHistos.root";
-	TFile *store =new TFile(fn, "recreate");
+	std::string fn = "FinalRateHistos.root";
+	TFile *store =new TFile((datadir + "/" + fn).c_str(), "recreate");
 
 	det_hits_hist->Write();
 	det_data_hist->Write();
@@ -735,8 +743,8 @@ public:
     }
 };
 
-void finalizeDataVolumes() {
+void finalizeDataVolumes(const char *datadir) {
     //printf("Base rate = %f\n", base_rate);
-    DataVolumes x;
+    DataVolumes x(datadir);
     x.run();
 }

@@ -46,6 +46,7 @@ class functions {
     TH2D *TvsZ;
     TH2D *TvsZz;
     TH2D *RCvsZ;
+    TH1D *TJML;
 
     std::vector<TH1F *> THistos;
     std::vector<TH1F *> asicHistos;
@@ -313,6 +314,7 @@ class functions {
 	TvsZ = new TH2D("TvsZ", "TvsZ", 400, -6000, 6000, 400, -50, 1000);
 	TvsZz = new TH2D("TvsZz", "TvsZz", 400, -6000, 6000, 400, -50, 150);
 	RCvsZ = new TH2D("RCvsZ", "RCvsZ", 400, -6000, 6000, 400, -50, 50);
+	TJML = new TH1D("T", "T", 400, 0, 1000);
 
 	for(int i=0;i<detnames.size();i++) {
 	    TH1F *Th = new TH1F((detnames[i] + "_T").c_str(), (detnames[i] + "_T").c_str(), 400, 0, 200);
@@ -1254,7 +1256,7 @@ class functions {
 	    const auto &[sys,sector,row,zzz,tower] = tup5(cellToLocal(cell, {8,6,6,4,8}));
 	    Short_t xx = (cell >>32) & 0xffff;
 	    Short_t yy = (cell >>48) & 0xffff;
-	    //printf("DET_EcalBarrelScFi- %d %d %f %f %f %f %d %d %d %d\n", xx,yy, x, y, getR(x,y), getPhi(x,y), sys, sector,row,tower);
+	    //printf("DET_EcalBarrelScFi- %d %d %d %f %f %f %f %f %d %d %d %d\n", event, xx, yy, x, y, z, getR(x,y), getPhi(x,y), sys, sector, row, tower);
 	    {
 		fillDebugHist(detector, x, y,row);
 	    }
@@ -1263,25 +1265,20 @@ class functions {
 	    // NASIC=48 / side,  NRDO=2/side
 	    asic = sector-1;
 	    rdo = (int)((sector-1)/24);
-	    if(z > 0) {
-		asic += 48;
-		rdo += 2;
-	    }
+	    channel = sector-1 + 48*(row-1) + 48*12*(tower-1);
 
 	    cell = cell & maskBits(8+8+8+8);
 	    ULong_t ncell = cell + 0x10000000000;    // always hit both sides!
 	    //det_[detector][ncell]++;         // add second hit!
 
-	    channel = cell;
-	    int nchannel = ncell;
+	 
+	    int nchannel = channel + 10000;
 	    int nasic = asic + 10000;
 	    int nrdo = rdo + 10000;
 	    asic_hits[detector][nasic]++;
 	    rdo_hits[detector][nrdo]++;
 	    channel_hits[detector][nchannel]++;
 	    tot_hits_this_event++;
-
-
 	}
 
 	else if(detector==DET_TOFBarrel) {
@@ -1353,6 +1350,7 @@ class functions {
 	    TvsZ->Fill(z, t);
 	    TvsZz->Fill(z, t);
 	    RCvsZ->Fill(z, sqrt(z*z + x*x + y*y)/ 299);
+	    TJML->Fill(t);
 	}
 
 	if(rdo != 0xffffffffff) {
@@ -1549,7 +1547,8 @@ class functions {
 	TvsZ->Write();
 	TvsZz->Write();
 	RCvsZ->Write();
-	
+	TJML->Write();
+
 	for(int i=0;i<ndets;i++) {
 	    int hits=0;
 	    for(const auto & [cell, count] : asic_hits[i]) hits += count;

@@ -43,9 +43,27 @@
 	for(int i = 0;i<EcalBarrelImagingRecHits_;i++){
 	    fun.addHitCell(jentry, fun.DET_EcalBarrelImaging, EcalBarrelImagingRecHits_cellID[i], EcalBarrelImagingRecHits_position_x[i], EcalBarrelImagingRecHits_position_y[i], EcalBarrelImagingRecHits_position_z[i], EcalBarrelImagingRecHits_time[i], EcalBarrelImagingRecHits_timeError[i]);
 	}
-	for(int i = 0;i<EcalBarrelScFiRecHits_;i++){
-	    fun.addHitCell(jentry, fun.DET_EcalBarrelScFi, EcalBarrelScFiRecHits_cellID[i], EcalBarrelScFiRecHits_position_x[i], EcalBarrelScFiRecHits_position_y[i], EcalBarrelScFiRecHits_position_z[i],  EcalBarrelScFiRecHits_time[i], EcalBarrelScFiRecHits_timeError[i]);
+	if(0) { 
+	    for(int i = 0;i<EcalBarrelScFiRecHits_;i++){
+		fun.addHitCell(jentry, fun.DET_EcalBarrelScFi, EcalBarrelScFiRecHits_cellID[i], EcalBarrelScFiRecHits_position_x[i], EcalBarrelScFiRecHits_position_y[i], EcalBarrelScFiRecHits_position_z[i],  EcalBarrelScFiRecHits_time[i], EcalBarrelScFiRecHits_timeError[i]);
+	    }
 	}
+	else {
+	    std::unordered_map<ULong_t, Int_t> ecal_cells_hit;
+	    for(int i = 0;i<EcalBarrelScFiRecHits_;i++){
+		ULong_t cell = EcalBarrelScFiRecHits_cellID[i];
+		const auto &[sys,sec,row,zzz,tower] = fun.tup5(fun.cellToLocal(cell, {8,6,6,4,8}));
+		int zidx = (EcalBarrelScFiRecHits_position_z[i] > 0) ? 0 : 1;
+		int ridx = (int)(row-1)/4;
+		ULong_t asic = (sec-1) + 48*zidx + 96*ridx;   // Full asic... for initial test.
+		if(ecal_cells_hit.find(asic) == ecal_cells_hit.end()) {
+		    // add
+		    fun.addHitCell(jentry, fun.DET_EcalBarrelScFi, EcalBarrelScFiRecHits_cellID[i], EcalBarrelScFiRecHits_position_x[i], EcalBarrelScFiRecHits_position_y[i], EcalBarrelScFiRecHits_position_z[i],  EcalBarrelScFiRecHits_time[i], EcalBarrelScFiRecHits_timeError[i]);
+		    ecal_cells_hit[asic] = 1;
+		}
+	    }
+	}
+	
 	for(int i = 0;i<EcalEndcapNRecHits_;i++){
 	    fun.addHitCell(jentry, fun.DET_EcalEndcapN, EcalEndcapNRecHits_cellID[i], EcalEndcapNRecHits_position_x[i], EcalEndcapNRecHits_position_y[i], EcalEndcapNRecHits_position_z[i], EcalEndcapNRecHits_time[i], EcalEndcapNRecHits_timeError[i]);
 	}
