@@ -9,8 +9,8 @@ const char *filenameHistograms = "output/DIS_Histo.root";
 const char *filenameOutput = "output/DIS_Data.root";
 
 //double base_event_rate = 8.3e4;      // This assumes 
-//Int_t n_events_to_process = 10000;
-Int_t n_events_to_process = 2000000;
+//Int_t n_events_to_process = 50000000;
+Int_t n_events_to_process = 1000;
 
 void DIS::Loop()
 #include "AnalysisShell.C"

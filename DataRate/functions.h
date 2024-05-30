@@ -488,7 +488,12 @@ class functions {
 	}
 
 	else if(detector == DET_TOFBarrel) {
-	    return 64;           // FCFD?
+	    if(stage == 1) {
+		return 3*64;
+	    }
+	    else {
+		return 64;           // FCFD?
+	    }
 	}
 
 	else if (detector == DET_TOFEndcap) {
@@ -1285,7 +1290,13 @@ class functions {
 	    const auto &[sys,layer,module,sensor] = tup4(cellToLocal(cell, {8,4,12,2}));
 	    Short_t xx = (cell >>32) & 0xffff;
 	    Short_t yy = (cell >>48) & 0xffff;
-	    //	printf("Sys %d %d %d %d %d %d\n", sys, layer,module,sensor,xx,yy);
+	    
+	    static int first=1;
+	    if(first) { 
+		printf("TOFBarrel: event sys layer module sensor xx yy x y z\n");
+		first = 0;
+	    }
+	    printf("TOFBarrel: %d %d %d %d %d %d %d %f %f %f\n", event, sys, layer,module,sensor,xx,yy,x,y,z);
 
 	    cell = cell & maskBits(8+4+12+2);
 
@@ -1302,7 +1313,15 @@ class functions {
 	    const auto &[sys,layer,module,idx,idy] = tup5(cellToLocal(cell, {8,4,8,7,5}));
 	    Short_t xx = (cell >>32) & 0xffff;
 	    Short_t yy = (cell >>48) & 0xffff;
-	    //printf("Sys %d %d %d %d %d %d %d %f\n", sys, layer,module,idx,idy,xx,yy,z);
+
+	    /*
+	    static int first=1;
+	    if(first) { 
+		printf("TOFEndcap: event sys layer module, idx, idy, xx, yy, x, y, z\n");
+		first = 0;
+	    }
+	    printf("TOFEndcap: %d %d %d %d %d %d %d %d %f %f %f\n", event, sys, layer, module,idx,idy,xx,yy,x,y,z);
+	    */
 
 	    cell = cell & maskBits(8+4+8+7+5);
 
