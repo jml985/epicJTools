@@ -389,17 +389,23 @@ class functions {
     }
 
 
-    Float_t noiseHitBits(Int_t detector,Int_t stage) {
-	if(stage == 1) {
-	    return asicBits(detector, stage);
+    Float_t noiseHitBits(Int_t detector,Int_t stage) {	
+	if((detector == DET_SiBarrelVertex) ||
+	   (detector == DET_SiBarrelTracker) ||
+	   (detector == DET_SiEndcapTracker)) {
+	    return 64;    // 64 bits / noise not likely twice
 	}
+
+	//if(stage == 1) {
+	return asicBits(detector, stage);
+	//}
 
 	// stage == 2,   after analysis
 	// ITS-3
 	if((detector == DET_SiBarrelVertex) ||
 	   (detector == DET_SiBarrelTracker) ||
 	   (detector == DET_SiEndcapTracker)) {
-	    return 2*64;    // 64 bits / pixel + same hit likely in adjoining readouts
+	    return 64;    // 64 bits / noise not likely twice
 	}
 	
 	else if ((detector == DET_BackwardMPGDEndcap) ||
@@ -467,7 +473,7 @@ class functions {
 	else if((detector == DET_EcalEndcapP) ||
 		(detector == DET_EcalEndcapN))   {
 	    if(stage == 1) 
-		return 64*6;   // 4 time bins sampled?
+		return 144;   // 4 time bins sampled?
 	    else 
 		return 64;
 	}
@@ -478,7 +484,7 @@ class functions {
 		(detector == DET_HcalBarrel) ||
 		(detector == DET_EcalBarrelScFi)) {
 	    if(stage == 1) 
-		return 18*64*6;  // assume 1/4 asic segmentation AND need for 4 samples 
+		return 480;  // assume 1/4 asic segmentation AND need for 4 samples 
 	    else
 		return 64;       // can reduce to single channel hit
 	}
@@ -487,7 +493,9 @@ class functions {
 	    return 64;
 	}
 
-	else if(detector == DET_TOFBarrel) {
+	else if((detector == DET_TOFBarrel) ||
+		(detector == DET_DIRC) ||
+		(detector == DET_pfRICH)) {
 	    if(stage == 1) {
 		return 3*64;
 	    }
@@ -512,28 +520,42 @@ class functions {
     // stage = 2 -> per rdo
     // stage = 3 -> per rdo after software triggering
 
+
+    Float_t defaultNoise() {
+	Float_t noise_per_channel;
+	//noise_per_channel = 2.700e-3 * 100e6 / 2;             // 3 sigma   135kHz
+	noise_per_channel = 6.334e-5 * 100e6 / 2;             // 4 sigma   3.1kHz
+	//noise_per_channel = 6.796e-6 * 100e6 / 2;               // 4.5 sigma = 340hz
+	//noise_per_channel = 5.733e-7 * 100e6 / 2;             // 5 sigma   30hz
+	//noise_per_channel = 1.973e-9 * 100e6 / 2;             // 6 sigma   .1hz
+	//noise_per_channel = 2.560e-12 * 100e6 /2;             // 7 sigma   
+	//return 311;
+	return noise_per_channel;
+    }
+
     Float_t detectorNoise(Int_t detector, int stage) {
 	Float_t noise_per_channel=0;
+	if(stage >= 3) stage = 2;
 
 	
 	// ITS-3
 	if((detector == DET_SiBarrelVertex) ||
 	   (detector == DET_SiBarrelTracker) ||
 	   (detector == DET_SiEndcapTracker)) {
-	    noise_per_channel = 1e-3;                
+	    noise_per_channel = 1e-2;                
 	}
 	
 	else if((detector == DET_BackwardMPGDEndcap) ||
 		(detector == DET_ForwardMPGDEndcap) ||
 		(detector == DET_MPGDBarrel) ||
 		(detector == DET_OuterMPGDBarrel)) {
-	    noise_per_channel = 30;                  //guess
+	    noise_per_channel = defaultNoise();
 	    if(stage >= 3) noise_per_channel = 0;                 // assume cluster finding eliminates noise!
 	}
 	
 	else if((detector == DET_EcalEndcapP) ||
 		(detector == DET_EcalEndcapN)) {
-	    noise_per_channel = 1000;
+	    noise_per_channel = defaultNoise();
 	    if(stage >= 3) {
 		noise_per_channel = 0;
 	    }
@@ -544,14 +566,14 @@ class functions {
 		(detector == DET_HcalEndcapN) ||
 		(detector == DET_HcalBarrel) ||
 		(detector == DET_EcalBarrelScFi)) {
-	    noise_per_channel = 1000;
+	    noise_per_channel = defaultNoise();
 	    if(stage>=3) {
 		noise_per_channel = 0;
 	    }
 	}
 	
 	else if(detector == DET_EcalBarrelImaging) {
-	    return 0;                 // no quote?
+	    return .01;                 // no quote?
 	}
 	 
 	else if(detector == DET_TOFBarrel) {
@@ -573,11 +595,7 @@ class functions {
 	    }
 	}
 	else {
-	    //noise_per_channel = 2.700e-3 * 100e6 / 2;             // 3 sigma   135kHz
-	    //noise_per_channel = 6.334e-5 * 100e6 / 2;             // 4 sigma   3.1kHz
-	    noise_per_channel = 5.733e-7 * 100e6 / 2;               // 5 sigma   30hz
-	    //noise_per_channel = 1.973e-9 * 100e6 / 2;             // 6 sigma   .1hz
-	    //noise_per_channel = 2.560e-12 * 100e6 /2;             // 7 sigma   
+	    noise_per_channel = defaultNoise();
 	}
 
 	// for simple detectors/no software trigger or clustering

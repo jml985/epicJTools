@@ -1,0 +1,17 @@
+   ------------------------------------------------------------------
+  | Welcome to ROOT 6.30/02                        https://root.cern |
+  | (c) 1995-2023, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for linuxx8664gcc on Dec 02 2024, 21:33:43                 |
+  | From heads/master@tags/v6-30-02                                  |
+  | With g++ (Debian 12.2.0-14) 12.2.0                               |
+  | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
+   ------------------------------------------------------------------
+
+
+Processing PhotonsOnWindow.C...
+Starting...
+Did a thousand
+Analyzing...
+TOTAL Det    Hits:    32.45 MHz       digitized:  18.69 Gb/s       Tape:   2.08 Gb/s
+MAX HRPPD:   Hits:     2.34 MHz       digitized:   1.35 Gb/s       Tape:   0.15 Gb/s
+MIN HRPPD:   Hits:   120.62 kHz       digitized:  69.47 Mb/s       Tape:   7.72 Mb/s

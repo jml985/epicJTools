@@ -395,8 +395,8 @@ public:
 	    }
 
 	    for(auto &[cell, vec] : ch_hits_ps[det]) {
-		//Double_t noise_hits = fun.detectorNoise(det, 0);
-		Double_t noise_hits = 0;
+		Double_t noise_hits = fun.detectorNoise(det, 0);
+		//Double_t noise_hits = 0;
 		vec[IDX_NOISE] = noise_hits;
 		vec[IDX_TOTAL] += noise_hits;
 	    }
@@ -415,14 +415,14 @@ public:
 	    
 	    
 	    for(auto & [cell, vec]: asic_hits_ps[det]) {
-		//Double_t noise_hits = fun.detectorNoise(det, 1);
-		Double_t noise_hits = 0;	
+		Double_t noise_hits = fun.detectorNoise(det, 1);
+		//Double_t noise_hits = 0;	
 		vec[IDX_NOISE] = noise_hits;
 		vec[IDX_TOTAL] += noise_hits;
 	    }
 	    for(auto &[cell, vec]: asic_bits_ps[det]) {
-		//Double_t noise_bits = fun.detectorNoise(det, 1) * fun.asicBits(det, 1);
-		Double_t noise_bits = 0;
+		Double_t noise_bits = fun.detectorNoise(det, 1) * fun.noiseHitBits(det, 1);
+		//Double_t noise_bits = 0;
 		vec[IDX_NOISE] = noise_bits;
 		vec[IDX_TOTAL] += noise_bits;
 	    }
@@ -445,20 +445,20 @@ public:
 		}
 	    }
 	    for(auto & [cell, vec]: rdo_hits_ps[det]) {
-		//Double_t noise_hits = fun.detectorNoise(det, 2);
-		Double_t noise_hits = 0;
+		Double_t noise_hits = fun.detectorNoise(det, 2);
+		//Double_t noise_hits = 0;
 		vec[IDX_NOISE] = noise_hits;
 		vec[IDX_TOTAL] += noise_hits;
 	    }
 	    for(auto & [cell, vec]: rdo_bits_ps[det]) {
-		//Double_t noise_bits = fun.detectorNoise(det, 2) * fun.asicBits(det,1);
-		Double_t noise_bits = 0;
+		Double_t noise_bits = fun.detectorNoise(det, 2) * fun.noiseHitBits(det,1);
+		//Double_t noise_bits = 0;
 		vec[IDX_NOISE] = noise_bits;
 		vec[IDX_TOTAL] += noise_bits;
 	    }   
 	    for(auto & [cell, vec]: rdo_bits_post_trigger_ps[det]) {
-		//Double_t noise_bits_post_trigger = fun.detectorNoise(det, 3) * fun.asicBits(det,1);
-		Double_t noise_bits_post_trigger = 0;
+		Double_t noise_bits_post_trigger = fun.detectorNoise(det, 3) * fun.noiseHitBits(det,2);
+		//Double_t noise_bits_post_trigger = 0;
 		vec[IDX_NOISE] = noise_bits_post_trigger;
 		vec[IDX_TOTAL] += noise_bits_post_trigger;
 	    }   
@@ -566,7 +566,7 @@ public:
 	    
 	    writeDetectorLineThr("to tape", "sum: ", rdo_data_post_trigger_sum);
 	    
-	    //rdo_hits_ps[det][IDX_NOISE] = detectorNoise(det, 3);
+	    //rdo_hits_ps[det][IDX_NOISE] = fun.detectorNoise(det, 3);
 	    //writeDetectorLine("rdo", "hitsToTape: ", rdo_hits_ps[det][
 	    printf("\n\n\n");
 
